@@ -16,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <h1>StopDaCap : MasakhaNER</h1>
+      <p>{time}</p>
     </div>
   );
 }
