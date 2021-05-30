@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-api": "cd ../backend && venv/Scripts/flask run --no-debugger",
+    "start-backend": "cd ../backend && python main.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
