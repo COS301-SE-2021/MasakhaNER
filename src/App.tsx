@@ -3,15 +3,15 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  // const [time, setTime] = useState(0);
+  const [time, setTime] = useState(0);
 
-  // useEffect(() => {
-  //   fetch("/index")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setTime(data.time)
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("https://masakha-api.herokuapp.com/")
+      .then((res) => res.json())
+      .then((data) => {
+        setTime(data.time)
+      });
+  }, []);
 
   return (
     <div className="App">
