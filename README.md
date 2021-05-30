@@ -10,7 +10,7 @@ A web-based interface that will be used as a named entity recognition tool for A
 | :----------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | <img src="" width="250" height="250"> <br/> Sinothando Mabhena <br/> u18007547 | [GitHub]() <br/> [Profile Page]() <br/> [LinkedIn]() <br/> | Something <br/> Something <br/> Something <br/> Something |
 | <img src="" width="250" height="250"> <br/> Phadimane Lerefolo <br/> u19081082 | [GitHub]() <br/> [Profile Page]() <br/> [LinkedIn]() <br/>     |    Something <br> Something                    |
-| <img src= "" width="250" height="250"> <br/> Sean Nkosi <br/> u19107383 <br/>  | [GitHub]() <br/> [Profile Page]() <br/> [LinkedIn]() <br/>      |        Something         |
+| <img src= "https://avatars.githubusercontent.com/u/73448777?s=400&u=73eedb33e1de74cf7d3912db93c0c909907a3257&v=4" width="250" height="250"> <br/> Sean Nkosi <br/> u19107383 <br/>  | [GitHub](https://github.com/siphoxnkosi) <br/> [Profile Page](https://siphoxnkosi.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/sean-nkosi-47b7901ba/) <br/>      |        Sports, Eating and Sleeping         |
 | <img src="" width="250" height="250"> <br/> Khotso Bore <br/> u19180642     | [GitHub]() <br/> [Profile Page]() <br/> [LinkedIn]() <br/>        |   Something <br/>     |
 | <img src="" width="250" height="250"> <br/> Siphesihle Vezi <br/> u19078286   | [GitHub]() <br/> [Profile Page]() <br/> [LinkedIn]() <br/> |  Something  |
 
