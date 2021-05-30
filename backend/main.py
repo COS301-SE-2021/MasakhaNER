@@ -7,3 +7,6 @@ app = Flask(__name__)
 def get_current_time():
     now = datetime.now()
     return {'time': now}
+
+if __name__ == "__main__":
+    app.run(debug=True)
