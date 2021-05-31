@@ -12,7 +12,7 @@ A web-based interface that will be used as a named entity recognition tool for A
 | <img src="https://avatars.githubusercontent.com/u/82508284?v=4" width="250" height="250"> <br/> Phadimane Lerefolo <br/> u19081082 | [GitHub](https://github.com/u19081082) <br/> [Profile Page]() <br/> [LinkedIn](https://www.linkedin.com/in/phadimane-lerefolo-9388ab1a9/) <br/>     |  Skills: Java, C++, Javascript, HTML, Python, PHP, NodeJS, JavaScript,CSS,React               Interests: AI, Data Science|
 | <img src= "https://avatars.githubusercontent.com/u/73448777?s=400&u=73eedb33e1de74cf7d3912db93c0c909907a3257&v=4" width="250" height="250"> <br/> Sean Nkosi <br/> u19107383 <br/>  | [GitHub](https://github.com/siphoxnkosi) <br/> [Profile Page](https://siphoxnkosi.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/sean-nkosi-47b7901ba/) <br/>      |        Sports, Eating and Sleeping         |
 | <img src="https://avatars.githubusercontent.com/u/82458587?v=4" width="250" height="250"> <br/> Khotso Bore <br/> u19180642     | [GitHub](https://github.com/Khotso-Bore) <br/> [Profile Page]() <br/> [LinkedIn](https://www.linkedin.com/in/khotso-bore-42487620b/) <br/>        |   Anime<br/> Coding<br/>    |
-| <img src="" width="250" height="250"> <br/> Siphesihle Vezi <br/> u19078286   | [GitHub]() <br/> [Profile Page]() <br/> [LinkedIn]() <br/> |  Something  |
+| <img src="https://avatars.githubusercontent.com/u/73443014?v=4" width="250" height="250"> <br/> Siphesihle Vezi <br/> u19078286   | [GitHub](https://github.com/Siphesihle05) <br/> [Profile Page]() <br/> [LinkedIn](https://www.linkedin.com/in/siphesihle-vezi-471103210/) <br/> |  Coding, Music, Fiction  |
 
 
 ## Documentation
