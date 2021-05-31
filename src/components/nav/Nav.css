@@ -1,0 +1,12 @@
+.Navbar {
+    background-color: rgb(240, 240, 240);
+    padding: 1em;
+}
+
+#navbar-heading {
+    margin-bottom: 0;
+}
+
+#navbar-subheading {
+    margin-top: 0;
+}
