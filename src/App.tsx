@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 function App() {
-  const [time, setTime] = useState(0);
-
-  useEffect(() => {
-    fetch("/index")
-      .then((res) => res.json())
-      .then((data) => {
-        setTime(data.time)
-      });
-  }, []);
-
   return (
     <div className="App">
-      <h1>StopDaCap : MasakhaNER</h1>
-      <p>{time}</p>
+      <Dashboard />
     </div>
   );
 }
