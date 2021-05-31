@@ -5,7 +5,7 @@ function App() {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
-    fetch("/")
+    fetch("/index")
       .then((res) => res.json())
       .then((data) => {
         setTime(data.time)
