@@ -32,7 +32,7 @@ def annotate(model_output):
         for y in compareList:
             if x.lower() == y[0]:
                 print(x)
-                newlist.append([{"name":x, "entity": y[1]}])
+                newlist.append({"name":x, "entity": y[1]})
                 i=0
                 break
             if i == len(compareList):
