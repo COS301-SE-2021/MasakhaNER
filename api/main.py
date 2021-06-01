@@ -30,7 +30,7 @@ def annotate(model_output):
     for x in model_output:
         for y in compareList:
             if x.lower() == y[0]:
-                newlist.append([{"name":x, "entity": y[1]}])
+                newlist.append({"name":x, "entity": y[1]})
                 break
     
     return newlist
