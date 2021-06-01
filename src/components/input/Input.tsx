@@ -1,7 +1,7 @@
 import React from "react";
 import InputSection from "../InputSection/InputSection";
 import Output from "../Output/Output";
-import Top from "../Top/Top";
+import Top from "../top/Top";
 import "./Input.css";
 
 export const Input = () => {
