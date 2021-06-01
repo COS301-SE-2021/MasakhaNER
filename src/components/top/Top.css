@@ -1,0 +1,10 @@
+.top{
+    display: grid;
+    grid-template-columns: auto;
+    background-color: rgb(164, 231, 231);
+    grid-template: 50px / auto auto;
+}
+
+.to{
+    border-left: 1px solid gray;
+}

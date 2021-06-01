@@ -1,0 +1,18 @@
+.inputSection{
+    margin-right: auto;
+    width: 45%;
+    /* position: relative; */
+    padding: 10px;
+}
+textarea#testSection{
+    width: 450px;
+    height: 150px;
+    resize: none;
+
+}
+.inputButton{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template: 50px / auto auto;
+    padding: 10px;
+}
