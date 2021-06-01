@@ -1,5 +1,28 @@
-.container{
+.input{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
     width: 75%;
 	margin: auto;
-    border: 1px solid gray;
+    border: 1px solid rgb(212, 187, 187);
+    /* border-radius: 10%; */
 }
+.container{
+    /* display: grid;
+    grid-template-columns: auto;
+    grid-template: 150px / auto auto; */
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+@media screen and (max-width: 1230px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+ }
