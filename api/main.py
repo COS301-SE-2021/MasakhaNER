@@ -27,16 +27,12 @@ def get_current_time():
 
 def annotate(model_output):
     newlist = []
-    i=0;
     for x in model_output:
         for y in compareList:
             if x.lower() == y[0]:
-                print(x)
                 newlist.append([{"name":x, "entity": y[1]}])
-                i=0
                 break
-            if i == len(compareList):
-                i=0;
+    
     return newlist
 
 @app.route('/input', methods=["POST"])
