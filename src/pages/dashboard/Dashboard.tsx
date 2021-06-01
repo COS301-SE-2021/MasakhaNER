@@ -1,6 +1,6 @@
 import React from "react";
-import { Input } from "../../components/Input/Input";
-import Nav from "../../components/Nav/Nav";
+import { Input } from "../../components/input/Input";
+import Nav from "../../components/nav/Nav";
 import Footer from "../../components/Footer/Footer";
 
 function Dashboard() {
