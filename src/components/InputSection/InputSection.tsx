@@ -6,8 +6,10 @@ export default function InputSection() {
     return (
         <div className = 'inputSection'>
             <textarea placeholder = 'Enter Text' id = 'testSection'></textarea>
-            <button className = 'btn btn-primary'>Translate</button>
-            <button  className = 'btn btn-light'><FaTimes /></button>
+            <div className = "inputButton">
+                <button className = 'btn btn-primary'>Translate</button>
+                <button  className = 'btn btn-light'><FaTimes /></button>
+            </div>
         </div>
     )
 }

@@ -9,10 +9,7 @@
     /* border-radius: 10%; */
 }
 .container{
-    /* display: grid;
-    grid-template-columns: auto;
-    grid-template: 150px / auto auto; */
-    /* padding: 10px; */
+    
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

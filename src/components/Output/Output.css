@@ -10,3 +10,9 @@ textarea#textOutput{
     resize: none;
     background-color: rgb(240, 240, 240);
 }
+.outputButton{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template: 50px / auto auto;
+    padding: 10px;
+}

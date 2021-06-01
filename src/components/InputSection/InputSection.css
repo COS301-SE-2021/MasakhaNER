@@ -10,3 +10,9 @@ textarea#testSection{
     resize: none;
 
 }
+.inputButton{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template: 50px / auto auto;
+    padding: 10px;
+}
