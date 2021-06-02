@@ -24,6 +24,12 @@ class User:
         print('register')
         self.cur.execute("INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode) VALUES('khotso','Bore','1234','stop@gmail.com','TRUE','1234')")
 
+    def login(self, email, password):
+        code='1111'
+        print('login')
+        self.cur.execute('"SELECT email,password FROM users where email="'+self.email+'";')
+        
+
         # self.activationCode = "1000"
 
 
