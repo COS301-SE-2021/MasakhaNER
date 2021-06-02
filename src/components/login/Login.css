@@ -34,6 +34,13 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+.icon {
+    padding: 10px;
+    background: dodgerblue;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+  }
 @media screen and (max-width: 880px) {
     .login {
         width: 40%;
