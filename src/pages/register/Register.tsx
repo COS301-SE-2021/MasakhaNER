@@ -118,7 +118,7 @@ function Register() {
       <ReCAPTCHA
         sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
         onChange={() => {
-          setVerified(true);
+          var onloadcallback = setVerified(true);
           enableBtn();
         }}
         /*Server Side: 6LeJWgkbAAAAAEhHofPc5SfmLrRSALFkH5976L6T */
