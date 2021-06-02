@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, Component, useCallback} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container } from "react-bootstrap";
 import "./Register.css";
@@ -10,7 +10,7 @@ function Register() {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [verified, setVerified] = useState(false);
+  const [verified, setVerified] = useState(true);
 
   const options = {
     method: "POST",
@@ -19,7 +19,7 @@ function Register() {
     },
     body: JSON.stringify({
       "firstname": firstName,
-      "lastmame": lastName,
+      "lastname": lastName,
       "email": email,
       "password": password,
     }),
@@ -41,7 +41,7 @@ function Register() {
     fetch("/register", options)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.firstname);
+        console.log(data.output);
       })
       .catch((err) => console.log(err));
   }, [clicked]);
@@ -103,13 +103,14 @@ function Register() {
         </div>
         <br />
         <button
+          disabled={verified}
           id="mainBtn"
-          disabled
+          // disabled
           type="submit"
           className="btn btn-secondary"
           onClick={() => {
-            setClicked(!clicked);
             handleSubscribe();
+            setClicked(!clicked);
           }}
         >
           Submit
@@ -117,11 +118,6 @@ function Register() {
       </form>
       <ReCAPTCHA
         sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-        onChange={() => {
-          var onloadcallback = setVerified(true);
-          enableBtn();
-        }}
-        /*Server Side: 6LeJWgkbAAAAAEhHofPc5SfmLrRSALFkH5976L6T */
       />
     </div>
   );
