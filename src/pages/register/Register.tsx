@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container } from 'react-bootstrap'
-import './Register.css'
+import React, {useState, useEffect} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
+import './Register.css';
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 function Register() {
@@ -79,6 +80,10 @@ function Register() {
                 <button type="submit" 
                 className="btn btn-secondary" onClick={()=>setClicked(!clicked)}>Submit</button>
             </form>
+            <ReCAPTCHA
+            sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+            /*Server Side: 6LeJWgkbAAAAAEhHofPc5SfmLrRSALFkH5976L6T */
+            />
        </div>
     )
 }

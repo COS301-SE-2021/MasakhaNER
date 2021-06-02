@@ -8,7 +8,8 @@ function Dashboard() {
   return (
     <div>
       <Nav />
-      <Input />
+      {/* <Input /> */}
+      <Register/>
       <Footer />
     </div>
   );
