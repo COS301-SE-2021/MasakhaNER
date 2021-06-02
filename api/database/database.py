@@ -26,6 +26,12 @@ class User:
         self.cur.close()
         self.conn.close()
 
+    def login(self, email, password):
+        print('login')
+        self.cur.execute(f"SELECT password FROM users where email='{email}';")
+        one=self.cur.fetchone()
+        if one[0] == password:
+            print('true')
 
 
 # DB_HOST=os.environ.get('DB_HOST')

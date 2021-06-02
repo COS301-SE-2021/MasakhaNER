@@ -71,6 +71,17 @@ def register_user():
     return {'output':'registered'}
     # user_data = str(request.json["register_data"])
 
+@app.route('/login', methods=["POST"])
+def login_user():
+    db = User()
+    user_email = str(request.json["email"])
+    user_password = str(request.json["password"])
+
+    db.login(user_email, user_password)
+
+
+    return {'output':'registered'}
+
 
 if __name__ == "__main__":
     app.run(debug=True)
