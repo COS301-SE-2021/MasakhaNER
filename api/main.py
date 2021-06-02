@@ -1,6 +1,18 @@
 from datetime import datetime
 from flask import Flask
 from flask import request
+#mport psycopg2
+
+#for importing files that are in a parent dir
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+#the file to be imported
+# import database
+from database.database import User
+
+
+
 
 app = Flask(__name__)
 
@@ -44,6 +56,44 @@ def model_feedback():
     annotatedlist = annotate(model_output)
 
     return {'output': annotatedlist}
+
+@app.route('/register', methods=["POST"])
+def register_user():
+    db = User()
+    user_firstname = str(request.json["firstname"])
+    user_lastname = str(request.json["lastname"])
+    user_email = str(request.json["email"])
+    user_password = str(request.json["password"])
+
+    db.register(user_firstname, user_lastname, user_email, user_password)
+
+
+    return {'output':'registered'}
+    # user_data = str(request.json["register_data"])
+@app.route('/validate-user-registration', methods=["POST"])
+def register_user():
+    db = User()
+    user_firstname = str(request.json["firstname"])
+    user_lastname = str(request.json["lastname"])
+    user_email = str(request.json["email"])
+    user_password = str(request.json["password"])
+
+    db.register(user_firstname, user_lastname, user_email, user_password)
+
+
+    return {'output':'registered'}
+
+@app.route('/login', methods=["POST"])
+def login_user():
+    db = User()
+    user_email = str(request.json["email"])
+    user_password = str(request.json["password"])
+
+    db.login(user_email, user_password)
+
+
+    return {'output':'registered'}
+
 
 if __name__ == "__main__":
     app.run(debug=True)
