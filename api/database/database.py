@@ -21,10 +21,10 @@ class User:
 
     def register(self, firstname, lastname, email, password):
         code='1111'
-        print('register')
-        self.cur.execute("INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode) VALUES('khotso','Bore','1234','stop@gmail.com','TRUE','1234')")
-
-        # self.activationCode = "1000"
+        self.cur.execute(f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode) VALUES('{firstname}','{lastname}','{password}','{email}',{True},{code})")
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
 
 
 
@@ -45,8 +45,4 @@ class User:
 
 # print(cur.fetchall())
 
-# conn.commit()
 
-# cur.close()
-
-# conn.close()
