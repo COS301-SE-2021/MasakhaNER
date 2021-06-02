@@ -81,6 +81,34 @@ def login_user():
     
     return {'output':'invalid username or password'}
     # user_data = str(request.json["register_data"])
+@app.route('/validate-user-registration', methods=["POST"])
+def register_user():
+    db = User()
+    user_firstname = str(request.json["firstname"])
+    user_lastname = str(request.json["lastname"])
+    user_email = str(request.json["email"])
+    user_password = str(request.json["password"])
+
+    db.register(user_firstname, user_lastname, user_email, user_password)
+
+
+    return {'output':'registered'}
+
+@app.route('/login', methods=["POST"])
+def login_user():
+    db = User()
+    user_email = str(request.json["email"])
+    user_password = str(request.json["password"])
+
+    if db.login(user_email, user_password):
+        return {'output':'logged-in'}
+    else:
+        return {'output':'invalid email or passowrd'}
+
+
+
+
+    
 
 
 if __name__ == "__main__":
