@@ -37,6 +37,7 @@ def annotate(model_output):
 
 @app.route('/input', methods=["POST"])
 def model_feedback():
+
     model_output = str(request.json["input"]).split()
 
     
