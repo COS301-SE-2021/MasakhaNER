@@ -1,26 +1,31 @@
-print('test')
-
-DB_HOST="ec2-34-232-191-133.compute-1.amazonaws.com"
-DB_NAME="d1mm3a0c29eepo"
-DB_PASS="904c29b5f6055f6de8c01b24e1ac3f29736c54ca010dd9b8cc022f1555fe3be7"
-DB_USER="orikanjrgszuig"
+from flask import Flask
 import psycopg2
 import psycopg2.extras
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+
+
+DB_HOST=os.environ.get('DB_HOST')
+DB_NAME=os.environ.get('DB_NAME')
+DB_PASS=os.environ.get('DB_PASS')
+DB_USER=os.environ.get('DB_USER')
+print('test')
 conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
 cur = conn.cursor()
 
-#cur.execute("CREATE TABLE student (id SERIAL PRIMARY KEY, name VARCHAR);")
+#cur.execute("CREATE TABLE user (id SERIAL PRIMARY KEY, name VARCHAR, lastname VARCHAR);")
 #cur.execute("INSERT INTO student (name) VALUES(%s)", ("Sihle",))
 
-#cur.execute("DELETE FROM student WHERE name='Cristina';")
+# cur.execute("DELETE FROM users WHERE firstname='Khotso';")
 
-cur.execute("SELECT * FROM student;")
+# cur.execute("SELECT * FROM users;")
 
-print(cur.fetchall())
+# print(cur.fetchall())
 
-conn.commit()
+# conn.commit()
 
-cur.close()
+# cur.close()
 
-conn.close()
+# conn.close()
