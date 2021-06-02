@@ -1,6 +1,18 @@
 from datetime import datetime
 from flask import Flask
 from flask import request
+#mport psycopg2
+
+#for importing files that are in a parent dir
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+#the file to be imported
+# import database
+from database.database import User
+
+thing = User()
+
 
 app = Flask(__name__)
 
@@ -44,6 +56,19 @@ def model_feedback():
     annotatedlist = annotate(model_output)
 
     return {'output': annotatedlist}
+
+@app.route('/register', method=["POST"])
+def register_user():
+    user_data = str(request.json["register_data"])
+
+{
+    "register_data": {
+        "firstname":"name",
+        "lastname":"surname",
+        "email":"email",
+        "password":"pass"
+    }
+}
 
 if __name__ == "__main__":
     app.run(debug=True)
