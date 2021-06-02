@@ -76,10 +76,10 @@ def login_user():
     user_email = str(request.json["email"])
     user_password = str(request.json["password"])
 
-    db.register(user_firstname, user_lastname, user_email, user_password)
-
-
-    return {'output':'registered'}
+    if db.login( user_email, user_password):
+        return {'output':'logged-in'}
+    
+    return {'output':'invalid username or password'}
     # user_data = str(request.json["register_data"])
 
 

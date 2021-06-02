@@ -28,6 +28,15 @@ class User:
         code='1111'
         print('login')
         self.cur.execute('"SELECT email,password FROM users where email="'+self.email+'";')
+        result = self.cur.fetchOne()
+        if result != None and result[0] == password:
+            return True
+        
+        return False
+
+            
+
+
         
 
         # self.activationCode = "1000"
