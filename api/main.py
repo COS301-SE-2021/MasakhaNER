@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 # import database
 from database.database import User
 
-thing = User()
+
 
 
 app = Flask(__name__)
@@ -57,18 +57,20 @@ def model_feedback():
 
     return {'output': annotatedlist}
 
-@app.route('/register', method=["POST"])
+@app.route('/register', methods=["POST"])
 def register_user():
-    user_data = str(request.json["register_data"])
+    db = User()
+    user_firstname = str(request.json["firstname"])
+    user_lastname = str(request.json["lastname"])
+    user_email = str(request.json["email"])
+    user_password = str(request.json["password"])
 
-{
-    "register_data": {
-        "firstname":"name",
-        "lastname":"surname",
-        "email":"email",
-        "password":"pass"
-    }
-}
+    db.register(user_firstname, user_lastname, user_email, user_password)
+
+
+    return {'output':'registered'}
+    # user_data = str(request.json["register_data"])
+
 
 if __name__ == "__main__":
     app.run(debug=True)

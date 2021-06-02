@@ -16,17 +16,16 @@ class User:
         self.DB_PASS=os.environ.get('DB_PASS')
         self.DB_USER=os.environ.get('DB_USER')
         self.conn = psycopg2.connect(dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        self.cur = self.conn.cursor()
         print('works')
 
-    def register(self, user_json):
-        self.firstname = user_json.firstname
-        self.lastname = user_json.lastname
-        self.password = user_json.password
-        self.email = user_json.email
-        self.isAdmin = user_json.isAdmin
-        self.activationCode = "1000"
+    def register(self, firstname, lastname, email, password):
+        code='1111'
+        print('register')
+        self.cur.execute("INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode) VALUES('khotso','Bore','1234','stop@gmail.com','TRUE','1234')")
 
-    str="user"
+        # self.activationCode = "1000"
+
 
 
 # DB_HOST=os.environ.get('DB_HOST')
