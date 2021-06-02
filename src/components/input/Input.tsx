@@ -7,10 +7,10 @@ import "./Input.css";
 export const Input = () => {
   return (
     <div className="input">
-      <Top />
+      {/* <Top /> */}
       <div className="container">
         <InputSection />
-        <Output />
+        {/* <Output /> */}
       </div>
     </div>
   );
