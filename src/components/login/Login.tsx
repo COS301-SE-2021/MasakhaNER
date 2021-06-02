@@ -4,23 +4,29 @@ import FacebookLogin from 'react-facebook-login'
 import './Login.css';
 import React, { useState } from 'react';
 import { validEmail, validPassword } from './Regex';
-import {BrowserRouter} from 'react-router-dom'
-import {Link} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
+let history
 const responseGoogle = (response: any) =>{
     console.log(response);
+    history.push('/Dashboard');
 }
 const responseFacebook = (response: any) => {
     console.log(response);
+    history.push('/Dashboard');
 }
 
 export default function Login(this: any) {
+    history = useHistory();
     const [email, setEmail] = useState('');
     const [err, setEmailErr] = useState(false);
     const validate = () => {
-        console.log(email);
+    console.log(email);
         if (!validEmail.test(email)) {
             setEmailErr(true)
+        }
+        else{
+            history.push('/Dashboard');
         }
      };
     return (
