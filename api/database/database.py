@@ -27,14 +27,11 @@ class User:
         self.conn.close()
 
     def login(self, email, password):
-        code='1111'
         print('login')
-        self.cur.execute('"SELECT email,password FROM users where email="'+self.email+'";')
-        result = self.cur.fetchOne()
-        if result != None and result[0] == password:
+        self.cur.execute(f"SELECT password FROM users where email='{email}';")
+        one=self.cur.fetchone()
+        if one!=None and one[0] == password:
             return True
-        
-        return False
         else:
             return False
 
