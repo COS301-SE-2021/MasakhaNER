@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component, useCallback} from "react";
+import React, { useState, useEffect, Component, useCallback } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container } from "react-bootstrap";
 import "./Register.css";
@@ -18,32 +18,35 @@ function Register() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      "firstname": firstName,
-      "lastname": lastName,
-      "email": email,
-      "password": password,
+      firstname: firstName,
+      lastname: lastName,
+      email: email,
+      password: password,
     }),
   };
 
   function handleSubscribe() {
-    if (verified) {
+    if (!verified === true) {
       alert("You have successfully subscribed!");
     } else {
       alert("Please verify that you are human!");
     }
   }
 
-  function enableBtn() {
-    (document.getElementById("mainBtn") as HTMLInputElement).disabled = false;
-  }
+  // function enableBtn() {
+  //   (document.getElementById("mainBtn") as HTMLInputElement).disabled = false;
+  // }
 
   useEffect(() => {
-    fetch("/register", options)
+    if(!verified === true){
+      fetch("/register", options)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.output);
       })
       .catch((err) => console.log(err));
+    }
+    
   }, [clicked]);
 
   const handleSubmit = (e: any) => {
@@ -105,7 +108,6 @@ function Register() {
         <button
           disabled={verified}
           id="mainBtn"
-          // disabled
           type="submit"
           className="btn btn-secondary"
           onClick={() => {
@@ -118,6 +120,9 @@ function Register() {
       </form>
       <ReCAPTCHA
         sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+        onChange={() => {
+          setVerified(false);
+        }}
       />
     </div>
   );
