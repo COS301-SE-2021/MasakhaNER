@@ -70,17 +70,6 @@ def register_user():
 
     return {'output':'registered'}
 
-@app.route('/login', methods=["POST"])
-def login_user():
-    db = User()
-    user_email = str(request.json["email"])
-    user_password = str(request.json["password"])
-
-    if db.login( user_email, user_password):
-        return {'output':'logged-in'}
-    
-    return {'output':'invalid username or password'}
-    # user_data = str(request.json["register_data"])
 @app.route('/validate-user-registration', methods=["POST"])
 def register_user():
     db = User()
