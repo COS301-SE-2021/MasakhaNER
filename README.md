@@ -20,7 +20,7 @@ A web-based interface that will be used as a named entity recognition tool for A
 - [Software Requirements Specification - StopDaCAp](https://docs.google.com/document/d/1vjjS5MQYoHAB4J2reDeffHQKpTJA0F64WjCdptu6PjY/edit?usp=sharing)
 
 ## Demo Links
-- [Demo 1 - StopDaCAp]()
+- [StopDaCap - Demo 1]()
 
 ## Technology Stack
 <p>Frontend - ReactJS</p>
@@ -31,10 +31,10 @@ A web-based interface that will be used as a named entity recognition tool for A
 
 <p>Monorepo and Git Flow</p>
 
-<h3>Branching Strategy</h3>
+## Branching Strategy
 
-- master (build)
-  - develop (build)
+- master
+  - develop
     - frontend-develop
       - frontend-feature-module
     - backend-develop
