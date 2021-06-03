@@ -22,7 +22,7 @@ class User:
         self.cur.execute(f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode) VALUES('{firstname}','{lastname}','{password}','{email}',{True},{code})")
         sendemail = Email()
         message =  """\
-        Subject: Masakhane Activation Code
+        Masakhane Activation Code
 
         Here is your activation code: 1111 """
         sendemail.send_email(message, email)

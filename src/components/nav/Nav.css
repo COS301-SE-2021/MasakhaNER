@@ -1,11 +1,13 @@
 .Navbar {
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(0, 0, 0);
     padding: 1em;
     margin-bottom: 10em;
+    color: white;
 }
 
 #navbar-heading {
     margin-bottom: 0;
+    font-size: 60px;
 }
 
 #navbar-subheading {

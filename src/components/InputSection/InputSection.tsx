@@ -21,7 +21,6 @@ export default function InputSection() {
     fetch("/input", options)
       .then((res) => res.json())
       .then((data) => {
-        // data.output !== undefined && console.log(data)
         setOutputData(data.output);
       })
       .catch((err) => console.log(err));
@@ -34,6 +33,8 @@ export default function InputSection() {
   return (
     <div className="inputSection">
       <form onSubmit={handleSubmit}>
+        <p>Enter text in one of the selected languages to test model</p>
+
         <input
           placeholder="Enter Text"
           id="testSection"
@@ -41,11 +42,9 @@ export default function InputSection() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         ></input>
+
         <div className="inputButton">
-          <button
-            className="btn btn-dark"
-            onClick={() => setClicked(!clicked)}
-          >
+          <button className="btn btn-dark" onClick={() => setClicked(!clicked)}>
             Send
           </button>
         </div>

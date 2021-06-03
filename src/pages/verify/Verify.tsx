@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import "./verifyAccount.css"
+import { Link } from 'react-router-dom';
 
 function VerifyAccount() {
   const [code, setCode] = useState("");
@@ -17,15 +18,15 @@ function VerifyAccount() {
     }),
   };
 
-  useEffect(() => {
-      fetch("/verifyAccount", options)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.output);
-      })
-      .catch((err) => console.log(err));
+//   useEffect(() => {
+//       fetch("/verifyAccount", options)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         console.log(data.output);
+//       })
+//       .catch((err) => console.log(err));
     
-  }, [clicked]);
+//   }, [clicked]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -40,7 +41,9 @@ function VerifyAccount() {
                 <input type="text" placeholder="Confirmation Code" className="form-control" id="code" name="code"/>
             </div>
             <br />
-            <button type="submit" className="btn btn-primary">Next</button>
+            <Link to="/dashboard">
+            <button type="submit" className="btn btn-dark">Next</button>
+            </Link>
         </form>
     </div>
     )

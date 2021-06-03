@@ -21,10 +21,3 @@ class Email:
         self.server.quit() 
         print('email sent')
 
-sendemail = Email()
-receiver_email = "sinothandomabhena@gmail.com"
-message =  """\
-        Subject: Hi there
-
-        Sup"""
-# sendemail.send_email(message,receiver_email)

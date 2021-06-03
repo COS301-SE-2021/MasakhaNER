@@ -6,9 +6,21 @@ import "./Input.css";
 
 export const Input = () => {
   return (
-    <div className="input">
-      <div className="container">
-        <InputSection />
+    <div>
+      <div className="input">
+        <h2>Test model</h2>
+        <label htmlFor="languages">Choose a language:</label>
+        <select name="languages" id="language">
+          <option value="Zulu">Zulu</option>
+        </select>
+        <div className="container">
+          <InputSection />
+        </div>
+        <div id="feedback">
+          <h3>Provide feedback on model feedback</h3>
+          <br />
+          <input></input>
+        </div>
       </div>
     </div>
   );
