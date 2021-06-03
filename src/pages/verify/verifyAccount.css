@@ -1,24 +1,15 @@
-/* .p{
-    position: center;
+.signup-form {
+  width: 400px;
+  margin: 0 auto;
+  padding: 30px 0;
+  margin-top: 200px;
 }
 
-.h3{
-    position: center;
+.signup-form form {
+  color: #999;
+  border-radius: 3px;
+  margin-bottom: 15px;
+  background: #f2f3f7;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px;
 }
-
-.btn btn-primary{
-    position: center;
-} */
-
-.signup-form{
-    width: 400px;
-    margin: 0 auto;
-    padding: 30px 0;}
-
-    .signup-form form{
-		color: #999;
-		border-radius: 3px;
-    	margin-bottom: 15px;
-        background: #f2f3f7;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        padding: 30px;}
