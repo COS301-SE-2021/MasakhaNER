@@ -11,11 +11,6 @@ class OutputTest(unittest.TestCase):
     
     str = 'empyt'
     def test_endpoint(self):
-        """
-        GIVEN a User model
-        WHEN a new User is created
-        THEN check the email, hashed_password, and role fields are defined correctly
-        """
         print("week")
         r = requests.post(OutputTest.ENDPOINT_URL,json=OutputTest.INPUT)
         data = json.loads(r.content)
