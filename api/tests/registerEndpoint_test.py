@@ -3,7 +3,7 @@ import requests
 import json
 
 class Test(unittest.TestCase):
-    ENDPOINT_URL = "http://127.0.0.1:5000/input"
+    ENDPOINT_URL = "http://127.0.0.1:5000/register"
     
     INPUT = {
         "input": "Kanye in London"
