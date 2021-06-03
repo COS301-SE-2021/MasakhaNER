@@ -24,7 +24,7 @@ class OutputTest(unittest.TestCase):
         result2 = data['output'][1]
 
         print(result1)
-        # print(result2)
+        print(result2)
         self.assertTrue(200==r.status_code,True)
         self.assertTrue(result1['entity']=='PERSON',True)
         self.assertTrue(result1['name']=='Kanye',True)
