@@ -26,14 +26,33 @@ class User:
         self.cur.close()
         self.conn.close()
 
+    def get_code(self,email):
+        self.cur.execute(f"SELECT activationCode FROM users where email='{email}';")
+        return self.cur.fetchone()[0]
+        
+
     def login(self, email, password):
         print('login')
         self.cur.execute(f"SELECT password FROM users where email='{email}';")
         one=self.cur.fetchone()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+        print(one)
         if one!=None and one[0] == password:
             return True
         else:
             return False
+
+    def update_user(self,email):
+        self.cur.execute(f"SELECT * FROM users where email='{email}';")
+        self.cur.execute(f"Update users set firstname = 'VERIFIED' where email='{email}';")
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+
+
+
 
 
 # DB_HOST=os.environ.get('DB_HOST')

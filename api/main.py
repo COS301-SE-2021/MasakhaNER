@@ -71,17 +71,19 @@ def register_user():
     return {'output':'registered'}
 
 @app.route('/validate-user-registration', methods=["POST"])
-def register_user():
-    db = User()
-    user_firstname = str(request.json["firstname"])
-    user_lastname = str(request.json["lastname"])
-    user_email = str(request.json["email"])
-    user_password = str(request.json["password"])
-
-    db.register(user_firstname, user_lastname, user_email, user_password)
-
-
-    return {'output':'registered'}
+def validate_register_user():
+   
+    # user_firstname = str(request.json["firstname"])
+    # user_lastname = str(request.json["lastname"])
+    # user_email = str(request.json["email"])
+    # user_password = str(request.json["password"])
+    user_code  = request.json["code"]
+    
+    if user_code == User().get_code(str(request.json["email"])):
+        User().update_user(str(request.json["email"]))
+        return {'output':'chnaged'}
+    else:
+        return {'output':'false'}
 
 @app.route('/login', methods=["POST"])
 def login_user():
