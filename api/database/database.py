@@ -115,8 +115,8 @@ class User:
         else:
             return False
     """
-    update user Function:
-        used
+    very=ify user Function:
+        verifies user based on code passed in
     Parameters:
         email (string): User's email
     Returns:
