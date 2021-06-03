@@ -2,8 +2,8 @@ from datetime import datetime
 from flask import Flask
 from flask import request
 import os, sys
-
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
 from database.database import User
 
 app = Flask(__name__)
@@ -40,6 +40,7 @@ pretrained_data = [
     ['friday','DATE'],
     ['saturday','DATE'],
     ['sunday','DATE'],
+    ['jumatatu','DATE'],
     ['tuks','ORGANISATION'],
     ['wits','ORGANISATION'],
     ['apple','ORGANISATION'],
@@ -67,17 +68,37 @@ def train_model(user_input):
                 break
     return newlist
 
+"""
+    model_feedback function:
+        receiveves user input so the
+        NER model can train it
+        and returns feedback
+    Parameters:
+        None
+    Returns:
+        JSON object with model feedback
+""" 
+
 @app.route('/input', methods=["POST"])
 def model_feedback():
     user_input = str(request.json["input"]).split()
     model_feedback = train_model(user_input)
     return {'output': model_feedback}
 
+"""
+    register_user function:
+        registers user to the system and adds them to
+        the database
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+""" 
 
 @app.route('/register', methods=["POST"])
 def register_user():
     db = User()
-    if(db != False):
+    if(db != None):
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])
@@ -88,6 +109,15 @@ def register_user():
             return {'response':'failed'}
     else:
         return {'response':'failed'}
+
+"""
+    verify_user function:
+        verifies user based on passed in code
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+""" 
 
 @app.route('/verify', methods=["POST"])
 def verify_user():
@@ -102,6 +132,15 @@ def verify_user():
             return {'response':'failed'}
     else:
         return {{'response':'failed'}}
+
+"""
+    login_user function:
+        logs user into the system
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+""" 
 
 @app.route('/login', methods=["POST"])
 def login_user():

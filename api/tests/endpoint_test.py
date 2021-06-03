@@ -2,8 +2,16 @@ import unittest
 import requests
 import json
 
+# #for importing files that are in a parent dir
+# import os, sys
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+# #the file to be imported
+# import main
+
 class OutputTest(unittest.TestCase):
     ENDPOINT_URL = "http://127.0.0.1:5000/input"
+    #ENDPOINT_URL = "http://127.0.0.1:5000/index"
     
     INPUT = {
         "input": "Kanye in London"
@@ -30,3 +38,15 @@ class OutputTest(unittest.TestCase):
         self.assertEquals(result1['name'],'Kanye')
         self.assertEquals(result2['entity'],'location')
         self.assertEquals(result2['name'],'London')
+        
+
+#     def work():
+#         print("yes")
+        
+        
+# play = OutputTest
+# print(play.test_endpoint(play))
+    def registerEndpoint(fname, lname, email, password):
+        print(fname + lname + email + password)
+        
+

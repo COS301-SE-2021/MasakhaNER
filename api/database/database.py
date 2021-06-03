@@ -30,7 +30,7 @@ class User:
                 dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
             self.cur = self.conn.cursor()
         except:
-            return False
+            return None
 
     """
     Register Function:
@@ -115,8 +115,8 @@ class User:
         else:
             return False
     """
-    update user Function:
-        used
+    very=ify user Function:
+        verifies user based on code passed in
     Parameters:
         email (string): User's email
     Returns:

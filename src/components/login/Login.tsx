@@ -24,7 +24,6 @@ export default function Login(this: any) {
   const [clicked, setClicked] = useState(false);
 
   const validate = () => {
-    console.log(email);
     if (!validEmail.test(email)) {
       setEmailErr(true);
     } else {
