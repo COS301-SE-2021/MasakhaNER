@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import "./verifyAccount.css"
 
 function VerifyAccount() {
   const [code, setCode] = useState("");
@@ -38,6 +39,7 @@ function VerifyAccount() {
             <div className="form-group">
                 <input type="text" placeholder="Confirmation Code" className="form-control" id="code" name="code"/>
             </div>
+            <br />
             <button type="submit" className="btn btn-primary">Next</button>
         </form>
     </div>
