@@ -23,10 +23,17 @@ class OutputTest(unittest.TestCase):
         result1 = data['output'][0]
         result2 = data['output'][1]
 
-        # print(result1)
+        print(result1)
         # print(result2)
-        self.assertEquals(200,r.status_code)
-        self.assertEquals(result1['entity'],'person')
-        self.assertEquals(result1['name'],'Kanye')
-        self.assertEquals(result2['entity'],'location')
-        self.assertEquals(result2['name'],'London')
+        self.assertTrue(200==r.status_code,True)
+        self.assertTrue(result1['entity']=='PERSON',True)
+        self.assertTrue(result1['name']=='Kanye',True)
+        self.assertTrue(result2['entity']=='LOCATION',True)
+        self.assertTrue(result2['name']=='London',True)
+        # self.assertEquals(result1['entity'],'PERSON')
+        # self.assertEquals(result1['name'],'Kanye')
+        # self.assertEquals(result2['entity'],'LOCATION')
+        # self.assertEquals(result2['name'],'London')
+
+# play = OutputTest
+# play.test_endpoint(play)
