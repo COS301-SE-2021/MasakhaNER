@@ -2,8 +2,8 @@ from datetime import datetime
 from flask import Flask
 from flask import request
 import os, sys
-
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
 from database.database import User
 
 app = Flask(__name__)
