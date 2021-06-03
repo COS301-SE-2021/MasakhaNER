@@ -30,7 +30,7 @@ class User:
                 dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
             self.cur = self.conn.cursor()
         except:
-            return False
+            return None
 
     """
     Register Function:
