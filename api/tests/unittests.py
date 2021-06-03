@@ -29,6 +29,3 @@ class OutputTest(unittest.TestCase):
         self.assertEqual(result1['name'],'Kanye')
         self.assertEqual(result2['entity'],'LOCATION')
         self.assertEqual(result2['name'],'London')
-
-# play = OutputTest
-# play.test_endpoint(play)
