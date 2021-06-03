@@ -9,7 +9,6 @@ class OutputTest(unittest.TestCase):
         "input": "Kanye in London"
     }
     
-    str = 'empyt'
     def test_endpoint(self):
         print("week")
         r = requests.post(OutputTest.ENDPOINT_URL,json=OutputTest.INPUT)
