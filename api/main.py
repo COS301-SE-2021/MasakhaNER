@@ -96,7 +96,7 @@ def verify_user():
         user_email = request.json["email"]
         user_code  = request.json["code"]
         if user_code == db.get_code(user_email):
-            # User().update_user(str(request.json["email"]))
+            db.verify_user(user_email)
             return {'response':'verified'}
         else:
             return {'response':'failed'}

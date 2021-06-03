@@ -56,7 +56,7 @@ class User:
             encrypted_password_2 = "encrypted_password"
             code = '1111'
             self.cur.execute(
-                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode) VALUES('{firstname}','{lastname}','{encrypted_password_2}','{email}',{False},{code})")
+                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{encrypted_password_2}','{email}',{False},{code},{False})")
             sendemail = Email()
             message = """\
             Masakhane Activation Code
@@ -74,9 +74,7 @@ class User:
     """
     Get code Function:
         Takes in the users email and queries the database
-        to return the activation code and compares it to
-        the code sent in from the user. If matched,
-        the users account is verified.
+        to return the activation code.
     Parameters:
         email (string): User's email
     Returns:
@@ -116,11 +114,18 @@ class User:
             return True
         else:
             return False
-
-    # def update_user(self, email):
-    #     self.cur.execute(f"SELECT * FROM users where email='{email}';")
-    #     self.cur.execute(
-    #         f"Update users set firstname = 'VERIFIED' where email='{email}';")
-    #     self.conn.commit()
-    #     self.cur.close()
-    #     self.conn.close()
+    """
+    update user Function:
+        used
+    Parameters:
+        email (string): User's email
+    Returns:
+        Boolean:Returns true or false if user register successfully
+    """
+    def verify_user(self, email):
+        self.cur.execute(f"SELECT * FROM users where email='{email}';")
+        self.cur.execute(
+            f"Update users set verified = {True} where email='{email}';")
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
