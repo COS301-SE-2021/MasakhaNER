@@ -98,13 +98,13 @@ class User:
         Boolean:Returns true or false if user logged in successfully
     """
     def login(self, email, password):
-        encoded_password = bytes('1234', encoding='utf-8')
-        encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
-        print('passowrd1: ',encrypted_password)
+        # encoded_password = bytes('1234', encoding='utf-8')
+        # encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
+        # print('passowrd1: ',encrypted_password)
         
-        encoded_password = bytes('1234', encoding='utf-8')
-        encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt())) 
-        print('passowrd2: ',encrypted_password)
+        # encoded_password = bytes('1234', encoding='utf-8')
+        # encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt())) 
+        # print('passowrd2: ',encrypted_password)
 
         
         encrypted_password_2 = 'encrypted_password'
