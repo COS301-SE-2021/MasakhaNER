@@ -1,18 +1,18 @@
 .inputSection{
-    margin-right: auto;
+    margin: 0 auto;
     width: 45%;
-    /* position: relative; */
     padding: 10px;
+    text-align: center;
 }
-textarea#testSection{
-    width: 450px;
-    height: 150px;
+#testSection{
+    border-radius: 10px;
+    width: 12em;
+    height: 40px;
     resize: none;
 
 }
 .inputButton{
-    display: grid;
+    justify-content: center;
     grid-template-columns: auto;
-    grid-template: 50px / auto auto;
     padding: 10px;
 }

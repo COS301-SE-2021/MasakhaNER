@@ -7,10 +7,8 @@ import "./Input.css";
 export const Input = () => {
   return (
     <div className="input">
-      {/* <Top /> */}
       <div className="container">
         <InputSection />
-        {/* <Output /> */}
       </div>
     </div>
   );

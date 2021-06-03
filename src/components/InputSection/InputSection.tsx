@@ -43,7 +43,7 @@ export default function InputSection() {
         ></input>
         <div className="inputButton">
           <button
-            className="btn btn-primary"
+            className="btn btn-dark"
             onClick={() => setClicked(!clicked)}
           >
             Send

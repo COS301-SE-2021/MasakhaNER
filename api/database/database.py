@@ -1,3 +1,4 @@
+from api.database.email import Email
 from flask import Flask
 import psycopg2
 import psycopg2.extras
@@ -7,8 +8,6 @@ from flask import request
 
 load_dotenv()
 
-word='yes'
-
 class User:
     def __init__(self):
         self.DB_HOST=os.environ.get('DB_HOST')
@@ -17,11 +16,16 @@ class User:
         self.DB_USER=os.environ.get('DB_USER')
         self.conn = psycopg2.connect(dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
         self.cur = self.conn.cursor()
-        print('works')
 
     def register(self, firstname, lastname, email, password):
         code='1111'
         self.cur.execute(f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode) VALUES('{firstname}','{lastname}','{password}','{email}',{True},{code})")
+        sendemail = Email()
+        message =  """\
+        Subject: Masakhane Activation Code
+
+        Here is your activation code: 1111 """
+        sendemail.send_email(message, email)
         self.conn.commit()
         self.cur.close()
         self.conn.close()

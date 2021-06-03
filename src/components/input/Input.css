@@ -1,15 +1,16 @@
 .input{
+    margin-top: 50px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     height: 70%;
     width: 75%;
 	margin: auto;
-    border: 1px solid rgb(212, 187, 187);
-    /* border-radius: 10%; */
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px rgb(221, 221, 221);
 }
 .container{
-    
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

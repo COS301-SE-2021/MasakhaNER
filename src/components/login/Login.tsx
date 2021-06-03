@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import "./Login.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { validEmail, validPassword } from "./Regex";
 import { Link, useHistory } from "react-router-dom";
 
@@ -19,17 +19,39 @@ const responseFacebook = (response: any) => {
 export default function Login(this: any) {
   history = useHistory();
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [err, setEmailErr] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const validate = () => {
     console.log(email);
     if (!validEmail.test(email)) {
       setEmailErr(true);
     } else {
+      setClicked(!clicked);
       history.push("/Dashboard");
     }
   };
-  
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email: email, password: password }),
+  };
+
+  useEffect(() => {
+    if (err) {
+      fetch("/login", options)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("data: ", data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [clicked]);
+
   return (
     <div className="login">
       <div className="loginTop">
@@ -47,14 +69,15 @@ export default function Login(this: any) {
         <br />
         <input type="password" placeholder="Password" required />
         <br />
-        <button className="btn btn-success" onClick={validate}>
+        <button className="btn btn-dark" onClick={validate}>
           Login
         </button>
         <br />
+        <p>Don't have an account? Sign up</p>
         <Link to="/register">
-            <a href="#" className="btn btn-primary">
+          <a href="#" className="btn btn-primary">
             Signup
-            </a>
+          </a>
         </Link>
       </div>
       <GoogleLogin
@@ -71,7 +94,7 @@ export default function Login(this: any) {
         callback={responseFacebook}
         icon="fa-facebook"
       />
-      {err && <p>Envalid email</p>}
+      {err && <p>Invalid email or password</p>}
       <div className="forgot">
         <a href="# ">forgot password?</a>
       </div>
