@@ -8,6 +8,11 @@
 # testing
 /coverage
 
+#database details
+/api/database/__pycache__/
+/api/__pycache__/
+/api/.env
+/__pycache__
 # production
 /build
 

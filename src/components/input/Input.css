@@ -1,0 +1,34 @@
+.input{
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    width: 75%;
+	margin: auto;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px rgb(221, 221, 221);
+}
+
+#language {
+    text-align: center;
+    margin: 0 auto;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+@media screen and (max-width: 1230px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+ }

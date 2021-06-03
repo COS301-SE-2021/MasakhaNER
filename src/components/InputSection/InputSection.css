@@ -1,0 +1,18 @@
+.inputSection{
+    margin: 0 auto;
+    width: 70%;
+    padding: 10px;
+    text-align: center;
+}
+#testSection{
+    border-radius: 10px;
+    width: 12em;
+    height: 40px;
+    resize: none;
+
+}
+.inputButton{
+    justify-content: center;
+    grid-template-columns: auto;
+    padding: 10px;
+}

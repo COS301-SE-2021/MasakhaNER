@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Dashboard from "./pages/dashboard/Dashboard";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Login from "./components/login/Login";
+import Register from "./pages/register/Register";
+import Verify from "./pages/verify/Verify";
 
 function App() {
-  // const [time, setTime] = useState(0);
-
-  // useEffect(() => {
-  //   fetch("https://masakha-api.herokuapp.com/")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setTime(data.time)
-  //     });
-  // }, []);
-
   return (
     <div className="App">
-      <h1>StopDaCap : MasakhaNER</h1>
-      {/* <p>{time}</p> */}
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Login} />
+          <Route exact path='/dashboard' component = {Dashboard} />
+          <Route exact path='/register' component = {Register} />
+          <Route exact path='/verify' component = {Verify} />
+        </Switch>
+      </Router>
+      
     </div>
   );
 }
