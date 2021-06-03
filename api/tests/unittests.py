@@ -25,7 +25,7 @@ class OutputTest(unittest.TestCase):
         # self.assertTrue(result1['name']=='Kanye',True)
         # self.assertTrue(result2['entity']=='LOCATION',True)
         # self.assertTrue(result2['name']=='London',True)
-        self.assertEqual(200, r.status_code, msg='works')
+        self.assertEqual(200, r.status_code)
         self.assertEqual(result1['entity'],'PERSON')
         self.assertEqual(result1['name'],'Kanye')
         self.assertEqual(result2['entity'],'LOCATION')
