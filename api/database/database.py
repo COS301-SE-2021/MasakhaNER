@@ -1,9 +1,12 @@
-from api.database.email import Email
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+from database.email import Email
 from flask import Flask
 import psycopg2
 import psycopg2.extras
 from dotenv import load_dotenv
-import os
+#import os
 from flask import request
 import bcrypt
 
@@ -98,13 +101,14 @@ class User:
         Boolean:Returns true or false if user logged in successfully
     """
     def login(self, email, password):
-        # encoded_password = bytes('1234', encoding='utf-8')
-        # encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
-        # print('passowrd1: ',encrypted_password)
+        # print("running login")
         
         # encoded_password = bytes('1234', encoding='utf-8')
-        # encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt())) 
-        # print('passowrd2: ',encrypted_password)
+        # encrypted_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
+        # print('passowrd1: ',encrypted_password)
+        
+        # if bcrypt.hashpw(encoded_password, encrypted_password) == encrypted_password:
+        #     print('true')
 
         
         encrypted_password_2 = 'encrypted_password'
