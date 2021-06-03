@@ -98,10 +98,15 @@ class User:
         Boolean:Returns true or false if user logged in successfully
     """
     def login(self, email, password):
-        # encoded_password = bytes(password, encoding='utf-8')
-        # encrypted_password = str(bcrypt.hashpw(
-        #     encoded_password, bcrypt.gensalt()))
-        # encrypted_password_2 = encrypted_password[1:]
+        encoded_password = bytes('1234', encoding='utf-8')
+        encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
+        print('passowrd1: ',encrypted_password)
+        
+        encoded_password = bytes('1234', encoding='utf-8')
+        encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt())) 
+        print('passowrd2: ',encrypted_password)
+
+        
         encrypted_password_2 = 'encrypted_password'
         print(encrypted_password_2)
         self.cur.execute(f"SELECT password FROM users where email='{email}';")
@@ -131,15 +136,15 @@ class User:
         self.conn.close()
 
 
-# class Test(self):
+# # class Test(self):
 
-#     def testHash(self):
-        encoded_password = bytes('1234', encoding='utf-8')
-        encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
-        print('passowrd1: ',encrypted_password)
+# #     def testHash(self):
+#         encoded_password = bytes('1234', encoding='utf-8')
+#         encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
+#         print('passowrd1: ',encrypted_password)
         
-        encoded_password = bytes('1234', encoding='utf-8')
-        encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt())) 
-        print('passowrd2: ',encrypted_password)
+#         encoded_password = bytes('1234', encoding='utf-8')
+#         encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt())) 
+#         print('passowrd2: ',encrypted_password)
 
-#run = Test().testHash()
+# #run = Test().testHash()
