@@ -17,9 +17,9 @@ class Test(unittest.TestCase):
         print("running")
         r = requests.post(self.ENDPOINT_URL,json=self.INPUT)
         data = json.loads(r.content)
-        print(data)
+        # print(data)
         
-        result1 = data['response']
+        # result1 = data['response']
         # result2 = data['output'][1]
 
         # print(result1)
