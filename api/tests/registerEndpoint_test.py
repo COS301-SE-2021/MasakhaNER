@@ -25,7 +25,7 @@ class Test(unittest.TestCase):
         # print(result1)
         # print(result2)
         self.assertEqual(200, r.status_code)
-        self.assertEqual(result1,'registered',msg=result1)
+        self.assertEqual(result1,'registered',msg=" if failed User already exists")
         # self.assertEqual(result1['name'],'Kanye')
         # self.assertEqual(result2['entity'],'LOCATION')
         # self.assertEqual(result2['name'],'London')
