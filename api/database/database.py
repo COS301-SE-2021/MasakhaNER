@@ -129,3 +129,17 @@ class User:
         self.conn.commit()
         self.cur.close()
         self.conn.close()
+
+
+# class Test(self):
+
+#     def testHash(self):
+        encoded_password = bytes('1234', encoding='utf-8')
+        encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
+        print('passowrd1: ',encrypted_password)
+        
+        encoded_password = bytes('1234', encoding='utf-8')
+        encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt())) 
+        print('passowrd2: ',encrypted_password)
+
+#run = Test().testHash()
