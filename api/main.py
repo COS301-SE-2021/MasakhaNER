@@ -69,11 +69,21 @@ def register_user():
 
 
     return {'output':'registered'}
-    # user_data = str(request.json["register_data"])
+
 @app.route('/validate-user-registration', methods=["POST"])
-def validate_user():
-    # db = User()
-    return {'output':'validated'}
+def validate_register_user():
+   
+    # user_firstname = str(request.json["firstname"])
+    # user_lastname = str(request.json["lastname"])
+    # user_email = str(request.json["email"])
+    # user_password = str(request.json["password"])
+    user_code  = request.json["code"]
+    
+    if user_code == User().get_code(str(request.json["email"])):
+        User().update_user(str(request.json["email"]))
+        return {'output':'chnaged'}
+    else:
+        return {'output':'false'}
 
 @app.route('/login', methods=["POST"])
 def login_user():
@@ -81,10 +91,15 @@ def login_user():
     user_email = str(request.json["email"])
     user_password = str(request.json["password"])
 
-    db.login(user_email, user_password)
+    if db.login(user_email, user_password):
+        return {'output':'logged-in'}
+    else:
+        return {'output':'invalid email or passowrd'}
 
 
-    return {'output':'registered'}
+
+
+    
 
 
 if __name__ == "__main__":
