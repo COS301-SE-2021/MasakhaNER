@@ -5,75 +5,122 @@ import psycopg2.extras
 from dotenv import load_dotenv
 import os
 from flask import request
+import bcrypt
 
 load_dotenv()
 
+
 class User:
+    """
+    Constructor:
+        Connects to the database.
+    Parameters:
+        None
+    Returns:
+        Boolean:Returns false if database connection fails
+    """
+
     def __init__(self):
-        self.DB_HOST=os.environ.get('DB_HOST')
-        self.DB_NAME=os.environ.get('DB_NAME')
-        self.DB_PASS=os.environ.get('DB_PASS')
-        self.DB_USER=os.environ.get('DB_USER')
-        self.conn = psycopg2.connect(dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
-        self.cur = self.conn.cursor()
+        try:
+            self.DB_HOST = os.environ.get('DB_HOST')
+            self.DB_NAME = os.environ.get('DB_NAME')
+            self.DB_PASS = os.environ.get('DB_PASS')
+            self.DB_USER = os.environ.get('DB_USER')
+            self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+            self.cur = self.conn.cursor()
+        except:
+            return False
+
+    """
+    Register Function:
+        Registers user by iunserting details into
+        the database. Password is encrypted using bcrypt, 
+        activation code is generated and sent to the user 
+        via the users email.
+    Parameters:
+        firstname (string): User's firstname
+        lastname (string): User's lastname
+        email (string): User's email
+        password (string): User's password
+    Returns:
+        Boolean:Returns true or false if user register successfully
+    """
 
     def register(self, firstname, lastname, email, password):
-        code='1111'
-        self.cur.execute(f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode) VALUES('{firstname}','{lastname}','{password}','{email}',{True},{code})")
-        sendemail = Email()
-        message =  """\
-        Masakhane Activation Code
+        try:
+            # encoded_password = bytes(password, encoding='utf-8')
+            # encrypted_password = str(bcrypt.hashpw(
+            #     encoded_password, bcrypt.gensalt()))
+            # encrypted_password_2 = encrypted_password[1:]
+            encrypted_password_2 = "encrypted_password"
+            code = '1111'
+            self.cur.execute(
+                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode) VALUES('{firstname}','{lastname}','{encrypted_password_2}','{email}',{False},{code})")
+            sendemail = Email()
+            message = """\
+            Masakhane Activation Code
 
-        Here is your activation code: 1111 """
-        sendemail.send_email(message, email)
-        self.conn.commit()
-        self.cur.close()
-        self.conn.close()
+            Here is your activation code: 1111 """
+            sendemail.send_email(message, email)
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
 
-    def get_code(self,email):
-        self.cur.execute(f"SELECT activationCode FROM users where email='{email}';")
+    """
+    Get code Function:
+        Takes in the users email and queries the database
+        to return the activation code and compares it to
+        the code sent in from the user. If matched,
+        the users account is verified.
+    Parameters:
+        email (string): User's email
+    Returns:
+        Boolean:Returns true or false if user register successfully
+    """
+
+    def get_code(self, email):
+        self.cur.execute(
+            f"SELECT activationcode FROM users where email='{email}';")
         return self.cur.fetchone()[0]
-        
 
+
+    """
+    Login Function:
+        Takes in the users email and password and
+        queries the databse to check if the
+        user exists.
+    Parameters:
+        email (string): User's email
+    Returns:
+        Boolean:Returns true or false if user logged in successfully
+    """
     def login(self, email, password):
-        print('login')
+        # encoded_password = bytes(password, encoding='utf-8')
+        # encrypted_password = str(bcrypt.hashpw(
+        #     encoded_password, bcrypt.gensalt()))
+        # encrypted_password_2 = encrypted_password[1:]
+        encrypted_password_2 = 'encrypted_password'
+        print(encrypted_password_2)
         self.cur.execute(f"SELECT password FROM users where email='{email}';")
-        one=self.cur.fetchone()
+        db_password = self.cur.fetchone()
         self.conn.commit()
         self.cur.close()
         self.conn.close()
-        print(one)
-        if one!=None and one[0] == password:
+        print(  f"'{str(db_password[0])}'"  )
+        if db_password != None and db_password[0] == encrypted_password_2:
             return True
         else:
             return False
 
-    def update_user(self,email):
-        self.cur.execute(f"SELECT * FROM users where email='{email}';")
-        self.cur.execute(f"Update users set firstname = 'VERIFIED' where email='{email}';")
-        self.conn.commit()
-        self.cur.close()
-        self.conn.close()
-
-
-
-
-
-# DB_HOST=os.environ.get('DB_HOST')
-# DB_NAME=os.environ.get('DB_NAME')
-# DB_PASS=os.environ.get('DB_PASS')
-# DB_USER=os.environ.get('DB_USER')
-#  print('test')
-# conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
-# cur = conn.cursor()
-
-#cur.execute("CREATE TABLE user (id SERIAL PRIMARY KEY, name VARCHAR, lastname VARCHAR);")
-#cur.execute("INSERT INTO student (name) VALUES(%s)", ("Sihle",))
-
-# cur.execute("DELETE FROM users WHERE firstname='Khotso';")
-
-# cur.execute("SELECT * FROM users;")
-
-# print(cur.fetchall())
-
-
+    # def update_user(self, email):
+    #     self.cur.execute(f"SELECT * FROM users where email='{email}';")
+    #     self.cur.execute(
+    #         f"Update users set firstname = 'VERIFIED' where email='{email}';")
+    #     self.conn.commit()
+    #     self.cur.close()
+    #     self.conn.close()

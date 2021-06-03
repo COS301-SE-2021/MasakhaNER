@@ -1,6 +1,14 @@
 import smtplib, ssl
 
 class Email:
+    """
+    Constructor:
+        Sets up SMTP server..
+    Parameters:
+        None
+    Returns:
+        Boolean:Returns false if database connection fails
+    """ 
     def __init__(self):
         self.smtp_server = "smtp.gmail.com"
         self.port = 587  # For starttls
@@ -14,10 +22,23 @@ class Email:
             self.server.ehlo() 
             self.server.login(self.sender_email, self.password)
         except Exception as e:
-            print(f"Exception: {e}")
+            print(f"Send email error: {e}")
+            return False
 
+    """
+    send_email function:
+        Sends email to user when they register
+    Parameters:
+        message(string): message sent containing email
+        receiver_email(string): email address of user
+    Returns:
+        Boolean:Returns false if email sending fails
+    """ 
     def send_email(self, message, receiver_email):
-        self.server.sendmail(self.sender_email, receiver_email, message)
-        self.server.quit() 
-        print('email sent')
+        try:
+            self.server.sendmail(self.sender_email, receiver_email, message)
+            self.server.quit() 
+            print('email sent')
+        except:
+            return False;
 
