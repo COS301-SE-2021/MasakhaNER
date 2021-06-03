@@ -30,4 +30,4 @@ class Test(unittest.TestCase):
         # self.assertEqual(result2['entity'],'LOCATION')
         # self.assertEqual(result2['name'],'London')
 
-run = Test().test_endpoint()
+#run = Test().test_endpoint()
