@@ -4,7 +4,7 @@ import FacebookLogin from "react-facebook-login";
 import "./Login.css";
 import React, { useState } from "react";
 import { validEmail, validPassword } from "./Regex";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 let history;
 const responseGoogle = (response: any) => {
@@ -51,9 +51,11 @@ export default function Login(this: any) {
           Login
         </button>
         <br />
-        <a href="#" className="btn btn-primary">
-          Signup
-        </a>
+        <Link to="/register">
+            <a href="#" className="btn btn-primary">
+            Signup
+            </a>
+        </Link>
       </div>
       <GoogleLogin
         clientId="824866690096-4rqi2a1n6bvj9sfstjcbv999i9pi69i3.apps.googleusercontent.com"

@@ -7,8 +7,7 @@ function Dashboard() {
   return (
     <div>
       <Nav />
-      {/* <Input /> */}
-      <Register/>
+      <Input />
       <Footer />
     </div>
   );

@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container } from "react-bootstrap";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -38,15 +39,14 @@ function Register() {
   // }
 
   useEffect(() => {
-    if(!verified === true){
+    if (!verified === true) {
       fetch("/register", options)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.output);
-      })
-      .catch((err) => console.log(err));
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.output);
+        })
+        .catch((err) => console.log(err));
     }
-    
   }, [clicked]);
 
   const handleSubmit = (e: any) => {
@@ -105,18 +105,20 @@ function Register() {
           />
         </div>
         <br />
-        <button
-          disabled={verified}
-          id="mainBtn"
-          type="submit"
-          className="btn btn-secondary"
-          onClick={() => {
-            handleSubscribe();
-            setClicked(!clicked);
-          }}
-        >
-          Submit
-        </button>
+        <Link to="/dashboard">
+          <button
+            disabled={verified}
+            id="mainBtn"
+            type="submit"
+            className="btn btn-secondary"
+            onClick={() => {
+              handleSubscribe();
+              setClicked(!clicked);
+            }}
+          >
+            Submit
+          </button>
+        </Link>
       </form>
       <ReCAPTCHA
         sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
