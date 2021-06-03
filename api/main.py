@@ -40,6 +40,7 @@ pretrained_data = [
     ['friday','DATE'],
     ['saturday','DATE'],
     ['sunday','DATE'],
+    ['jumatatu','DATE'],
     ['tuks','ORGANISATION'],
     ['wits','ORGANISATION'],
     ['apple','ORGANISATION'],
@@ -67,12 +68,32 @@ def train_model(user_input):
                 break
     return newlist
 
+"""
+    model_feedback function:
+        receiveves user input so the
+        NER model can train it
+        and returns feedback
+    Parameters:
+        None
+    Returns:
+        JSON object with model feedback
+""" 
+
 @app.route('/input', methods=["POST"])
 def model_feedback():
     user_input = str(request.json["input"]).split()
     model_feedback = train_model(user_input)
     return {'output': model_feedback}
 
+"""
+    register_user function:
+        registers user to the system and adds them to
+        the database
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+""" 
 
 @app.route('/register', methods=["POST"])
 def register_user():
@@ -89,6 +110,15 @@ def register_user():
     else:
         return {'response':'failed'}
 
+"""
+    verify_user function:
+        verifies user based on passed in code
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+""" 
+
 @app.route('/verify', methods=["POST"])
 def verify_user():
     db = User()
@@ -102,6 +132,15 @@ def verify_user():
             return {'response':'failed'}
     else:
         return {{'response':'failed'}}
+
+"""
+    login_user function:
+        logs user into the system
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+""" 
 
 @app.route('/login', methods=["POST"])
 def login_user():
