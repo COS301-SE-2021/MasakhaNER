@@ -14,6 +14,7 @@ class Test(unittest.TestCase):
     
     def test_endpoint(self):
         
+        print("running")
         r = requests.post(self.ENDPOINT_URL,json=self.INPUT)
         data = json.loads(r.content)
         print(data)
@@ -27,3 +28,5 @@ class Test(unittest.TestCase):
         # self.assertEqual(result1['name'],'Kanye')
         # self.assertEqual(result2['entity'],'LOCATION')
         # self.assertEqual(result2['name'],'London')
+
+run = Test().test_endpoint
