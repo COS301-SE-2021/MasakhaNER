@@ -77,7 +77,7 @@ def model_feedback():
 @app.route('/register', methods=["POST"])
 def register_user():
     db = User()
-    if(db != False):
+    if(db != None):
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])
