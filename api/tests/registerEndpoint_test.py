@@ -8,7 +8,7 @@ class Test(unittest.TestCase):
     INPUT = {
         "firstname": "man",
         "lastname": "manson",
-        "email": "m@gmail.com",
+        "email": "manson@gmail.com",
         "password": "1234"
     }
     
@@ -24,8 +24,8 @@ class Test(unittest.TestCase):
 
         # print(result1)
         # print(result2)
-        #self.assertEqual(200, r.status_code)
-        # self.assertEqual(result1['entity'],'PERSON')
+        self.assertEqual(200, r.status_code)
+        self.assertEqual(result1,'failed',msg=result1)
         # self.assertEqual(result1['name'],'Kanye')
         # self.assertEqual(result2['entity'],'LOCATION')
         # self.assertEqual(result2['name'],'London')
