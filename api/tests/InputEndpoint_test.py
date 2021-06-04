@@ -17,8 +17,6 @@ class Test(unittest.TestCase):
         result1 = data['output'][0]
         result2 = data['output'][1]
 
-        # print(result1)
-        # print(result2)
         self.assertEqual(200, r.status_code)
         self.assertEqual(result1['entity'],'PERSON')
         self.assertEqual(result1['name'],'Kanye')
