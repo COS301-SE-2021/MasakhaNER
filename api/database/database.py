@@ -118,7 +118,7 @@ class User:
         self.conn.commit()
         self.cur.close()
         self.conn.close()
-        print(  f"'{str(db_password[0])}'"  )
+        #print(  f"'{str(db_password[0])}'"  )
         if db_password != None and db_password[0] == encrypted_password_2:
             return True
         else:
