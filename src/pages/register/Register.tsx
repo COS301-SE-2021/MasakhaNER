@@ -26,26 +26,6 @@ function Register() {
     }),
   };
 
-  function handleSubscribe() {
-    if (!disabled === true) {
-      alert("You have successfully subscribed!");
-    } else {
-      alert("Please verify that you are human!");
-    }
-  }
-  function checkDetails() {
-    if (
-      firstName.length === 0 ||
-      lastName.length === 0 ||
-      email.length === 0 ||
-      password.length === 0
-    ) {
-      alert("Enter all details");
-      return false;
-    }
-    return true;
-  }
-
   useEffect(() => {
     if (disabled === false) {
       fetch("/register", options)

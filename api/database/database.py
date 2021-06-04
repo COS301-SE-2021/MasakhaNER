@@ -1,9 +1,12 @@
-from api.database.email import Email
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+from database.email import Email
 from flask import Flask
 import psycopg2
 import psycopg2.extras
 from dotenv import load_dotenv
-import os
+#import os
 from flask import request
 import bcrypt
 
@@ -30,7 +33,7 @@ class User:
                 dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
             self.cur = self.conn.cursor()
         except:
-            return False
+            return None
 
     """
     Register Function:
@@ -98,10 +101,16 @@ class User:
         Boolean:Returns true or false if user logged in successfully
     """
     def login(self, email, password):
-        # encoded_password = bytes(password, encoding='utf-8')
-        # encrypted_password = str(bcrypt.hashpw(
-        #     encoded_password, bcrypt.gensalt()))
-        # encrypted_password_2 = encrypted_password[1:]
+        # print("running login")
+        
+        # encoded_password = bytes('1234', encoding='utf-8')
+        # encrypted_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
+        # print('passowrd1: ',encrypted_password)
+        
+        # if bcrypt.hashpw(encoded_password, encrypted_password) == encrypted_password:
+        #     print('true')
+
+        
         encrypted_password_2 = 'encrypted_password'
         print(encrypted_password_2)
         self.cur.execute(f"SELECT password FROM users where email='{email}';")
@@ -109,7 +118,7 @@ class User:
         self.conn.commit()
         self.cur.close()
         self.conn.close()
-        print(  f"'{str(db_password[0])}'"  )
+        #print(  f"'{str(db_password[0])}'"  )
         if db_password != None and db_password[0] == encrypted_password_2:
             return True
         else:
@@ -129,3 +138,17 @@ class User:
         self.conn.commit()
         self.cur.close()
         self.conn.close()
+
+
+# # class Test(self):
+
+# #     def testHash(self):
+#         encoded_password = bytes('1234', encoding='utf-8')
+#         encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
+#         print('passowrd1: ',encrypted_password)
+        
+#         encoded_password = bytes('1234', encoding='utf-8')
+#         encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt())) 
+#         print('passowrd2: ',encrypted_password)
+
+# #run = Test().testHash()
