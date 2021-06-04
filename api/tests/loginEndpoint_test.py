@@ -7,7 +7,7 @@ class Test(unittest.TestCase):
     
     
     
-    def test_endpoint2(self):
+    def test_endpoint(self):
         INPUT = {
         "email": "IDONOTEXIT@gmail.com",
         "password": "1234"
@@ -18,10 +18,10 @@ class Test(unittest.TestCase):
         
         result1 = data['response']
 
-        print(result1)
+        #print(result1)
         # print(result2)
         self.assertEqual(200, r.status_code)
-        self.assertEqual(result1,'invaild',msg=" if failed User is valid")
+        self.assertEqual(result1,'invalid',msg=" if failed User is valid")
         # self.assertEqual(result1['name'],'Kanye')
         # self.assertEqual(result2['entity'],'LOCATION')
         # self.assertEqual(result2['name'],'London')
