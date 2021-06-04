@@ -17,7 +17,7 @@ A web-based interface that will be used as a named entity recognition tool for A
 
 ## Documentation
 
-- [Software Requirements Specification - StopDaCAp](https://docs.google.com/document/d/1vjjS5MQYoHAB4J2reDeffHQKpTJA0F64WjCdptu6PjY/edit?usp=sharing)
+- [Software Requirements Specification - StopDaCAp](https://drive.google.com/file/d/1W7VcD3aDbkesO6wtPLqwU1DE3OHYBJ_k/view?usp=sharing)
 
 ## Demo Links
 - [StopDaCap - Demo 1](https://drive.google.com/file/d/1nY6zOI-pzEs0-Fn2sCIAineUekJEAGyV/view?usp=sharing)
