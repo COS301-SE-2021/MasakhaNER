@@ -125,7 +125,7 @@ def verify_user():
     if(db != False):
         user_email = request.json["email"]
         user_code  = request.json["code"]
-        if user_code == db.get_code(user_email):
+        if user_code!=None and user_code == db.get_code(user_email):
             db.verify_user(user_email)
             return {'response':'verified'}
         else:

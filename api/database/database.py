@@ -85,9 +85,12 @@ class User:
     """
 
     def get_code(self, email):
-        self.cur.execute(
-            f"SELECT activationcode FROM users where email='{email}';")
-        return self.cur.fetchone()[0]
+        self.cur.execute(f"SELECT activationcode FROM users where email='{email}';")
+        var = self.cur.fetchone()
+        if var != None:
+            return var[0]
+        else:
+            return None
 
 
     """
