@@ -20,7 +20,7 @@ A web-based interface that will be used as a named entity recognition tool for A
 - [Software Requirements Specification - StopDaCAp](https://docs.google.com/document/d/1vjjS5MQYoHAB4J2reDeffHQKpTJA0F64WjCdptu6PjY/edit?usp=sharing)
 
 ## Demo Links
-- [StopDaCap - Demo 1]()
+- [StopDaCap - Demo 1](https://drive.google.com/file/d/1nY6zOI-pzEs0-Fn2sCIAineUekJEAGyV/view?usp=sharing)
 
 ## Technology Stack
 <p>Frontend - ReactJS</p>
