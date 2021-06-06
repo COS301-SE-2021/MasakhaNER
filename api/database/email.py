@@ -13,7 +13,7 @@ class Email:
         self.smtp_server = "smtp.gmail.com"
         self.port = 587  # For starttls
         self.sender_email = "masakhaner.301@gmail.com"
-        self.password = "stopdacap@301"
+        self.password = ""
         self.context = ssl.create_default_context()
         try:
             self.server = smtplib.SMTP(self.smtp_server,self.port)
