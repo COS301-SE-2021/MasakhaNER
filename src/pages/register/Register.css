@@ -32,3 +32,8 @@
 #register-header {
   font-size: 60px;
 }
+
+.title-container {
+  text-align: center;
+  padding-bottom: 15px;
+}

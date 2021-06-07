@@ -43,10 +43,12 @@ function Register() {
 
   return (
     <div>
-      <h1 id="register-header">Sign up to use the MasakhaNER Tool</h1>
       <div className="signup-form">
         <div className="registerTop">
-          <h2>Register</h2>
+          <h2>Sign Up</h2>
+        </div>
+        <div className="title-container">
+          <h1 id="register-header">Masakha NER Tool</h1>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -119,7 +121,7 @@ function Register() {
             }}
           >
             {/* <Link to="/verify" id="submit-link"> */}
-            Submit
+            Sign Up
             {/* </Link> */}
           </button>
         </form>
