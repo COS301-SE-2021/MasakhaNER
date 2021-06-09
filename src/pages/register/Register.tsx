@@ -47,11 +47,9 @@ function Register() {
         <div className="registerTop">
           <h2>Sign Up</h2>
         </div>
-        {/* <div className="title-container"> */}
-          <h1 id="register-header">Masakha NER Tool</h1>
-        {/* </div> */}
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
+        <div className="form-row">
+          <div className="form-group col-md-6">
             <label htmlFor="firstName">First Name:</label>
             <input
               type="text"
@@ -63,7 +61,11 @@ function Register() {
               onChange={(e) => setfirstName(e.target.value)}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group col-md-6">
+            <h1 id="register-header">Masakha NER Tool</h1>
+          </div>
+        </div>
+          <div className="form-group col-md-6">
             <label htmlFor="lastName">Last Name:</label>
             <input
               type="text"
@@ -75,7 +77,7 @@ function Register() {
               onChange={(e) => setlastName(e.target.value)}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group col-md-6">
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -87,7 +89,7 @@ function Register() {
               onChange={(e) => setemail(e.target.value)}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group col-md-6">
             <label htmlFor="password">Password:</label>
             <input
               type="password"
