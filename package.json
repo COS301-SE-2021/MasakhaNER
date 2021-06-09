@@ -16,11 +16,13 @@
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-dom": "^17.0.2",
-    "react-google-recaptcha": "^2.1.0",
-    "react-icons": "^4.2.0",
-    "react-recaptcha": "^2.3.10",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
+    "react-google-recaptcha": "^2.1.0",
+    "react-icons": "^4.2.0",
+    "react-linkedin-login": "^1.0.4",
+    "react-linkedin-login-oauth2": "^1.0.9",
+    "react-recaptcha": "^2.3.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^4.1.2",
@@ -53,9 +55,9 @@
   },
   "proxy": "http://localhost:5000",
   "devDependencies": {
+    "@types/react-facebook-login": "^4.1.3",
     "@types/react-google-recaptcha": "^2.1.0",
     "@types/react-recaptcha": "^2.3.3",
-    "@types/react-facebook-login": "^4.1.3",
     "@types/react-router-dom": "^5.1.7"
   }
 }
