@@ -2,13 +2,13 @@
   width: 800px;
   margin: 0 auto;
   padding: 30px 0;
-  /* justify-content: center; */
-  /* align-items: center; */
+  justify-content: left; 
+  align-items: left; 
   margin-top: 0 !important;
 }
 
 .signup-form form {
-  background-color: white !important;
+  /* background-color: white !important; */
   color: #999;
   width: 800px;
   border-radius: 3px;
@@ -18,9 +18,6 @@
   padding: 30px;
 }
 
-.label{
-  text-align: left;
-}
 
 .registerTop{
   background-color: rgb(0, 0, 0);
