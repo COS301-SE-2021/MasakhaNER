@@ -47,9 +47,9 @@ function Register() {
         <div className="registerTop">
           <h2>Sign Up</h2>
         </div>
-        <div className="title-container">
+        {/* <div className="title-container"> */}
           <h1 id="register-header">Masakha NER Tool</h1>
-        </div>
+        {/* </div> */}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="firstName">First Name:</label>

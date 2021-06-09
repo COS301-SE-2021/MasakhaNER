@@ -2,8 +2,8 @@
   width: 800px;
   margin: 0 auto;
   padding: 30px 0;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   margin-top: 0 !important;
 }
 
@@ -19,6 +19,10 @@
 }
 .form-group{
   width: 400px;
+}
+
+.label{
+  text-align: left;
 }
 
 .registerTop{
@@ -39,6 +43,6 @@
 }
 
 .title-container {
-  text-align: center;
+  /* text-align: center; */
   padding-bottom: 15px;
 }
