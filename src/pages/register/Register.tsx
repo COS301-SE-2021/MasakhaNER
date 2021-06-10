@@ -44,8 +44,15 @@ function Register() {
   return (
     <div className="signup-form">
           <div id="register-header">
-            <h1>Masakha 
-              NER Tool</h1>
+            <h1>MASAKHA NER TOOL</h1>
+              <p>Please confirm that you are human <br />
+                before submitting...</p>
+              <ReCAPTCHA
+                sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+                onChange={() => {
+                  setDisabled(false);
+                }}
+              />
           </div>
       <form id="regForm" onSubmit={handleSubmit}>
       <div className="registerTop">
@@ -99,13 +106,6 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <p>Please confirm that you are human before submitting</p>
-        <ReCAPTCHA
-          sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-          onChange={() => {
-            setDisabled(false);
-          }}
-        />
         <br />
         <div className="register-button">
         <button
@@ -121,7 +121,7 @@ function Register() {
             window.location.href = "/verify";
           }}
         >
-          Sign Up
+          Sign up
         </button>
         </div>
       </form>
