@@ -85,13 +85,23 @@ def train_model(user_input):
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        db = User();
+        token = None
         if 'x-access-token' in request.headers:
             token = request.headers['x-access-token']
 
+        if not token:
+            return jsonify({'message': 'Token is miissing!'}), 401
+
         try:
+            db=User()
             data = jwt.decode(token,app.config['secret_key'])
-            user = 
+            user = db.findByEmail(data['email'])
+        except:
+            return jsonify({'message' : 'invalid'}),401
+
+        return f(user,*args,**kwargs)
+
+    return decorated
 
 
 @app.route('/input', methods=["POST"])
@@ -168,9 +178,9 @@ def login_user():
             token = jwt.encode({'user' : user_email, 'exp' : datetime.utcnow() + timedelta(hours=2)}, app.config['SECRET_KEY'])
             return jsonify({'token':token.decode('UTF-8')})
         else:
-            return {'response':'invalid'}
+            return jsonify({'message': 'authetication failed!'}), 401
     else:
-        return {'response':'failed'}
+        return jsonify({'message': 'authetication failed!'}), 401
 
     
 
