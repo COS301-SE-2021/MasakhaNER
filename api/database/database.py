@@ -87,6 +87,9 @@ class User:
     def get_code(self, email):
         self.cur.execute(f"SELECT activationcode FROM users where email='{email}';")
         var = self.cur.fetchone()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
         if var != None:
             return var[0]
         else:
@@ -141,6 +144,14 @@ class User:
         self.conn.commit()
         self.cur.close()
         self.conn.close()
+
+    def findByEmail(self, email):
+        self.cur.execute(f"SELECT * FROM users where email='{email}';")
+        db_user = self.cur.fetchone()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+        return db_user
 
 
 # # class Test(self):
