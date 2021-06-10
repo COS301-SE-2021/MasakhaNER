@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import Flask
 from flask import request
+import jwt
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
@@ -150,11 +151,14 @@ def login_user():
         user_password = str(request.json["password"])
 
         if db.login(user_email, user_password):
+            token = jwt.encode({'user' : })
             return {'response':'logged-in'}
         else:
             return {'response':'invalid'}
     else:
         return {'response':'failed'}
+
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
