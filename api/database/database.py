@@ -60,12 +60,12 @@ class User:
             code = '1111'
             self.cur.execute(
                 f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{encrypted_password_2}','{email}',{False},{code},{False})")
-            sendemail = Email()
+            #sendemail = Email()
             message = """\
             Masakhane Activation Code
 
             Here is your activation code: 1111 """
-            sendemail.send_email(message, email)
+            #sendemail.send_email(message, email)
             self.conn.commit()
             self.cur.close()
             self.conn.close()

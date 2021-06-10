@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from flask import Flask,jsonify
 from flask import request
+from functools import wraps
 import jwt
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
@@ -89,16 +90,20 @@ def token_required(f):
         token = None
         if 'x-access-token' in request.headers:
             token = request.headers['x-access-token']
+            print(token)
 
         if not token:
             return jsonify({'message': 'Token is miissing!'}), 401
 
         try:
+            print("here")
             db=User()
-            data = jwt.decode(token,app.config['secret_key'])
+            print("here2")
+            data = jwt.decode(token,app.config['SECRET_KEY'],"HS256")
+            print("data is ",data)
             user = db.findUserByEmail(data['email'])
-        except:
-            return jsonify({'message' : 'invalid'}),401
+        except Exception as e:
+            return jsonify({'message' : str(e)}),401
 
         return f(user,*args,**kwargs)
 
@@ -128,6 +133,13 @@ def model_feedback(user):
 
 @app.route('/register', methods=["POST"])
 def register_user():
+
+    # "firstname":"kanye",
+    # "lastname":"west",
+    # "email":"kw@gmail.com",
+    # "password":"12345"
+
+
     db = User()
     if(db != None):
         user_firstname = str(request.json["firstname"])
@@ -181,8 +193,8 @@ def login_user():
         user_password = str(request.json["password"])
 
         if db.login(user_email, user_password):
-            token = jwt.encode({'user' : user_email, 'exp' : datetime.utcnow() + timedelta(minutes=10)}, app.config['SECRET_KEY'])
-            return jsonify({'token':token.decode('UTF-8')})
+            token = jwt.encode({'email' : user_email, 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+            return jsonify({'token': token})
         else:
             return jsonify({'message': 'authetication failed!'}), 401
     else:
