@@ -42,13 +42,14 @@ function Register() {
   };
 
   return (
+    
     <div className="signup-form">
+          <div id="register-header"><h1>Masakha NER Tool</h1></div>
+      <form id="regForm" onSubmit={handleSubmit}>
       <div className="registerTop">
         <h2>Sign Up</h2>
       </div>
-      <form onSubmit={handleSubmit}>
-      <div className="form-row">
-        <div className="form-group col-md-6">
+        <div className="form-group">
           <label htmlFor="firstName">First Name:</label>
           <input
             type="text"
@@ -60,11 +61,7 @@ function Register() {
             onChange={(e) => setfirstName(e.target.value)}
           />
         </div>
-        <div className="form-group col-md-6">
-          <h1 id="register-header">Masakha NER Tool</h1>
-        </div>
-      </div>
-        <div className="form-group col-md-6">
+        <div className="form-group">
           <label htmlFor="lastName">Last Name:</label>
           <input
             type="text"
@@ -76,7 +73,7 @@ function Register() {
             onChange={(e) => setlastName(e.target.value)}
           />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -88,7 +85,7 @@ function Register() {
             onChange={(e) => setemail(e.target.value)}
           />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -108,6 +105,7 @@ function Register() {
           }}
         />
         <br />
+        <div className="register-button">
         <button
           disabled={disabled}
           id="mainBtn"
@@ -121,10 +119,9 @@ function Register() {
             window.location.href = "/verify";
           }}
         >
-          {/* <Link to="/verify" id="submit-link"> */}
           Sign Up
-          {/* </Link> */}
         </button>
+        </div>
       </form>
     </div>
   );
