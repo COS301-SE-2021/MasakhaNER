@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container } from "react-bootstrap";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
-import { Link } from "react-router-dom";
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -37,6 +36,7 @@ function Register() {
     }
   }, [clicked]);
 
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -69,6 +69,10 @@ function Register() {
             className="form-control"
             value={firstName}
             onChange={(e) => setfirstName(e.target.value)}
+            ref={register({
+              required: true,
+              pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
+            })}
           />
         </div>
         <div className="form-group">
