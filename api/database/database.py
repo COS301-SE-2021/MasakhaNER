@@ -145,9 +145,17 @@ class User:
         self.cur.close()
         self.conn.close()
 
-    def findByEmail(self, email):
+    def findUserByEmail(self, email):
         self.cur.execute(f"SELECT * FROM users where email='{email}';")
         db_user = self.cur.fetchone()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+        return db_user
+
+    def getAllUsers(self):
+        self.cur.execute(f"SELECT * FROM users;")
+        db_user = self.cur.fetchall()
         self.conn.commit()
         self.cur.close()
         self.conn.close()

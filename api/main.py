@@ -95,7 +95,7 @@ def token_required(f):
         try:
             db=User()
             data = jwt.decode(token,app.config['secret_key'])
-            user = db.findByEmail(data['email'])
+            user = db.findUserByEmail(data['email'])
         except:
             return jsonify({'message' : 'invalid'}),401
 
