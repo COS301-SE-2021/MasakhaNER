@@ -2,9 +2,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import "./Login.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { validEmail } from "./Regex";
 import { useHistory } from "react-router-dom";
+import {FaLinkedin} from "react-icons/fa"
+// import LinkedIn from "linkedin-login-for-react";
+// import styles from "./styles.css";
 
 let history;
 const responseGoogle = (response: any) => {
@@ -56,6 +59,15 @@ export default function Login(this: any) {
     }
   }, [clicked]);
 
+  const callbackLinkedIn = (error: any, code: any, redirectUri: any) => {
+    if (error) {
+      // signin failed
+    } else {
+      history.push("/Dashboard");
+      // Obtain authorization token from linkedin api
+      // see https://developer.linkedin.com/docs/oauth2 for more info
+    }
+  };
 
   return (
     <div className="login-body">
@@ -97,6 +109,7 @@ export default function Login(this: any) {
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy={"single_host_origin"}
+            // className = "fab fa-google"
           />
           <FacebookLogin
             appId="2951110285136034"
@@ -105,8 +118,11 @@ export default function Login(this: any) {
             callback={responseFacebook}
             cssClass = "btn btn-primary"
             textButton = ""
-            icon="fa-facebook"
+            icon="fab fa-facebook-f"
           />
+          <a className="btn btn-primary" href="#!" role="button">
+              <FaLinkedin />
+          </a>
         </div>
         {err && <p>Invalid email or password</p>}
         
