@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container } from "react-bootstrap";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useForm } from 'react-hook-form';
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -36,7 +37,7 @@ function Register() {
     }
   }, [clicked]);
 
-
+  const { register, errors } = useForm(); 
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -69,10 +70,6 @@ function Register() {
             className="form-control"
             value={firstName}
             onChange={(e) => setfirstName(e.target.value)}
-            ref={register({
-              required: true,
-              pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
-            })}
           />
         </div>
         <div className="form-group">
@@ -95,6 +92,13 @@ function Register() {
             className="form-control"
             value={email}
             onChange={(e) => setemail(e.target.value)}
+            // ref={register({
+            //   required: 'Email is required.',
+            //   pattern: {
+            //     value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+            //     message: 'Email is not valid.'
+            //   }
+            // })}
           />
         </div>
         <div className="form-group">
@@ -106,6 +110,13 @@ function Register() {
             className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            // ref={register({
+            //   required: 'Password is required.',
+            //   minLength: {
+            //     value: 6,
+            //     message: 'Password should be at-least 6 characters.'
+            //   }
+            // })}
           />
         </div>
         <br />
