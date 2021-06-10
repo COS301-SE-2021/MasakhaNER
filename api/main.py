@@ -8,6 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from database.database import User
 
 app = Flask(__name__)
+
 app.config['SECRET_KEY']='secret'
 
 
@@ -105,7 +106,12 @@ def token_required(f):
 
 
 @app.route('/input', methods=["POST"])
-def model_feedback():
+@token_required
+def model_feedback(user):
+
+    if not user:
+        return jsonify({'message' : 'log in to use model'}),401
+
     user_input = str(request.json["input"]).split()
     model_feedback = train_model(user_input)
     return {'output': model_feedback}
@@ -175,7 +181,7 @@ def login_user():
         user_password = str(request.json["password"])
 
         if db.login(user_email, user_password):
-            token = jwt.encode({'user' : user_email, 'exp' : datetime.utcnow() + timedelta(hours=2)}, app.config['SECRET_KEY'])
+            token = jwt.encode({'user' : user_email, 'exp' : datetime.utcnow() + timedelta(minutes=10)}, app.config['SECRET_KEY'])
             return jsonify({'token':token.decode('UTF-8')})
         else:
             return jsonify({'message': 'authetication failed!'}), 401
