@@ -36,7 +36,7 @@ function Register() {
     }
   }, [clicked]);
 
-  const { register, errors } = useForm(); 
+  const { register, formState: { errors } } = useForm(); 
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
