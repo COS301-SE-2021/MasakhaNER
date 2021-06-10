@@ -12,6 +12,10 @@ import bcrypt
 
 load_dotenv()
 
+# TODO: 
+#      implement prepared statements to SQL queries
+#
+
 
 class User:
     """
