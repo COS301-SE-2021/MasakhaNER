@@ -1,6 +1,5 @@
-import React, { useState, useEffect, Component, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Container } from "react-bootstrap";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from 'react-hook-form';
@@ -87,20 +86,22 @@ function Register() {
           <label htmlFor="email">Email:</label>
           <input
             type="email"
-            name="emal"
+            name="email"
             id="email"
             className="form-control"
             value={email}
             onChange={(e) => setemail(e.target.value)}
-            // ref={register({
-            //   required: 'Email is required.',
-            //   pattern: {
-            //     value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-            //     message: 'Email is not valid.'
-            //   }
-            // })}
+            ref={register({
+              required: true,
+              pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
+            })}
           />
-          {errors.email && <p className="errorMsg">{errors.email.message}</p>}
+          {errors.email && errors.email.type === "required" && (
+            <p className="errorMsg">Email is required.</p>
+          )}
+          {errors.email && errors.email.type === "pattern" && (
+            <p className="errorMsg">Email is not valid.</p>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
@@ -111,16 +112,15 @@ function Register() {
             className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            // ref={register({
-            //   required: 'Password is required.',
-            //   minLength: {
-            //     value: 6,
-            //     message: 'Password should be at-least 6 characters.'
-            //   }
-            // })}
+            // ref={register({ required: true, minLength: 6 })}
           />
-          {errors.password && (
-            <p className="errorMsg">{errors.password.message}</p>
+          {errors.password && errors.password.type === "required" && (
+            <p className="errorMsg">Password is required.</p>
+          )}
+          {errors.password && errors.password.type === "minLength" && (
+            <p className="errorMsg">
+              Password should be at-least 6 characters.
+            </p>
           )}
         </div>
         <br />
