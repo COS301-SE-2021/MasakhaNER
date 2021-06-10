@@ -1,5 +1,5 @@
-from datetime import datetime
-from flask import Flask
+from datetime import datetime, timedelta
+from flask import Flask,jsonify
 from flask import request
 import jwt
 import os, sys
@@ -8,6 +8,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from database.database import User
 
 app = Flask(__name__)
+app.config['SECRET_KEY']='secret'
+
 
 """
     Serves as mock trained data
@@ -80,6 +82,18 @@ def train_model(user_input):
         JSON object with model feedback
 """ 
 
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        db = User();
+        if 'x-access-token' in request.headers:
+            token = request.headers['x-access-token']
+
+        try:
+            data = jwt.decode(token,app.config['secret_key'])
+            user = 
+
+
 @app.route('/input', methods=["POST"])
 def model_feedback():
     user_input = str(request.json["input"]).split()
@@ -151,8 +165,8 @@ def login_user():
         user_password = str(request.json["password"])
 
         if db.login(user_email, user_password):
-            token = jwt.encode({'user' : })
-            return {'response':'logged-in'}
+            token = jwt.encode({'user' : user_email, 'exp' : datetime.utcnow() + timedelta(hours=2)}, app.config['SECRET_KEY'])
+            return jsonify({'token':token.decode('UTF-8')})
         else:
             return {'response':'invalid'}
     else:
