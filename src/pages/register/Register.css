@@ -68,10 +68,10 @@ a, p{
   width: 100%;
 }
 
-.register-button{
-  display: grid;
-  grid-template: 90px / auto auto;
-  justify-content: space-evenly;
-  grid-gap: 90px;
+#reCAP{
+  align-self: start;
+  width: 45%;
+  height: 45%;
+  margin-top: auto;
+  margin-bottom: auto;
 }
-

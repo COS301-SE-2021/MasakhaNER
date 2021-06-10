@@ -44,19 +44,21 @@ function Register() {
   return (
     <div className="signup-form">
           <div id="register-header">
-            <h1>MASAKHA NER TOOL</h1>
+            <h1>MASAKHA <br/> NER TOOL</h1>
               <p>Please confirm that you are human <br />
                 before submitting...</p>
-              <ReCAPTCHA
-                sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-                onChange={() => {
-                  setDisabled(false);
-                }}
-              />
+               <div className="reCAP"> 
+                <ReCAPTCHA
+                  sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+                  onChange={() => {
+                    setDisabled(false);
+                  }}
+                />
+              </div>
           </div>
       <form id="regForm" onSubmit={handleSubmit}>
       <div className="registerTop">
-        <h2>Sign Up</h2>
+        <h2>SIGN UP</h2>
       </div>
         <div className="form-group">
           <label htmlFor="firstName">First Name:</label>
@@ -65,7 +67,6 @@ function Register() {
             name="firstName"
             id="firstName"
             className="form-control"
-            placeholder="Firstname"
             value={firstName}
             onChange={(e) => setfirstName(e.target.value)}
           />
@@ -77,7 +78,6 @@ function Register() {
             name="flastName"
             id="lastName"
             className="form-control"
-            placeholder="Lastname"
             value={lastName}
             onChange={(e) => setlastName(e.target.value)}
           />
@@ -89,7 +89,6 @@ function Register() {
             name="emal"
             id="email"
             className="form-control"
-            placeholder="Email address"
             value={email}
             onChange={(e) => setemail(e.target.value)}
           />
@@ -101,7 +100,6 @@ function Register() {
             name="password"
             id="password"
             className="form-control"
-            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
