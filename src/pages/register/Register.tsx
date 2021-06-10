@@ -100,6 +100,7 @@ function Register() {
             //   }
             // })}
           />
+          {errors.email && <p className="errorMsg">{errors.email.message}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
@@ -118,6 +119,9 @@ function Register() {
             //   }
             // })}
           />
+          {errors.password && (
+            <p className="errorMsg">{errors.password.message}</p>
+          )}
         </div>
         <br />
         <div className="register-button">
