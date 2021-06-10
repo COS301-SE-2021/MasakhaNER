@@ -42,9 +42,11 @@ function Register() {
   };
 
   return (
-    
     <div className="signup-form">
-          <div id="register-header"><h1>Masakha NER Tool</h1></div>
+          <div id="register-header">
+            <h1>Masakha 
+              NER Tool</h1>
+          </div>
       <form id="regForm" onSubmit={handleSubmit}>
       <div className="registerTop">
         <h2>Sign Up</h2>
