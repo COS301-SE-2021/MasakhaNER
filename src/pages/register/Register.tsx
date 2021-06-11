@@ -39,12 +39,14 @@ function Register() {
         .catch((err) => console.log(err));
     }
   }, [clicked]);
+
   const validEmail = new RegExp(
     '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
   );
   const validPassword = new RegExp(
     '^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$'
   );
+
   const validate = () => {
     if (!validEmail.test(email)){
       setEmailErr(true);
@@ -52,6 +54,9 @@ function Register() {
     }else if (!validPassword.test(password)){
       setPasswordErr(true);
       console.log(setEmailErr);
+    }else{
+      setClicked(!clicked);
+      window.location.href = "/verify";
     }
   }
   const handleSubmit = (e: any) => {
@@ -138,6 +143,7 @@ function Register() {
           id="mainBtn"
           type="submit"
           className="btn btn-dark"
+          //onClick={validate}
           onClick={(e) => {
             e.preventDefault();
             setClicked(!clicked);
@@ -149,8 +155,8 @@ function Register() {
           Sign up
         </button>
         </div>
+        {Passworderr || Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>}
       </form>
-      {Passworderr ||Emailerr && <p>Invalid email or password</p>}
     </div>
   );
 }
