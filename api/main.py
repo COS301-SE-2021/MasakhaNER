@@ -241,6 +241,19 @@ def admin_delete_user(user):
             return {'response':'failed'}
     else:
         return {'response':'failed'}
+
+@app.route('/admingetusers', methods=["POST"])
+@token_required
+def admin_get_users(user):
+
+    if user[5]!='False':
+        return jsonify({'message': 'user unauthirized'}), 401
+    
+    db = User()
+    if(db != None):
+        
+        users = db.getAllUsers()
+        print(users)
     
 
 if __name__ == "__main__":
