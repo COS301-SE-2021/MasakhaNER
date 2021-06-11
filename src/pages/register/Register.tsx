@@ -47,6 +47,10 @@ function Register() {
     '^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$'
   );
 
+  const setItem = () => {
+    localStorage.setItem('newEmail', JSON.stringify(email));
+  }
+
   const validate = () => {
     if (!validEmail.test(email)){
       setEmailErr(true);
@@ -146,6 +150,7 @@ function Register() {
           //onClick={validate}
           onClick={(e) => {
             e.preventDefault();
+            setItem();
             setClicked(!clicked);
             console.log(disabled);
             console.log(clicked);
