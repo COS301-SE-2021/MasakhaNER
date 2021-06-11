@@ -223,7 +223,7 @@ def admin_add_user(user):
     else:
         return {'response':'failed'}
 
-@app.route('/adminadduser', methods=["POST"])
+@app.route('/admindeleteuser', methods=["POST"])
 @token_required
 def admin_delete_user(user):
     
@@ -235,8 +235,8 @@ def admin_delete_user(user):
     if(db != None):
         
         user_email = str(request.json["email"])
-        if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
-            return {'response':'registered'}
+        if(db.adminDeleteUser(user_email)):
+            return {'response':'deleted'}
         else:
             return {'response':'failed'}
     else:
