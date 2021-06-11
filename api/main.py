@@ -215,8 +215,9 @@ def admin_add_user(user):
         user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
-        user_password = str(request.json["password"])
-        user_password = str(request.json["password"])
+        user_isadmin = str(request.json["isadmin"])
+        user_code = str(request.json["activattionCode"])
+        user_verified = str()
         if(db.register(user_firstname, user_lastname, user_email, user_password)):
             return {'response':'registered'}
         else:
