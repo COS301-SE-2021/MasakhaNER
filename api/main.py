@@ -93,7 +93,7 @@ def token_required(f):
             print(token)
 
         if not token:
-            return jsonify({'message': 'Token is miissing!'}), 401
+            return jsonify({'message': 'Token is missing!'}), 401
 
         try:
             print("here")
@@ -204,3 +204,8 @@ def login_user():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# DB_HOST="ec2-34-232-191-133.compute-1.amazonaws.com"
+# DB_NAME="d1mm3a0c29eepo"
+# DB_PASS="904c29b5f6055f6de8c01b24e1ac3f29736c54ca010dd9b8cc022f1555fe3be7"
+# DB_USER="orikanjrgszuig"
