@@ -12,6 +12,9 @@ function Register() {
   const [password, setPassword] = useState("");
   const [clicked, setClicked] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [Emailerr, setEmailErr] = useState(false);
+  const [Passworderr, setPasswordErr] = useState(false);
+  
 
   const options = {
     method: "POST",
@@ -37,7 +40,20 @@ function Register() {
     }
   }, [clicked]);
 
-  const { register, formState: { errors } } = useForm(); 
+  // const { register, formState: { errors } } = useForm(); 
+  const validEmail = new RegExp(
+    '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
+  );
+  const validPassword = new RegExp(
+    '^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$'
+  );
+  const validate = () => {
+    if (!validEmail.test(email)){
+      setEmailErr(true);
+    }else if (!validPassword.test(password)){
+      setPasswordErr(true);
+    }
+  }
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -97,12 +113,12 @@ function Register() {
             //   pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
             // })}
           />
-          {errors.email && errors.email.type === "required" && (
+          {/* {errors.email && errors.email.type === "required" && (
             <p className="errorMsg">Email is required.</p>
           )}
           {errors.email && errors.email.type === "pattern" && (
             <p className="errorMsg">Email is not valid.</p>
-          )}
+          )} */}
         </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
@@ -117,14 +133,14 @@ function Register() {
             // ref={register({ required: true, 
             //   minLength: 6 })}
           />
-          {errors.password && errors.password.type === "required" && (
+          {/* {errors.password && errors.password.type === "required" && (
             <p className="errorMsg">Password is required.</p>
           )}
           {errors.password && errors.password.type === "minLength" && (
             <p className="errorMsg">
               Password should be at-least 6 characters.
             </p>
-          )}
+          )} */}
         </div>
         <br />
         <div className="register-button">
