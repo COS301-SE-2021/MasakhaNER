@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, Ref } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from 'react-hook-form';
+
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -91,10 +92,10 @@ function Register() {
             className="form-control"
             value={email}
             onChange={(e) => setemail(e.target.value)}
-            ref={register({
-              required: true,
-              pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
-            })}
+            // ref={register({
+            //   required: true,
+            //   pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
+            // })}
           />
           {errors.email && errors.email.type === "required" && (
             <p className="errorMsg">Email is required.</p>
@@ -112,7 +113,9 @@ function Register() {
             className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            // ref={register({ required: true, minLength: 6 })}
+            //ref={"required"}
+            // ref={register({ required: true, 
+            //   minLength: 6 })}
           />
           {errors.password && errors.password.type === "required" && (
             <p className="errorMsg">Password is required.</p>
