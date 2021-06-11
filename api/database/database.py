@@ -144,7 +144,7 @@ class User:
         self.conn.commit()
         self.cur.close()
         self.conn.close()
-
+    #admin functions
     def findUserByEmail(self, email):
         self.cur.execute(f"SELECT * FROM users where email='{email}';")
         db_user = self.cur.fetchone()
