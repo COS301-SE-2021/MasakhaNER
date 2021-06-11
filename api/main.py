@@ -200,6 +200,29 @@ def login_user():
     else:
         return jsonify({'message': 'authetication failed!'}), 401
 
+#Admin functions
+@app.route('/adminadduser', methods=["POST"])
+@token_required
+def admin_add_user(user):
+    
+    print(user)
+    if user[5]=='False':
+        return jsonify({'message': 'user unauthirized'}), 401
+    
+    db = User()
+    if(db != None):
+        user_firstname = str(request.json["firstname"])
+        user_lastname = str(request.json["lastname"])
+        user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
+        user_password = str(request.json["password"])
+        user_password = str(request.json["password"])
+        if(db.register(user_firstname, user_lastname, user_email, user_password)):
+            return {'response':'registered'}
+        else:
+            return {'response':'failed'}
+    else:
+        return {'response':'failed'}
     
 
 if __name__ == "__main__":
