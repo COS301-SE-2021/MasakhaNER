@@ -39,8 +39,6 @@ function Register() {
         .catch((err) => console.log(err));
     }
   }, [clicked]);
-
-  // const { register, formState: { errors } } = useForm(); 
   const validEmail = new RegExp(
     '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
   );
@@ -86,6 +84,7 @@ function Register() {
             className="form-control"
             value={firstName}
             onChange={(e) => setfirstName(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -97,6 +96,7 @@ function Register() {
             className="form-control"
             value={lastName}
             onChange={(e) => setlastName(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -108,17 +108,8 @@ function Register() {
             className="form-control"
             value={email}
             onChange={(e) => setemail(e.target.value)}
-            // ref={register({
-            //   required: true,
-            //   pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
-            // })}
+            required
           />
-          {/* {errors.email && errors.email.type === "required" && (
-            <p className="errorMsg">Email is required.</p>
-          )}
-          {errors.email && errors.email.type === "pattern" && (
-            <p className="errorMsg">Email is not valid.</p>
-          )} */}
         </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
@@ -129,18 +120,8 @@ function Register() {
             className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            //ref={"required"}
-            // ref={register({ required: true, 
-            //   minLength: 6 })}
+            required
           />
-          {/* {errors.password && errors.password.type === "required" && (
-            <p className="errorMsg">Password is required.</p>
-          )}
-          {errors.password && errors.password.type === "minLength" && (
-            <p className="errorMsg">
-              Password should be at-least 6 characters.
-            </p>
-          )} */}
         </div>
         <br />
         <div className="register-button">
@@ -161,6 +142,7 @@ function Register() {
         </button>
         </div>
       </form>
+      {Passworderr ||Emailerr && <p>Invalid email or password</p>}
     </div>
   );
 }
