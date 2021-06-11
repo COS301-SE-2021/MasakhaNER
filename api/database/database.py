@@ -74,22 +74,15 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
-    def adminAddUser(self, firstname, lastname, email, password,isadmin,activationcode,verified):
+    def adminAddUser(self, firstname, lastname, email, password,isadmin):
         try:
             # encoded_password = bytes(password, encoding='utf-8')
             # encrypted_password = str(bcrypt.hashpw(
             #     encoded_password, bcrypt.gensalt()))
             # encrypted_password_2 = encrypted_password[1:]
             encrypted_password_2 = "encrypted_password"
-            code = '1111'
             self.cur.execute(
-                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{password}','{email}',{isadmin},{activationcode},{verified})")
-            #sendemail = Email()
-            message = """\
-            Masakhane Activation Code
-
-            Here is your activation code: 1111 """
-            #sendemail.send_email(message, email)
+                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{password}','{email}',{isadmin},{0000},{True})")
             self.conn.commit()
             self.cur.close()
             self.conn.close()
