@@ -74,23 +74,6 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
-    def adminAddUser(self, firstname, lastname, email, password,isadmin):
-        try:
-            # encoded_password = bytes(password, encoding='utf-8')
-            # encrypted_password = str(bcrypt.hashpw(
-            #     encoded_password, bcrypt.gensalt()))
-            # encrypted_password_2 = encrypted_password[1:]
-            encrypted_password_2 = "encrypted_password"
-            self.cur.execute(
-                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{password}','{email}',{isadmin},{0000},{True})")
-            self.conn.commit()
-            self.cur.close()
-            self.conn.close()
-            return True
-        except Exception as e:
-            print(f"Database connection error: {e}")
-            return False
-
     """
     Get code Function:
         Takes in the users email and queries the database
@@ -177,6 +160,34 @@ class User:
         self.cur.close()
         self.conn.close()
         return db_user
+
+    def adminAddUser(self, firstname, lastname, email, password,isadmin):
+        try:
+            # encoded_password = bytes(password, encoding='utf-8')
+            # encrypted_password = str(bcrypt.hashpw(
+            #     encoded_password, bcrypt.gensalt()))
+            # encrypted_password_2 = encrypted_password[1:]
+            encrypted_password_2 = "encrypted_password"
+            self.cur.execute(
+                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{password}','{email}',{isadmin},{0000},{True})")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
+    def adminDeleteUser(self,email):
+        try:
+            self.cur.execute(f"DELETE FROM users WHERE email = '{email}';")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
 
 
 # # class Test(self):
