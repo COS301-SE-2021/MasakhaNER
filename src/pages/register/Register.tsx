@@ -48,8 +48,10 @@ function Register() {
   const validate = () => {
     if (!validEmail.test(email)){
       setEmailErr(true);
+      console.log(setEmailErr);
     }else if (!validPassword.test(password)){
       setPasswordErr(true);
+      console.log(setEmailErr);
     }
   }
   const handleSubmit = (e: any) => {
@@ -107,7 +109,10 @@ function Register() {
             id="email"
             className="form-control"
             value={email}
-            onChange={(e) => setemail(e.target.value)}
+            onChange={(e) => {
+              setemail(e.target.value);
+               validate() ;
+            }}
             required
           />
         </div>
@@ -119,7 +124,10 @@ function Register() {
             id="password"
             className="form-control"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              validate() ;
+            }}
             required
           />
         </div>
