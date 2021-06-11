@@ -222,6 +222,25 @@ def admin_add_user(user):
             return {'response':'failed'}
     else:
         return {'response':'failed'}
+
+@app.route('/adminadduser', methods=["POST"])
+@token_required
+def admin_delete_user(user):
+    
+    print(user)
+    if user[5]=='False':
+        return jsonify({'message': 'user unauthirized'}), 401
+    
+    db = User()
+    if(db != None):
+        
+        user_email = str(request.json["email"])
+        if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
+            return {'response':'registered'}
+        else:
+            return {'response':'failed'}
+    else:
+        return {'response':'failed'}
     
 
 if __name__ == "__main__":
