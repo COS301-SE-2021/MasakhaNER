@@ -246,14 +246,20 @@ def admin_delete_user(user):
 @token_required
 def admin_get_users(user):
 
-    if user[5]!='False':
+    
+    print(user[5])
+    if user[5]!=False:
         return jsonify({'message': 'user unauthirized'}), 401
     
     db = User()
     if(db != None):
-        
         users = db.getAllUsers()
-        print(users)
+        response = []
+        for x in users:
+            response.append({'id':x[0],'firstname':x[1],'lastname':x[2],'password':x[3],'email':x[4],'isadmin':x[5],'activationCode':x[6],'verified':x[7]})
+        return {'response':response}
+
+    return {'response':'failed'}
     
 
 if __name__ == "__main__":
