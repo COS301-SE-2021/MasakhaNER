@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef, Ref } from "react";
+import React, { useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useForm } from 'react-hook-form';
 
 
 function Register() {
