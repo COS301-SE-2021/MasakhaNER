@@ -3,11 +3,8 @@ import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import "./Login.css";
 import React, { useState, useEffect } from "react";
-import { validEmail } from "./Regex";
-import { useHistory } from "react-router-dom";
-import {FaLinkedin} from "react-icons/fa"
-// import LinkedIn from "linkedin-login-for-react";
-// import styles from "./styles.css";
+import { validEmail, validPassword } from "./Regex";
+import { Link, useHistory } from "react-router-dom";
 
 let history;
 const responseGoogle = (response: any) => {
@@ -18,7 +15,6 @@ const responseFacebook = (response: any) => {
   console.log(response);
   history.push("/Dashboard");
 };
-
 
 export default function Login(this: any) {
   history = useHistory();
@@ -35,10 +31,6 @@ export default function Login(this: any) {
       history.push("/Dashboard");
     }
   };
-
-  const register = () =>{
-    history.push("/register");
-  }
 
   const options = {
     method: "POST",
@@ -59,73 +51,57 @@ export default function Login(this: any) {
     }
   }, [clicked]);
 
-  const callbackLinkedIn = (error: any, code: any, redirectUri: any) => {
-    if (error) {
-      // signin failed
-    } else {
-      history.push("/Dashboard");
-      // Obtain authorization token from linkedin api
-      // see https://developer.linkedin.com/docs/oauth2 for more info
-    }
-  };
-
   return (
-    <div className="login-body">
-      <div id="login-header">
-        <h1>MASAKHA 
-          NER TOOL</h1>
-
-      </div>
-
+    <div>
+      <h1 id="login-header">Welcome to the MasakhaNER Tool</h1>
       <div className="login">
         <div className="loginTop">
-          <h2>LOGIN</h2>
+          <h2>Log In</h2>
         </div>
         <div className="loginForm">
           <label htmlFor="email">Email address:</label>
-          <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
           <br />
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" required />
+          <input type="password" placeholder="Password" name="password" required />
           <br />
-
-          <div className = "login-button">
-            <span>
-              <a href="# ">forgot password?</a>
-              <button className="btn btn-dark" onClick={validate}>Login</button>
-            </span>
-            <span>
-              <br/>
-                <button className="btn btn-light" onClick = {register}>Sign up</button>
-            </span>
-          </div>
-
+          <button className="btn btn-dark" onClick={validate}>
+            Login
+          </button>
+          <br />
+          <p>Don't have an account? Sign up</p>
+          <Link to="/register">
+            <a href="#" className="btn btn-primary">
+              Signup
+            </a>
+          </Link>
         </div>
-        <p>or log in using</p>
-        <div className = "social-btn">
-          <GoogleLogin
-            clientId="824866690096-4rqi2a1n6bvj9sfstjcbv999i9pi69i3.apps.googleusercontent.com"
-            buttonText=""
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={"single_host_origin"}
-            // className = "fab fa-google"
-          />
-          <FacebookLogin
-            appId="2951110285136034"
-            autoLoad={true}
-            fields="name,email,picture"
-            callback={responseFacebook}
-            cssClass = "btn btn-primary"
-            textButton = ""
-            icon="fab fa-facebook-f"
-          />
-          <a className="btn btn-primary" href="#!" role="button">
-              <FaLinkedin />
-          </a>
-        </div>
+        <GoogleLogin
+          clientId="824866690096-4rqi2a1n6bvj9sfstjcbv999i9pi69i3.apps.googleusercontent.com"
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+        <FacebookLogin
+          appId="2951110285136034"
+          autoLoad={true}
+          fields="name,email,picture"
+          callback={responseFacebook}
+          icon="fa-facebook"
+        />
         {err && <p>Invalid email or password</p>}
-        
+        <div className="forgot">
+          <a href="# ">forgot password?</a>
+        </div>
       </div>
     </div>
   );

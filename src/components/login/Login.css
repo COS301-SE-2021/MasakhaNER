@@ -1,57 +1,40 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-::after, ::before {
-    box-sizing: unset;
-}
-.login-body{
-    background-color: rgb(226, 226, 229);
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    box-shadow: 10px 5px 5px 5px rgb(221, 221, 221);
-    width: 70%;
-    margin-top: 150px;
-    padding: 20px;
-    flex-wrap: wrap;
-}
 .login{
-    text-align: start;
-    align-items: flex-start;
+    border: 1px solid rgb(240, 240, 240);
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
-    width: 40%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 30%;
+    border-radius: 5px;
+    margin-top: 80px;
+    box-shadow: 5px 5px 5px rgb(221, 221, 221);
 }
 .loginTop{
-    border-bottom: 10px solid black;
-    color: black;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: xx-large;
     border-radius: 5px 5px 0 0;
-    width: 100%;
-    text-align: left;
-    /* padding: 20px; */
+    padding: 30px;
 }
 .forgot{
     border-radius: 0 0 5px 5px;
     background-color: rgb(255, 255, 255);
     height: 20%
 }
- a, p{
+.forgot a{
     color: gray;
     text-decoration: none;
     font-size: small;
 }
 .loginForm{
-    color: rgb(153, 153, 153);
+    color: #999;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 100%;
-    padding: 30px;
-    padding-left: 0%;
-    padding-right: 0%;
 }
 .icon {
     padding: 10px;
@@ -60,56 +43,13 @@
     min-width: 50px;
     text-align: center;
   }
-/* @media screen and (max-width: 880px) {
+@media screen and (max-width: 880px) {
     .login {
         width: 40%;
     }
- } */
-
- #login-header h1{
-    font-size: 80px;
- }
- #login-header{
-    align-self: start;
-    width: 45%;
-    height: 45%;
-    margin-top: auto;
-    margin-bottom: auto;
- }
- .loginForm input{
-    border: 10px solid white;
-    background-color: white;
-    box-shadow: 5px 5px 5px rgb(221, 221, 221);
-    border-radius: 0 0 5px 5px;
-    width: 100%;
  }
 
-.login-button, .social-btn{
-    display: grid; 
-    grid-template: 100px / auto auto;
-    justify-content: space-evenly;
-    grid-gap: 110px;
-}
-.login-button span{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 150px;
-}
-.social-btn{
-    display: grid;
-    grid-template: 45px / auto  auto auto;
-    justify-content: space-evenly;
-    grid-gap: 125px;
-}
-.social-btn button{
-    width: 100%;
-    height: 100%;
-    align-items: center;
-}
-.social-btn span{
-    width: 120%;
-    padding: 0%;
-    align-items: center;
-    background-color: white;
-}
+ #login-header {
+     font-size: 60px;
+     margin-top: 100px;
+ }
