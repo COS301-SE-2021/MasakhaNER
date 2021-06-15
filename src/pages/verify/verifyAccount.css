@@ -1,11 +1,11 @@
-.signup-form {
+.verify-form {
   width: 400px;
   margin: 0 auto;
   padding: 30px 0;
   margin-top: 200px;
 }
 
-.signup-form form {
+.verify-form form {
   color: #999;
   border-radius: 3px;
   margin-bottom: 15px;
