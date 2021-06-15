@@ -1,9 +1,8 @@
-import React, { useState, useEffect, Component, useCallback } from "react";
+import React, { useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Container } from "react-bootstrap";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
-import { Link } from "react-router-dom";
+
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -12,6 +11,9 @@ function Register() {
   const [password, setPassword] = useState("");
   const [clicked, setClicked] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [Emailerr, setEmailErr] = useState(false);
+  const [Passworderr, setPasswordErr] = useState(false);
+  
 
   const options = {
     method: "POST",
@@ -37,93 +39,128 @@ function Register() {
     }
   }, [clicked]);
 
+  const validEmail = new RegExp(
+    '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
+  );
+  const validPassword = new RegExp(
+    '^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$'
+  );
+
+  const setItem = () => {
+    localStorage.setItem('newEmail', JSON.stringify(email));
+  }
+
+  const validate = () => {
+    if (!validEmail.test(email)){
+      setEmailErr(true);
+      console.log(setEmailErr);
+    }else if (!validPassword.test(password)){
+      setPasswordErr(true);
+      console.log(setEmailErr);
+    }else{
+      setClicked(!clicked);
+      window.location.href = "/verify";
+    }
+  }
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
 
   return (
-    <div>
-      <h1 id="register-header">Sign up to use the MasakhaNER Tool</h1>
-      <div className="signup-form">
-        <div className="registerTop">
-          <h2>Register</h2>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="firstName">First Name:</label>
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              className="form-control"
-              placeholder="Firstname"
-              value={firstName}
-              onChange={(e) => setfirstName(e.target.value)}
-            />
+    <div className="signup-form">
+          <div id="register-header">
+            <h1>MASAKHA <br/> NER TOOL</h1>
+              <p>Please confirm that you are human <br />
+                before submitting...</p>
+               <div className="reCAP"> 
+                <ReCAPTCHA
+                  sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+                  onChange={() => {
+                    setDisabled(false);
+                  }}
+                />
+              </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name:</label>
-            <input
-              type="text"
-              name="flastName"
-              id="lastName"
-              className="form-control"
-              placeholder="Lastname"
-              value={lastName}
-              onChange={(e) => setlastName(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="emal"
-              id="email"
-              className="form-control"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setemail(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              className="form-control"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <p>Please confirm that you are human before submitting</p>
-          <ReCAPTCHA
-            sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-            onChange={() => {
-              setDisabled(false);
-            }}
-          />
-          <br />
-          <button
-            disabled={disabled}
-            id="mainBtn"
-            type="submit"
-            className="btn btn-dark"
-            onClick={(e) => {
-              e.preventDefault();
-              setClicked(!clicked);
-              console.log(disabled);
-              console.log(clicked);
-              window.location.href = "/verify";
-            }}
-          >
-            {/* <Link to="/verify" id="submit-link"> */}
-            Submit
-            {/* </Link> */}
-          </button>
-        </form>
+      <form id="regForm" onSubmit={handleSubmit}>
+      <div className="registerTop">
+        <h2>SIGN UP</h2>
       </div>
+        <div className="form-group">
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            className="form-control"
+            value={firstName}
+            onChange={(e) => setfirstName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            type="text"
+            name="flastName"
+            id="lastName"
+            className="form-control"
+            value={lastName}
+            onChange={(e) => setlastName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => {
+              setemail(e.target.value);
+               validate() ;
+            }}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              validate() ;
+            }}
+            required
+          />
+        </div>
+        <br />
+        <div className="register-button">
+        <button
+          disabled={disabled}
+          id="mainBtn"
+          type="submit"
+          className="btn btn-dark"
+          //onClick={validate}
+          onClick={(e) => {
+            e.preventDefault();
+            setItem();
+            setClicked(!clicked);
+            console.log(disabled);
+            console.log(clicked);
+            window.location.href = "/verify";
+          }}
+        >
+          Sign up
+        </button>
+        </div>
+        {Passworderr || Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>}
+      </form>
     </div>
   );
 }
