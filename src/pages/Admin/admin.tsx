@@ -1,5 +1,5 @@
 import React from 'react'
-import Admin from '../../components/admin/Admin'
+import Admin from "../../components/admin/Admin"
 
 export default function admin() {
     return (

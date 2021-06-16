@@ -1,6 +1,5 @@
 
 import { useHistory } from 'react-router-dom';
-import { Input } from '../input/Input';
 import "./admin.css"
 
 let history;
@@ -12,15 +11,15 @@ function Admin() {
     };
 
     const getAdminUsers = () =>{
-
+        history.push("/AdminUsers");
     };
     
     const getRegularUsers = () =>{
-
+        history.push("/RegisterUsers");
     };
 
     const Models = () =>{
-
+        history.push("/Models");
     };
 
     return (
