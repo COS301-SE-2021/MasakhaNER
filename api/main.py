@@ -1,12 +1,17 @@
-from datetime import datetime
-from flask import Flask
+from datetime import datetime, timedelta
+from flask import Flask,jsonify
 from flask import request
+from functools import wraps
+import jwt
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from database.database import User
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY']='secret'
+
 
 """
     Serves as mock trained data
@@ -79,8 +84,39 @@ def train_model(user_input):
         JSON object with model feedback
 """ 
 
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        if 'x-access-token' in request.headers:
+            token = request.headers['x-access-token']
+            print(token)
+
+        if not token:
+            return jsonify({'message': 'Token is missing!'}), 401
+
+        try:
+            print("here")
+            db=User()
+            print("here2")
+            data = jwt.decode(token,app.config['SECRET_KEY'],"HS256")
+            print("data is ",data)
+            user = db.findUserByEmail(data['email'])
+        except Exception as e:
+            return jsonify({'message' : str(e)}),401
+
+        return f(user,*args,**kwargs)
+
+    return decorated
+
+
 @app.route('/input', methods=["POST"])
-def model_feedback():
+@token_required
+def model_feedback(user):
+
+    if not user:
+        return jsonify({'message' : 'log in to use model'}),401
+
     user_input = str(request.json["input"]).split()
     model_feedback = train_model(user_input)
     return {'output': model_feedback}
@@ -97,6 +133,13 @@ def model_feedback():
 
 @app.route('/register', methods=["POST"])
 def register_user():
+
+    # "firstname":"kanye",
+    # "lastname":"west",
+    # "email":"kw@gmail.com",
+    # "password":"12345"
+
+
     db = User()
     if(db != None):
         user_firstname = str(request.json["firstname"])
@@ -150,11 +193,79 @@ def login_user():
         user_password = str(request.json["password"])
 
         if db.login(user_email, user_password):
-            return {'response':'logged-in'}
+            token = jwt.encode({'email' : user_email, 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+            return jsonify({'token': token})
         else:
-            return {'response':'invalid'}
+            return jsonify({'message': 'authetication failed!'}), 401
+    else:
+        return jsonify({'message': 'authetication failed!'}), 401
+
+#Admin functions
+@app.route('/adminadduser', methods=["POST"])
+@token_required
+def admin_add_user(user):
+    
+    print(user)
+    if user[5]=='False':
+        return jsonify({'message': 'user unauthirized'}), 401
+    
+    db = User()
+    if(db != None):
+        user_firstname = str(request.json["firstname"])
+        user_lastname = str(request.json["lastname"])
+        user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
+        user_isadmin = str(request.json["isadmin"])
+        if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
+            return {'response':'registered'}
+        else:
+            return {'response':'failed'}
     else:
         return {'response':'failed'}
 
+@app.route('/admindeleteuser', methods=["POST"])
+@token_required
+def admin_delete_user(user):
+    
+    print(user)
+    if user[5]=='False':
+        return jsonify({'message': 'user unauthirized'}), 401
+    
+    db = User()
+    if(db != None):
+        
+        user_email = str(request.json["email"])
+        if(db.adminDeleteUser(user_email)):
+            return {'response':'deleted'}
+        else:
+            return {'response':'failed'}
+    else:
+        return {'response':'failed'}
+
+@app.route('/admingetusers', methods=["POST"])
+@token_required
+def admin_get_users(user):
+
+    
+    print(user[5])
+    if user[5]!=False:
+        return jsonify({'message': 'user unauthirized'}), 401
+    
+    db = User()
+    if(db != None):
+        users = db.getAllUsers()
+        response = []
+        for x in users:
+            response.append({'id':x[0],'firstname':x[1],'lastname':x[2],'password':x[3],'email':x[4],'isadmin':x[5],'activationCode':x[6],'verified':x[7]})
+        return {'response':response}
+
+    return {'response':'failed'}
+    
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+# DB_HOST="ec2-34-232-191-133.compute-1.amazonaws.com"
+# DB_NAME="d1mm3a0c29eepo"
+# DB_PASS="904c29b5f6055f6de8c01b24e1ac3f29736c54ca010dd9b8cc022f1555fe3be7"
+# DB_USER="orikanjrgszuig"
