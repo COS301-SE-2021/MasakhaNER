@@ -177,6 +177,23 @@ class User:
         except Exception as e:
             print(f"Database connection error: {e}")
             return False
+    
+    def adminUpdateUser(self, id,firstname, lastname, email, password,isadmin,verified):
+        try:
+            # encoded_password = bytes(password, encoding='utf-8')
+            # encrypted_password = str(bcrypt.hashpw(
+            #     encoded_password, bcrypt.gensalt()))
+            # encrypted_password_2 = encrypted_password[1:]
+            encrypted_password_2 = "encrypted_password"
+            self.cur.execute(
+                f"Update users set firstname = {firstname},lastname={lastname},password={password},email={email},isadmin={isadmin},verified ={verified} where id={id};")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
 
     def adminDeleteUser(self,email):
         try:
