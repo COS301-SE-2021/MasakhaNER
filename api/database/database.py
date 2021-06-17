@@ -184,9 +184,8 @@ class User:
             # encrypted_password = str(bcrypt.hashpw(
             #     encoded_password, bcrypt.gensalt()))
             # encrypted_password_2 = encrypted_password[1:]
-            encrypted_password_2 = "encrypted_password"
             self.cur.execute(
-                f"Update users set firstname = {firstname},lastname={lastname},password={password},email={email},isadmin={isadmin},verified ={verified} where id={id};")
+                f"Update users set firstname ='{firstname}',lastname='{lastname}',password='{password}',email='{email}',isadmin={isadmin},verified ={verified} where id={id};")
             self.conn.commit()
             self.cur.close()
             self.conn.close()
