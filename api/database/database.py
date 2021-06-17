@@ -88,8 +88,8 @@ class User:
     """
 
     def get_code(self, email):
-        self.cur.execute(
-            f"SELECT activationcode FROM users where email='{email}';")
+        sql = "SELECT activationcode FROM users where email=%s;"
+        self.cur.execute(sql,(email,))
         var = self.cur.fetchone()
         self.conn.commit()
         self.cur.close()
@@ -194,7 +194,8 @@ class User:
 
     def adminDeleteUser(self, email):
         try:
-            self.cur.execute(f"DELETE FROM users WHERE email = '{email}';")
+            sql = "DELETE FROM users WHERE email =%s;"
+            self.cur.execute(sql,(email,))
             self.conn.commit()
             self.cur.close()
             self.conn.close()
