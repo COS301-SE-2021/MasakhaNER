@@ -262,6 +262,25 @@ def admin_get_users(user):
     return {'response':'failed'}
     
 
+#Update password
+@app.route('/updatepassword', methods=["POST"])
+@token_required
+def update_password(user):
+    db = User()
+    if(db != None):
+        user_firstname = str(request.json["firstname"])
+        user_lastname = str(request.json["lastname"])
+        user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
+        user_isadmin = str(request.json["isadmin"])
+        if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
+            return {'response':'registered'}
+        else:
+            return {'response':'failed'}
+    else:
+        return {'response':'failed'}
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
