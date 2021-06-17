@@ -166,9 +166,8 @@ class User:
             # encrypted_password = str(bcrypt.hashpw(
             #     encoded_password, bcrypt.gensalt()))
             # encrypted_password_2 = encrypted_password[1:]
-            encrypted_password_2 = "encrypted_password"
-            self.cur.execute(
-                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{password}','{email}',{isadmin},{0000},{True})")
+            sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+            self.cur.execute(sql,(firstname, lastname, password,email,isadmin,000,True))
             self.conn.commit()
             self.cur.close()
             self.conn.close()
