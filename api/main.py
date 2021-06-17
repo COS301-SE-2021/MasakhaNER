@@ -240,7 +240,7 @@ def admin_update_user(user):
         user_password = str(request.json["password"])
         user_isadmin = str(request.json["isadmin"])
         user_verified = str(request.json["verified"])
-        if(db.adminUpdateUser(user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
+        if(db.adminUpdateUser(user_id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
             return {'response':'registered'}
         else:
             return {'response':'failed'}
