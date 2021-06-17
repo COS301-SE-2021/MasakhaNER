@@ -52,19 +52,17 @@ class User:
 
     def register(self, firstname, lastname, email, password):
         try:
-            # encoded_password = bytes(password, encoding='utf-8')
-            # encrypted_password = str(bcrypt.hashpw(
-            #     encoded_password, bcrypt.gensalt()))
-            # encrypted_password_2 = encrypted_password[1:]
-            encrypted_password_2 = "encrypted_password"
+            encoded_password = bytes(password, encoding='utf-8')
+            encrypted_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
+            print(type(encrypted_password))
+            encrypted_password = encrypted_password.decode('UTF-8')
             code = '1111'
-            self.cur.execute(
-                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{encrypted_password_2}','{email}',{False},{code},{False})")
+            self.cur.execute(f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{encrypted_password}','{email}',{False},{code},{False})")
             #sendemail = Email()
-            message = """\
-            Masakhane Activation Code
+            # message = """\
+            # Masakhane Activation Code
 
-            Here is your activation code: 1111 """
+            # Here is your activation code: 1111 """
             #sendemail.send_email(message, email)
             self.conn.commit()
             self.cur.close()
@@ -109,26 +107,19 @@ class User:
     def login(self, email, password):
         # print("running login")
         
-        # encoded_password = bytes('1234', encoding='utf-8')
-        # encrypted_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
-        # print('passowrd1: ',encrypted_password)
-        
-        # if bcrypt.hashpw(encoded_password, encrypted_password) == encrypted_password:
-        #     print('true')
-
-        
-        encrypted_password_2 = 'encrypted_password'
-        print(encrypted_password_2)
         self.cur.execute(f"SELECT password FROM users where email='{email}';")
         db_password = self.cur.fetchone()
         self.conn.commit()
         self.cur.close()
         self.conn.close()
         #print(  f"'{str(db_password[0])}'"  )
-        if db_password != None and db_password[0] == encrypted_password_2:
-            return True
-        else:
-            return False
+        if db_password != None:
+            if bcrypt.checkpw(password.encode('UTF-8'), db_password[0].encode('UTF-8')):
+                print("password works")
+                return True
+            else:
+                return False
+        return False
     """
     very=ify user Function:
         verifies user based on code passed in
