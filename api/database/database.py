@@ -60,10 +60,9 @@ class User:
             encrypted_password = encrypted_password.decode('UTF-8')
             code = '1111'
 
-            sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{encrypted_password}','{email}',{False},{code},{False})"
+            sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
 
-            self.cur.execute(
-                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{encrypted_password}','{email}',{False},{code},{False})")
+            self.cur.execute(sql,(firstname,lastname,encrypted_password,email,False,code,False))
             #sendemail = Email()
             # message = """\
             # Masakhane Activation Code
@@ -184,8 +183,8 @@ class User:
             # encrypted_password = str(bcrypt.hashpw(
             #     encoded_password, bcrypt.gensalt()))
             # encrypted_password_2 = encrypted_password[1:]
-            self.cur.execute(
-                f"Update users set firstname ='{firstname}',lastname='{lastname}',password='{password}',email='{email}',isadmin={isadmin},verified ={verified} where id={id};")
+            sql = "Update users set firstname=%s,lastname=%s,password=%s,email=%s,isadmin=%s,verified =%s where id=%s;"
+            self.cur.execute(sql,(firstname,lastname,password,email,isadmin,verified,id))
             self.conn.commit()
             self.cur.close()
             self.conn.close()
