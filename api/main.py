@@ -233,12 +233,14 @@ def admin_update_user(user):
     
     db = User()
     if(db != None):
+        user_id = str(request.json["id"])
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
         user_isadmin = str(request.json["isadmin"])
-        if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
+        user_verified = str(request.json["verified"])
+        if(db.adminUpdateUser(user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
             return {'response':'registered'}
         else:
             return {'response':'failed'}
