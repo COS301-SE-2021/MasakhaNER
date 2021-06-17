@@ -136,9 +136,8 @@ class User:
     """
 
     def verify_user(self, email):
-        self.cur.execute(f"SELECT * FROM users where email='{email}';")
-        self.cur.execute(
-            f"Update users set verified = {True} where email='{email}';")
+        sql = "Update users set verified = {True} where email=%s;"
+        self.cur.execute(sql,(email,))
         self.conn.commit()
         self.cur.close()
         self.conn.close()
