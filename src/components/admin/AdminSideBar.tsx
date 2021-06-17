@@ -4,7 +4,7 @@ import "./admin.css"
 
 let history;
 
-function Admin() {
+function AdminSideBar() {
     history = useHistory();
     const displayDashboard = () => {
         history.push("/Dashboard");
@@ -38,4 +38,4 @@ function Admin() {
         </>
     )
 }
-export default Admin;
+export default AdminSideBar;
