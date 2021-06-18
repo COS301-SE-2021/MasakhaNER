@@ -33,7 +33,7 @@ export default function InputSection() {
   return (
     <div className="inputSection">
       <form onSubmit={handleSubmit}>
-        <p>Enter text in one of the selected languages to test model</p>
+        <p>Enter text</p>
 
         <input
           placeholder="Enter Text"
