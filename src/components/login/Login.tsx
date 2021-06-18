@@ -6,8 +6,7 @@ import React, { useState, useEffect } from "react";
 import { validEmail } from "./Regex";
 import { useHistory } from "react-router-dom";
 import {FaLinkedin} from "react-icons/fa"
-// import LinkedIn from "linkedin-login-for-react";
-// import styles from "./styles.css";
+
 
 let history;
 const responseGoogle = (response: any) => {

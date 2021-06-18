@@ -30,7 +30,6 @@
     border-radius: 5px 5px 0 0;
     width: 100%;
     text-align: left;
-    /* padding: 20px; */
 }
 .forgot{
     border-radius: 0 0 5px 5px;
@@ -60,11 +59,6 @@
     min-width: 50px;
     text-align: center;
   }
-/* @media screen and (max-width: 880px) {
-    .login {
-        width: 40%;
-    }
- } */
 
  #login-header h1{
     font-size: 80px;
