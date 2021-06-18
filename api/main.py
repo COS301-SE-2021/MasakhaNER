@@ -122,7 +122,7 @@ def model_feedback(user):
 
     user_input = str(request.json["input"]).split()
     model_feedback = train_model(user_input)
-    return {'output': model_feedback}
+    return {'output': model_feedback},200
 
 """
     register_user function:
@@ -150,11 +150,11 @@ def register_user():
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
         if(db.register(user_firstname, user_lastname, user_email, user_password)):
-            return {'response':'registered'}
+            return {'response':'registered'},200
         else:
-            return {'response':'failed'}
+            return {'response':'failed'},400
     else:
-        return {'response':'failed'}
+        return {'response':'failed'},400
 
 """
     verify_user function:
@@ -173,11 +173,11 @@ def verify_user():
         user_code  = request.json["code"]
         if user_code!=None and user_code == db.get_code(user_email):
             db.verify_user(user_email)
-            return {'response':'verified'}
+            return {'response':'verified'},200
         else:
-            return {'response':'failed'}
+            return {'response':'failed'},400
     else:
-        return {{'response':'failed'}}
+        return {{'response':'failed'}},400
 
 """
     login_user function:
@@ -220,11 +220,11 @@ def admin_add_user(user):
         user_password = str(request.json["password"])
         user_isadmin = str(request.json["isadmin"])
         if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
-            return {'response':'registered'}
+            return {'response':'registered'},200
         else:
-            return {'response':'failed'}
+            return {'response':'failed'},400
     else:
-        return {'response':'failed'}
+        return {'response':'failed'},400
 
 @app.route('/adminupdateuser', methods=["POST"])
 @token_required
@@ -244,11 +244,11 @@ def admin_update_user(user):
         user_isadmin = str(request.json["isadmin"])
         user_verified = str(request.json["verified"])
         if(db.adminUpdateUser(user_id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
-            return {'response':'registered'}
+            return {'response':'registered'},200
         else:
-            return {'response':'failed'}
+            return {'response':'failed'},400
     else:
-        return {'response':'failed'}
+        return {'response':'failed'},400
 
 @app.route('/admindeleteuser', methods=["POST"])
 @token_required
@@ -263,11 +263,11 @@ def admin_delete_user(user):
         
         user_id = str(request.json["id"])
         if(db.adminDeleteUser(user_id)):
-            return {'response':'deleted'}
+            return {'response':'deleted'},200
         else:
-            return {'response':'failed'}
+            return {'response':'failed'},400
     else:
-        return {'response':'failed'}
+        return {'response':'failed'},400
 
 @app.route('/admingetusers', methods=["POST"])
 @token_required
@@ -284,9 +284,9 @@ def admin_get_users(user):
         response = []
         for x in users:
             response.append({'id':x[0],'firstname':x[1],'lastname':x[2],'password':x[3],'email':x[4],'isadmin':x[5],'activationCode':x[6],'verified':x[7]})
-        return {'response':response}
+        return {'response':response},200
 
-    return {'response':'failed'}
+    return {'response':'failed'},400
     
 
 if __name__ == "__main__":
