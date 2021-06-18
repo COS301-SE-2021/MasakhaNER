@@ -94,33 +94,9 @@ class mockdatabse:
     """
 
     def login(self, email, password):
-        if self.findUserByEmail(email):
-            encoded_password = bytes(password, encoding='utf-8')
-            encrypted_password = bcrypt.hashpw(
-            encoded_password, bcrypt.gensalt())
-            print(type(encrypted_password))
-            encrypted_password = encrypted_password.decode('UTF-8')
-            code = '1111'
-            user_id=self.id
-            self.id+=1
-
-            user = [user_id,firstname,lastname,encrypted_password,email,False,code,False]
-            self.list.append(user)
-            return True
-         else:
-            return False
-
-
-        
-        sql = "SELECT password FROM users where email=%s;"
-        self.cur.execute(sql,(email,))
-        db_password = self.cur.fetchone()
-        self.conn.commit()
-        self.cur.close()
-        self.conn.close()
-        print(db_password)
-        if db_password != None:
-            if bcrypt.checkpw(password.encode('UTF-8'), db_password[0].encode('UTF-8')):
+        user = self.findUserByEmail(email)
+        if user != None:
+            if bcrypt.checkpw(password.encode('UTF-8'), user[3].encode('UTF-8')):
                 print("password works")
                 return True
             else:
