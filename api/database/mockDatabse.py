@@ -136,12 +136,7 @@ class mockdatabse:
 
 
     def getAllUsers(self):
-        self.cur.execute(f"SELECT * FROM users;")
-        db_user = self.cur.fetchall()
-        self.conn.commit()
-        self.cur.close()
-        self.conn.close()
-        return db_user
+        return self.db_list
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         if self.findUserByEmail(email) == None:
