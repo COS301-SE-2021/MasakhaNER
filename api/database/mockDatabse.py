@@ -21,12 +21,12 @@ class mockdatabse:
     Returns:
         Boolean:Returns false if database connection fails
     """
-    list=None
-    id=None
+    db_list=None
+    db_id=None
 
     def __init__(self):
-        self.list=[]
-        self.id=1
+        self.db_list=[]
+        self.db_id=1
 
     """
     Register Function:
@@ -51,11 +51,11 @@ class mockdatabse:
             print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
             code = '1111'
-            user_id=self.id
-            self.id+=1
+            user_id=self.db_id
+            self.db_id+=1
 
             user = [user_id,firstname,lastname,encrypted_password,email,False,code,False]
-            self.list.append(user)
+            self.db_list.append(user)
             return True
          else:
             return False
@@ -123,8 +123,14 @@ class mockdatabse:
     # admin functions
 
     def findUserByEmail(self, email):
-        for x in list:
+        for x in self.db_list:
             if x[4] == email:
+                return x
+        return None
+
+    def findUserById(self, id):
+        for x in self.db_list:
+            if x[0] == id:
                 return x
         return None
 
@@ -138,22 +144,42 @@ class mockdatabse:
         return db_user
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
-        try:
-            # encoded_password = bytes(password, encoding='utf-8')
-            # encrypted_password = str(bcrypt.hashpw(
-            #     encoded_password, bcrypt.gensalt()))
-            # encrypted_password_2 = encrypted_password[1:]
-            sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-            self.cur.execute(sql,(firstname, lastname, password,email,isadmin,000,True))
-            self.conn.commit()
-            self.cur.close()
-            self.conn.close()
+        if self.findUserByEmail(email) == None:
+            encoded_password = bytes(password, encoding='utf-8')
+            encrypted_password = bcrypt.hashpw(
+            encoded_password, bcrypt.gensalt())
+            encrypted_password = encrypted_password.decode('UTF-8')
+            code = '1111'
+            user_id=self.db_id
+            self.db_id+=1
+
+            user = [user_id,firstname,lastname,encrypted_password,email,isadmin,code,True]
+            self.db_list.append(user)
             return True
-        except Exception as e:
-            print(f"Database connection error: {e}")
+        else:
             return False
 
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
+        user = self.findUserById(id)
+        if user != None:
+            encoded_password = bytes(password, encoding='utf-8')
+            encrypted_password = bcrypt.hashpw(
+            encoded_password, bcrypt.gensalt())
+            encrypted_password = encrypted_password.decode('UTF-8')
+            code = '1111'
+            user[1]=firstname
+            user[2]=lastname
+            user[3]=password
+            user[4]=email
+            user[5]=isadmin
+            user[6]=code
+            user[7]=verified
+            return True
+        else:
+            return False
+
+        
+        
         try:
             # encoded_password = bytes(password, encoding='utf-8')
             # encrypted_password = str(bcrypt.hashpw(
