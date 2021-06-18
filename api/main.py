@@ -204,6 +204,16 @@ def login_user():
         return jsonify({'message': 'authetication failed!'}), 401
 
 #Admin functions
+
+"""
+    admin_add_user function:
+        allows admin to add new user
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+""" 
+
 @app.route('/adminadduser', methods=["POST"])
 @token_required
 def admin_add_user(user):
@@ -225,6 +235,16 @@ def admin_add_user(user):
             return {'response':'failed'}
     else:
         return {'response':'failed'}
+
+
+"""
+    admin_update_user function:
+        allows admin to update a user
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+""" 
 
 @app.route('/adminupdateuser', methods=["POST"])
 @token_required
@@ -250,6 +270,14 @@ def admin_update_user(user):
     else:
         return {'response':'failed'}
 
+"""
+    admin_delete_user function:
+        allows admin to delete a user
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
 @app.route('/admindeleteuser', methods=["POST"])
 @token_required
 def admin_delete_user(user):
@@ -269,11 +297,18 @@ def admin_delete_user(user):
     else:
         return {'response':'failed'}
 
+        
+"""
+    admin_get_users function:
+        allows admin to get all users
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
 @app.route('/admingetusers', methods=["POST"])
 @token_required
 def admin_get_users(user):
-
-    
     print(user[5])
     if user[5]!=False:
         return jsonify({'message': 'user unauthirized'}), 401
@@ -288,7 +323,14 @@ def admin_get_users(user):
 
     return {'response':'failed'}
     
-
+"""
+    main function:
+        starts the Flask API
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
 if __name__ == "__main__":
     app.run(debug=True)
 
