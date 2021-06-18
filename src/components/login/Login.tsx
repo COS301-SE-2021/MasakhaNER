@@ -13,7 +13,7 @@ const responseGoogle = (response: any) => {
 };
 const responseFacebook = (response: any) => {
   console.log(response);
-  history.push("/Dashboard");
+  // history.push("/Dashboard");
 };
 
 export default function Login(this: any) {
