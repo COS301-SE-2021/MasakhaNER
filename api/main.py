@@ -11,8 +11,8 @@ from database.database import User
 app = Flask(__name__)
 
 app.config['SECRET_KEY']='secret'
-app.config['Database'] = User()
-app.config['Database'] = User()
+# app.config['Database'] = User()
+# app.config['Database'] = User()
 
 
 
