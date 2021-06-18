@@ -9,8 +9,11 @@ export const Input = () => {
   return (
     <div>
       <div className="input">
-        <h2>Train MasakhaNER model</h2>
+        <div className="input-header">
+          <h2>Train model</h2>
+        </div>
         <label htmlFor="languages">Choose a language:</label>
+        <br />
         <select name="languages" id="language">
           <option value="swahili">Swahili</option>
         </select>
@@ -19,9 +22,11 @@ export const Input = () => {
         </div>
         <hr />
         <div id="feedback">
-          <h3>Provide feedback on model feedback</h3>
+          <h3>Feedback</h3>
           <br />
-          <input></input>
+          <label htmlFor="languages">Correction: </label>
+          <br />
+          <input placeholder="Type here..."></input>
           <select name="languages" id="language">
             <option value="person">PERSON</option>
             <option value="location">LOCATION</option>
@@ -36,7 +41,7 @@ export const Input = () => {
               alert("Feedback submitted");
             }}
           >
-            Submit Feedback
+            Send
           </button>
         </div>
       </div>

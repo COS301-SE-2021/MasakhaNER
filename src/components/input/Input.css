@@ -33,3 +33,11 @@
         justify-content: space-around;
     }
  }
+
+ .input-header{
+    border-bottom: 10px solid black;
+    color: black;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    text-align: center;
+  }
