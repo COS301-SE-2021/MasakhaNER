@@ -178,34 +178,11 @@ class mockdatabse:
         else:
             return False
 
-        
-        
-        try:
-            # encoded_password = bytes(password, encoding='utf-8')
-            # encrypted_password = str(bcrypt.hashpw(
-            #     encoded_password, bcrypt.gensalt()))
-            # encrypted_password_2 = encrypted_password[1:]
-            sql = "Update users set firstname=%s,lastname=%s,password=%s,email=%s,isadmin=%s,verified =%s where id=%s;"
-            self.cur.execute(sql,(firstname,lastname,password,email,isadmin,verified,id))
-            self.conn.commit()
-            self.cur.close()
-            self.conn.close()
-            return True
-        except Exception as e:
-            print(f"Database connection error: {e}")
-            return False
-
     def adminDeleteUser(self, id):
-        try:
-            sql = "DELETE FROM users WHERE id =%s;"
-            self.cur.execute(sql,(id,))
-            self.conn.commit()
-            self.cur.close()
-            self.conn.close()
-            return True
-        except Exception as e:
-            print(f"Database connection error: {e}")
-            return False
+        for x in self.db_list:
+            if x[0] == id:
+                return True
+        return False
 
 
 # # class Test(self):
