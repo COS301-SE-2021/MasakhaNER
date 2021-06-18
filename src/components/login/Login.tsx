@@ -109,7 +109,6 @@ export default function Login(this: any) {
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy={"single_host_origin"}
-            // className = "fab fa-google"
           />
           <FacebookLogin
             appId="2951110285136034"
