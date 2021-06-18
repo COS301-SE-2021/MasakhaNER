@@ -71,16 +71,10 @@ class mockdatabse:
     """
 
     def get_code(self, email):
-        sql = "SELECT activationcode FROM users where email=%s;"
-        self.cur.execute(sql,(email,))
-        var = self.cur.fetchone()
-        self.conn.commit()
-        self.cur.close()
-        self.conn.close()
-        if var != None:
-            return var[0]
-        else:
-            return None
+        user = self.findUserByEmail(email)
+        if user != None:
+            return user[5]
+        return None
 
     """
     Login Function:
