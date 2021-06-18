@@ -143,7 +143,7 @@ def register_user():
     # "password":"12345"
 
 
-    db = User()
+    db = app.config['DB']
     if(db != None):
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
@@ -167,7 +167,7 @@ def register_user():
 
 @app.route('/verify', methods=["POST"])
 def verify_user():
-    db = User()
+    db = app.config['DB']
     if(db != False):
         user_email = request.json["email"]
         user_code  = request.json["code"]
@@ -190,7 +190,7 @@ def verify_user():
 
 @app.route('/login', methods=["POST"])
 def login_user():
-    db = User()
+    db = app.config['DB']
     if(db != False):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
@@ -206,7 +206,7 @@ def login_user():
 #Admin functions
 @app.route('/adminadduser', methods=["POST"])
 @token_required
-def admin_add_user(user):
+def admin_add_user(user,database):
     
     print(user)
     if user[5]=='False':
@@ -228,7 +228,7 @@ def admin_add_user(user):
 
 @app.route('/adminupdateuser', methods=["POST"])
 @token_required
-def admin_update_user(user):
+def admin_update_user(user,database):
     
     print(user)
     if user[5]=='False':
@@ -252,7 +252,7 @@ def admin_update_user(user):
 
 @app.route('/admindeleteuser', methods=["POST"])
 @token_required
-def admin_delete_user(user):
+def admin_delete_user(user,database):
     
     print(user)
     if user[5]=='False':
@@ -271,7 +271,7 @@ def admin_delete_user(user):
 
 @app.route('/admingetusers', methods=["POST"])
 @token_required
-def admin_get_users(user):
+def admin_get_users(user,database):
 
     
     print(user[5])
