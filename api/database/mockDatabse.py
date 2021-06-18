@@ -112,11 +112,14 @@ class mockdatabse:
     """
 
     def verify_user(self, email):
-        sql = "Update users set verified = {True} where email=%s;"
-        self.cur.execute(sql,(email,))
-        self.conn.commit()
-        self.cur.close()
-        self.conn.close()
+        user = self.findUserByEmail(email)
+        if user != None:
+            if user[7]==True:
+                print("password works")
+                return True
+            else:
+                return False
+        return False
     # admin functions
 
     def findUserByEmail(self, email):
