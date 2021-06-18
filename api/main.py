@@ -11,6 +11,9 @@ from database.database import User
 app = Flask(__name__)
 
 app.config['SECRET_KEY']='secret'
+app.config['Database'] = User()
+app.config['Database'] = User()
+
 
 
 """
@@ -258,8 +261,8 @@ def admin_delete_user(user):
     db = User()
     if(db != None):
         
-        user_email = str(request.json["email"])
-        if(db.adminDeleteUser(user_email)):
+        user_id = str(request.json["id"])
+        if(db.adminDeleteUser(user_id)):
             return {'response':'deleted'}
         else:
             return {'response':'failed'}

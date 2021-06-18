@@ -192,10 +192,10 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
-    def adminDeleteUser(self, email):
+    def adminDeleteUser(self, id):
         try:
-            sql = "DELETE FROM users WHERE email =%s;"
-            self.cur.execute(sql,(email,))
+            sql = "DELETE FROM users WHERE id =%s;"
+            self.cur.execute(sql,(id,))
             self.conn.commit()
             self.cur.close()
             self.conn.close()
