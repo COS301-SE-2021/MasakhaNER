@@ -12,7 +12,7 @@ export const Input = () => {
         <div className="input-header">
           <h2>Train model</h2>
         </div>
-        <label htmlFor="languages">Choose a language:</label>
+        <label htmlFor="languages">Choose a language</label>
         <br />
         <select name="languages" id="language">
           <option value="swahili">Swahili</option>
@@ -24,9 +24,12 @@ export const Input = () => {
         <div id="feedback">
           <h3>Feedback</h3>
           <br />
-          <label htmlFor="languages">Correction: </label>
+          <label htmlFor="languages">Correction </label>
           <br />
           <input placeholder="Type here..."></input>
+          <br />
+          <label htmlFor="languages">Entity </label>
+          <br />
           <select name="languages" id="language">
             <option value="person">PERSON</option>
             <option value="location">LOCATION</option>

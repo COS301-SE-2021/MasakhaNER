@@ -41,3 +41,19 @@
     width: 100%;
     text-align: center;
   }
+
+  .input input{
+    border: 10px solid white;
+    background-color: white;
+    box-shadow: 5px 5px 5px rgb(221, 221, 221);
+    border-radius: 0 0 5px 5px;
+    width: 100%;
+  }
+
+  .input select{
+    border: 10px solid white;
+    background-color: white;
+    box-shadow: 5px 5px 5px rgb(221, 221, 221);
+    border-radius: 0 0 5px 5px;
+    width: 100%;
+  }
