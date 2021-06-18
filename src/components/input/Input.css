@@ -1,13 +1,14 @@
 .input{
-    padding: 35px;
-    display: flex;
-    flex-direction: column;
-    height: 70%;
-    width: 75%;
-	margin: auto;
-    border: 1px solid rgb(211, 211, 211);
-    border-radius: 15px;
-    box-shadow: 5px 5px 5px rgb(221, 221, 221);
+    background-color: rgb(226, 226, 229);
+    margin-left: auto;
+    margin-right: auto;
+    /* display: flex; */
+    flex-direction: row;
+    justify-content: space-evenly;
+    box-shadow: 10px 5px 5px 5px rgb(221, 221, 221);
+    width: 70%;
+    margin-top: 70px;
+    padding: 20px;
 }
 
 #language {
