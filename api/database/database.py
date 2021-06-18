@@ -1,14 +1,15 @@
-import os, sys
+import bcrypt
+from flask import request
+from dotenv import load_dotenv
+import psycopg2.extras
+import psycopg2
+from flask import Flask
+from database.email import Email
+import os
+import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
-from database.email import Email
-from flask import Flask
-import psycopg2
-import psycopg2.extras
-from dotenv import load_dotenv
 #import os
-from flask import request
-import bcrypt
 
 load_dotenv()
 
@@ -52,19 +53,21 @@ class User:
 
     def register(self, firstname, lastname, email, password):
         try:
-            # encoded_password = bytes(password, encoding='utf-8')
-            # encrypted_password = str(bcrypt.hashpw(
-            #     encoded_password, bcrypt.gensalt()))
-            # encrypted_password_2 = encrypted_password[1:]
-            encrypted_password_2 = "encrypted_password"
+            encoded_password = bytes(password, encoding='utf-8')
+            encrypted_password = bcrypt.hashpw(
+                encoded_password, bcrypt.gensalt())
+            print(type(encrypted_password))
+            encrypted_password = encrypted_password.decode('UTF-8')
             code = '1111'
-            self.cur.execute(
-                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{encrypted_password_2}','{email}',{False},{code},{False})")
-            #sendemail = Email()
-            message = """\
-            Masakhane Activation Code
 
-            Here is your activation code: 1111 """
+            sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+
+            self.cur.execute(sql,(firstname,lastname,encrypted_password,email,False,code,False))
+            #sendemail = Email()
+            # message = """\
+            # Masakhane Activation Code
+
+            # Here is your activation code: 1111 """
             #sendemail.send_email(message, email)
             self.conn.commit()
             self.cur.close()
@@ -85,7 +88,8 @@ class User:
     """
 
     def get_code(self, email):
-        self.cur.execute(f"SELECT activationcode FROM users where email='{email}';")
+        sql = "SELECT activationcode FROM users where email=%s;"
+        self.cur.execute(sql,(email,))
         var = self.cur.fetchone()
         self.conn.commit()
         self.cur.close()
@@ -94,7 +98,6 @@ class User:
             return var[0]
         else:
             return None
-
 
     """
     Login Function:
@@ -106,29 +109,23 @@ class User:
     Returns:
         Boolean:Returns true or false if user logged in successfully
     """
+
     def login(self, email, password):
         # print("running login")
-        
-        # encoded_password = bytes('1234', encoding='utf-8')
-        # encrypted_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
-        # print('passowrd1: ',encrypted_password)
-        
-        # if bcrypt.hashpw(encoded_password, encrypted_password) == encrypted_password:
-        #     print('true')
-
-        
-        encrypted_password_2 = 'encrypted_password'
-        print(encrypted_password_2)
-        self.cur.execute(f"SELECT password FROM users where email='{email}';")
+        sql = "SELECT password FROM users where email=%s;"
+        self.cur.execute(sql,(email,))
         db_password = self.cur.fetchone()
         self.conn.commit()
         self.cur.close()
         self.conn.close()
-        #print(  f"'{str(db_password[0])}'"  )
-        if db_password != None and db_password[0] == encrypted_password_2:
-            return True
-        else:
-            return False
+        print(db_password)
+        if db_password != None:
+            if bcrypt.checkpw(password.encode('UTF-8'), db_password[0].encode('UTF-8')):
+                print("password works")
+                return True
+            else:
+                return False
+        return False
     """
     very=ify user Function:
         verifies user based on code passed in
@@ -137,16 +134,18 @@ class User:
     Returns:
         Boolean:Returns true or false if user register successfully
     """
+
     def verify_user(self, email):
-        self.cur.execute(f"SELECT * FROM users where email='{email}';")
-        self.cur.execute(
-            f"Update users set verified = {True} where email='{email}';")
+        sql = "Update users set verified = {True} where email=%s;"
+        self.cur.execute(sql,(email,))
         self.conn.commit()
         self.cur.close()
         self.conn.close()
-    #admin functions
+    # admin functions
+
     def findUserByEmail(self, email):
-        self.cur.execute(f"SELECT * FROM users where email='{email}';")
+        sql ="SELECT * FROM users where email=%s;"
+        self.cur.execute(sql,(email,))
         db_user = self.cur.fetchone()
         self.conn.commit()
         self.cur.close()
@@ -161,15 +160,14 @@ class User:
         self.conn.close()
         return db_user
 
-    def adminAddUser(self, firstname, lastname, email, password,isadmin):
+    def adminAddUser(self, firstname, lastname, email, password, isadmin):
         try:
             # encoded_password = bytes(password, encoding='utf-8')
             # encrypted_password = str(bcrypt.hashpw(
             #     encoded_password, bcrypt.gensalt()))
             # encrypted_password_2 = encrypted_password[1:]
-            encrypted_password_2 = "encrypted_password"
-            self.cur.execute(
-                f"INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES('{firstname}','{lastname}','{password}','{email}',{isadmin},{0000},{True})")
+            sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+            self.cur.execute(sql,(firstname, lastname, password,email,isadmin,000,True))
             self.conn.commit()
             self.cur.close()
             self.conn.close()
@@ -178,9 +176,26 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
-    def adminDeleteUser(self,email):
+    def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         try:
-            self.cur.execute(f"DELETE FROM users WHERE email = '{email}';")
+            # encoded_password = bytes(password, encoding='utf-8')
+            # encrypted_password = str(bcrypt.hashpw(
+            #     encoded_password, bcrypt.gensalt()))
+            # encrypted_password_2 = encrypted_password[1:]
+            sql = "Update users set firstname=%s,lastname=%s,password=%s,email=%s,isadmin=%s,verified =%s where id=%s;"
+            self.cur.execute(sql,(firstname,lastname,password,email,isadmin,verified,id))
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
+    def adminDeleteUser(self, id):
+        try:
+            sql = "DELETE FROM users WHERE id =%s;"
+            self.cur.execute(sql,(id,))
             self.conn.commit()
             self.cur.close()
             self.conn.close()
@@ -196,9 +211,9 @@ class User:
 #         encoded_password = bytes('1234', encoding='utf-8')
 #         encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
 #         print('passowrd1: ',encrypted_password)
-        
+
 #         encoded_password = bytes('1234', encoding='utf-8')
-#         encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt())) 
+#         encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
 #         print('passowrd2: ',encrypted_password)
 
 # #run = Test().testHash()
