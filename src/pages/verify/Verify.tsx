@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
 import "./verifyAccount.css"
 import { Link } from 'react-router-dom';
-import { email } from 'react-admin';
 
 function VerifyAccount() {
   const [code, setCode] = useState("");
-  const [clicked, setClicked] = useState(false);
+  //const [clicked, setClicked] = useState(false);
 
   const options = {
     method: "POST",
@@ -29,9 +27,9 @@ function VerifyAccount() {
     
 //   }, [clicked]);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-  };
+  // const handleSubmit = (e: any) => {
+  //   e.preventDefault();
+  // };
     return (
     <div className="veryify-form">
         <form>

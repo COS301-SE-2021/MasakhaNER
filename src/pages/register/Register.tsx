@@ -2,6 +2,8 @@ import React, { useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useHistory } from "react-router-dom";
+
 
 
 function Register() {
@@ -39,6 +41,18 @@ function Register() {
     }
   }, [clicked]);
 
+  useEffect(() => {
+    fetch("/register")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.response.status === 200) {
+          console.log("This thing worked: ", data.response.status);
+          validate();
+        }
+      })
+      .catch((error) => console.log(error.message));
+  }, [clicked]);
+
   const validEmail = new RegExp(
     '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
   );
@@ -63,8 +77,8 @@ function Register() {
     }
   }
   const handleSubmit = (e: any) => {
-    e.preventDefault();
-  };
+    e.preventDefault();  
+  }
 
   return (
     <div className="signup-form">
@@ -150,9 +164,12 @@ function Register() {
           onClick={(e) => {
             e.preventDefault();
             setItem();
-            setClicked(!clicked);
-            console.log(disabled);
-            console.log(clicked);
+            //setClicked(!clicked);
+            //console.log(disabled);
+            //console.log(clicked);
+
+            validate();
+            
             window.location.href = "/verify";
           }}
         >
