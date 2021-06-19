@@ -1,10 +1,8 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useHistory } from "react-router-dom";
-
-
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -15,7 +13,6 @@ function Register() {
   const [disabled, setDisabled] = useState(true);
   const [Emailerr, setEmailErr] = useState(false);
   const [Passworderr, setPasswordErr] = useState(false);
-  
 
   const options = {
     method: "POST",
@@ -23,34 +20,32 @@ function Register() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      "firstname": firstName,
-      "lastname": lastName,
-      "email": email,
-      "password": password,
+      firstname: firstName,
+      lastname: lastName,
+      email: email,
+      password: password,
     }),
   };
 
-  const handleStatus = async () =>{
-    try{
+  const handleStatus = async () => {
+    try {
       const resp = await fetch("/register", options);
       console.log(resp);
-      if(resp.status === 200){
+      if (resp.status === 200) {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
         window.location.href = "/verify";
-      }
-      else{
+      } else {
         alert(resp.status);
         alert("Incorrect verification code!");
         window.location.href = "/";
       }
-    }
-    catch(error){
+    } catch (error) {
       console.log("there is an error", error);
       window.location.href = "/";
     }
-  }
+  };
 
   useEffect(() => {
     if (disabled === false) {
@@ -64,51 +59,53 @@ function Register() {
   }, [clicked]);
 
   const validEmail = new RegExp(
-    '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
+    "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
   );
-  const validPassword = new RegExp(
-    '^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$'
-  );
+  const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
 
   const setItem = () => {
-    localStorage.setItem('newEmail', JSON.stringify(email));
-  }
+    localStorage.setItem("newEmail", JSON.stringify(email));
+  };
 
   const validate = () => {
-    if (!validEmail.test(email)){
+    if (!validEmail.test(email)) {
       setEmailErr(true);
       console.log(setEmailErr);
-    }else if (!validPassword.test(password)){
+    } else if (!validPassword.test(password)) {
       setPasswordErr(true);
       console.log(setEmailErr);
-    }else{
+    } else {
       setClicked(!clicked);
       window.location.href = "/verify";
     }
-  }
+  };
   const handleSubmit = (e: any) => {
-    e.preventDefault();  
-  }
+    e.preventDefault();
+  };
 
   return (
     <div className="signup-form">
-          <div id="register-header">
-            <h1>MASAKHA <br/> NER TOOL</h1>
-              <p>Please confirm that you are human <br />
-                before submitting...</p>
-               <div className="reCAP"> 
-                <ReCAPTCHA
-                  sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-                  onChange={() => {
-                    setDisabled(false);
-                  }}
-                />
-              </div>
-          </div>
-      <form id="regForm" onSubmit={handleSubmit}>
-      <div className="registerTop">
-        <h2>SIGN UP</h2>
+      <div id="register-header">
+        <h1>
+          MASAKHA <br /> NER TOOL
+        </h1>
+        <p>
+          Please confirm that you are human <br />
+          before submitting...
+        </p>
+        <div className="reCAP">
+          <ReCAPTCHA
+            sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+            onChange={() => {
+              setDisabled(false);
+            }}
+          />
+        </div>
       </div>
+      <form id="regForm" onSubmit={handleSubmit}>
+        <div className="registerTop">
+          <h2>SIGN UP</h2>
+        </div>
         <div className="form-group">
           <label htmlFor="firstName">First Name:</label>
           <input
@@ -143,7 +140,7 @@ function Register() {
             value={email}
             onChange={(e) => {
               setemail(e.target.value);
-               validate() ;
+              validate();
             }}
             required
           />
@@ -158,36 +155,29 @@ function Register() {
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
-              validate() ;
+              validate();
             }}
             required
           />
         </div>
         <br />
         <div className="register-button">
-        <button
-          disabled={disabled}
-          id="mainBtn"
-          type="submit"
-          className="btn btn-dark"
-          //onClick={validate}
-          onClick={(e) => {
-            e.preventDefault();
-            setItem();
-            handleStatus();
-            //setClicked(!clicked);
-            //console.log(disabled);
-            //console.log(clicked);
-
-            //validate();
-            
-            //window.location.href = "/verify";
-          }}
-        >
-          Sign up
-        </button>
+          <button
+            disabled={disabled}
+            id="mainBtn"
+            type="submit"
+            className="btn btn-dark"
+            onClick={(e) => {
+              e.preventDefault();
+              setItem();
+              handleStatus();
+            }}
+          >
+            Sign up
+          </button>
         </div>
-        {Passworderr || Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>}
+        {Passworderr ||
+          (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
       </form>
     </div>
   );
