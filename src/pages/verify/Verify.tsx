@@ -19,35 +19,24 @@ function VerifyAccount() {
   };
 
   const handleVerify = async () =>{
-    const opts ={
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "code": code
-      })
-    }
     try{
-      const resp = await fetch("/Verify", opts);
+      const resp = await fetch("/verify", options);
       console.log(resp);
       if(resp.status === 200){
+        alert(resp.status);
         const data = await resp.json();
         console.log(data);
-        localStorage.setItem("token", data.token);
-        window.location.href = "/Dashboard";
-        //history.push("/Dashboard");
+        window.location.href = "/login";
       }
       else{
-        alert("Incorrect login or user does not exists!!!");
+        alert(resp.status);
+        alert("Incorrect verification code!");
         window.location.href = "/";
-        //history.push("/");
       }
     }
     catch(error){
       console.log("there is an error", error);
       window.location.href = "/";
-      //history.push("/");
     }
   }
 
