@@ -10,7 +10,6 @@
 
 # api folder
 *.pyc
-/api/.env
 
 # production
 /build
