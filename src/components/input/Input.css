@@ -9,6 +9,9 @@
     width: 70%;
     margin-top: 70px;
     padding: 20px;
+    content: "";
+    clear: both;
+    display: table;
 }
 
 #language {
@@ -51,6 +54,7 @@
     background-color: white;
     box-shadow: 5px 5px 5px rgb(221, 221, 221);
     border-radius: 0 0 5px 5px;
+    box-shadow: 10px 5px 5px 5px rgb(221, 221, 221);
   }
 
   .input select{
@@ -58,10 +62,19 @@
     background-color: white;
     box-shadow: 5px 5px 5px rgb(221, 221, 221);
     border-radius: 0 0 5px 5px;
+    box-shadow: 10px 5px 5px 5px rgb(221, 221, 221);
   }
 
   a, p, label {
     color: gray;
     text-decoration: none;
     font-size: small;
+  }
+
+  .feedback{
+    float: left;
+  }
+
+  .model-output{
+    float: right;
   }

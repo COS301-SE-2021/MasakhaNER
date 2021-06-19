@@ -34,9 +34,8 @@ export default function InputSection() {
     <div className="inputSection">
       <form onSubmit={handleSubmit}>
         <p>Enter text</p>
-
         <input
-          placeholder="Enter Text"
+          placeholder="Type here..."
           id="testSection"
           type="text"
           value={input}

@@ -21,7 +21,7 @@ export const Input = () => {
           <InputSection />
         </div>
         <hr />
-        <div id="feedback">
+        <div id="feedback" className="feedback">
           <h3>Feedback</h3>
           <br />
           <label htmlFor="languages">Correction </label>
@@ -46,6 +46,9 @@ export const Input = () => {
           >
             Send
           </button>
+        </div>
+        <div className="model-output">
+          Add Model Ouput here.
         </div>
       </div>
     </div>
