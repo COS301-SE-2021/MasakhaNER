@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useHistory } from "react-router-dom";
+import { exists } from "fs";
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -36,7 +37,13 @@ function Register() {
         const data = await resp.json();
         console.log(data);
         window.location.href = "/verify";
-      } else {
+      } else if (resp.status === 400) {
+        alert("Email already exists, try again!");
+        const data = await resp.json();
+        console.log(data);
+        window.location.href = "/register";
+      }
+      else {
         alert(resp.status);
         alert("Incorrect verification code!");
         window.location.href = "/";
