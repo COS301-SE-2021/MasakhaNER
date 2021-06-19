@@ -17,6 +17,28 @@ function VerifyAccount() {
     }),
   };
 
+  const handleVerify = async () =>{
+    try{
+      const resp = await fetch("/verify", options);
+      console.log(resp);
+      if(resp.status === 200){
+        alert(resp.status);
+        const data = await resp.json();
+        console.log(data);
+        window.location.href = "/login";
+      }
+      else{
+        alert(resp.status);
+        alert("Incorrect verification code!");
+        window.location.href = "/";
+      }
+    }
+    catch(error){
+      console.log("there is an error", error);
+      window.location.href = "/";
+    }
+  }
+
 //   useEffect(() => {
 //       fetch("/verifyAccount", options)
 //       .then((res) => res.json())
@@ -40,7 +62,7 @@ function VerifyAccount() {
             </div>
             <br />
             <Link to="/dashboard">
-            <button type="submit" className="btn btn-dark">Next</button>
+            <button type="submit" className="btn btn-dark" onClick={handleVerify}>Next</button>
             </Link>
         </form>
     </div>
