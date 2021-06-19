@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function VerifyAccount() {
   const [code, setCode] = useState("");
-  const [clicked, setClicked] = useState(false);
+  //const [clicked, setClicked] = useState(false);
 
   const options = {
     method: "POST",
@@ -60,7 +60,13 @@ function VerifyAccount() {
             <h3>Enter Confirmation Code</h3>
             <p>Enter the confirmation code we sent to your email.<em>{localStorage.getItem("newEmail")}</em></p>
             <div className="form-group">
-                <input type="text" placeholder="Confirmation Code" className="form-control" id="code" name="code"/>
+                <input type="text"
+                placeholder="Confirmation Code" 
+                className="form-control" 
+                id="code" 
+                name="code"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}/>
             </div>
             <br />
             <Link to="/dashboard">
