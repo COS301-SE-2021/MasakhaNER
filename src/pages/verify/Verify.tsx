@@ -1,12 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
 import "./verifyAccount.css"
 import { Link } from 'react-router-dom';
 
 function VerifyAccount() {
   const [code, setCode] = useState("");
-  const [clicked, setClicked] = useState(false);
+  //const [clicked, setClicked] = useState(false);
 
   const options = {
     method: "POST",
@@ -50,15 +49,14 @@ function VerifyAccount() {
     
 //   }, [clicked]);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-  };
-
+  // const handleSubmit = (e: any) => {
+  //   e.preventDefault();
+  // };
     return (
     <div className="veryify-form">
         <form>
             <h3>Enter Confirmation Code</h3>
-            <p>Enter the confirmation code we sent to your email.<em>{localStorage.getItem("newEmail")}</em></p>
+            <p>Enter the confirmation code we sent to your email: <em>{localStorage.getItem('newEmail')}</em>.</p>
             <div className="form-group">
                 <input type="text" placeholder="Confirmation Code" className="form-control" id="code" name="code"/>
             </div>
