@@ -16,3 +16,11 @@
     grid-template-columns: auto;
     padding: 10px;
 }
+
+.output-header h2{
+    font-weight: bold;
+    color: black;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    text-align: center;
+  }
