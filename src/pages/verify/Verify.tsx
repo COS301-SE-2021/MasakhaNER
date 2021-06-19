@@ -18,6 +18,39 @@ function VerifyAccount() {
     }),
   };
 
+  const handleVerify = async () =>{
+    const opts ={
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "code": code
+      })
+    }
+    try{
+      const resp = await fetch("/Verify", opts);
+      console.log(resp);
+      if(resp.status === 200){
+        const data = await resp.json();
+        console.log(data);
+        localStorage.setItem("token", data.token);
+        window.location.href = "/Dashboard";
+        //history.push("/Dashboard");
+      }
+      else{
+        alert("Incorrect login or user does not exists!!!");
+        window.location.href = "/";
+        //history.push("/");
+      }
+    }
+    catch(error){
+      console.log("there is an error", error);
+      window.location.href = "/";
+      //history.push("/");
+    }
+  }
+
 //   useEffect(() => {
 //       fetch("/verifyAccount", options)
 //       .then((res) => res.json())
@@ -42,7 +75,7 @@ function VerifyAccount() {
             </div>
             <br />
             <Link to="/dashboard">
-            <button type="submit" className="btn btn-dark">Next</button>
+            <button type="submit" className="btn btn-dark" onClick={handleVerify}>Next</button>
             </Link>
         </form>
     </div>
