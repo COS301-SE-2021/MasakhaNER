@@ -30,6 +30,28 @@ function Register() {
     }),
   };
 
+  const handleStatus = async () =>{
+    try{
+      const resp = await fetch("/register", options);
+      console.log(resp);
+      if(resp.status === 200){
+        alert(resp.status);
+        const data = await resp.json();
+        console.log(data);
+        window.location.href = "/verify";
+      }
+      else{
+        alert(resp.status);
+        alert("Incorrect verification code!");
+        window.location.href = "/";
+      }
+    }
+    catch(error){
+      console.log("there is an error", error);
+      window.location.href = "/";
+    }
+  }
+
   useEffect(() => {
     if (disabled === false) {
       fetch("/register", options)
@@ -39,18 +61,6 @@ function Register() {
         })
         .catch((err) => console.log(err));
     }
-  }, [clicked]);
-
-  useEffect(() => {
-    fetch("/register")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.response.status === 200) {
-          console.log("This thing worked: ", data.response.status);
-          validate();
-        }
-      })
-      .catch((error) => console.log(error.message));
   }, [clicked]);
 
   const validEmail = new RegExp(
@@ -164,13 +174,14 @@ function Register() {
           onClick={(e) => {
             e.preventDefault();
             setItem();
+            handleStatus();
             //setClicked(!clicked);
             //console.log(disabled);
             //console.log(clicked);
 
-            validate();
+            //validate();
             
-            window.location.href = "/verify";
+            //window.location.href = "/verify";
           }}
         >
           Sign up
