@@ -1,6 +1,5 @@
 from flask import Response
 from database.database import User
-from database.database import Model
 from datetime import datetime, timedelta
 from flask import Flask, json, jsonify
 from flask import request
@@ -354,7 +353,7 @@ def admin_add_models(user):
     if user[5]=='False':
         return jsonify({'message': 'user unauthirized'}), 401
 
-    db = Model()
+    db = User()
     if(db != None):
         model_name = str(request.json["modelname"])
         model_model = str(request.json["model"])
@@ -372,7 +371,7 @@ def admin_get_models(user):
     if user[5] != False:
         return jsonify({'message': 'user unauthirized'}), 401
 
-    db = Model()
+    db = User()
     if(db != None):
         models = db.getAllModels()
         resp = []
