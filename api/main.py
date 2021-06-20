@@ -262,28 +262,29 @@ def admin_add_user(user):
 #         JSON object with response
 # """
 
-@app.route('/users/<id>', methods=["PUT"])
+@app.route('/users/<id>', methods=["PUT","GET"])
 @token_required
 def admin_update_user(user, id):
-    print(user)
-    if user[5]=='False':
-        return jsonify({'message': 'user unauthirized'}), 401
+    # print(user)
+    if request.method == "PUT":
+        if user[5]=='False':
+            return jsonify({'message': 'user unauthirized'}), 401
 
-    db = User()
-    if(db != None):
-        # user_id = str(request.json["id"])
-        user_firstname = str(request.json["firstname"])
-        user_lastname = str(request.json["lastname"])
-        user_email = str(request.json["email"])
-        user_password = str(request.json["password"])
-        user_isadmin = str(request.json["isadmin"])
-        user_verified = str(request.json["verified"])
-        if(db.adminUpdateUser(id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
-            return {'response':'registered'},200
+        db = User()
+        if(db != None):
+            # user_id = str(request.json["id"])
+            user_firstname = str(request.json["firstname"])
+            user_lastname = str(request.json["lastname"])
+            user_email = str(request.json["email"])
+            user_password = str(request.json["password"])
+            user_isadmin = str(request.json["isadmin"])
+            user_verified = str(request.json["verified"])
+            if(db.adminUpdateUser(id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
+                return {'response':'registered'},200
+            else:
+                return {'response':'failed'},400
         else:
             return {'response':'failed'},400
-    else:
-        return {'response':'failed'},400
 
 # """
 #     admin_delete_user function:
