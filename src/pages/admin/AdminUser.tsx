@@ -9,6 +9,7 @@ import simpleRestProvider from "ra-data-simple-rest";
 import CreateModel from "../../components/admin/CreateModel";
 import ModelList from "../../components/admin/ModelList";
 
+
 export default function AdminUser() {
   const fetchJson = (url: string, options: any = {}) => {
     if (!options.headers) {
@@ -20,7 +21,6 @@ export default function AdminUser() {
 
   return (
     <>
-      {/* <Nav /> */}
       <Admin
         dataProvider={simpleRestProvider("http://localhost:3000", fetchJson)}
       >
