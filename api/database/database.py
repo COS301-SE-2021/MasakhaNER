@@ -157,6 +157,15 @@ class User:
         self.cur.close()
         self.conn.close()
         return db_user
+    
+    def getUser(self, id):
+        sql = "SELECT * FROM users WHERE id=%s;"
+        self.cur.execute(sql,(id,))
+        db_user = self.cur.fetchone()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+        return db_user
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         try:
@@ -173,7 +182,7 @@ class User:
         except Exception as e:
             print(f"Database connection error: {e}")
             return False
-
+        
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         try:
             # encoded_password = bytes(password, encoding='utf-8')
