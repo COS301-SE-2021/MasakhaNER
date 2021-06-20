@@ -53,6 +53,8 @@ class User:
 
     def register(self, firstname, lastname, email, password):
         try:
+            self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
             self.cur = self.conn.cursor()
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
@@ -89,6 +91,8 @@ class User:
     """
 
     def get_code(self, email):
+        self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
         self.cur = self.conn.cursor()
         sql = "SELECT activationcode FROM users where email=%s;"
         self.cur.execute(sql,(email,))
@@ -114,6 +118,8 @@ class User:
 
     def login(self, email, password):
         # print("running login")
+        self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
         self.cur = self.conn.cursor()
         sql = "SELECT password FROM users where email=%s;"
         self.cur.execute(sql,(email,))
@@ -139,6 +145,8 @@ class User:
     """
 
     def verify_user(self, email):
+        self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
         self.cur = self.conn.cursor()
         sql = "Update users set verified = {True} where email=%s;"
         self.cur.execute(sql,(email,))
@@ -148,6 +156,8 @@ class User:
     # admin functions
 
     def findUserByEmail(self, email):
+        self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
         self.cur = self.conn.cursor()
         sql ="SELECT * FROM users where email=%s;"
         self.cur.execute(sql,(email,))
@@ -158,6 +168,8 @@ class User:
         return db_user
 
     def getAllUsers(self):
+        self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
         self.cur.execute(f"SELECT * FROM users;")
         db_user = self.cur.fetchall()
         self.conn.commit()
@@ -167,6 +179,8 @@ class User:
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         try:
+            self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
             self.cur = self.conn.cursor()
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
@@ -186,8 +200,12 @@ class User:
 
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         try:
+            self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+            self.cur = self.conn.cursor()
+            
             if self.findUserByEmail(email) is None:
-                self.cur = self.conn.cursor()
+                
                 encoded_password = bytes(password, encoding='utf-8')
                 encrypted_password = bcrypt.hashpw(
                 encoded_password, bcrypt.gensalt())
@@ -206,6 +224,8 @@ class User:
 
     def adminDeleteUser(self, id):
         try:
+            self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
             self.cur = self.conn.cursor()
             sql = "DELETE FROM users WHERE id =%s;"
             self.cur.execute(sql,(id,))
@@ -219,14 +239,17 @@ class User:
 
     def update(self, email, password):
         try:
+            self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
             self.cur = self.conn.cursor()
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
             encoded_password, bcrypt.gensalt())
             #print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
-            sql="UPDATE users SET password =%s, WHERE email= %s"
-            self.cur.execute(sql(encrypted_password,email))
+            print(email)
+            sql="UPDATE users SET password =%s WHERE email= %s;"
+            self.cur.execute(sql,(encrypted_password,email))
             self.conn.commit()
             self.cur.close()
             self.conn.close()

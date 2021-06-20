@@ -318,7 +318,13 @@ def admin_get_users(user):
 @app.route('/updatepassword', methods=["POST"])
 @token_required
 def update_password(user):
-    db = User()
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    if user[5]!=False:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    db = app.config['DATABASE']
     if(db != None):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
