@@ -184,6 +184,7 @@ def verify_user():
         user_code = request.json["code"]
         if user_code != None and user_code == db.get_code(user_email):
             db.verify_user(user_email)
+
             return {'response': 'verified'}, 200
         else:
             return {'response': 'failed'}, 400
@@ -264,7 +265,6 @@ def admin_add_user(user):
 @app.route('/users/<id>', methods=["PUT"])
 @token_required
 def admin_update_user(user, id):
-
     print(user)
     if user[5]=='False':
         return jsonify({'message': 'user unauthirized'}), 401

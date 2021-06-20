@@ -23,6 +23,12 @@ export default function AdminUser() {
       <Resource
         name="users"
         list={UserList}
+        edit={UserEdit}
+        create={CreateUser}
+      />
+      <Resource
+        name="models"
+        list={UserList}
         create={CreateUser}
         edit={UserEdit}
       />

@@ -18,8 +18,8 @@ const UserList = (props: any) => {
         <EmailField source="email" />
         <TextField source="isadmin" />
         <TextField source="verified" />
-        <DeleteButton basePath="/user" />
-        <EditButton basePath="/user" />
+        <DeleteButton basePath="/users" />
+        <EditButton basePath="/users" />
       </Datagrid>
     </List>
   );
