@@ -7,8 +7,27 @@ import {
   EditButton,
   DeleteButton,
 } from "react-admin";
+import { format, parse } from "content-range";
+import { useEffect } from "react";
 
-const userList = (props: any) => {
+const UserList = (props: any) => {
+  const options: any = {
+    method: "GET",
+    headers: {
+      key:"x-access-token", 
+      value: localStorage.getItem("token")
+    },
+    body: JSON.stringify(''),
+  };
+
+  useEffect(() => {
+    fetch("/users", options)
+      .then((res) => res.json())
+      .catch((err) => console.log(err));
+  }, [true]);
+
+  
+
   return (
     <List {...props}>
       <Datagrid>
@@ -18,11 +37,11 @@ const userList = (props: any) => {
         <EmailField source="email" />
         <TextField source="isadmin" />
         <TextField source="verified" />
-        <EditButton basePath="/users" />
-        <DeleteButton basePath="/users" />
+        <DeleteButton basePath="/user" />
+        <EditButton basePath="/user" />
       </Datagrid>
     </List>
   );
 };
 
-export default userList;
+export default UserList;
