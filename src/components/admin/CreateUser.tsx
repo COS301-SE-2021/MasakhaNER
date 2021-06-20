@@ -5,6 +5,7 @@ const  CreateUser = (props:any) =>{
     return (
         <Create title = "Create a user" {...props}>
             <SimpleForm>
+                <TextInput disabled source = "id"/>
                 <TextInput source = "firstname"/>
                 <TextInput source = "lastname"/>
                 <TextInput source = "email"/>
