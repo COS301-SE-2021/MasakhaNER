@@ -47,7 +47,7 @@ function Register() {
   );
 
   const setItem = () => {
-    localStorage.setItem('newEmail', JSON.stringify(email));
+    localStorage.setItem('newEmail', email);
   }
 
   const validate = () => {

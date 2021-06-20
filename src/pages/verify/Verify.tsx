@@ -19,25 +19,21 @@ function VerifyAccount() {
     }),
   };
 
-  useEffect(() => {
-    //alert("Location? siLa");
-    handleVerify();
-  }, [clicked]);
+  // useEffect(() => {
+  //   handleVerify();
+  // }, [clicked]);
 
   const handleVerify = async () => {
-    //setClicked(!clicked);
-    alert("Location? siLa");
     try {
       const resp = await fetch("/verify", options);
-      console.log("This is what came back: ", resp);
+      console.log("This is what came back: ", options);
+  
       if (resp.status === 200) {
-        alert(resp.status);
         const data = await resp.json();
-        console.log(data);
+        alert("You have successfully verified your account!");
         window.location.href = "/login";
       }
       else {
-        alert(resp.status);
         alert("Incorrect verification code!");
         window.location.href = "/verify";
       }
@@ -76,6 +72,7 @@ function VerifyAccount() {
             className="btn btn-dark"
             onClick={(e) => {
               e.preventDefault();
+              handleVerify();
               setClicked(!clicked);
             }}>Next</button>
         </Link>
