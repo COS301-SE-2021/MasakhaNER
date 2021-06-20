@@ -11,29 +11,31 @@ import { format, parse } from "content-range";
 import { useEffect } from "react";
 
 const UserList = (props: any) => {
-  const options: any = {
-    method: "GET",
-    headers: {
-      key:"x-access-token", 
-      value: localStorage.getItem("token")
-    },
-    body: JSON.stringify(''),
-  };
+  // const options: any = {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "x-access-token": localStorage.getItem("token"),
+  //   },
+  // };
 
-  useEffect(() => {
-    fetch("/users", options)
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
-  }, [true]);
-
-  
+  // useEffect(() => {
+  //   fetch("/users", options)
+  //     .then((res) => {
+  //       res.json();
+  //     })
+  //     .then((data) => { 
+  //       console.log(typeof(data));
+  //     })
+  //     // .catch((err) => console.log(err));
+  // }, [true]);
 
   return (
     <List {...props}>
       <Datagrid>
         <TextField source="id" />
         <TextField source="firstname" />
-        <TextField source="Lastname" />
+        <TextField source="lastname" />
         <EmailField source="email" />
         <TextField source="isadmin" />
         <TextField source="verified" />
