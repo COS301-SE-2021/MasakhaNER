@@ -114,8 +114,8 @@ class User:
         self.cur.execute(sql,(email,))
         db_password = self.cur.fetchone()
         self.conn.commit()
-        self.cur.close()
-        self.conn.close()
+        # self.cur.close()
+        # self.conn.close()
         print(db_password)
         if db_password != None:
             if bcrypt.checkpw(password.encode('UTF-8'), db_password[0].encode('UTF-8')):
@@ -149,6 +149,17 @@ class User:
         self.cur.close()
         self.conn.close()
         return db_user
+
+    def isAdmin(self, email):
+        sql ="SELECT isadmin FROM users where email=%s;"
+        self.cur.execute(sql,(email,))
+        db_user = self.cur.fetchone()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+        if db_user[0]==True:
+            return True
+        return False
 
     def getAllUsers(self):
         self.cur.execute(f"SELECT * FROM users;")

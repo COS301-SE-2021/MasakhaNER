@@ -212,7 +212,9 @@ def login_user():
         if db.login(user_email, user_password):
             token = jwt.encode({'email': user_email, 'exp': datetime.utcnow(
             ) + timedelta(minutes=60)}, app.config['SECRET_KEY'], algorithm="HS256")
-            return jsonify({'token': token})
+
+
+            return jsonify({'isadmin':db.isAdmin(user_email),'token': token})
         else:
             return jsonify({'message': 'authetication failed!'}), 401
     else:
@@ -299,7 +301,7 @@ def admin_update_user(user, id):
 def admin_delete_user(user, id):
 
     print(user)
-    if user[5]=='False':
+    if user[5]==False:
         return jsonify({'message': 'user unauthirized'}), 401
 
     db = User()
@@ -329,7 +331,7 @@ def admin_delete_user(user, id):
 @token_required
 def admin_get_users(user):
     # print(user[5])
-    if user[5] != False:
+    if user[5] == False:
         return jsonify({'message': 'user unauthirized'}), 401
 
     db = User()
