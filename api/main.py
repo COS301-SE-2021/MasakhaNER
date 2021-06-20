@@ -377,7 +377,7 @@ def admin_get_models(user):
         models = db.getAllModels()
         resp = []
         for x in models:
-            resp.append({'modelname': x[0], 'model': x[1]})
+            resp.append({'id':x[0],'modelname': x[1], 'model': x[2]})
         res = Response(response=json.dumps(resp))
         res.headers.add('Content-Range', 'models 0-10/100')
         res.headers.add('Content-Type', 'application/json')
