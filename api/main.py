@@ -229,27 +229,27 @@ def login_user():
         JSON object with response
 """
 
-# @app.route('/users', methods=["POST"])
-# @token_required
-# def admin_add_user(user):
+@app.route('/users', methods=["POST"])
+@token_required
+def admin_add_user(user):
 
-#     print(user)
-#     if user[5]=='False':
-#         return jsonify({'message': 'user unauthirized'}), 401
+    print(user)
+    if user[5]=='False':
+        return jsonify({'message': 'user unauthirized'}), 401
 
-#     db = User()
-#     if(db != None):
-#         user_firstname = str(request.json["firstname"])
-#         user_lastname = str(request.json["lastname"])
-#         user_email = str(request.json["email"])
-#         user_password = str(request.json["password"])
-#         user_isadmin = str(request.json["isadmin"])
-#         if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
-#             return {'response':'registered'},200
-#         else:
-#             return {'response':'failed'},400
-#     else:
-#         return {'response':'failed'},400
+    db = User()
+    if(db != None):
+        user_firstname = str(request.json["firstname"])
+        user_lastname = str(request.json["lastname"])
+        user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
+        user_isadmin = str(request.json["isadmin"])
+        if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
+            return {'response':'registered'},200
+        else:
+            return {'response':'failed'},400
+    else:
+        return {'response':'failed'},400
 
 
 # """
@@ -261,29 +261,29 @@ def login_user():
 #         JSON object with response
 # """
 
-# @app.route('/users', methods=["PUT"])
-# @token_required
-# def admin_update_user(user):
+@app.route('/users/<id>', methods=["PUT"])
+@token_required
+def admin_update_user(user, id):
 
-#     print(user)
-#     if user[5]=='False':
-#         return jsonify({'message': 'user unauthirized'}), 401
+    print(user)
+    if user[5]=='False':
+        return jsonify({'message': 'user unauthirized'}), 401
 
-#     db = User()
-#     if(db != None):
-#         user_id = str(request.json["id"])
-#         user_firstname = str(request.json["firstname"])
-#         user_lastname = str(request.json["lastname"])
-#         user_email = str(request.json["email"])
-#         user_password = str(request.json["password"])
-#         user_isadmin = str(request.json["isadmin"])
-#         user_verified = str(request.json["verified"])
-#         if(db.adminUpdateUser(user_id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
-#             return {'response':'registered'},200
-#         else:
-#             return {'response':'failed'},400
-#     else:
-#         return {'response':'failed'},400
+    db = User()
+    if(db != None):
+        # user_id = str(request.json["id"])
+        user_firstname = str(request.json["firstname"])
+        user_lastname = str(request.json["lastname"])
+        user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
+        user_isadmin = str(request.json["isadmin"])
+        user_verified = str(request.json["verified"])
+        if(db.adminUpdateUser(id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
+            return {'response':'registered'},200
+        else:
+            return {'response':'failed'},400
+    else:
+        return {'response':'failed'},400
 
 # """
 #     admin_delete_user function:
@@ -293,24 +293,25 @@ def login_user():
 #     Returns:
 #         JSON object with response
 # """
-# @app.route('/users', methods=["DELETE"])
-# @token_required
-# def admin_delete_user(user):
+@app.route('/users/<id>', methods=["DELETE"])
+@token_required
+def admin_delete_user(user, id):
 
-#     print(user)
-#     if user[5]=='False':
-#         return jsonify({'message': 'user unauthirized'}), 401
+    print(user)
+    if user[5]=='False':
+        return jsonify({'message': 'user unauthirized'}), 401
 
-#     db = User()
-#     if(db != None):
+    db = User()
+    if(db != None):
 
-#         user_id = str(request.json["id"])
-#         if(db.adminDeleteUser(user_id)):
-#             return {'response':'deleted'},200
-#         else:
-#             return {'response':'failed'},400
-#     else:
-#         return {'response':'failed'},400
+        # user_id = str(request.json["id"])
+        # if(db.adminDeleteUser(user_id)):
+        if(db.adminDeleteUser(id)):
+            return {'response':'deleted'},200
+        else:
+            return {'response':'failed'},400
+    else:
+        return {'response':'failed'},400
 
 
 """
@@ -333,15 +334,10 @@ def admin_get_users(user):
     db = User()
     if(db != None):
         users = db.getAllUsers()
-        # res.headers.add('content-range', 'bytes 0-10/100')
         resp = []
         for x in users:
             resp.append({'id': x[0], 'firstname': x[1], 'lastname': x[2], 'password': x[3],
                         'email': x[4], 'isadmin': x[5], 'activationCode': x[6], 'verified': x[7]})
-        # return {'response':response},200,
-        # print(res)
-
-        # res = Response(response=json.dumps({"data": {"Record": resp}}))
         res = Response(response=json.dumps(resp))
         res.headers.add('Content-Range', 'users 0-10/100')
         res.headers.add('Content-Type', 'application/json')

@@ -7,29 +7,8 @@ import {
   EditButton,
   DeleteButton,
 } from "react-admin";
-import { format, parse } from "content-range";
-import { useEffect } from "react";
 
 const UserList = (props: any) => {
-  // const options: any = {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "x-access-token": localStorage.getItem("token"),
-  //   },
-  // };
-
-  // useEffect(() => {
-  //   fetch("/users", options)
-  //     .then((res) => {
-  //       res.json();
-  //     })
-  //     .then((data) => { 
-  //       console.log(typeof(data));
-  //     })
-  //     // .catch((err) => console.log(err));
-  // }, [true]);
-
   return (
     <List {...props}>
       <Datagrid>
