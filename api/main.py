@@ -4,12 +4,13 @@ from flask import request
 from functools import wraps
 import jwt
 import os, sys
+from flask_cors import CORS
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from database.database import User
 
 app = Flask(__name__)
-
+CORS(app)
 app.config['SECRET_KEY']='secret'
 # app.config['Database'] = User()
 # app.config['Database'] = User()
@@ -91,8 +92,9 @@ def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
-        if 'x-access-token' in request.headers:
-            token = request.headers['x-access-token']
+        print(request.headers)
+        if 'x-access-token' == request.headers['Key']:
+            token = request.headers['Value']
             print(token)
 
         if not token:
@@ -214,7 +216,7 @@ def login_user():
         JSON object with response
 """ 
 
-@app.route('/adminadduser', methods=["POST"])
+@app.route('/users', methods=["POST"])
 @token_required
 def admin_add_user(user):
     
@@ -246,7 +248,7 @@ def admin_add_user(user):
         JSON object with response
 """ 
 
-@app.route('/adminupdateuser', methods=["POST"])
+@app.route('/users', methods=["PUT"])
 @token_required
 def admin_update_user(user):
     
@@ -278,7 +280,7 @@ def admin_update_user(user):
     Returns:
         JSON object with response
 """
-@app.route('/admindeleteuser', methods=["POST"])
+@app.route('/users', methods=["DELETE"])
 @token_required
 def admin_delete_user(user):
     
@@ -306,7 +308,7 @@ def admin_delete_user(user):
     Returns:
         JSON object with response
 """
-@app.route('/admingetusers', methods=["POST"])
+@app.route('/users', methods=["GET"])
 @token_required
 def admin_get_users(user):
     print(user[5])

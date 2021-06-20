@@ -16,6 +16,7 @@
     "bootstrap": "^5.0.1",
     "concurrently": "^6.2.0",
     "conda": "^0.0.1-a17",
+    "content-range": "^2.0.0",
     "errors": "^0.3.0",
     "icons": "^1.0.0",
     "ra-data-simple-rest": "^3.16.0",

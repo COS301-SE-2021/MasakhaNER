@@ -1,16 +1,18 @@
 import React from "react";
 import AdminSideBar from "../../components/admin/AdminSideBar";
 
-import { Admin, Resource } from "react-admin";
-import restProvider from "ra-data-simple-rest";
-import userList from "../../components/admin/userList";
+import {fetchUtils, Admin, Resource } from "react-admin";
+import userList from "../../components/admin/UserList";
 import CreateUser from "../../components/admin/CreateUser";
 import UserEdit from "../../components/admin/UserEdit";
 import { Input } from "../../components/input/Input";
+import simpleRestProvider from 'ra-data-simple-rest';
+import axios from "axios";
 
-export default function admin() {
+export default function AdminUser() {
+  
   return (
-      <Admin dataProvider={restProvider("http://localhost:3000")}>
+      <Admin dataProvider={simpleRestProvider("http://localhost:3000")}>
         <Resource 
           name="users" 
           list={userList} 
