@@ -92,8 +92,6 @@ class User:
         self.cur.execute(sql,(email,))
         var = self.cur.fetchone()
         self.conn.commit()
-        self.cur.close()
-        self.conn.close()
         if var != None:
             return var[0]
         else:
@@ -136,7 +134,7 @@ class User:
     """
 
     def verify_user(self, email):
-        sql = "Update users set verified = {True} where email=%s;"
+        sql = "Update users set verified = True where email=%s;"
         self.cur.execute(sql,(email,))
         self.conn.commit()
         self.cur.close()
