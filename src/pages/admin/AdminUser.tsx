@@ -19,21 +19,20 @@ export default function AdminUser() {
   };
 
   return (
-    <Admin
-      dataProvider={simpleRestProvider("http://localhost:3000", fetchJson)}
-    >
-      <Resource
-        name="users"
-        list={UserList}
-        edit={UserEdit}
-        create={CreateUser}
-      />
-      <Resource
-        name="models"
-        list={ModelList}
-        create={CreateModel}
-      />
-      <Resource name="dashboard" list={Input} />
-    </Admin>
+    <>
+      {/* <Nav /> */}
+      <Admin
+        dataProvider={simpleRestProvider("http://localhost:3000", fetchJson)}
+      >
+        <Resource
+          name="users"
+          list={UserList}
+          edit={UserEdit}
+          create={CreateUser}
+        />
+        <Resource name="models" list={ModelList} create={CreateModel} />
+        <Resource name="dashboard" list={Input} />
+      </Admin>
+    </>
   );
 }
