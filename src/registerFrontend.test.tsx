@@ -1,5 +1,4 @@
 import { fireEvent, getByRole, render } from "@testing-library/react";
-import React from "react";
 import { act } from "react-dom/test-utils";
 import Login from "./components/login/Login";
 
