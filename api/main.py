@@ -9,9 +9,11 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from database.database import User
 
 app = Flask(__name__)
+app.config.from_object('config_default.Config')
 
 app.config['SECRET_KEY']='secret'
-# app.config['Database'] = User()
+app.config['DATABASE']=User()
+Databse = User()
 # app.config['Database'] = User()
 
 
@@ -90,27 +92,37 @@ def train_model(user_input):
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        user = None
         token = None
+        print(request.headers)
         if 'x-access-token' in request.headers:
+            #print('here')
             token = request.headers['x-access-token']
-            print(token)
+            #print(token)
 
         if not token:
-            return jsonify({'message': 'Token is missing!'}), 401
+            return jsonify({'response': 'Token is missing!'}), 401
 
         try:
-            print("here")
-            db=User()
-            print("here2")
+            #print("here")
+            db=app.config['DATABASE']
+            #print("here2")
             data = jwt.decode(token,app.config['SECRET_KEY'],"HS256")
-            print("data is ",data)
+            #print("data is ",data)
             user = db.findUserByEmail(data['email'])
         except Exception as e:
-            return jsonify({'message' : str(e)}),401
+            return jsonify({'response' : str(e)}),401
 
         return f(user,*args,**kwargs)
 
     return decorated
+
+# @app.route('/', methods=["POST"])
+# def index():
+
+#     db = app.config['DATABASE']
+#     db.printList()
+#     return {'output':'working'},200
 
 
 @app.route('/input', methods=["POST"])
@@ -118,7 +130,7 @@ def token_required(f):
 def model_feedback(user):
 
     if not user:
-        return jsonify({'message' : 'log in to use model'}),401
+        return jsonify({'response' : 'log in to use model'}),401
 
     user_input = str(request.json["input"]).split()
     model_feedback = train_model(user_input)
@@ -141,9 +153,9 @@ def register_user():
     # "lastname":"west",
     # "email":"kw@gmail.com",
     # "password":"12345"
+    #return {'response':'registered'},200
 
-
-    db = app.config['DB']
+    db = app.config['DATABASE']
     if(db != None):
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
@@ -167,7 +179,7 @@ def register_user():
 
 @app.route('/verify', methods=["POST"])
 def verify_user():
-    db = app.config['DB']
+    db = app.config['DATABASE']
     if(db != False):
         user_email = request.json["email"]
         user_code  = request.json["code"]
@@ -190,7 +202,10 @@ def verify_user():
 
 @app.route('/login', methods=["POST"])
 def login_user():
-    db = app.config['DB']
+    # print(app.config)
+    # athing = app.config['DB_NAME']
+    # print(type(athing))
+    db = app.config['DATABASE']
     if(db != False):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
@@ -199,20 +214,23 @@ def login_user():
             token = jwt.encode({'email' : user_email, 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
             return jsonify({'token': token})
         else:
-            return jsonify({'message': 'authetication failed!'}), 401
+            return jsonify({'response': 'authetication failed!'}), 401
     else:
-        return jsonify({'message': 'authetication failed!'}), 401
+        return jsonify({'response': 'authetication failed!'}), 401
 
 #Admin functions
 @app.route('/adminadduser', methods=["POST"])
 @token_required
-def admin_add_user(user,database):
+def admin_add_user(user):
     
     print(user)
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+        
     if user[5]=='False':
-        return jsonify({'message': 'user unauthirized'}), 401
+        return jsonify({'response': 'user unauthirized'}), 401
     
-    db = User()
+    db = app.config['DATABASE']
     if(db != None):
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
@@ -228,7 +246,7 @@ def admin_add_user(user,database):
 
 @app.route('/adminupdateuser', methods=["POST"])
 @token_required
-def admin_update_user(user,database):
+def admin_update_user(user):
     
     print(user)
     if user[5]=='False':
@@ -252,11 +270,11 @@ def admin_update_user(user,database):
 
 @app.route('/admindeleteuser', methods=["POST"])
 @token_required
-def admin_delete_user(user,database):
+def admin_delete_user(user):
     
     print(user)
     if user[5]=='False':
-        return jsonify({'message': 'user unauthirized'}), 401
+        return jsonify({'response': 'user unauthirized'}), 401
     
     db = User()
     if(db != None):
@@ -271,12 +289,12 @@ def admin_delete_user(user,database):
 
 @app.route('/admingetusers', methods=["POST"])
 @token_required
-def admin_get_users(user,database):
+def admin_get_users(user):
 
     
     print(user[5])
     if user[5]!=False:
-        return jsonify({'message': 'user unauthirized'}), 401
+        return jsonify({'response': 'user unauthirized'}), 401
     
     db = User()
     if(db != None):

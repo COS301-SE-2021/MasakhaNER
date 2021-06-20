@@ -26,6 +26,17 @@ class mockdatabase:
 
     def __init__(self):
         self.db_list=[]
+        encoded_password = bytes('password', encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
+        user = [0,'first','person', encrypted_password,'fp@gmail.com',True,0000,True]
+        self.db_list.append(user)
+        
+        user = [0,'second','person', encrypted_password,'secondperson@gmail.com',False,0000,True]
+        self.db_list.append(user)
+
         self.db_id=1
 
     """
@@ -48,7 +59,7 @@ class mockdatabase:
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
             encoded_password, bcrypt.gensalt())
-            print(type(encrypted_password))
+            #print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
             code = '1111'
             user_id=self.db_id
@@ -131,6 +142,11 @@ class mockdatabase:
 
     def getAllUsers(self):
         return self.db_list
+    
+    def printList(self):
+        print(self.db_list)
+
+        #return self.db_list
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         if self.findUserByEmail(email) == None:
@@ -151,19 +167,22 @@ class mockdatabase:
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         user = self.findUserById(id)
         if user != None:
-            encoded_password = bytes(password, encoding='utf-8')
-            encrypted_password = bcrypt.hashpw(
-            encoded_password, bcrypt.gensalt())
-            encrypted_password = encrypted_password.decode('UTF-8')
-            code = '1111'
-            user[1]=firstname
-            user[2]=lastname
-            user[3]=password
-            user[4]=email
-            user[5]=isadmin
-            user[6]=code
-            user[7]=verified
-            return True
+            if not self.findUserByEmail(email):
+                encoded_password = bytes(password, encoding='utf-8')
+                encrypted_password = bcrypt.hashpw(
+                encoded_password, bcrypt.gensalt())
+                encrypted_password = encrypted_password.decode('UTF-8')
+                code = '1111'
+                user[1]=firstname
+                user[2]=lastname
+                user[3]=password
+                user[4]=email
+                user[5]=isadmin
+                user[6]=code
+                user[7]=verified
+                return True
+            else:
+                return False
         else:
             return False
 

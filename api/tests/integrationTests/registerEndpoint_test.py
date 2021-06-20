@@ -1,8 +1,20 @@
+from api.database.mockDatabase import mockdatabse
 import unittest
 import requests
 import json
+import main
 
-class Test(unittest.TestCase):
+
+
+class BaseTest(unittest.TestCase):
+
+    def create_app(self):
+        main.config.from_object('config.TestConfig')
+        return main
+
+class Test(BaseTest):
+    
+    
     ENDPOINT_URL = "http://127.0.0.1:5000/register"
     
     INPUT = {
@@ -11,7 +23,7 @@ class Test(unittest.TestCase):
         "email": "manson@gmail.com",
         "password": "1234"
     }
-    
+
     def test_endpoint(self):
         
         print("running")

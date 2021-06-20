@@ -1,9 +1,0 @@
-class Config(object):
-    DEBUG = False
-    TESTING = False
-    DB_NAME='REAL'
-    DB=User()
-
-class TestingConfig(Config):
-    DB_NAME='Mock'
-    DB=mockdatabase()
