@@ -313,6 +313,21 @@ def admin_get_users(user):
         return {'response':response},200
 
     return {'response':'failed'},400
+
+#Update password
+@app.route('/updatepassword', methods=["POST"])
+@token_required
+def update_password(user):
+    db = User()
+    if(db != None):
+        user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
+        if(db.update( user_email, user_password)):
+            return {'response':'registered'}
+        else:
+            return {'response':'failed'}
+    else:
+        return {'response':'failed'}
     
 
 if __name__ == "__main__":
