@@ -1,7 +1,7 @@
 import React from "react";
 
 import { fetchUtils, Admin, Resource } from "react-admin";
-import UserList from "../../components/admin/UserList";
+import UserList from "../../components/admin/userList";
 import CreateUser from "../../components/admin/CreateUser";
 import UserEdit from "../../components/admin/UserEdit";
 import { Input } from "../../components/input/Input";
