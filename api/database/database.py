@@ -219,7 +219,14 @@ class User:
 
     def update(self, email, password):
         try:
-            self.cur.execute(f"UPDATE users SET password ='{password}', WHERE email= '{email};")
+            self.cur = self.conn.cursor()
+            encoded_password = bytes(password, encoding='utf-8')
+            encrypted_password = bcrypt.hashpw(
+            encoded_password, bcrypt.gensalt())
+            #print(type(encrypted_password))
+            encrypted_password = encrypted_password.decode('UTF-8')
+            sql="UPDATE users SET password =%s, WHERE email= %s"
+            self.cur.execute(sql(encrypted_password,email))
             self.conn.commit()
             self.cur.close()
             self.conn.close()
