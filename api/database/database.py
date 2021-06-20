@@ -202,16 +202,24 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
+    def adminAddModel(self, modelname, model):
+        try:
+            sql = "INSERT INTO models (modelname,model) VALUES(%s,%s)"
+            self.cur.execute(sql,(modelname, model))
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
 
-# # class Test(self):
+    def getAllModels(self):
+        self.cur.execute(f"SELECT * FROM models;")
+        db_user = self.cur.fetchall()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+        return db_user
 
-# #     def testHash(self):
-#         encoded_password = bytes('1234', encoding='utf-8')
-#         encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
-#         print('passowrd1: ',encrypted_password)
 
-#         encoded_password = bytes('1234', encoding='utf-8')
-#         encrypted_password = str(bcrypt.hashpw(encoded_password, bcrypt.gensalt()))
-#         print('passowrd2: ',encrypted_password)
-
-# #run = Test().testHash()
