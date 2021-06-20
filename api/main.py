@@ -366,6 +366,25 @@ def admin_add_models(user):
         return {'response':'failed'},400
 
 
+@app.route('/models', methods=["GET"])
+@token_required
+def admin_get_models(user):
+    if user[5] != False:
+        return jsonify({'message': 'user unauthirized'}), 401
+
+    db = Model()
+    if(db != None):
+        models = db.getAllModels()
+        resp = []
+        for x in models:
+            resp.append({'modelname': x[0], 'model': x[1]})
+        res = Response(response=json.dumps(resp))
+        res.headers.add('Content-Range', 'models 0-10/100')
+        res.headers.add('Content-Type', 'application/json')
+        return res, 200
+
+    return {'response': 'failed'}, 400
+
 """
     main function:
         starts the Flask API

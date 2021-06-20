@@ -250,3 +250,11 @@ class Model:
             print(f"Database connection error: {e}")
             return False
 
+    def getAllModels(self):
+        self.cur.execute(f"SELECT * FROM models;")
+        db_user = self.cur.fetchall()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+        return db_user
+
