@@ -215,3 +215,38 @@ class User:
 #         print('passowrd2: ',encrypted_password)
 
 # #run = Test().testHash()
+
+class Model:
+    """
+    Constructor:
+        Connects to the database.
+    Parameters:
+        None
+    Returns:
+        Boolean:Returns false if database connection fails
+    """
+
+    def __init__(self):
+        try:
+            self.DB_HOST = os.environ.get('DB_HOST')
+            self.DB_NAME = os.environ.get('DB_NAME')
+            self.DB_PASS = os.environ.get('DB_PASS')
+            self.DB_USER = os.environ.get('DB_USER')
+            self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+            self.cur = self.conn.cursor()
+        except:
+            return None
+
+    def adminAddModel(self, modelname, model):
+        try:
+            sql = "INSERT INTO models (modelname,model) VALUES(%s,%s)"
+            self.cur.execute(sql,(modelname, model))
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+

@@ -1,5 +1,6 @@
 from flask import Response
 from database.database import User
+from database.database import Model
 from datetime import datetime, timedelta
 from flask import Flask, json, jsonify
 from flask import request
@@ -346,6 +347,24 @@ def admin_get_users(user):
 
     return {'response': 'failed'}, 400
 
+#admin model functionality
+@app.route('/models', methods=["POST"])
+@token_required
+def admin_add_models(user):
+    if user[5]=='False':
+        return jsonify({'message': 'user unauthirized'}), 401
+
+    db = Model()
+    if(db != None):
+        model_name = str(request.json["modelname"])
+        model_model = str(request.json["model"])
+        if(db.adminAddModel(model_name, model_model)):
+            return {'response':'model added'},200
+        else:
+            return {'response':'failed'},400
+    else:
+        return {'response':'failed'},400
+
 
 """
     main function:
@@ -362,3 +381,6 @@ if __name__ == "__main__":
 # DB_NAME="d1mm3a0c29eepo"
 # DB_PASS="904c29b5f6055f6de8c01b24e1ac3f29736c54ca010dd9b8cc022f1555fe3be7"
 # DB_USER="orikanjrgszuig"
+
+
+
