@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function VerifyAccount() {
   const [code, setCode] = useState("");
-  //const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const options = {
     method: "POST",
@@ -14,11 +14,12 @@ function VerifyAccount() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      "code": code
+      code: code
     }),
   };
 
   const handleVerify = async () =>{
+    setClicked(!clicked);
     try{
       const resp = await fetch("/verify", options);
       console.log(resp);
@@ -31,24 +32,24 @@ function VerifyAccount() {
       else{
         alert(resp.status);
         alert("Incorrect verification code!");
-        window.location.href = "/";
+        window.location.href = "/verify";
       }
     }
     catch(error){
       console.log("there is an error", error);
-      window.location.href = "/";
+      window.location.href = "/verify";
     }
   }
 
-//   useEffect(() => {
-//       fetch("/verifyAccount", options)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         console.log(data.output);
-//       })
-//       .catch((err) => console.log(err));
+  useEffect(() => {
+      fetch("/verify", options)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("The code passed in: ", data.output);
+      })
+      .catch((err) => console.log(err));
     
-//   }, [clicked]);
+  }, [clicked]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -56,17 +57,20 @@ function VerifyAccount() {
 
     return (
     <div className="veryify-form">
-        <form>
+        <form onSubmit={handleSubmit}>
             <h3>Enter Confirmation Code</h3>
             <p>Enter the confirmation code we sent to your email.<em>{localStorage.getItem("newEmail")}</em></p>
             <div className="form-group">
-                <input type="text"
+              <input 
+                type="text"
                 placeholder="Confirmation Code" 
                 className="form-control" 
                 id="code" 
                 name="code"
                 value={code}
-                onChange={(e) => setCode(e.target.value)}/>
+                onChange={(e) => setCode(e.target.value)}
+                required
+              />
             </div>
             <br />
             <Link to="/dashboard">
