@@ -227,7 +227,7 @@ def admin_add_user(user):
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
         
-    if user[5]=='False':
+    if user[5]==False:
         return jsonify({'response': 'user unauthirized'}), 401
     
     db = app.config['DATABASE']
@@ -236,7 +236,7 @@ def admin_add_user(user):
         user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
-        user_isadmin = str(request.json["isadmin"])
+        user_isadmin = request.json["isadmin"]
         if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
             return {'response':'registered'},200
         else:
@@ -249,20 +249,23 @@ def admin_add_user(user):
 def admin_update_user(user):
     
     print(user)
-    if user[5]=='False':
-        return jsonify({'message': 'user unauthirized'}), 401
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    if user[5]==False:
+        return jsonify({'response': 'user unauthirized'}), 401
     
-    db = User()
+    db = app.config['DATABASE']
     if(db != None):
-        user_id = str(request.json["id"])
+        user_id = request.json["id"]
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
-        user_isadmin = str(request.json["isadmin"])
-        user_verified = str(request.json["verified"])
+        user_isadmin = request.json["isadmin"]
+        user_verified = request.json["verified"]
         if(db.adminUpdateUser(user_id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
-            return {'response':'registered'},200
+            return {'response':'updated'},200
         else:
             return {'response':'failed'},400
     else:
@@ -273,13 +276,16 @@ def admin_update_user(user):
 def admin_delete_user(user):
     
     print(user)
-    if user[5]=='False':
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    if user[5]==False:
         return jsonify({'response': 'user unauthirized'}), 401
     
-    db = User()
+    db = app.config['DATABASE']
     if(db != None):
         
-        user_id = str(request.json["id"])
+        user_id = request.json["id"]
         if(db.adminDeleteUser(user_id)):
             return {'response':'deleted'},200
         else:
@@ -293,10 +299,13 @@ def admin_get_users(user):
 
     
     print(user[5])
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
     if user[5]!=False:
         return jsonify({'response': 'user unauthirized'}), 401
     
-    db = User()
+    db = app.config['DATABASE']
     if(db != None):
         users = db.getAllUsers()
         response = []

@@ -34,10 +34,10 @@ class mockdatabase:
         user = [0,'first','person', encrypted_password,'fp@gmail.com',True,0000,True]
         self.db_list.append(user)
         
-        user = [0,'second','person', encrypted_password,'secondperson@gmail.com',False,0000,True]
+        user = [1,'second','person', encrypted_password,'secondperson@gmail.com',False,0000,True]
         self.db_list.append(user)
 
-        self.db_id=1
+        self.db_id=2
 
     """
     Register Function:
@@ -84,7 +84,7 @@ class mockdatabase:
     def get_code(self, email):
         user = self.findUserByEmail(email)
         if user != None:
-            return user[5]
+            return user[6]
         return None
 
     """
@@ -167,7 +167,7 @@ class mockdatabase:
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         user = self.findUserById(id)
         if user != None:
-            if not self.findUserByEmail(email):
+            if self.findUserByEmail(email) is None:
                 encoded_password = bytes(password, encoding='utf-8')
                 encrypted_password = bcrypt.hashpw(
                 encoded_password, bcrypt.gensalt())
@@ -175,7 +175,7 @@ class mockdatabase:
                 code = '1111'
                 user[1]=firstname
                 user[2]=lastname
-                user[3]=password
+                user[3]=encrypted_password
                 user[4]=email
                 user[5]=isadmin
                 user[6]=code
@@ -189,6 +189,7 @@ class mockdatabase:
     def adminDeleteUser(self, id):
         for x in self.db_list:
             if x[0] == id:
+                self.db_list.remove(x)
                 return True
         return False
 
