@@ -53,10 +53,11 @@ class User:
 
     def register(self, firstname, lastname, email, password):
         try:
+            self.cur = self.conn.cursor()
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
-                encoded_password, bcrypt.gensalt())
-            print(type(encrypted_password))
+            encoded_password, bcrypt.gensalt())
+            #print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
             code = '1111'
 
@@ -88,6 +89,7 @@ class User:
     """
 
     def get_code(self, email):
+        self.cur = self.conn.cursor()
         sql = "SELECT activationcode FROM users where email=%s;"
         self.cur.execute(sql,(email,))
         var = self.cur.fetchone()
@@ -112,6 +114,7 @@ class User:
 
     def login(self, email, password):
         # print("running login")
+        self.cur = self.conn.cursor()
         sql = "SELECT password FROM users where email=%s;"
         self.cur.execute(sql,(email,))
         db_password = self.cur.fetchone()
@@ -136,6 +139,7 @@ class User:
     """
 
     def verify_user(self, email):
+        self.cur = self.conn.cursor()
         sql = "Update users set verified = {True} where email=%s;"
         self.cur.execute(sql,(email,))
         self.conn.commit()
@@ -144,6 +148,7 @@ class User:
     # admin functions
 
     def findUserByEmail(self, email):
+        self.cur = self.conn.cursor()
         sql ="SELECT * FROM users where email=%s;"
         self.cur.execute(sql,(email,))
         db_user = self.cur.fetchone()
@@ -162,11 +167,14 @@ class User:
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         try:
-            # encoded_password = bytes(password, encoding='utf-8')
-            # encrypted_password = str(bcrypt.hashpw(
-            #     encoded_password, bcrypt.gensalt()))
-            # encrypted_password_2 = encrypted_password[1:]
-            sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+            self.cur = self.conn.cursor()
+            encoded_password = bytes(password, encoding='utf-8')
+            encrypted_password = bcrypt.hashpw(
+            encoded_password, bcrypt.gensalt())
+            #print(type(encrypted_password))
+            encrypted_password = encrypted_password.decode('UTF-8')
+            
+            sql = "INSERT INTO users (firstname,lastname,encrypted_password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
             self.cur.execute(sql,(firstname, lastname, password,email,isadmin,000,True))
             self.conn.commit()
             self.cur.close()
@@ -178,22 +186,27 @@ class User:
 
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         try:
-            # encoded_password = bytes(password, encoding='utf-8')
-            # encrypted_password = str(bcrypt.hashpw(
-            #     encoded_password, bcrypt.gensalt()))
-            # encrypted_password_2 = encrypted_password[1:]
-            sql = "Update users set firstname=%s,lastname=%s,password=%s,email=%s,isadmin=%s,verified =%s where id=%s;"
-            self.cur.execute(sql,(firstname,lastname,password,email,isadmin,verified,id))
-            self.conn.commit()
-            self.cur.close()
-            self.conn.close()
-            return True
+            if self.findUserByEmail(email) is None:
+                self.cur = self.conn.cursor()
+                encoded_password = bytes(password, encoding='utf-8')
+                encrypted_password = bcrypt.hashpw(
+                encoded_password, bcrypt.gensalt())
+                #print(type(encrypted_password))
+                encrypted_password = encrypted_password.decode('UTF-8')
+                sql = "Update users set firstname=%s,lastname=%s,password=%s,email=%s,isadmin=%s,verified =%s where id=%s;"
+                self.cur.execute(sql,(firstname,lastname, encrypted_password,email,isadmin,verified,id))
+                self.conn.commit()
+                self.cur.close()
+                self.conn.close()
+                return True
+            return False
         except Exception as e:
             print(f"Database connection error: {e}")
             return False
 
     def adminDeleteUser(self, id):
         try:
+            self.cur = self.conn.cursor()
             sql = "DELETE FROM users WHERE id =%s;"
             self.cur.execute(sql,(id,))
             self.conn.commit()
