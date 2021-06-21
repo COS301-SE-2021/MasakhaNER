@@ -17,10 +17,18 @@ A web-based interface that will be used as a named entity recognition tool for A
 
 ## Documentation
 
-- [Software Requirements Specification - StopDaCAp](https://drive.google.com/file/d/1W7VcD3aDbkesO6wtPLqwU1DE3OHYBJ_k/view?usp=sharing)
+- [SRS Version 1 - StopDaCAp](https://drive.google.com/file/d/1W7VcD3aDbkesO6wtPLqwU1DE3OHYBJ_k/view?usp=sharing)
+
+- [SRS Version 2 - StopDaCAp](https://drive.google.com/file/d/1W7VcD3aDbkesO6wtPLqwU1DE3OHYBJ_k/view?usp=sharing)
+
+- [Architecture requirements - StopDaCAp](https://docs.google.com/document/d/18KUGhHu3Fjvr40h5DXKYnaO1FYh1Oi7Qg8m_osAix9U/edit?usp=sharing)
+
+
 
 ## Demo Links
 - [StopDaCap - Demo 1](https://drive.google.com/file/d/1nY6zOI-pzEs0-Fn2sCIAineUekJEAGyV/view?usp=sharing)
+
+- [StopDaCap - Demo 2](https://drive.google.com/file/d/13PeCR4WkB-gCx_1qIbWK8FsenK6Cz9Ot/view?usp=sharing)
 
 ## Technology Stack
 <p>Frontend - ReactJS</p>
