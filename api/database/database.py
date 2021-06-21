@@ -114,8 +114,8 @@ class User:
         self.cur.execute(sql,(email,))
         db_password = self.cur.fetchone()
         self.conn.commit()
-        self.cur.close()
-        self.conn.close()
+        # self.cur.close()
+        # self.conn.close()
         print(db_password)
         if db_password != None:
             if bcrypt.checkpw(password.encode('UTF-8'), db_password[0].encode('UTF-8')):
@@ -150,9 +150,29 @@ class User:
         self.conn.close()
         return db_user
 
+    def isAdmin(self, email):
+        sql ="SELECT isadmin FROM users where email=%s;"
+        self.cur.execute(sql,(email,))
+        db_user = self.cur.fetchone()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+        if db_user[0]==True:
+            return True
+        return False
+
     def getAllUsers(self):
         self.cur.execute(f"SELECT * FROM users;")
         db_user = self.cur.fetchall()
+        self.conn.commit()
+        self.cur.close()
+        self.conn.close()
+        return db_user
+    
+    def getUser(self, id):
+        sql = "SELECT * FROM users WHERE id=%s;"
+        self.cur.execute(sql,(id,))
+        db_user = self.cur.fetchone()
         self.conn.commit()
         self.cur.close()
         self.conn.close()
@@ -173,7 +193,7 @@ class User:
         except Exception as e:
             print(f"Database connection error: {e}")
             return False
-
+        
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         try:
             # encoded_password = bytes(password, encoding='utf-8')
@@ -221,5 +241,18 @@ class User:
         self.cur.close()
         self.conn.close()
         return db_user
+
+    def adminDeleteModel(self, id):
+        try:
+            sql = "DELETE FROM models WHERE id =%s;"
+            self.cur.execute(sql,(id,))
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
 
 

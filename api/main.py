@@ -212,7 +212,9 @@ def login_user():
         if db.login(user_email, user_password):
             token = jwt.encode({'email': user_email, 'exp': datetime.utcnow(
             ) + timedelta(minutes=60)}, app.config['SECRET_KEY'], algorithm="HS256")
-            return jsonify({'token': token})
+
+
+            return jsonify({'isadmin':db.isAdmin(user_email),'token': token})
         else:
             return jsonify({'message': 'authetication failed!'}), 401
     else:
@@ -246,7 +248,7 @@ def admin_add_user(user):
         user_password = str(request.json["password"])
         user_isadmin = str(request.json["isadmin"])
         if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
-            return {'response':'registered'},200
+            return jsonify({'response':'registered'}),200
         else:
             return {'response':'failed'},400
     else:
@@ -262,17 +264,16 @@ def admin_add_user(user):
 #         JSON object with response
 # """
 
-@app.route('/users/<id>', methods=["PUT","GET"])
+@app.route('/users/<id>', methods=["PUT"])
 @token_required
 def admin_update_user(user, id):
     # print(user)
     if request.method == "PUT":
-        if user[5]=='False':
+        if user[5]==False:
             return jsonify({'message': 'user unauthirized'}), 401
 
         db = User()
         if(db != None):
-            # user_id = str(request.json["id"])
             user_firstname = str(request.json["firstname"])
             user_lastname = str(request.json["lastname"])
             user_email = str(request.json["email"])
@@ -280,18 +281,20 @@ def admin_update_user(user, id):
             user_isadmin = str(request.json["isadmin"])
             user_verified = str(request.json["verified"])
             if(db.adminUpdateUser(id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
-                return {'response':'registered'},200
+                return jsonify({'id':0,'response':'registered'}),200
             else:
-                return {'response':'failed'},400
+                return jsonify({'response':'failed'}),400
         else:
-            return {'response':'failed'},400
+            return jsonify({'response':'failed'}),400
+    else:
+        return jsonify({'response':'failed'}),400
 
 # """
 #     admin_delete_user function:
 #         allows admin to delete a user
 #     Parameters:
 #         None
-#     Returns:
+#     Returns:  
 #         JSON object with response
 # """
 @app.route('/users/<id>', methods=["DELETE"])
@@ -299,7 +302,7 @@ def admin_update_user(user, id):
 def admin_delete_user(user, id):
 
     print(user)
-    if user[5]=='False':
+    if user[5]==False:
         return jsonify({'message': 'user unauthirized'}), 401
 
     db = User()
@@ -316,6 +319,33 @@ def admin_delete_user(user, id):
 
 
 """
+    admin_get_user function:
+        allows admin to get one user
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
+@app.route('/users/<id>', methods=["GET"])
+@token_required
+def admin_get_user(user, id):
+    # print(user[5])
+    if user[5] == False:
+        return jsonify({'message': 'user unauthirized'}), 401
+
+    db = User()
+    if(db != None):
+        user = db.getUser(id)
+        resp ={'id': user[0], 'firstname': user[1], 'lastname': user[2], 'password': user[3],
+                        'email': user[4], 'isadmin': user[5], 'activationCode': user[6], 'verified': user[7]}
+        res = Response(response=json.dumps(resp))
+        res.headers.add('Content-Range', 'users 0-10/100')
+        res.headers.add('Content-Type', 'application/json')
+        return res, 200
+
+    return {'response': 'failed'}, 400
+
+"""
     admin_get_users function:
         allows admin to get all users
     Parameters:
@@ -324,12 +354,11 @@ def admin_delete_user(user, id):
         JSON object with response
 """
 
-
-@app.route('/users', methods=["POST", "GET"])
+@app.route('/users', methods=["GET"])
 @token_required
 def admin_get_users(user):
     # print(user[5])
-    if user[5] != False:
+    if user[5] == False:
         return jsonify({'message': 'user unauthirized'}), 401
 
     db = User()
@@ -350,7 +379,7 @@ def admin_get_users(user):
 @app.route('/models', methods=["POST"])
 @token_required
 def admin_add_models(user):
-    if user[5]=='False':
+    if user[5]==False:
         return jsonify({'message': 'user unauthirized'}), 401
 
     db = User()
@@ -368,7 +397,7 @@ def admin_add_models(user):
 @app.route('/models', methods=["GET"])
 @token_required
 def admin_get_models(user):
-    if user[5] != False:
+    if user[5] == False:
         return jsonify({'message': 'user unauthirized'}), 401
 
     db = User()
@@ -383,6 +412,26 @@ def admin_get_models(user):
         return res, 200
 
     return {'response': 'failed'}, 400
+
+@app.route('/models/<id>', methods=["DELETE"])
+@token_required
+def admin_delete_model(user, id):
+
+    print(user)
+    if user[5]==False:
+        return jsonify({'message': 'user unauthirized'}), 401
+
+    db = User()
+    if(db != None):
+
+        # user_id = str(request.json["id"])
+        # if(db.adminDeleteUser(user_id)):
+        if(db.adminDeleteModel(id)):
+            return {'response':'deleted'},200
+        else:
+            return {'response':'failed'},400
+    else:
+        return {'response':'failed'},400
 
 """
     main function:
