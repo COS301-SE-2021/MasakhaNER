@@ -33,7 +33,7 @@ class Test(unittest.TestCase):
         }
 
         token = jwt.encode({'email' :'fgch@gmail.com', 'exp' : datetime.utcnow() - timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/adminupdateuser',json=INPUT,headers={'x-access-token':token})
+        r = self.main.put('/users/1',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
@@ -52,7 +52,7 @@ class Test(unittest.TestCase):
         }
 
         token = jwt.encode({'email' :'ejhrfefh@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/adminupdateuser',json=INPUT,headers={'x-access-token':token})
+        r = self.main.put('/users/1',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
@@ -71,35 +71,17 @@ class Test(unittest.TestCase):
         }
 
         token = jwt.encode({'email' :'secondperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/adminupdateuser',json=INPUT,headers={'x-access-token':token})
+        r = self.main.put('/users/1',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
         self.assertEqual(401, r.status_code)
         self.assertEqual(result, 'user unauthirized')
 
-    def test_endpoint3(self):
-        INPUT = {
-        "id":1,
-        "firstname": "first",
-        "lastname": "person",
-        "email": "fp@gmail.com",
-        "password": "password",
-        "isadmin":False,
-        "verified":True
-        }
-
-        token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/adminupdateuser',json=INPUT,headers={'x-access-token':token})
-        data = json.loads(r.data)
-        print(data)
-        result = data['response']
-        self.assertEqual(400, r.status_code)
-        self.assertEqual(result, 'failed')
 
     def test_endpoint4(self):
         INPUT = {
-        "id":-1,
+        "id":3,
         "firstname": "third",
         "lastname": "person",
         "email": "thirdperson@gmail.com",
@@ -109,37 +91,19 @@ class Test(unittest.TestCase):
         }
 
         token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/adminupdateuser',json=INPUT,headers={'x-access-token':token})
+        r = self.main.put('/users/3',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
         self.assertEqual(400, r.status_code)
         self.assertEqual(result, 'failed')
 
+    
     def test_endpoint5(self):
         INPUT = {
         "id":1,
         "firstname": "third",
         "lastname": "person",
-        "email": "secondperson@gmail.com",
-        "password": "password",
-        "isadmin":False,
-        "verified":True
-        }
-
-        token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/adminupdateuser',json=INPUT,headers={'x-access-token':token})
-        data = json.loads(r.data)
-        print(data)
-        result = data['response']
-        self.assertEqual(400, r.status_code)
-        self.assertEqual(result, 'failed')
-
-    def test_endpoint6(self):
-        INPUT = {
-        "id":1,
-        "firstname": "third",
-        "lastname": "person",
         "email": "thirdperson@gmail.com",
         "password": "password",
         "isadmin":False,
@@ -147,7 +111,7 @@ class Test(unittest.TestCase):
         }
 
         token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/adminupdateuser',json=INPUT,headers={'x-access-token':token})
+        r = self.main.put('/users/1',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']

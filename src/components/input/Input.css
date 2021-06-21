@@ -1,13 +1,15 @@
 .input{
-    padding: 35px;
-    display: flex;
-    flex-direction: column;
-    height: 70%;
-    width: 75%;
-	margin: auto;
-    border: 1px solid rgb(211, 211, 211);
-    border-radius: 15px;
-    box-shadow: 5px 5px 5px rgb(221, 221, 221);
+    background-color: rgb(226, 226, 229);
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 70%;
+    margin-top: 70px;
+    padding: 20px;
+    content: "";
+    clear: both;
+    display: table;
 }
 
 #language {
@@ -32,3 +34,39 @@
         justify-content: space-around;
     }
  }
+
+ .input-header{
+    border-bottom: 10px solid black;
+    color: black;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .input-header h2, h3{
+    font-weight: bold;
+  }
+
+  .input input{
+    border: 10px solid white;
+    background-color: white;
+    box-shadow: 5px 5px 5px rgb(221, 221, 221);
+    border-radius: 0 0 5px 5px;
+  }
+
+  .input select{
+    border: solid white;
+    background-color: white;
+    box-shadow: 5px 5px 5px rgb(221, 221, 221);
+    border-radius: 0 0 5px 5px;
+  }
+
+  a, p, label {
+    color: gray;
+    text-decoration: none;
+    font-size: small;
+  }
+
+  .model-output{
+    float: right;
+  }
