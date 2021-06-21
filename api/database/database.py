@@ -206,6 +206,10 @@ class User:
              self.conn.commit()
              self.cur.close()
              self.conn.close()
+             return True
+         except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
 
 
 # # class Test(self):
