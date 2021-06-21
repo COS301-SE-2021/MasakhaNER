@@ -211,6 +211,8 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
+    def update_name(self, email, password):
+
 
 # # class Test(self):
 
