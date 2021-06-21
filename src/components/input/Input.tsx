@@ -47,9 +47,10 @@ export const Input = () => {
             Send
           </button>
         </div>
-        <div className="model-output">
+        {/* <div className="model-output">
+          
           Add Model Ouput here.
-        </div>
+        </div> */}
       </div>
     </div>
   );

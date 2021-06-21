@@ -2,10 +2,8 @@
     background-color: rgb(226, 226, 229);
     margin-left: auto;
     margin-right: auto;
-    /* display: flex; */
     flex-direction: row;
     justify-content: space-evenly;
-    box-shadow: 10px 5px 5px 5px rgb(221, 221, 221);
     width: 70%;
     margin-top: 70px;
     padding: 20px;
@@ -69,10 +67,6 @@
     color: gray;
     text-decoration: none;
     font-size: small;
-  }
-
-  .feedback{
-    float: left;
   }
 
   .model-output{
