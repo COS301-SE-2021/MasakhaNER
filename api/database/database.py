@@ -204,6 +204,8 @@ class User:
          try:
              self.cur.execute(f"UPDATE users SET password ='{password}', WHERE email= '{email};")
              self.conn.commit()
+             self.cur.close()
+             self.conn.close()
 
 
 # # class Test(self):
