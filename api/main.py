@@ -288,6 +288,8 @@ def update_password(user):
             return {'response':'updated'}
         else:
             return {'response':'failed'}
+    else:
+        return {'response':'failed'}
 
 if __name__ == "__main__":
     app.run(debug=True)
