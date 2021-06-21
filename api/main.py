@@ -280,7 +280,8 @@ def update_password(user):
 @app.route('/updateemail', methods=["POST"])
 @token_required
 def update_password(user):
-    
+    db = User()
+
 if __name__ == "__main__":
     app.run(debug=True)
 
