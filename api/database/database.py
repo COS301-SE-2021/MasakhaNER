@@ -213,6 +213,8 @@ class User:
 
     def update_name(self, email, name):
         try:
+             self.cur.execute(f"UPDATE users SET email ='{email}', WHERE password= '{name};")
+
 
 
 # # class Test(self):
