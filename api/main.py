@@ -13,7 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 app.config['SECRET_KEY'] = 'secret'
 # app.config['Database'] = User()
 # app.config['Database'] = User()
