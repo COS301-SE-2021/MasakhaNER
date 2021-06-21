@@ -220,6 +220,7 @@ class User:
              return True
         except Exception as e:
             print(f"Database connection error: {e}")
+            return False
 
 
 
