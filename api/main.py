@@ -291,6 +291,9 @@ def update_password(user):
     else:
         return {'response':'failed'}
 
+@app.route('/updatename', methods=["POST"])
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
