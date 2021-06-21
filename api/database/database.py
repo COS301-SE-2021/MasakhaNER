@@ -212,6 +212,7 @@ class User:
             return False
 
     def update_name(self, email, password):
+        try:
 
 
 # # class Test(self):
