@@ -242,4 +242,17 @@ class User:
         self.conn.close()
         return db_user
 
+    def adminDeleteModel(self, id):
+        try:
+            sql = "DELETE FROM models WHERE id =%s;"
+            self.cur.execute(sql,(id,))
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
+
 

@@ -269,7 +269,7 @@ def admin_add_user(user):
 def admin_update_user(user, id):
     # print(user)
     if request.method == "PUT":
-        if user[5]=='False':
+        if user[5]==False:
             return jsonify({'message': 'user unauthirized'}), 401
 
         db = User()
@@ -281,7 +281,7 @@ def admin_update_user(user, id):
             user_isadmin = str(request.json["isadmin"])
             user_verified = str(request.json["verified"])
             if(db.adminUpdateUser(id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
-                return jsonify({'response':'registered'}),200
+                return jsonify({'id':0,'response':'registered'}),200
             else:
                 return jsonify({'response':'failed'}),400
         else:
@@ -294,7 +294,7 @@ def admin_update_user(user, id):
 #         allows admin to delete a user
 #     Parameters:
 #         None
-#     Returns:
+#     Returns:  
 #         JSON object with response
 # """
 @app.route('/users/<id>', methods=["DELETE"])
@@ -330,7 +330,7 @@ def admin_delete_user(user, id):
 @token_required
 def admin_get_user(user, id):
     # print(user[5])
-    if user[5] != False:
+    if user[5] == False:
         return jsonify({'message': 'user unauthirized'}), 401
 
     db = User()
@@ -379,7 +379,7 @@ def admin_get_users(user):
 @app.route('/models', methods=["POST"])
 @token_required
 def admin_add_models(user):
-    if user[5]=='False':
+    if user[5]==False:
         return jsonify({'message': 'user unauthirized'}), 401
 
     db = User()
@@ -397,7 +397,7 @@ def admin_add_models(user):
 @app.route('/models', methods=["GET"])
 @token_required
 def admin_get_models(user):
-    if user[5] != False:
+    if user[5] == False:
         return jsonify({'message': 'user unauthirized'}), 401
 
     db = User()
@@ -412,6 +412,26 @@ def admin_get_models(user):
         return res, 200
 
     return {'response': 'failed'}, 400
+
+@app.route('/models/<id>', methods=["DELETE"])
+@token_required
+def admin_delete_model(user, id):
+
+    print(user)
+    if user[5]==False:
+        return jsonify({'message': 'user unauthirized'}), 401
+
+    db = User()
+    if(db != None):
+
+        # user_id = str(request.json["id"])
+        # if(db.adminDeleteUser(user_id)):
+        if(db.adminDeleteModel(id)):
+            return {'response':'deleted'},200
+        else:
+            return {'response':'failed'},400
+    else:
+        return {'response':'failed'},400
 
 """
     main function:
