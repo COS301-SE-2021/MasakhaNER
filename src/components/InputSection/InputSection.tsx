@@ -34,10 +34,9 @@ export default function InputSection() {
   return (
     <div className="inputSection">
       <form onSubmit={handleSubmit}>
-        <p>Enter text in one of the selected languages to test model</p>
-
+        <p>Enter text</p>
         <input
-          placeholder="Enter Text"
+          placeholder="Type here..."
           id="testSection"
           type="text"
           value={input}
@@ -50,7 +49,10 @@ export default function InputSection() {
           </button>
         </div>
       </form>
-      <Output data={outputData} />
+        <div className="output-header">
+          <h2>Model output</h2>
+          <Output data={outputData} />
+        </div>
     </div>
   );
 }
