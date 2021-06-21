@@ -292,7 +292,8 @@ def update_password(user):
         return {'response':'failed'}
 
 @app.route('/updatename', methods=["POST"])
-
+@token_required
+def update_password(user):
 
 if __name__ == "__main__":
     app.run(debug=True)
