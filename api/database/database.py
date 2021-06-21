@@ -218,6 +218,7 @@ class User:
              self.cur.close()
              self.conn.close()
              return True
+        except Exception as e:
 
 
 
