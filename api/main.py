@@ -300,6 +300,7 @@ def update_password(user):
         user_password = str(request.json["firstname"])
         if(db.update_email( user_email, user_password)):
             return {'response':'updated'}
+        else:
 
 if __name__ == "__main__":
     app.run(debug=True)
