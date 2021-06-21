@@ -217,6 +217,7 @@ class User:
              self.conn.commit()
              self.cur.close()
              self.conn.close()
+             return True
 
 
 
