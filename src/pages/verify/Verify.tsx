@@ -20,7 +20,7 @@ function VerifyAccount() {
 
   // useEffect(() => {
   //   handleVerify();
-  // }, [clicked]);
+  //}, [clicked]);
 
   const handleVerify = async () => {
     try {
@@ -30,7 +30,7 @@ function VerifyAccount() {
       if (resp.status === 200) {
         const data = await resp.json();
         alert("You have successfully verified your account!");
-        window.location.href = "/login";
+        window.location.href = "/";
       }
       else {
         alert("Incorrect verification code!");
@@ -72,7 +72,7 @@ function VerifyAccount() {
             onClick={(e) => {
               e.preventDefault();
               handleVerify();
-              setClicked(!clicked);
+              //setClicked(!clicked);
             }}>Next</button>
         </Link>
       </form>
