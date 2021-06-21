@@ -322,7 +322,7 @@ def update_password(user):
     if(db != None):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
-        if(db.up( user_email, user_password)):
+        if(db.update( user_email, user_password)):
             return {'response':'registered'}
         else:
             return {'response':'failed'}
