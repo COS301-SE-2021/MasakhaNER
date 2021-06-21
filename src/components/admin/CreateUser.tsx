@@ -1,5 +1,5 @@
 import React from 'react'
-import {Create, SimpleForm, TextInput} from "react-admin"
+import {Create, SimpleForm, TextInput, PasswordInput} from "react-admin"
 
 const  CreateUser = (props:any) =>{
     return (
@@ -8,6 +8,7 @@ const  CreateUser = (props:any) =>{
                 <TextInput source = "firstname"/>
                 <TextInput source = "lastname"/>
                 <TextInput source = "email"/>
+                <PasswordInput source = "password"/>
                 <TextInput label = "Admin" source = "isadmin"/>
             </SimpleForm>
         </Create>

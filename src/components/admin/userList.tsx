@@ -8,21 +8,21 @@ import {
   DeleteButton,
 } from "react-admin";
 
-const userList = (props: any) => {
+const UserList = (props: any) => {
   return (
     <List {...props}>
       <Datagrid>
         <TextField source="id" />
         <TextField source="firstname" />
-        <TextField source="Lastname" />
+        <TextField source="lastname" />
         <EmailField source="email" />
         <TextField source="isadmin" />
         <TextField source="verified" />
-        <EditButton basePath="/users" />
         <DeleteButton basePath="/users" />
+        <EditButton basePath="/users" />
       </Datagrid>
     </List>
   );
 };
 
-export default userList;
+export default UserList;
