@@ -295,6 +295,7 @@ def update_password(user):
 @token_required
 def update_password(user):
     db = User()
+    if(db != None):
 
 if __name__ == "__main__":
     app.run(debug=True)
