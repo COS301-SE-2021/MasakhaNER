@@ -213,12 +213,13 @@ class User:
 
     def update_name(self, email, name):
         try:
-             self.cur.execute(f"UPDATE users SET email ='{email}', WHERE password= '{name};")
+             self.cur.execute(f"UPDATE users SET name ='{name}', WHERE email= '{email};")
              self.conn.commit()
              self.cur.close()
              self.conn.close()
              return True
         except Exception as e:
+            print(f"Database connection error: {e}")
 
 
 
