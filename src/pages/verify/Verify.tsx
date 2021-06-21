@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./verifyAccount.css"
 import { Link } from 'react-router-dom';
@@ -13,60 +13,71 @@ function VerifyAccount() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      "email": localStorage.getItem("newEmail"),
       "code": code
     }),
   };
 
-  const handleVerify = async () =>{
-    try{
+  // useEffect(() => {
+  //   handleVerify();
+  // }, [clicked]);
+
+  const handleVerify = async () => {
+    try {
       const resp = await fetch("/verify", options);
-      console.log(resp);
-      if(resp.status === 200){
-        alert(resp.status);
+      console.log("This is what came back: ", options);
+  
+      if (resp.status === 200) {
         const data = await resp.json();
-        console.log(data);
+        alert("You have successfully verified your account!");
         window.location.href = "/login";
       }
-      else{
-        alert(resp.status);
+      else {
         alert("Incorrect verification code!");
-        window.location.href = "/";
+        window.location.href = "/verify";
       }
     }
-    catch(error){
+    catch (error) {
       console.log("there is an error", error);
-      window.location.href = "/";
+      window.location.href = "/verify";
     }
   }
 
-//   useEffect(() => {
-//       fetch("/verifyAccount", options)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         console.log(data.output);
-//       })
-//       .catch((err) => console.log(err));
-    
-//   }, [clicked]);
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  };
 
-  // const handleSubmit = (e: any) => {
-  //   e.preventDefault();
-  // };
-    return (
+  return (
     <div className="veryify-form">
-        <form>
-            <h3>Enter Confirmation Code</h3>
-            <p>Enter the confirmation code we sent to your email: <em>{localStorage.getItem('newEmail')}</em>.</p>
-            <div className="form-group">
-                <input type="text" placeholder="Confirmation Code" className="form-control" id="code" name="code"/>
-            </div>
-            <br />
-            <Link to="/dashboard">
-            <button type="submit" className="btn btn-dark" onClick={handleVerify}>Next</button>
-            </Link>
-        </form>
+      <form onSubmit={handleSubmit}>
+        <h3>Enter Confirmation Code</h3>
+        <p>Enter the confirmation code we sent to your email.<em>{localStorage.getItem("newEmail")}</em></p>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Confirmation Code"
+            className="form-control"
+            id="code"
+            name="code"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            required
+          />
+        </div>
+        <br />
+        <Link to="/dashboard">
+          <button
+            type="submit"
+            className="btn btn-dark"
+            onClick={(e) => {
+              e.preventDefault();
+              handleVerify();
+              setClicked(!clicked);
+            }}>Next</button>
+        </Link>
+      </form>
     </div>
-    )
+  )
 }
 
 export default VerifyAccount

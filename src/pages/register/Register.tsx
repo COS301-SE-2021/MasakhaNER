@@ -64,8 +64,8 @@ function Register() {
   const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
 
   const setItem = () => {
-    localStorage.setItem("newEmail", JSON.stringify(email));
-  };
+    localStorage.setItem('newEmail', email);
+  }
 
   const validate = () => {
     if (!validEmail.test(email)) {
