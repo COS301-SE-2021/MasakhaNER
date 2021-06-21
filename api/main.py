@@ -13,9 +13,10 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
 app = Flask(__name__)
-# CORS(app)
-app.config['SECRET_KEY'] = 'secret'
-# app.config['Database'] = User()
+app.config.from_object('config_default.Config')
+
+# app.config['SECRET_KEY']='secret'
+# app.config['DATABASE']=User()
 # app.config['Database'] = User()
 
 
@@ -97,28 +98,37 @@ def train_model(user_input):
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        user = None
         token = None
         print(request.headers)
         if 'x-access-token' in request.headers:
+            #print('here')
             token = request.headers['x-access-token']
-            print(token)
+            #print(token)
 
         if not token:
-            return jsonify({'message': 'Token is missing!'}), 401
+            return jsonify({'response': 'Token is missing!'}), 401
 
         try:
-            print("here")
-            db = User()
-            print("here2")
-            data = jwt.decode(token, app.config['SECRET_KEY'], "HS256")
-            print("data is ", data)
+            #print("here")
+            db=app.config['DATABASE']
+            #print("here2")
+            data = jwt.decode(token,app.config['SECRET_KEY'],"HS256")
+            #print("data is ",data)
             user = db.findUserByEmail(data['email'])
         except Exception as e:
-            return jsonify({'message': str(e)}), 401
+            return jsonify({'response' : str(e)}),401
 
         return f(user, *args, **kwargs)
 
     return decorated
+
+# @app.route('/', methods=["POST"])
+# def index():
+
+#     db = app.config['DATABASE']
+#     db.printList()
+#     return {'output':'working'},200
 
 
 @app.route('/input', methods=["POST"])
@@ -126,7 +136,7 @@ def token_required(f):
 def model_feedback(user):
 
     if not user:
-        return jsonify({'message': 'log in to use model'}), 401
+        return jsonify({'response' : 'log in to use model'}),401
 
     user_input = str(request.json["input"]).split()
     model_feedback = train_model(user_input)
@@ -151,8 +161,9 @@ def register_user():
     # "lastname":"west",
     # "email":"kw@gmail.com",
     # "password":"12345"
+    #return {'response':'registered'},200
 
-    db = User()
+    db = app.config['DATABASE']
     if(db != None):
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
@@ -178,7 +189,7 @@ def register_user():
 
 @app.route('/verify', methods=["POST"])
 def verify_user():
-    db = User()
+    db = app.config['DATABASE']
     if(db != False):
         user_email = request.json["email"]
         user_code = request.json["code"]
@@ -204,7 +215,10 @@ def verify_user():
 
 @app.route('/login', methods=["POST"])
 def login_user():
-    db = User()
+    # print(app.config)
+    # athing = app.config['DB_NAME']
+    # print(type(athing))
+    db = app.config['DATABASE']
     if(db != False):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
@@ -216,9 +230,9 @@ def login_user():
 
             return jsonify({'isadmin':db.isAdmin(user_email),'token': token})
         else:
-            return jsonify({'message': 'authetication failed!'}), 401
+            return jsonify({'response': 'authetication failed!'}), 401
     else:
-        return jsonify({'message': 'authetication failed!'}), 401
+        return jsonify({'response': 'authetication failed!'}), 401
 
 # Admin functions
 
@@ -237,16 +251,19 @@ def login_user():
 def admin_add_user(user):
 
     print(user)
-    if user[5]=='False':
-        return jsonify({'message': 'user unauthirized'}), 401
-
-    db = User()
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+        
+    if user[5]==False:
+        return jsonify({'response': 'user unauthirized'}), 401
+    
+    db = app.config['DATABASE']
     if(db != None):
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
-        user_isadmin = str(request.json["isadmin"])
+        user_isadmin = request.json["isadmin"]
         if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
             return jsonify({'response':'registered'}),200
         else:
@@ -268,22 +285,23 @@ def admin_add_user(user):
 @token_required
 def admin_update_user(user, id):
     # print(user)
-    if request.method == "PUT":
-        if user[5]==False:
-            return jsonify({'message': 'user unauthirized'}), 401
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
 
-        db = User()
-        if(db != None):
-            user_firstname = str(request.json["firstname"])
-            user_lastname = str(request.json["lastname"])
-            user_email = str(request.json["email"])
-            user_password = str(request.json["password"])
-            user_isadmin = str(request.json["isadmin"])
-            user_verified = str(request.json["verified"])
-            if(db.adminUpdateUser(id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
-                return jsonify({'id':0,'response':'registered'}),200
-            else:
-                return jsonify({'response':'failed'}),400
+    if user[5]==False:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    db = app.config['DATABASE']
+    if(db != None):
+        print("hello")
+        user_firstname = str(request.json["firstname"])
+        user_lastname = str(request.json["lastname"])
+        user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
+        user_isadmin = str(request.json["isadmin"])
+        user_verified = str(request.json["verified"])
+        if(db.adminUpdateUser(id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
+            return jsonify({'id':0,'response':'registered'}),200
         else:
             return jsonify({'response':'failed'}),400
     else:
@@ -302,14 +320,14 @@ def admin_update_user(user, id):
 def admin_delete_user(user, id):
 
     print(user)
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
     if user[5]==False:
-        return jsonify({'message': 'user unauthirized'}), 401
-
-    db = User()
+        return jsonify({'response': 'user unauthirized'}), 401
+    
+    db = app.config['DATABASE']
     if(db != None):
-
-        # user_id = str(request.json["id"])
-        # if(db.adminDeleteUser(user_id)):
         if(db.adminDeleteUser(id)):
             return {'response':'deleted'},200
         else:
@@ -330,18 +348,22 @@ def admin_delete_user(user, id):
 @token_required
 def admin_get_user(user, id):
     # print(user[5])
-    if user[5] == False:
-        return jsonify({'message': 'user unauthirized'}), 401
+    if id is not None:
+        if user is None:
+            return jsonify({'response': 'user unauthirized'}), 401
 
-    db = User()
-    if(db != None):
-        user = db.getUser(id)
-        resp ={'id': user[0], 'firstname': user[1], 'lastname': user[2], 'password': user[3],
-                        'email': user[4], 'isadmin': user[5], 'activationCode': user[6], 'verified': user[7]}
-        res = Response(response=json.dumps(resp))
-        res.headers.add('Content-Range', 'users 0-10/100')
-        res.headers.add('Content-Type', 'application/json')
-        return res, 200
+        if user[5] == False:
+            return jsonify({'response': 'user unauthirized'}), 401
+
+        db = app.config['DATABASE']
+        if(db != None):
+            user = db.getUser(id)
+            resp ={'id': user[0], 'firstname': user[1], 'lastname': user[2], 'password': user[3],
+                            'email': user[4], 'isadmin': user[5], 'activationCode': user[6], 'verified': user[7]}
+            res = Response(response=json.dumps(resp))
+            res.headers.add('Content-Range', 'users 0-10/100')
+            res.headers.add('Content-Type', 'application/json')
+            return res, 200
 
     return {'response': 'failed'}, 400
 
@@ -358,10 +380,13 @@ def admin_get_user(user, id):
 @token_required
 def admin_get_users(user):
     # print(user[5])
-    if user[5] == False:
-        return jsonify({'message': 'user unauthirized'}), 401
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
 
-    db = User()
+    if user[5] == False:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    db = app.config['DATABASE']
     if(db != None):
         users = db.getAllUsers()
         resp = []
@@ -379,10 +404,13 @@ def admin_get_users(user):
 @app.route('/models', methods=["POST"])
 @token_required
 def admin_add_models(user):
-    if user[5]==False:
-        return jsonify({'message': 'user unauthirized'}), 401
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
 
-    db = User()
+    if user[5]==False:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    db = app.config['DATABASE']
     if(db != None):
         model_name = str(request.json["modelname"])
         model_model = str(request.json["model"])
@@ -397,10 +425,13 @@ def admin_add_models(user):
 @app.route('/models', methods=["GET"])
 @token_required
 def admin_get_models(user):
-    if user[5] == False:
-        return jsonify({'message': 'user unauthirized'}), 401
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
 
-    db = User()
+    if user[5] == False:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    db = app.config['DATABASE']
     if(db != None):
         models = db.getAllModels()
         resp = []
@@ -418,8 +449,11 @@ def admin_get_models(user):
 def admin_delete_model(user, id):
 
     print(user)
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
     if user[5]==False:
-        return jsonify({'message': 'user unauthirized'}), 401
+        return jsonify({'response': 'user unauthirized'}), 401
 
     db = User()
     if(db != None):
