@@ -203,6 +203,7 @@ class User:
     def update_email(self, email, password):
          try:
              self.cur.execute(f"UPDATE users SET password ='{password}', WHERE email= '{email};")
+             self.conn.commit()
 
 
 # # class Test(self):
