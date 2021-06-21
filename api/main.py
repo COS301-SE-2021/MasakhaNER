@@ -268,12 +268,10 @@ def admin_get_users(user):
 def update_password(user):
     db = User()
     if(db != None):
-        user_firstname = str(request.json["firstname"])
-        user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
         user_isadmin = str(request.json["isadmin"])
-        if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
+        if(db.update( user_email, user_password)):
             return {'response':'registered'}
         else:
             return {'response':'failed'}
