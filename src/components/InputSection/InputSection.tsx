@@ -9,10 +9,11 @@ export default function InputSection() {
   const [clicked, setClicked] = useState(false);
   const [outputData, setOutputData] = useState([]);
 
-  const options = {
+  const options: any = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": localStorage.getItem("token"),
     },
     body: JSON.stringify({ input: input }),
   };
