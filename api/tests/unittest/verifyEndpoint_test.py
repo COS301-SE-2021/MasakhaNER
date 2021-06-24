@@ -28,6 +28,14 @@ class BasicTests(unittest.TestCase):
         # # Disable sending emails during unit testing
         # mail.init_app(app)
         # self.assertEqual(app.debug, False)
+    def tearDown(self):
+        # main.config['TESTING'] = True
+        # main.config['WTF_CSRF_ENABLED'] = False
+        # main.config['DEBUG'] = False
+        # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+        # os.path.join(main.config['BASEDIR'], TEST_DB)
+        app.config['DATABASE'].clear()
+        self.main = None
     
     # executed after each test
     def tearDown(self):

@@ -21,7 +21,7 @@ class BasicTests(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        #app.config.from_object('config_default.TestingConfig')
+        app.config.from_object('config_default.Config')
         self.main = app.test_client()
         # db.drop_all()
         # db.create_all()

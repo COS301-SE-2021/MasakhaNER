@@ -133,6 +133,12 @@ class mockdatabase:
                 return x
         return None
 
+    def isAdmin(self, email):
+        for x in self.db_list:
+            if x[4] == email and x[5] == True:
+                return True
+        return False
+
     def findUserById(self, id):
         for x in self.db_list:
             if x[0] == id:
@@ -166,8 +172,8 @@ class mockdatabase:
 
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         user = self.findUserById(id)
+        print('this is the user:', user)
         if user != None:
-            if self.findUserByEmail(email) is None:
                 encoded_password = bytes(password, encoding='utf-8')
                 encrypted_password = bcrypt.hashpw(
                 encoded_password, bcrypt.gensalt())
@@ -181,18 +187,31 @@ class mockdatabase:
                 user[6]=code
                 user[7]=verified
                 return True
-            else:
-                return False
         else:
             return False
 
     def adminDeleteUser(self, id):
         for x in self.db_list:
+            #print(type(id))
             if x[0] == id:
                 self.db_list.remove(x)
                 return True
         return False
 
+    def clear(self):
+        self.db_list=[]
+        encoded_password = bytes('password', encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
+        user = [0,'first','person', encrypted_password,'fp@gmail.com',True,0000,True]
+        self.db_list.append(user)
+        
+        user = [1,'second','person', encrypted_password,'secondperson@gmail.com',False,0000,True]
+        self.db_list.append(user)
+
+        self.db_id=2
 
 # # class Test(self):
 

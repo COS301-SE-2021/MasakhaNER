@@ -19,7 +19,7 @@ class BasicTests(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        #app.config.from_object('config_default.TestingConfig')
+        app.config.from_object('config_default.Config')
         self.main = app.test_client()
         # db.drop_all()
         # db.create_all()
@@ -33,25 +33,6 @@ class BasicTests(unittest.TestCase):
         pass#
 
     def test_endpoint(self):
-        #print('hello')
-        INPUT = {
-        "firstname": "first",
-        "lastname": "person",
-        "email": "fp@gmail.com",
-        "password": "password"
-        }
-        response = self.main.post('/register',json=INPUT)
-        print(response.data)
-        
-        r = json.loads(response.data)
-        #print(r)
-
-        result1 = r['response']
-
-        self.assertEqual(400, response.status_code)
-        self.assertEqual(result1,'failed',msg=" if failed User is valid")
-
-    def test_endpoint2(self):
         #print('hello')
         INPUT = {
         "firstname": "man",

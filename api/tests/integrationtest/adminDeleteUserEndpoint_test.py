@@ -18,8 +18,18 @@ class Test(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        #app.config.from_object('config_default.TestingConfig')
+        app.config.from_object('config_default.Config')
+        
         self.main = app.test_client()
+    
+    def tearDown(self):
+        # main.config['TESTING'] = True
+        # main.config['WTF_CSRF_ENABLED'] = False
+        # main.config['DEBUG'] = False
+        # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+        # os.path.join(main.config['BASEDIR'], TEST_DB)
+        #app.config['DATABASE'].deleteBob()
+        self.main =None
     
     def test_endpoint(self):
         INPUT = {
@@ -60,7 +70,7 @@ class Test(unittest.TestCase):
         "id":1
         }
 
-        token = jwt.encode({'email' :'secondperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        token = jwt.encode({'email' :'thirdperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.delete('/users/1',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
@@ -72,9 +82,10 @@ class Test(unittest.TestCase):
         INPUT = {
         "id":1
         }
+        
 
         token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.delete('/users/182',json=INPUT,headers={'x-access-token':token})
+        r = self.main.delete('/users/0',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']

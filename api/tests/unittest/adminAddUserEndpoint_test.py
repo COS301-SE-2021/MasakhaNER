@@ -21,6 +21,15 @@ class Test(unittest.TestCase):
         app.config.from_object('config_default.TestingConfig')
         self.main = app.test_client()
     
+    def tearDown(self):
+        # main.config['TESTING'] = True
+        # main.config['WTF_CSRF_ENABLED'] = False
+        # main.config['DEBUG'] = False
+        # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+        # os.path.join(main.config['BASEDIR'], TEST_DB)
+        app.config['DATABASE'].clear()
+        self.main = None
+    
     def test_endpoint(self):
         INPUT = {
         "firstname": "first",

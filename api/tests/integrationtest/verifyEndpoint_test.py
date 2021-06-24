@@ -20,7 +20,7 @@ class BasicTests(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        #app.config.from_object('config_default.TestingConfig')
+        app.config.from_object('config_default.Config')
         self.main = app.test_client()
         # db.drop_all()
         # db.create_all()
@@ -50,7 +50,7 @@ class BasicTests(unittest.TestCase):
 
     def test_endpoint2(self):
         INPUT = {
-        "email": "fp@gmail.com",
+        "email": "test@test.co.za",
         "code": 1234
         }
         #tests with valid user password but wrong code
@@ -64,8 +64,8 @@ class BasicTests(unittest.TestCase):
 
     def test_endpoint3(self):
         INPUT = {
-        "email": "fp@gmail.com",
-        "code": 0000
+        "email": "test@test.co.za",
+        "code": 1111
         }
         #tests with valid user password and right code
         r = self.main.post('/verify',json=INPUT)

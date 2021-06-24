@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        #app.config.from_object('config_default.TestingConfig')
+        app.config.from_object('config_default.Config')
         self.main = app.test_client()
     
     def test_endpoint(self):
@@ -62,19 +62,18 @@ class Test(unittest.TestCase):
 
     def test_endpoint3(self):
         INPUT = {
-        "id":1,
         "firstname": "third",
         "lastname": "person",
-        "email": "secondperson@gmail.com",
+        "email": "chnaged@gmail.com",
         "password": "password",
         "isadmin":False,
         "verified":True
         }
 
-        token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.put('/user/1',json=INPUT,headers={'x-access-token':token})
+        token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        r = self.main.put('/users/198',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
-        self.assertEqual(400, r.status_code)
-        self.assertEqual(result, 'failed')
+        self.assertEqual(200, r.status_code)
+        self.assertEqual(result, 'updated')

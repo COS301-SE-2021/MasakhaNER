@@ -99,7 +99,8 @@ class User:
         var = self.cur.fetchone()
         #self.conn.commit()
         if var != None:
-            return var[0]
+            code = int(var[0])
+            return code
         else:
             return None
 
@@ -201,6 +202,35 @@ class User:
         # self.cur.close()
         # self.conn.close()
         return db_user
+
+    def insertBob(self):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        # self.cur = self.conn.cursor()
+        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        self.cur.execute(sql,(0,'bob', 'bob','password','bob@bob.com',False,000,True))
+        self.conn.commit()
+        
+
+    def deleteLast(self):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        # self.cur = self.conn.cursor()
+        sql = "DELETE FROM users WHERE id in ( SELECT id FROM users ORDER BY id desc LIMIT 1)"
+        #sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        self.cur.execute(sql)
+        self.conn.commit()
+       
+    
+    def deleteBob(self):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        # self.cur = self.conn.cursor()
+        sql = "DELETE FROM users WHERE id=0;"
+        #sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        self.cur.execute(sql)
+        self.conn.commit()
+       
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         try:

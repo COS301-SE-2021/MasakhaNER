@@ -21,6 +21,15 @@ class Test(unittest.TestCase):
         app.config.from_object('config_default.TestingConfig')
         self.main = app.test_client()
     
+    def tearDown(self):
+        # main.config['TESTING'] = True
+        # main.config['WTF_CSRF_ENABLED'] = False
+        # main.config['DEBUG'] = False
+        # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+        # os.path.join(main.config['BASEDIR'], TEST_DB)
+        app.config['DATABASE'].clear()
+        self.main = None
+    
     def test_endpoint(self):
         INPUT = {
         "firstname": "first",
@@ -69,12 +78,9 @@ class Test(unittest.TestCase):
         self.assertEqual(result, 'user unauthirized')
 
     def test_endpoint4(self):
-        INPUT = {
-        "id":1
-        }
 
         token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.delete('/users/1',json=INPUT,headers={'x-access-token':token})
+        r = self.main.delete('/users/1',headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']

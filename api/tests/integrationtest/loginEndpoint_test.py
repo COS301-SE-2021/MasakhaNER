@@ -20,7 +20,7 @@ class BasicTests(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        #app.config.from_object('config_default.TestingConfig')
+        app.config.from_object('config_default.Config')
         self.main = app.test_client()
         # db.drop_all()
         # db.create_all()
@@ -53,7 +53,7 @@ class BasicTests(unittest.TestCase):
     def test_endpoint2(self):
         #print('hello')
         INPUT = {
-        "email": "fp@gmail.com",
+        "email": "test@test.co.za",
         "password": "wrwe5465"
         }
         response = self.main.post('/login',json=INPUT)
@@ -70,8 +70,8 @@ class BasicTests(unittest.TestCase):
     def test_endpoint3(self):
         #print('hello')
         INPUT = {
-        "email": "fp@gmail.com",
-        "password": "password"
+        "email": "test@test.co.za",
+        "password": "test"
         }
         response = self.main.post('/login',json=INPUT)
         print(response.data)
@@ -84,7 +84,7 @@ class BasicTests(unittest.TestCase):
         data = jwt.decode(token,app.config['SECRET_KEY'],"HS256")
         user_email=data['email']
         self.assertEqual(200, response.status_code)
-        self.assertEqual(user_email,'fp@gmail.com',msg=" if failed User is valid")
+        self.assertEqual(user_email,'test@test.co.za',msg=" if failed User is valid")
 
     # def test_endpoint2(self):
     #     self.main.post('/register',json=self.INPUT)

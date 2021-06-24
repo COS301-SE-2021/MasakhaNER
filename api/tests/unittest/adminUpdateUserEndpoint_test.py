@@ -20,6 +20,15 @@ class Test(unittest.TestCase):
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.TestingConfig')
         self.main = app.test_client()
+
+    def tearDown(self):
+        # main.config['TESTING'] = True
+        # main.config['WTF_CSRF_ENABLED'] = False
+        # main.config['DEBUG'] = False
+        # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+        # os.path.join(main.config['BASEDIR'], TEST_DB)
+        app.config['DATABASE'].clear()
+        self.main = None
     
     def test_endpoint(self):
         INPUT = {
@@ -82,26 +91,6 @@ class Test(unittest.TestCase):
     def test_endpoint4(self):
         INPUT = {
         "id":3,
-        "firstname": "third",
-        "lastname": "person",
-        "email": "thirdperson@gmail.com",
-        "password": "password",
-        "isadmin":False,
-        "verified":True
-        }
-
-        token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.put('/users/3',json=INPUT,headers={'x-access-token':token})
-        data = json.loads(r.data)
-        print(data)
-        result = data['response']
-        self.assertEqual(400, r.status_code)
-        self.assertEqual(result, 'failed')
-
-    
-    def test_endpoint5(self):
-        INPUT = {
-        "id":1,
         "firstname": "third",
         "lastname": "person",
         "email": "thirdperson@gmail.com",

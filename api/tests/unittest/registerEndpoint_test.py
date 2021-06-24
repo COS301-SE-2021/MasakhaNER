@@ -30,7 +30,13 @@ class BasicTests(unittest.TestCase):
     
     # executed after each test
     def tearDown(self):
-        pass#
+        # main.config['TESTING'] = True
+        # main.config['WTF_CSRF_ENABLED'] = False
+        # main.config['DEBUG'] = False
+        # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+        # os.path.join(main.config['BASEDIR'], TEST_DB)
+        app.config['DATABASE'].clear()
+        self.main = None
 
     def test_endpoint(self):
         #print('hello')

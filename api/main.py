@@ -194,6 +194,7 @@ def verify_user():
         user_email = request.json["email"]
         user_code = request.json["code"]
         if user_code != None and user_code == db.get_code(user_email):
+            print(True)
             db.verify_user(user_email)
 
             return {'response': 'verified'}, 200
@@ -284,7 +285,9 @@ def admin_add_user(user):
 @app.route('/users/<id>', methods=["PUT"])
 @token_required
 def admin_update_user(user, id):
-    # print(user)
+    print(id)
+    id = int(id)
+    
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
@@ -301,7 +304,7 @@ def admin_update_user(user, id):
         user_isadmin = str(request.json["isadmin"])
         user_verified = str(request.json["verified"])
         if(db.adminUpdateUser(id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
-            return jsonify({'id':0,'response':'registered'}),200
+            return jsonify({'id':0,'response':'updated'}),200
         else:
             return jsonify({'response':'failed'}),400
     else:
@@ -318,6 +321,8 @@ def admin_update_user(user, id):
 @app.route('/users/<id>', methods=["DELETE"])
 @token_required
 def admin_delete_user(user, id):
+
+    id = int(id)
 
     print(user)
     if user is None:
