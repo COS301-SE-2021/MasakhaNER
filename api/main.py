@@ -1,3 +1,4 @@
+from api.model import runModel
 from flask import Response
 from database.database import User
 from datetime import datetime, timedelta
@@ -11,6 +12,7 @@ from flask_cors import CORS
 from werkzeug.datastructures import Headers
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
+from model import runModel
 
 app = Flask(__name__)
 app.config.from_object('config_default.Config')
@@ -138,6 +140,7 @@ def model_feedback(user):
     if not user:
         return jsonify({'response' : 'log in to use model'}),401
 
+    print(runModel("Emir of Kano turban Zhang wey don spend 18 years for Nigeria"))
     user_input = str(request.json["input"]).split()
     model_feedback = train_model(user_input)
     return {'output': model_feedback}, 200
