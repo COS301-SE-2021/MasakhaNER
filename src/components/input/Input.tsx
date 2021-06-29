@@ -6,35 +6,9 @@ import "./Input.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import useSpeechToText from 'react-hook-speech-to-text';
 
-const {
-  error,
-  isRecording,
-  results,
-  startSpeechToText,
-  stopSpeechToText,
-  interimResult
-} = useSpeechToText({
-  continuous: true,
-  timeout: 10000,
-  speechRecognitionProperties: { interimResults: true }
-});
-
 export const Input = () => {
-  if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
   return (
     <div>
-      <div>
-      <h1>Recording: {isRecording.toString()}</h1>
-      <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
-        {isRecording ? 'Stop Recording' : 'Start Recording'}
-      </button>
-      <ul>
-        {results.map((result, index) => (
-          <li key={index}>{result}</li>
-        ))}
-        {interimResult && <li>{interimResult}</li>}
-      </ul>
-    </div>
       <div className="input">
         <div className="input-header">
           <h2>Train model</h2>

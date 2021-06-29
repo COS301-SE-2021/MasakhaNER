@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import "./InputSection.css";
 import Output from "../Output/Output";
+import useSpeechToText from 'react-hook-speech-to-text';
 
 export default function InputSection() {
   const [input, setInput] = useState("");
@@ -31,9 +32,34 @@ export default function InputSection() {
     e.preventDefault();
   };
 
+  const {
+    error,
+    isRecording,
+    results,
+    startSpeechToText,
+    stopSpeechToText,
+    interimResult
+  } = useSpeechToText({
+    continuous: true,
+    timeout: 10000,
+    speechRecognitionProperties: { interimResults: true }
+  });
+
   return (
     <div className="inputSection">
       <form onSubmit={handleSubmit}>
+      <div>
+      <h1>Recording: {isRecording.toString()}</h1>
+      <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
+        {isRecording ? 'Stop Recording' : 'Start Recording'}
+      </button>
+      <ul>
+        {results.map((result, index) => (
+          <li key={index}>{result}</li>
+        ))}
+        {interimResult && <li>{interimResult}</li>}
+      </ul>
+    </div>
         <p>Enter text</p>
         <input
           placeholder="Type here..."
