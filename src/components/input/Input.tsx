@@ -4,6 +4,22 @@ import Output from "../Output/Output";
 import Top from "../top/Top";
 import "./Input.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import useSpeechToText from 'react-hook-speech-to-text';
+
+const {
+  error,
+  isRecording,
+  results,
+  startSpeechToText,
+  stopSpeechToText,
+  interimResult
+} = useSpeechToText({
+  continuous: true,
+  timeout: 10000,
+  speechRecognitionProperties: { interimResults: true }
+});
+
+// if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
 
 export const Input = () => {
   return (
