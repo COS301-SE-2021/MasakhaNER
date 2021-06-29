@@ -19,9 +19,8 @@ const {
   speechRecognitionProperties: { interimResults: true }
 });
 
-// if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
-
 export const Input = () => {
+  if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
   return (
     <div>
       <div className="input">
