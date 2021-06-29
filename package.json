@@ -29,6 +29,7 @@
     "react-google-login": "^5.2.2",
     "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.8.3",
+    "react-hook-speech-to-text": "^0.6.0",
     "react-icons": "^4.2.0",
     "react-recaptcha": "^2.3.10",
     "react-router-dom": "^5.2.0",
