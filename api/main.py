@@ -140,10 +140,19 @@ def model_feedback(user):
     if not user:
         return jsonify({'response' : 'log in to use model'}),401
 
-    print(runModel("Emir of Kano turban Zhang wey don spend 18 years for Nigeria"))
-    user_input = str(request.json["input"]).split()
-    model_feedback = train_model(user_input)
-    return {'output': model_feedback}, 200
+    
+    user_input = str(request.json["input"])
+    #print(runModel(user_input))
+    model_feedback = runModel("Emir of Kano turban Zhang wey don spend 18 years for Nigeria")
+    newlist=[]
+    print(len(model_feedback))
+    dude = str(model_feedback)
+    dude = eval(dude)
+    #dude = json.dumps(model_feedback[0])
+    #dude = json.loads(dude)
+    print(dude)
+    dude = {'output':dude}
+    return dude, 200
 
 
 """
@@ -229,7 +238,7 @@ def login_user():
 
         if db.login(user_email, user_password):
             token = jwt.encode({'email': user_email, 'exp': datetime.utcnow(
-            ) + timedelta(minutes=60)}, app.config['SECRET_KEY'], algorithm="HS256")
+            ) + timedelta(hours=2)}, app.config['SECRET_KEY'], algorithm="HS256")
 
 
             return jsonify({'isadmin':db.isAdmin(user_email),'token': token})
