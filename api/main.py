@@ -1,4 +1,4 @@
-from api.model import runModel
+from model import runModel
 from flask import Response
 from database.database import User
 from datetime import datetime, timedelta
