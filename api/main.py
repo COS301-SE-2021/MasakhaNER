@@ -143,8 +143,7 @@ def model_feedback(user):
     
     user_input = str(request.json["input"])
     #print(runModel(user_input))
-    model_feedback = runModel("Emir of Kano turban Zhang wey don spend 18 years for Nigeria")
-    newlist=[]
+    model_feedback = runModel(user_input)
     print(len(model_feedback))
     dude = str(model_feedback)
     dude = eval(dude)
