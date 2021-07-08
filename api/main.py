@@ -142,15 +142,12 @@ def model_feedback(user):
 
     
     user_input = str(request.json["input"])
-    #print(runModel(user_input))
-    model_feedback = runModel(user_input)
-    print(len(model_feedback))
-    dude = str(model_feedback)
-    dude = eval(dude)
+    
+    model_feedback = str(runModel(user_input))
+    model_feedback = eval(model_feedback)
     #dude = json.dumps(model_feedback[0])
     #dude = json.loads(dude)
-    print(dude)
-    dude = {'output':dude}
+    dude = {'output':model_feedback}
     return dude, 200
 
 
