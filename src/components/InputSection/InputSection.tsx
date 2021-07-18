@@ -49,7 +49,7 @@ export default function InputSection() {
     <div className="inputSection">
       <form onSubmit={handleSubmit}>
       <div>
-      <h1>Recording: {isRecording.toString()}</h1>
+      {/* <h1>Recording: {isRecording.toString()}</h1> */}
       <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
         {isRecording ? 'Stop Recording' : 'Start Recording'}
       </button>
