@@ -1,5 +1,4 @@
 import "./Output.css";
-import { FaCopy } from "react-icons/fa";
 
 interface OutputProps {
   data: Array<any>;
