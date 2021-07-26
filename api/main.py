@@ -1,3 +1,4 @@
+from model import runModel
 from flask import Response
 from database.database import User
 from datetime import datetime, timedelta
@@ -11,6 +12,7 @@ from flask_cors import CORS
 from werkzeug.datastructures import Headers
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
+from model import runModel
 
 app = Flask(__name__)
 app.config.from_object('config_default.Config')
@@ -138,9 +140,15 @@ def model_feedback(user):
     if not user:
         return jsonify({'response' : 'log in to use model'}),401
 
-    user_input = str(request.json["input"]).split()
-    model_feedback = train_model(user_input)
-    return {'output': model_feedback}, 200
+    
+    user_input = str(request.json["input"])
+    
+    model_feedback = str(runModel(user_input))
+    model_feedback = eval(model_feedback)
+    #dude = json.dumps(model_feedback[0])
+    #dude = json.loads(dude)
+    dude = {'output':model_feedback}
+    return dude, 200
 
 
 """
@@ -226,7 +234,7 @@ def login_user():
 
         if db.login(user_email, user_password):
             token = jwt.encode({'email': user_email, 'exp': datetime.utcnow(
-            ) + timedelta(minutes=60)}, app.config['SECRET_KEY'], algorithm="HS256")
+            ) + timedelta(hours=2)}, app.config['SECRET_KEY'], algorithm="HS256")
 
 
             return jsonify({'isadmin':db.isAdmin(user_email),'token': token})
