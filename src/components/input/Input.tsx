@@ -1,4 +1,7 @@
+import React from "react";
 import InputSection from "../InputSection/InputSection";
+import Output from "../Output/Output";
+import Top from "../top/Top";
 import "./Input.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -44,6 +47,10 @@ export const Input = () => {
             Send
           </button>
         </div>
+        {/* <div className="model-output">
+          
+          Add Model Ouput here.
+        </div> */}
       </div>
     </div>
   );

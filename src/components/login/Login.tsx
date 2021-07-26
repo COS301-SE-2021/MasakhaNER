@@ -2,9 +2,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import "./Login.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { validEmail, validPassword } from "./Regex";
 import { useHistory } from "react-router-dom";
 import { FaLinkedin } from "react-icons/fa";
+import axios from "axios";
 
 let history;
 const responseGoogle = (response: any) => {
@@ -25,10 +27,32 @@ export default function Login(setToken: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setEmailErr] = useState(false);
+  const [passErr, setPasswordErr] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [state, setUser] = useState("");
 
   const register = () => {
     history.push("/register");
   };
+
+  // const options = {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({ email: email, password: password }),
+  // };
+
+  // useEffect(() => {
+  //   if (err) {
+  //     fetch("/login", options)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log("data: ", data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [clicked]);
 
   const handleLogin = async () => {
     const opts = {
