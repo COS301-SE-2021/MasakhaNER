@@ -12,8 +12,8 @@ function Nav() {
     }
     return (
         <div className="Navbar">
-            <h1 id="navbar-heading">Masakha NER Tool</h1>
-            <p id="navbar-subheading">Web-based interface used as a named entity recognition tool for African languages.</p>
+            <h1 className="navbar-heading">Masakha NER Tool</h1>
+            <p className="navbar-subheading">Web-based interface used as a named entity recognition tool for African languages.</p>
             <button onClick = {handleLogout} className="btn btn-dark">Log out</button>
         </div>
     )

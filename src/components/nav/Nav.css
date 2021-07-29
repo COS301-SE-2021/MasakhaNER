@@ -6,11 +6,21 @@
     margin-bottom: 60px;
 }
 
-#navbar-heading {
+.navbar-heading {
     margin-bottom: 0;
     font-size: 60px;
 }
 
-#navbar-subheading {
+.navbar-subheading {
     margin-top: 0;
+}
+@media screen and (max-width: 555px){
+    .navbar-heading {
+      font-size: 40px;
+    }
+}
+@media screen and (max-width: 360px){
+    .navbar-heading {
+      font-size: 30px;
+    }
 }
