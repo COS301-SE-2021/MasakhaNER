@@ -92,17 +92,10 @@ function Register() {
           Please confirm that you are human <br />
           before submitting...
         </p>
-        <div className="reCAP">
-          <ReCAPTCHA
-            sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-            onChange={() => {
-              setDisabled(false);
-            }}
-          />
-        </div>
+        
       </div>
       <form id="regForm" onSubmit={handleSubmit}>
-        <div className="registerTop">
+        <div className="registerTop" id="destination">
           <h2>SIGN UP</h2>
         </div>
         <div className="form-group">
@@ -160,6 +153,14 @@ function Register() {
           />
         </div>
         <br />
+        <div className="reCAP">
+          <ReCAPTCHA
+            sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+            onChange={() => {
+              setDisabled(false);
+            }}
+          />
+        </div>
         <div className="register-button">
           <button
             disabled={disabled}
