@@ -97,11 +97,13 @@ function Register() {
       <form id="regForm" onSubmit={handleSubmit}>
         <div className="registerTop" id="destination">
           <h2>SIGN UP</h2>
-          <h2>MASAKHANE - SIGN UP</h2>
-          <p>
-          Please confirm that you are human <br />
-          before submitting...
-        </p>
+          <div id="mobile-version">
+            <h2>MASAKHANE - SIGN UP</h2>
+            <p>
+            Please confirm that you are human <br />
+            before submitting...
+            </p>
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="firstName">First Name:</label>
