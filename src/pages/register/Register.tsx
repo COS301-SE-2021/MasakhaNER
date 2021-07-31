@@ -96,7 +96,8 @@ function Register() {
       </div>
       <form id="regForm" onSubmit={handleSubmit}>
         <div className="registerTop" id="destination">
-          <h2>SIGN UP</h2>
+          
+          <div id="og-heading"><h2>SIGN UP</h2></div>
           <div id="mobile-version">
             <h2>MASAKHANE - SIGN UP</h2>
             <p>
