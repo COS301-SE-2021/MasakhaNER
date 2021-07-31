@@ -90,6 +90,9 @@ em{
   #mobile-version{
     display: contents;
   }
+  #og-heading{
+    display: none;
+  }
   #register-header{
     color: chartreuse;
     font-size: 8px;
