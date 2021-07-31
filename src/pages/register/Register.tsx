@@ -97,6 +97,7 @@ function Register() {
       <form id="regForm" onSubmit={handleSubmit}>
         <div className="registerTop" id="destination">
           <h2>SIGN UP</h2>
+          <h2>MASAKHANE - SIGN UP</h2>
         </div>
         <div className="form-group">
           <label htmlFor="firstName">First Name:</label>
