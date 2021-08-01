@@ -62,7 +62,7 @@ a, p, label {
   float: right;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (min-width: 360px) {
   .container {
     display: flex;
     flex-direction: column;
@@ -75,5 +75,6 @@ a, p, label {
   }
   .output-header h2{
     font-size: 20px;
+    padding-top: 20px;
   }
 }
