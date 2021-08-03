@@ -291,7 +291,7 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
-    def update(self, email, password):
+    def update_password(self, email, password):
         try:
             # self.conn = psycopg2.connect(
             #     dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)

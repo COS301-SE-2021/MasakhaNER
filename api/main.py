@@ -480,6 +480,11 @@ def admin_delete_model(user, id):
     else:
         return {'response':'failed'},400
 
+#-------------------------------Update Account Details----------------------------------#
+
+#Update password
+@app.route('/updatepassword', methods=["POST"])
+
 """
     main function:
         starts the Flask API
