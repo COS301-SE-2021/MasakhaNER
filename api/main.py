@@ -497,6 +497,10 @@ def update_password(user):
     else:
         return {'response':'failed'}
 
+#Update email
+@app.route('/updateemail', methods=["POST"])
+@token_required
+
 """
     main function:
         starts the Flask API
