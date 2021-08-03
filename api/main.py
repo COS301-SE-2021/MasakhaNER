@@ -486,6 +486,8 @@ def admin_delete_model(user, id):
 @app.route('/updatepassword', methods=["POST"])
 @token_required
 def update_password(user):
+    db = User()
+    if(db != None):
 
 """
     main function:
