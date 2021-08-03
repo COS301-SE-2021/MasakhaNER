@@ -496,5 +496,17 @@ if __name__ == "__main__":
 # DB_PASS="904c29b5f6055f6de8c01b24e1ac3f29736c54ca010dd9b8cc022f1555fe3be7"
 # DB_USER="orikanjrgszuig"
 
-
-
+@app.route('/update-details', methods=["GET"])
+@token_required
+def update_details():
+    db = app.config['DATABASE']
+    if(db != None):
+        user_firstname = str(request.json["firstname"])
+        user_lastname = str(request.json["lastname"])
+        user_email = str(request.json["email"])
+        if(db.update_user_details(user_email, user_firstname, user_lastname)):
+            return {'response': 'updated'}, 200
+        else:
+            return {'response': 'failed'}, 400
+    else:
+        return {'response': 'failed'}, 400
