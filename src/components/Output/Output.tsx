@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./Output.css";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
