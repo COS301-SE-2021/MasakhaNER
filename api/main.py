@@ -517,6 +517,8 @@ def update_email(user):
 @token_required
 def update_name(user):
     db = User()
+    if(db != None):
+        user_email = str(request.json["email"])
 
 """
     main function:
