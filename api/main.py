@@ -519,6 +519,8 @@ def update_name(user):
     db = User()
     if(db != None):
         user_email = str(request.json["email"])
+        user_name = str(request.json["firstname"])
+        if(db.update_name( user_email, user_name)):
 
 """
     main function:
