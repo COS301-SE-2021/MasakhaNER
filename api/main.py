@@ -512,6 +512,12 @@ def update_email(user):
     else:
         return {'response':'failed'}
 
+#Update first name
+@app.route('/updatefirstname', methods=["POST"])
+@token_required
+def update_name(user):
+    db = User()
+
 """
     main function:
         starts the Flask API
