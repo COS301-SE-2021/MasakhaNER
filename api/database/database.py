@@ -364,6 +364,9 @@ class User:
             return False
 
     def update_name(self, email, name):
+        try:
+            sql="UPDATE users SET name =%s, WHERE email= %s;"
+            self.cur.execute(sql,(name,email))
 
 
 
