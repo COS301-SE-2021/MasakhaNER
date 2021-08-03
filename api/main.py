@@ -492,6 +492,10 @@ def update_password(user):
         user_password = str(request.json["password"])
         if(db.update_password( user_email, user_password)):
             return {'response':'updated'}
+        else:
+            return {'response':'failed'}
+    else:
+        return {'response':'failed'}
 
 """
     main function:
