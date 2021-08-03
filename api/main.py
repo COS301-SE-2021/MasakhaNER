@@ -521,6 +521,9 @@ def update_name(user):
         user_email = str(request.json["email"])
         user_name = str(request.json["firstname"])
         if(db.update_name( user_email, user_name)):
+            return {'response':'Name updated'}
+        else:
+             return {'response':'failed'}
 
 """
     main function:
