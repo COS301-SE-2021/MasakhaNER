@@ -50,7 +50,7 @@ export default function InputSection() {
       </form>
         <div className="output-header">
           <h2>Model output</h2>
-          <Output data={outputData} />
+          <Output data={outputData} input={input}/>
         </div>
     </div>
   );

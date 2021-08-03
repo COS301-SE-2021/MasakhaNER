@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Register.css";
+import "./Edit.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import Nav from "../../../components/nav/Nav";
+import Footer from "../../../components/Footer/Footer";
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -21,24 +23,21 @@ function Register() {
     body: JSON.stringify({
       firstname: firstName,
       lastname: lastName,
-      email: email,
-      password: password,
+      email: email
     }),
   };
 
   const handleStatus = async () => {
     try {
-      const resp = await fetch("/register", options);
+      const resp = await fetch("/updatedetails", options);
       console.log(resp);
       if (resp.status === 200) {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
-        window.location.href = "/verify";
       } else {
         alert(resp.status);
         alert("Incorrect verification code!");
-        window.location.href = "/";
       }
     } catch (error) {
       console.log("there is an error", error);
@@ -83,27 +82,12 @@ function Register() {
   };
 
   return (
-    <div className="signup-form">
-      <div id="register-header">
-        <h1>
-          MASAKHA <br /> NER TOOL
-        </h1>
-        <p>
-          Please confirm that you are human <br />
-          before submitting...
-        </p>
-        <div className="reCAP">
-          <ReCAPTCHA
-            sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-            onChange={() => {
-              setDisabled(false);
-            }}
-          />
-        </div>
-      </div>
-      <form id="regForm" onSubmit={handleSubmit}>
+    <div id="detailspage">
+      <Nav />
+      <div className="signup-form">
+      <form id="detForm" onSubmit={handleSubmit}>
         <div className="registerTop">
-          <h2>SIGN UP</h2>
+          <h2>Edit Details</h2>
         </div>
         <div className="form-group">
           <label htmlFor="firstName">First Name:</label>
@@ -121,7 +105,7 @@ function Register() {
           <label htmlFor="lastName">Last Name:</label>
           <input
             type="text"
-            name="lastName"
+            name="flastName"
             id="lastName"
             className="form-control"
             value={lastName}
@@ -129,38 +113,8 @@ function Register() {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => {
-              setemail(e.target.value);
-              validate();
-            }}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              validate();
-            }}
-            required
-          />
-        </div>
         <br />
-        <div className="register-button">
+        <div className="submit-button">
           <button
             disabled={disabled}
             id="mainBtn"
@@ -172,13 +126,18 @@ function Register() {
               handleStatus();
             }}
           >
-            Sign up
+            Submit
           </button>
         </div>
         {Passworderr ||
           (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
       </form>
     </div>
+      <br />
+      <br />
+      <Footer />
+    </div>
+    
   );
 }
 
