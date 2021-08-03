@@ -64,7 +64,7 @@ const json = [
 ];
 
 interface OutputProps {
-    data: Array<any>;
+    data: Array<any>|null;
     input: string
   }
 
@@ -72,24 +72,27 @@ export default function Output({ data,input }: OutputProps) {
   let tex = "Emir of Kano turban Zhang wey don spend 18 years for Nigeria";
   let arr = [...input];
 
-  console.log(arr);
+  console.log(data);
   // console.log(json[0].start);
   let word = "";
 
   let j = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (j < data.length) {
-      if (data[j].start === i) {
-        word +=`<span id="${data[j].entity_group}">` + data[j].word + "</span>";
-        i = data[j].end - 1;
-        j += 1;
+  if(data!==null)
+  {
+    for (let i = 0; i < arr.length; i++) {
+      if (j < data.length) {
+        if (data[j].start === i) {
+          word +=`<span id="${data[j].entity_group}">` + data[j].word + "</span>";
+          i = data[j].end - 1;
+          j += 1;
+        } else {
+          word += arr[i];
+        }
       } else {
         word += arr[i];
       }
-    } else {
-      word += arr[i];
+      //console.log(j,i)
     }
-    //console.log(j,i)
   }
 
   console.log(word);

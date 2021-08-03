@@ -93,7 +93,7 @@ const Link = styled.div`
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [outputData, setOutputData] = useState([]);
+  const [outputData, setOutputData] = useState(null);
 
   const options: any = {
     method: "POST",
@@ -136,7 +136,7 @@ export default function InputSection() {
       </div>
       <div>
           <OutputSection>
-            <Output data={outputData} />
+            <Output data={outputData} input="hr"/>
           </OutputSection>
           <div id="button-container">
             <Button onClick={() => setClicked(!clicked)}>Feedback</Button>
