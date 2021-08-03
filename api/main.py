@@ -504,6 +504,8 @@ def update_email(user):
     db = User()
     if(db != None):
         user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
+        if(db.update_email( user_email, user_password)):
 
 """
     main function:
