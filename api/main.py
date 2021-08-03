@@ -277,9 +277,10 @@ def update_password(user):
     else:
         return {'response':'failed'}
 
+
 @app.route('/updateemail', methods=["POST"])
 @token_required
-def update_password(user):
+def update_email(user):
     db = User()
     if(db != None):
         user_email = str(request.json["email"])
@@ -293,7 +294,7 @@ def update_password(user):
 
 @app.route('/updatename', methods=["POST"])
 @token_required
-def update_password(user):
+def update_name(user):
     db = User()
     if(db != None):
         user_email = str(request.json["email"])
