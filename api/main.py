@@ -524,6 +524,8 @@ def update_name(user):
             return {'response':'Name updated'}
         else:
              return {'response':'failed'}
+    else:
+        return {'response':'failed'}
 
 """
     main function:
