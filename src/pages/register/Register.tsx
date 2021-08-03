@@ -2,6 +2,82 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  width: 80vw;
+  border: solid 1px #ffffff;
+  margin: 0 auto;
+  margin-top: 8vh;
+  border-radius: 20px;
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+`;
+
+const Bar = styled.div`
+  width: inherit;
+  height: 5px;
+  background-color: #000;
+  margin-top: 5px;
+`;
+
+const Header = styled.h1`
+  font-size: 3em;
+  margin-bottom: 1em;
+  @media (max-width: 767px) {
+    font-size: 2em;
+  }
+`;
+
+const Input = styled.input`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  height: 35px;
+  width: 15em;
+  padding: 15px;
+
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+  }
+
+  &:focus {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const Button = styled.button`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  width: 10em;
+  background-color: white;
+  border-radius: 20px;
+  height: 35px;
+  width: 15em;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+  }
+`;
+
+const SignUpButton = styled(Button)`
+  background-color: black;
+  color: white;
+`;
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -63,8 +139,8 @@ function Register() {
   const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
 
   const setItem = () => {
-    localStorage.setItem('newEmail', email);
-  }
+    localStorage.setItem("newEmail", email);
+  };
 
   const validate = () => {
     if (!validEmail.test(email)) {
@@ -83,102 +159,93 @@ function Register() {
   };
 
   return (
-    <div className="signup-form">
-      <div id="register-header">
-        <h1>
-          MASAKHA <br /> NER TOOL
-        </h1>
-        <p>
-          Please confirm that you are human <br />
-          before submitting...
-        </p>
-        <div className="reCAP">
-          <ReCAPTCHA
-            sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-            onChange={() => {
-              setDisabled(false);
-            }}
-          />
-        </div>
-      </div>
+    <Wrapper>
+      <Header>
+        MasakhaNER
+        <Bar />
+      </Header>
+
       <form id="regForm" onSubmit={handleSubmit}>
-        <div className="registerTop">
+        <div>
           <h2>SIGN UP</h2>
         </div>
-        <div className="form-group">
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            className="form-control"
-            value={firstName}
-            onChange={(e) => setfirstName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            className="form-control"
-            value={lastName}
-            onChange={(e) => setlastName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => {
-              setemail(e.target.value);
-              validate();
-            }}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              validate();
-            }}
-            required
-          />
-        </div>
-        <br />
-        <div className="register-button">
-          <button
-            disabled={disabled}
-            id="mainBtn"
-            type="submit"
-            className="btn btn-dark"
-            onClick={(e) => {
-              e.preventDefault();
-              setItem();
-              handleStatus();
-            }}
-          >
-            Sign up
-          </button>
-        </div>
+        <label>First name</label>
+        <Input
+          type="text"
+          name="firstName"
+          className="form-control"
+          value={firstName}
+          placeholder="Enter your first name"
+          onChange={(e) => setfirstName(e.target.value)}
+          required
+        />
+        <label htmlFor="lastName">Last name</label>
+        <Input
+          type="text"
+          name="flastName"
+          id="lastName"
+          className="form-control"
+          value={lastName}
+          placeholder="Enter your last name"
+          onChange={(e) => setlastName(e.target.value)}
+          required
+        />
+        <label htmlFor="email">Email address</label>
+        <Input
+          type="email"
+          name="email"
+          id="email"
+          className="form-control"
+          value={email}
+          placeholder="Enter your email address"
+          onChange={(e) => {
+            setemail(e.target.value);
+            validate();
+          }}
+          required
+        />
+        <label>Password</label>
+        <Input
+          type="password"
+          name="password"
+          id="password"
+          className="form-control"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            validate();
+          }}
+          required
+        />
+        <Button
+          disabled={disabled}
+          id="mainBtn"
+          type="submit"
+          className="btn btn-dark"
+          onClick={(e) => {
+            e.preventDefault();
+            setItem();
+            handleStatus();
+          }}
+        >
+          Sign up
+        </Button>
         {Passworderr ||
           (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
       </form>
-    </div>
+
+      <p>
+        Please confirm that you are human <br />
+        before submitting...
+      </p>
+      <ReCAPTCHA
+        sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+        onChange={() => {
+          setDisabled(false);
+        }}
+      />
+    </Wrapper>
   );
 }
 

@@ -1,33 +1,26 @@
-.inputSection{
-    margin: 0 auto;
-    width: 70%;
-    padding: 10px;
-    text-align: center;
+.inputSection {
+  margin: 0 auto;
+  width: 70%;
+  padding: 10px;
+  text-align: center;
 }
-#testSection{
-    border-radius: 10px;
-    width: 12em;
-    height: 40px;
-    resize: none;
-
-}
-.inputButton{
-    justify-content: center;
-    grid-template-columns: auto;
-    padding: 10px;
+.inputButton {
+  justify-content: center;
+  grid-template-columns: auto;
+  padding: 10px;
 }
 
-.output-header h2{
-    font-weight: bold;
-    color: black;
-    border-radius: 5px 5px 0 0;
-    width: 100%;
-    text-align: center;
-  }
+.output-header h2 {
+  font-weight: bold;
+  color: black;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  text-align: center;
+}
 
-.input input{
-    border: 10px solid white;
-    background-color: white;
-    box-shadow: 5px 5px 5px rgb(221, 221, 221);
-    border-radius: 0 0 5px 5px;
+.input input {
+  border: 10px solid white;
+  background-color: white;
+  box-shadow: 5px 5px 5px rgb(221, 221, 221);
+  border-radius: 0 0 5px 5px;
 }
