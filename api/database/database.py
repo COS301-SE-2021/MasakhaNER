@@ -367,6 +367,7 @@ class User:
         try:
             sql="UPDATE users SET name =%s, WHERE email= %s;"
             self.cur.execute(sql,(name,email))
+            self.conn.commit()
 
 
 
