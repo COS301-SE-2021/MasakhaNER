@@ -486,7 +486,7 @@ def admin_delete_model(user, id):
 @app.route('/updatepassword', methods=["POST"])
 @token_required
 def update_password(user):
-    db = User()
+    db = app.config['DATABASE']
     if(db != None):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
@@ -501,7 +501,7 @@ def update_password(user):
 @app.route('/updateemail', methods=["POST"])
 @token_required
 def update_email(user):
-    db = User()
+    db = app.config['DATABASE']
     if(db != None):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
