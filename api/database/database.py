@@ -369,6 +369,7 @@ class User:
             self.cur.execute(sql,(name,email))
             self.conn.commit()
             return True
+        except Exception as e:
 
 
 
