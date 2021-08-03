@@ -54,6 +54,7 @@ export default function InputSection() {
         {isRecording ? 'Stop Recording' : 'Start Recording'}
       </button>
       <ul>
+        {/* TODO: Map results to input box or automatically return translation */}
         {results.map((result, index) => (
           <li key={index}>{result}</li>
         ))}
