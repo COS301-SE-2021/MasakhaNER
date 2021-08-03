@@ -500,6 +500,8 @@ def update_password(user):
 #Update email
 @app.route('/updateemail', methods=["POST"])
 @token_required
+def update_email(user):
+    db = User()
 
 """
     main function:
