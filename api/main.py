@@ -506,11 +506,11 @@ def update_email(user):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
         if(db.update_email( user_email, user_password)):
-            return {'response':'Email updated'}
+            return {'response':'Email updated'},200
         else:
-            return {'response':'failed'}
+            return {'response':'failed'},400
     else:
-        return {'response':'failed'}
+        return {'response':'failed'},400
 
 #Update first name
 @app.route('/updatefirstname', methods=["POST"])
@@ -521,11 +521,11 @@ def update_name(user):
         user_email = str(request.json["email"])
         user_name = str(request.json["firstname"])
         if(db.update_name( user_email, user_name)):
-            return {'response':'Name updated'}
+            return {'response':'FirstName updated'},200
         else:
-             return {'response':'failed'}
+             return {'response':'failed'},400
     else:
-        return {'response':'failed'}
+        return {'response':'failed'},400
 
 """
     main function:
