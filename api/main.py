@@ -502,6 +502,8 @@ def update_password(user):
 @token_required
 def update_email(user):
     db = User()
+    if(db != None):
+        user_email = str(request.json["email"])
 
 """
     main function:
