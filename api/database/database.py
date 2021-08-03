@@ -353,5 +353,7 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
+    def update_password(self, email, password):
+
 
 
