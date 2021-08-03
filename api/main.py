@@ -509,6 +509,8 @@ def update_email(user):
             return {'response':'Email updated'}
         else:
             return {'response':'failed'}
+    else:
+        return {'response':'failed'}
 
 """
     main function:
