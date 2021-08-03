@@ -1,50 +1,78 @@
 import InputSection from "../InputSection/InputSection";
 import "./Input.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  background-color: white;
+  display: grid;
+  grid-template-columns: 65% 35%;
+  flex-direction: column;
+  justify-content: center;
+  height: 90vh;
+  width: 90vw;
+  border: solid 1px #ffffff;
+  margin: 0 auto;
+  margin-top: 8vh;
+  margin-bottom: 8vh;
+  border-radius: 20px;
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+
+  div {
+    text-align: left;
+  }
+`;
+
+const Header = styled.h1`
+  font-size: 3em;
+  margin-bottom: 1em;
+  @media (max-width: 767px) {
+    font-size: 2em;
+  }
+  text-align: left;
+  margin-left: 9vw;
+`;
+
+const History = styled.div`
+  background-color: white;
+  display: grid;
+  grid-template-columns: 65% 35%;
+  flex-direction: column;
+  justify-content: center;
+  height: 82vh;
+  width: 30vw;
+  border: solid 1px #ffffff;
+  margin: 0 auto;
+  margin-bottom: 8vh;
+  border-radius: 20px;
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  right: 2vw;
+
+  div {
+    text-align: left;
+  }
+
+  h4 {
+    color: #5f5f5f;
+  }
+`;
 
 export const Input = () => {
   return (
-    <div>
-      <div className="input">
-        <div className="input-header">
-          <h2>Train model</h2>
-        </div>
-        <label htmlFor="languages">Choose a language</label>
-        <br />
-        <select name="languages" id="language">
-          <option value="swahili">Swahili</option>
-        </select>
-        <div className="container">
+    <>
+      <Header>Train model</Header>
+      <Wrapper>
+        <div>
           <InputSection />
         </div>
-        <hr />
-        <div id="feedback" className="feedback">
-          <h3>Feedback</h3>
-          <br />
-          <label htmlFor="languages">Correction </label>
-          <br />
-          <input placeholder="Type here..."></input>
-          <br />
-          <label htmlFor="languages">Entity </label>
-          <br />
-          <select name="languages" id="language">
-            <option value="person">PERSON</option>
-            <option value="location">LOCATION</option>
-            <option value="date">DATE</option>
-            <option value="organisation">ORGANISATION</option>
-          </select>
-          <br />
-          <br />
-          <button
-            className="btn btn-dark"
-            onClick={() => {
-              alert("Feedback submitted");
-            }}
-          >
-            Send
-          </button>
+        <div>
+          <History>
+            <h4>History</h4>
+          </History>
         </div>
-      </div>
-    </div>
+      </Wrapper>
+    </>
   );
 };
