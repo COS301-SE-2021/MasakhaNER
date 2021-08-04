@@ -486,6 +486,9 @@ def admin_delete_model(user, id):
 @token_required
 def feedback(user):
     db = app.config['DATABASE']
+    if(db != None):
+        user_feedback = str(request.json["firstname"])
+        if(db.feedback(user_feedback)):
 
 
 
