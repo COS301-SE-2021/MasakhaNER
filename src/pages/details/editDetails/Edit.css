@@ -1,0 +1,81 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.signup-form{
+  background-color: rgb(226, 226, 229);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  box-shadow: 10px 5px 5px 5px rgb(221, 221, 221);
+  width: 70%;
+  margin-top: 70px;
+  padding: 20px;
+}
+.regForm{
+  text-align: start;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+.registerTop{
+  border-bottom: 10px solid black;
+  color: black;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  text-align: left;
+}
+
+a, p{
+  color: gray;
+  text-decoration: none;
+  font-size: small;
+}
+.form-group{
+  color: #999;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+}
+
+@media screen and (max-width: 880px) {
+  .register {
+      width: 40%;
+  }
+}
+
+#register-header h1{
+  font-size: 80px;
+}
+#register-header{
+  align-self: start;
+  width: 45%;
+  height: 45%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.form-group input{
+  border: 10px solid white;
+  background-color: white;
+  box-shadow: 5px 5px 5px rgb(221, 221, 221);
+  border-radius: 0 0 5px 5px;
+  width: 100%;
+}
+
+.reCAP{
+  align-self: start;
+  width: 45%;
+  height: 45%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+em{
+  font-weight: bold;
+}
