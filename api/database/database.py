@@ -355,10 +355,11 @@ class User:
 
     def update_user_details(self, email, name, surname):
          try:
-             self.cur.execute(f"UPDATE users SET name ='{name}', surname ='{surname}' WHERE email= '{email};")
+             sql = "UPDATE users SET firstname =%s, lastname =%s WHERE email=%s;"
+             self.cur.execute(sql,(name,surname,email))
              self.conn.commit()
-             self.cur.close()
-             self.conn.close()
+            #  self.cur.close()
+            #  self.conn.close()
              return True
          except Exception as e:
             print(f"Database connection error: {e}")
