@@ -482,8 +482,11 @@ def admin_delete_model(user, id):
 
 #feedback endpoint
 
-@app.route('/register', methods=["POST"])
+@app.route('/', methods=["POST"])
 @token_required
+def what():
+    continue
+
 
 """
     main function:
