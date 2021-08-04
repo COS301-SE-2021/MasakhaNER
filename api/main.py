@@ -482,11 +482,26 @@ def admin_delete_model(user, id):
 
 #feedback endpoint
 
-@app.route('/', methods=["POST"])
+@app.route('/feedback', methods=["POST"])
 @token_required
-def what():
-    continue
+def feedback(user):
+    db = app.config['DATABASE']
 
+
+
+
+db = app.config['DATABASE']
+    if(db != None):
+        user_firstname = str(request.json["firstname"])
+        user_lastname = str(request.json["lastname"])
+        user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
+        if(db.register(user_firstname, user_lastname, user_email, user_password)):
+            return {'response': 'registered'}, 200
+        else:
+            return {'response': 'failed'}, 400
+    else:
+        return {'response': 'failed'}, 400
 
 """
     main function:
