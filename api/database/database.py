@@ -358,7 +358,7 @@ class User:
             sql = "INSERT INTO User_feedback (feedback) VALUES (%s);"
             self.cur.execute(sql,(user_feedback))
             self.conn.commit()
-
+            return True
 
         except Exception as e:
 
