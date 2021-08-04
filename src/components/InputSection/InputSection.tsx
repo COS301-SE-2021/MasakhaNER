@@ -92,6 +92,7 @@ const Link = styled.div`
 
 export default function InputSection() {
   const [input, setInput] = useState("");
+  const [input2, setInput2] = useState("");
   const [clicked, setClicked] = useState(false);
   const [outputData, setOutputData] = useState(null);
 
@@ -117,6 +118,7 @@ export default function InputSection() {
     e.preventDefault();
   };
 
+  console.log(clicked);
   return (
     <FormContainer>
       <div>
@@ -130,13 +132,13 @@ export default function InputSection() {
           <div id="button-container">
             <Button onClick={() => setClicked(!clicked)}>Mic</Button>
             <Button onClick={() => setClicked(!clicked)}>Upload</Button>
-            <Button onClick={() => setClicked(!clicked)}>Send</Button>
+            <Button onClick={() => {setClicked(!clicked); setInput2(input)}}>Send</Button>
           </div>
         </form>
       </div>
       <div>
           <OutputSection>
-            <Output data={outputData} input="hr"/>
+            <Output data={outputData} input={input2}/>
           </OutputSection>
           <div id="button-container">
             <Button onClick={() => setClicked(!clicked)}>Feedback</Button>

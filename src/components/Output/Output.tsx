@@ -75,7 +75,7 @@ export default function Output({ data,input }: OutputProps) {
   console.log(data);
   // console.log(json[0].start);
   let word = "";
-
+  data = json;
   let j = 0;
   if(data!==null)
   {
