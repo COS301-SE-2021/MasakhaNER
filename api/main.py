@@ -480,6 +480,8 @@ def admin_delete_model(user, id):
     else:
         return {'response':'failed'},400
 
+#feedback endpoint
+
 """
     main function:
         starts the Flask API
