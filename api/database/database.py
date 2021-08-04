@@ -354,7 +354,12 @@ class User:
             return False
 
     def addFeedback(self):
-        
+        try:
+                        sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+
+
+        except Exception as e:
+
 
 
 
