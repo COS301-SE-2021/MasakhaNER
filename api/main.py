@@ -20,7 +20,7 @@ app.config.from_object('config_default.Config')
 # app.config['SECRET_KEY']='secret'
 # app.config['DATABASE']=User()
 # app.config['Database'] = User()
-
+#I MADE A COMMIT
 
 """
     Serves as mock trained data
