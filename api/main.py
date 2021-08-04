@@ -492,6 +492,9 @@ def feedback(user):
             return {'response': 'feeback_saved'}, 200
         else:
             return {'response': 'failed'}, 400
+    else:
+        return {'response': 'failed'}, 400
+
 
 
 
