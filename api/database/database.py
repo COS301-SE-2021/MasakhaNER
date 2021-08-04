@@ -360,7 +360,8 @@ class User:
             self.conn.commit()
             return True
         except Exception as e:
-             print(f"Database connection error: {e}")
+            print(f"Database connection error: {e}")
+            return False
 
 
 
