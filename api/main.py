@@ -482,6 +482,9 @@ def admin_delete_model(user, id):
 
 #feedback endpoint
 
+@app.route('/register', methods=["POST"])
+@token_required
+
 """
     main function:
         starts the Flask API
