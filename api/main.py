@@ -490,7 +490,8 @@ def feedback(user):
         user_feedback = str(request.json["firstname"])
         if(db.feedback(user_feedback)):
             return {'response': 'feeback_saved'}, 200
-        
+        else:
+            return {'response': 'failed'}, 400
 
 
 
