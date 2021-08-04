@@ -252,7 +252,7 @@ def update_details(user):
     if not user:
         return jsonify({'response' : 'log in to use model'}),401
 
-
+    #hello
     db = app.config['DATABASE']
     if(db != None):
         user_firstname = str(request.json["firstname"])
