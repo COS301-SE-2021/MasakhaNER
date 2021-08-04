@@ -353,5 +353,8 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
+    def addFeedback(self):
+        
+
 
 
