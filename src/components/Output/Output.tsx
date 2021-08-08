@@ -1,5 +1,5 @@
 import "./Output.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Text = styled.div`
@@ -29,8 +29,8 @@ const Text = styled.div`
     }
   }
   #PER {
-    background-color: #c1f177;
-    color: #538606;
+    background-color: #f16f6f;
+    color: #610707;
     #tag {
       width: 30px;
       color: white;
@@ -45,9 +45,6 @@ const Text = styled.div`
     }
   }
 `;
-// const createMarkup = (text:string) => {
-//   return { __html: <div>${text}</div> };
-// };
 
 const createText = (text: string) => {
   return <div dangerouslySetInnerHTML={{ __html: text }}></div>;
