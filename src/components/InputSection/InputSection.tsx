@@ -96,6 +96,23 @@ export default function InputSection() {
   const [clicked, setClicked] = useState(false);
   const [outputData, setOutputData] = useState(null);
 
+
+  var history : String[] = new Array();
+  const addToHistory = (data: String ) => {
+    history.push(data);
+    let stored = localStorage.getItem('history');
+    if(stored == null){
+      localStorage.setItem('history', history.toString());
+    }
+    else{
+      history = new Array();
+      history = stored.split(",");
+      history.push(data);
+      if(history.length > 5) history.shift();
+      localStorage.setItem('history', history.toString());
+    }
+    console.log(history);
+  }
   const options: any = {
     method: "POST",
     headers: {
@@ -118,7 +135,7 @@ export default function InputSection() {
     e.preventDefault();
   };
 
-  console.log(clicked);
+  // console.log(history);
   return (
     <FormContainer>
       <div>
@@ -150,5 +167,6 @@ export default function InputSection() {
         </Link>
       </div>
     </FormContainer>
+
   );
 }

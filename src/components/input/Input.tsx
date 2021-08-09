@@ -2,6 +2,7 @@ import InputSection from "../InputSection/InputSection";
 import "./Input.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
+import HistorySection from "../history/HistorySection";
 
 const Wrapper = styled.div`
   background-color: white;
@@ -69,7 +70,7 @@ export const Input = () => {
         </div>
         <div>
           <History>
-            <h4>History</h4>
+            <HistorySection/>
           </History>
         </div>
       </Wrapper>
