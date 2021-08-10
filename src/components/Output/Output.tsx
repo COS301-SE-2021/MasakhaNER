@@ -49,6 +49,11 @@ const Text = styled.div`
 //   return { __html: <div>${text}</div> };
 // };
 
+// function wikiSearch(entity1){
+
+// }
+
+
 const createText = (text: string) => {
   return <div dangerouslySetInnerHTML={{ __html: text }}></div>;
 };
@@ -112,7 +117,7 @@ export default function Output({ data, input }: OutputProps) {
           word +=
             ` <span id="${data[j].entity_group}">` +
             data[j].word +
-            `<span id="tag" onClick=wikiSearch(data[j].entity_group)>${data[j].entity_group}</span></span>`;
+            `<span id="tag" onClick=wikiSearch(data[j].entity_group)><a href="https://en.wikipedia.org/wiki/Kano">${data[j].entity_group}</a></span></span>`;
           i = data[j].end - 1;
           j += 1;
         } else {
