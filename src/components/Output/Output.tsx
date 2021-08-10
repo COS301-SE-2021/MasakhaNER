@@ -112,7 +112,7 @@ export default function Output({ data, input }: OutputProps) {
           word +=
             ` <span id="${data[j].entity_group}">` +
             data[j].word +
-            `<span id="tag">${data[j].entity_group}</span></span>`;
+            `<span id="tag" onClick=wikiSearch(data[j].entity_group)>${data[j].entity_group}</span></span>`;
           i = data[j].end - 1;
           j += 1;
         } else {
