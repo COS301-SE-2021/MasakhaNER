@@ -108,16 +108,16 @@ export default function Output({ data, input }: OutputProps) {
   console.log(data);
   // console.log(json[0].start);
   let word = "";
-  data = json;
+  //data = json;
   let j = 0;
   if (data !== null) {
     for (let i = 0; i < arr.length; i++) {
       if (j < data.length) {
         if (data[j].start === i) {
           word +=
-            ` <span id="${data[j].entity_group}">` +
+            ` <span id="${data[j].entity.substring(2)}">` +
             data[j].word +
-            `<span id="tag"><a href="https://en.wikipedia.org/wiki/${data[j].word}">${data[j].entity_group}</a></span></span>`;
+            `<span id="tag"><a href="https://en.wikipedia.org/wiki/${data[j].word}">${data[j].entity.substring(2)}</a></span></span>`;
           i = data[j].end - 1;
           j += 1;
         } else {

@@ -134,11 +134,11 @@ def token_required(f):
 
 
 @app.route('/input', methods=["POST"])
-@token_required
-def model_feedback(user):
+#@token_required
+def model_feedback():
 
-    if not user:
-        return jsonify({'response' : 'log in to use model'}),401
+    # if not user:
+    #     return jsonify({'response' : 'log in to use model'}),401
 
     
     user_input = str(request.json["input"])
