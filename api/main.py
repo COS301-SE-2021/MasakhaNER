@@ -513,6 +513,21 @@ def admin_delete_model(user, id):
         return {'response':'failed'},400
 
 #feedback endpoint
+@app.route('/feedback', methods=["POST"])
+@token_required
+def feedback(user):
+    db = app.config['DATABASE']
+    if(db != None):
+        user_feedback = str(request.json["firstname"])
+        if(db.addFeedback(user_feedback)):
+            return {'response': 'feeback_saved'}, 200
+        else:
+            return {'response': 'failed'}, 400
+    else:
+        return {'response': 'failed'}, 400
+
+
+
 
 """
     main function:
