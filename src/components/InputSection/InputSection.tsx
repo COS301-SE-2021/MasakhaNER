@@ -147,7 +147,7 @@ export default function InputSection() {
       <div>
         <Link>
           <h4>Link Section</h4>
-          <iframe src="https://en.wikipedia.org/wiki/kano" width="600" height="400"></iframe>
+          {/* <iframe src="https://en.wikipedia.org/wiki/kano" width="600" height="400"></iframe> */}
         </Link>
       </div>
     </FormContainer>
