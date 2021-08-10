@@ -5,6 +5,8 @@ import Login from "./components/login/Login";
 import Register from "./pages/register/Register";
 import Verify from "./pages/verify/Verify";
 import Admin from "./pages/admin/AdminUser";
+import Edit from "./pages/details/editDetails/Edit";
+import Changepass from "./pages/details/resetPassword/Changepass";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route exact path="/dashboard" component={Dashboard}  />
           <Route exact path="/verify" component={Verify} />
           <Route exact path="/admin" component={Admin} />
+          <Route exact path="/details/edit" component={Edit} />
+          <Route exact path="/details/changepassword" component={Changepass} />
         </Switch>
       </Router>
     </div>
