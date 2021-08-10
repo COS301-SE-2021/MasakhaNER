@@ -160,6 +160,18 @@ def model_feedback(user):
     Returns:
         JSON object with response
 """
+@app.route('/reset', methods=["POST"])
+def reset_password():
+    db = app.config['DATABASE']
+    if(db != None):
+        user_email = str(request.json['email'])
+        user_new_password = str(request.json['password'])
+        if(db.resetPassword(user_email,user_new_password)):
+            return {'response': 'password reset'}, 200
+        else:
+            return {'response': 'failed'}, 400
+    else:
+        return {'response': 'failed'}, 400
 
 
 @app.route('/register', methods=["POST"])
