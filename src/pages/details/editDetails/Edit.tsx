@@ -35,6 +35,8 @@ function Register() {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("isAuthenticated", "true");
       } else {
         alert(resp.status);
         alert("Incorrect verification code!");
