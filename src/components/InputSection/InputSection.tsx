@@ -159,6 +159,7 @@ export default function InputSection() {
         // localStorage.setItem("token", data.token);
         // localStorage.setItem("isAuthenticated", "true");
         setOutputData(data.output);
+        setInput2(input)
         console.log("data is ", data.output);
         // if (data.isadmin) {
         //   history.push("/Admin");
@@ -198,7 +199,7 @@ export default function InputSection() {
       </div>
       <div>
           <OutputSection>
-            {wait==3?"":wait===2? "pending...": wait===1? <Output data={outputData} input={input}/> : "failed"}
+            {wait==3?"":wait===2? "pending...": wait===1? <Output data={outputData} input={input2}/> : "failed"}
           </OutputSection>
           <div id="button-container">
             <Button onClick={() => setClicked(!clicked)}>Feedback</Button>
