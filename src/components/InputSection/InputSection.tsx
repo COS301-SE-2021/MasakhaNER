@@ -91,16 +91,22 @@ const Link = styled.div`
   }
 `;
 
+const FeedbackInput = styled(Input)`
+  height: 6em;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    width: '40%',
-    height: '60%',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    width: "40%",
+    height: "60%",
   },
 };
 
@@ -119,7 +125,7 @@ export default function InputSection() {
 
   const afterOpenModal = () => {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
+    subtitle.style.color = "#444444";
   };
 
   const closeModal = () => {
@@ -195,12 +201,13 @@ export default function InputSection() {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
+        <Button onClick={closeModal}>close</Button>
+        <div>{outputData}</div>
         <form>
-          <input />
-          <Button>the modal</Button>
+          <FeedbackInput />
+          <br />
+          <Button>Send Feedback</Button>
         </form>
       </Modal>
     </>
