@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/verify" component={Verify} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/details/edit" component={Edit} />
-          <Route exact path="/details/changepassword" component={Changepass} />
+          <Route exact path="/changepassword" component={Changepass} />
         </Switch>
       </Router>
     </div>

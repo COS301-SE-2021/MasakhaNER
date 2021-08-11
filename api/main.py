@@ -160,7 +160,7 @@ def model_feedback():
     Returns:
         JSON object with response
 """
-@app.route('/reset', methods=["POST"])
+@app.route('/changepassword', methods=["POST"])
 def reset_password():
     db = app.config['DATABASE']
     if(db != None):
