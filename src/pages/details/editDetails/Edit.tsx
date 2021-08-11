@@ -29,7 +29,7 @@ function Register() {
 
   const handleStatus = async () => {
     try {
-      const resp = await fetch("/updatedetails", options);
+      const resp = await fetch("/update-details", options);
       console.log(resp);
       if (resp.status === 200) {
         alert(resp.status);
@@ -116,7 +116,7 @@ function Register() {
         <br />
         <div className="submit-button">
           <button
-            disabled={disabled}
+            // disabled={disabled}
             id="mainBtn"
             type="submit"
             className="btn btn-dark"
