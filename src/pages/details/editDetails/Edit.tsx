@@ -15,10 +15,11 @@ function Register() {
   const [Emailerr, setEmailErr] = useState(false);
   const [Passworderr, setPasswordErr] = useState(false);
 
-  const options = {
+  const options : any  = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": localStorage.getItem("token"),
     },
     body: JSON.stringify({
       firstname: firstName,
@@ -35,8 +36,8 @@ function Register() {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("isAuthenticated", "true");
+        //localStorage.setItem("token", data.token);
+        //localStorage.setItem("isAuthenticated", "true");
       } else {
         alert(resp.status);
         alert("Incorrect verification code!");
@@ -49,7 +50,7 @@ function Register() {
 
   useEffect(() => {
     if (disabled === false) {
-      fetch("/register", options)
+      fetch("/update-details", options)
         .then((res) => res.json())
         .then((data) => {
           console.log(data.output);
