@@ -172,6 +172,7 @@ export default function InputSection() {
   };
 
   const handleSend = async () => {
+    addToHistory(input)
     setWait(2);
     const opts = {
       method: "POST",
