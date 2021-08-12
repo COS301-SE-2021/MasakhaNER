@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./InputSection.css";
 import Output from "../Output/Output";
 import styled from "styled-components";
+import Modal from "react-modal";
 
 const FormContainer = styled.div`
   display: grid;
@@ -90,6 +91,25 @@ const Link = styled.div`
   }
 `;
 
+const FeedbackInput = styled(Input)`
+  height: 6em;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    width: "40%",
+    height: "60%",
+  },
+};
+
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
@@ -97,23 +117,37 @@ export default function InputSection() {
   const [outputData, setOutputData] = useState(null);
   const [wait, setWait] = useState(3);
 
+  let subtitle: any;
+  const [modalIsOpen, setIsOpen] = useState(false);
 
-  var history : String[] = new Array();
-  const addToHistory = (data: String ) => {
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const afterOpenModal = () => {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = "#444444";
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  var history: String[] = new Array();
+  const addToHistory = (data: String) => {
     history.push(data);
-    let stored = localStorage.getItem('history');
-    if(stored == null){
-      localStorage.setItem('history', history.toString());
-    }
-    else{
+    let stored = localStorage.getItem("history");
+    if (stored == null) {
+      localStorage.setItem("history", history.toString());
+    } else {
       history = new Array();
       history = stored.split(",");
       history.push(data);
-      if(history.length > 5) history.shift();
-      localStorage.setItem('history', history.toString());
+      if (history.length > 5) history.shift();
+      localStorage.setItem("history", history.toString());
     }
     console.log(history);
-  }
+  };
   const options: any = {
     method: "POST",
     headers: {
@@ -146,7 +180,7 @@ export default function InputSection() {
         //"x-access-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
-        input: input
+        input: input,
       }),
     };
 
@@ -181,37 +215,53 @@ export default function InputSection() {
 
   // console.log(history);
   return (
-    <FormContainer>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <Input
-            placeholder="Type here..."
-            id="testSection"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <div id="button-container">
-            <Button onClick={() => setClicked(!clicked)}>Mic</Button>
-            <Button onClick={() => setClicked(!clicked)}>Upload</Button>
-            <Button onClick={handleSend}>Send</Button>
-          </div>
-        </form>
-      </div>
-      <div>
+    <>
+      <FormContainer>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <Input
+              placeholder="Type here..."
+              id="testSection"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <div id="button-container">
+              <Button onClick={() => setClicked(!clicked)}>Mic</Button>
+              <Button onClick={() => setClicked(!clicked)}>Upload</Button>
+              <Button onClick={handleSend}>Send</Button>
+            </div>
+          </form>
+        </div>
+        <div>
           <OutputSection>
             {wait==3?"":wait===2? "pending...": wait===1? <Output data={outputData} input={input2}/> : "failed"}
           </OutputSection>
           <div id="button-container">
-            <Button onClick={() => setClicked(!clicked)}>Feedback</Button>
+            <Button onClick={openModal}>Feedback</Button>
           </div>
-      </div>
-      <div>
-        <Link>
-          <h4>Link Section</h4>
-          {/* <iframe src="https://en.wikipedia.org/wiki/kano" width="600" height="400"></iframe> */}
-        </Link>
-      </div>
-    </FormContainer>
-
+        </div>
+        <div>
+          <Link>
+            <h4>Link Section</h4>
+          </Link>
+        </div>
+      </FormContainer>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
+        <Button onClick={closeModal}>close</Button>
+        <div><Output data={outputData} input={input2}/></div>
+        <form>
+          <FeedbackInput />
+          <br />
+          <Button>Send Feedback</Button>
+        </form>
+      </Modal>
+    </>
   );
 }
