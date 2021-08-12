@@ -114,10 +114,9 @@ export default function InputSection() {
       .catch((err) => console.log(err));
   }, [clicked]);
 
-  const loadData = () => {
-    var newEnt = localStorage.getItem('Entity');
-    console.log(newEnt);
-  }
+  var newEnt = localStorage.getItem('Entity');
+  var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
+  console.log(linklink);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -152,8 +151,7 @@ export default function InputSection() {
       <div>
         <Link>
           <h4>Link Section</h4>
-          <button className="btn btn-primary" onClick={loadData}>Load Wiki Page</button>
-          <iframe src='https://en.wikipedia.org/wiki/newEnt' width="600" height="400"></iframe>
+          <iframe src={linklink} width="600" height="400"></iframe>
         </Link>
       </div>
     </FormContainer>
