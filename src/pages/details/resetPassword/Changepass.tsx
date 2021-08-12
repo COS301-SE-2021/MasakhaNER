@@ -21,8 +21,7 @@ function Register() {
     },
     body: JSON.stringify({
       email: email,
-      password: password,
-      confirmPassword: password2
+      password: password
     }),
   };
 
@@ -114,9 +113,9 @@ function Register() {
               //console.log(e.target.value)
               // console.log(password2)
               // console.log(password3)
-              if(password2===e.target.value){
+              if(password===e.target.value){
                 setPasswordErr(true);
-                setDisabled(true)
+                setDisabled(false)
               }
               else{
                 setPasswordErr(false);
@@ -137,12 +136,13 @@ function Register() {
             className="btn btn-dark"
             onClick={(e) => {
               e.preventDefault();
-              if (!validPassword.test(password2)) {
-                setPasswordErr2(true)
-                //alert("use regex");
-              } else {
+              // if (!validPassword.test(password2)) {
+              //   //setPasswordErr2(true)
+              //   //alert("use regex");
+              // } else {
+              // handleStatus();
+              // }
               handleStatus();
-              }
             }}
           >
             Submit
