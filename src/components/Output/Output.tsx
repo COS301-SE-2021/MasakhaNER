@@ -114,7 +114,7 @@ export default function Output({ data, input }: OutputProps) {
     for (let i = 0; i < arr.length; i++) {
       if (j < data.length) {
         if (data[j].start === i) {
-            localStorage.setItem('UserName',data[j].word);
+            localStorage.setItem('Entity',data[j].word);
           word +=
             ` <span id="${data[j].entity_group}">` +
             data[j].word +
