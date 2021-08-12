@@ -115,6 +115,7 @@ export default function InputSection() {
   const [input2, setInput2] = useState("");
   const [clicked, setClicked] = useState(false);
   const [outputData, setOutputData] = useState(null);
+  const [wait, setWait] = useState(3);
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -132,6 +133,21 @@ export default function InputSection() {
     setIsOpen(false);
   };
 
+  var history: String[] = new Array();
+  const addToHistory = (data: String) => {
+    history.push(data);
+    let stored = localStorage.getItem("history");
+    if (stored == null) {
+      localStorage.setItem("history", history.toString());
+    } else {
+      history = new Array();
+      history = stored.split(",");
+      history.push(data);
+      if (history.length > 5) history.shift();
+      localStorage.setItem("history", history.toString());
+    }
+    console.log(history);
+  };
   const options: any = {
     method: "POST",
     headers: {
@@ -146,6 +162,7 @@ export default function InputSection() {
       .then((res) => res.json())
       .then((data) => {
         setOutputData(data.output);
+        console.log("data is ", data.output);
       })
       .catch((err) => console.log(err));
   }, [clicked]);
@@ -154,7 +171,48 @@ export default function InputSection() {
     e.preventDefault();
   };
 
-  console.log(clicked);
+  const handleSend = async () => {
+    setWait(2);
+    const opts = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //"x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        input: input,
+      }),
+    };
+
+    try {
+      const resp = await fetch("/input", opts);
+      console.log(resp);
+      if (resp.status === 200) {
+        const data = await resp.json();
+        console.log(data);
+        // localStorage.setItem("token", data.token);
+        // localStorage.setItem("isAuthenticated", "true");
+        setOutputData(data.output);
+        console.log("data is ", data.output);
+        // if (data.isadmin) {
+        //   history.push("/Admin");
+        // } else {
+        //   history.push("/Dashboard");
+        // }
+        setWait(1);
+      } else {
+        alert("error, failed!");
+        setWait(0);
+        //history.push("/");
+      }
+      console.log(wait);
+    } catch (error) {
+      console.log("there is an error", error);
+      history.push("/");
+    }
+  };
+
+  // console.log(history);
   return (
     <>
       <FormContainer>
@@ -169,20 +227,21 @@ export default function InputSection() {
             <div id="button-container">
               <Button onClick={() => setClicked(!clicked)}>Mic</Button>
               <Button onClick={() => setClicked(!clicked)}>Upload</Button>
-              <Button
-                onClick={() => {
-                  setClicked(!clicked);
-                  setInput2(input);
-                }}
-              >
-                Send
-              </Button>
+              <Button onClick={handleSend}>Send</Button>
             </div>
           </form>
         </div>
         <div>
           <OutputSection>
-            <Output data={outputData} input={input2} />
+            {wait == 3 ? (
+              ""
+            ) : wait === 2 ? (
+              "pending..."
+            ) : wait === 1 ? (
+              <Output data={outputData} input={input} />
+            ) : (
+              "failed"
+            )}
           </OutputSection>
           <div id="button-container">
             <Button onClick={openModal}>Feedback</Button>
