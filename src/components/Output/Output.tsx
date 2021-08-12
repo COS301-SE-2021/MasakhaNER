@@ -114,10 +114,11 @@ export default function Output({ data, input }: OutputProps) {
     for (let i = 0; i < arr.length; i++) {
       if (j < data.length) {
         if (data[j].start === i) {
+            localStorage.setItem('UserName',data[j].word);
           word +=
             ` <span id="${data[j].entity_group}">` +
             data[j].word +
-            `<span id="tag"><a href="https://en.wikipedia.org/wiki/${data[j].word}">${data[j].entity_group}</a></span></span>`;
+            `<span id="tag">${data[j].entity_group}</span></span>`;
           i = data[j].end - 1;
           j += 1;
         } else {
