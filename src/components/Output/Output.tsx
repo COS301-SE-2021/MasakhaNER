@@ -105,6 +105,10 @@ export default function Output({ data, input }: OutputProps) {
   let tex = "Emir of Kano turban Zhang wey don spend 18 years for Nigeria";
   let arr = [...input];
 
+  function storeWord(word:string){
+    localStorage.setItem('Entity',word);
+  }
+
   console.log(data);
   // console.log(json[0].start);
   let word = "";
@@ -116,9 +120,9 @@ export default function Output({ data, input }: OutputProps) {
         if (data[j].start === i) {
             localStorage.setItem('Entity',data[j].word);
           word +=
-            ` <span id="${data[j].entity_group}">` +
+            ` <span id="${data[j].entity_group}" onClick={storeWord(data[j].word)}>` +
             data[j].word +
-            `<span id="tag">${data[j].entity_group}</span></span>`;
+            `<span id="tag" onClick={storeWord(data[j].word)}>${data[j].entity_group}</span></span>`;
           i = data[j].end - 1;
           j += 1;
         } else {
