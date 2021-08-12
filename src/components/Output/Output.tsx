@@ -120,9 +120,9 @@ export default function Output({ data, input }: OutputProps) {
         if (data[j].start === i) {
             // localStorage.setItem('Entity',data[j].word);
           word +=
-            ` <span id="${data[j].entity_group}" onClick={${storeWord(data[j].word)}}>` +
+            ` <span id="${data[j].entity_group}" onClick="${storeWord(data[j].word)}">` +
             data[j].word +
-            `<span id="tag" onClick={${storeWord(data[j].word)}}>${data[j].entity_group}</span></span>`;
+            `<span id="tag" onClick="${storeWord(data[j].word)}">${data[j].entity_group}</span></span>`;
           i = data[j].end - 1;
           j += 1;
         } else {
