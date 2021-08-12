@@ -116,6 +116,9 @@ export default function InputSection() {
   const [clicked, setClicked] = useState(false);
   const [outputData, setOutputData] = useState(null);
   const [wait, setWait] = useState(3);
+  const [up, setUp] = useState(false);
+  const [filename, setFileName] = useState("");
+  const [filecontent, setFileContent] = useState("");
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -215,6 +218,30 @@ export default function InputSection() {
   };
 
   // console.log(history);
+  
+
+  const handleFileChange = (e: any) =>{
+    
+    const file = e.target.files[0];
+    const reader : any = new FileReader();
+   //console.log("NAME",file.name)
+    reader.readAsText(file);
+    reader.onload = () => {
+      //console.log("running")
+      setFileName(file.name);
+      
+      setFileContent(reader.result);
+      //console.log("RESULT",typeof(reader.result))
+      setInput(reader.result)
+      
+    }
+
+    
+    
+  }
+  // console.log("THSI IS FILE ANME ",filename)
+  // console.log("THSI IS FILE CONTENT ",filecontent);
+  
   return (
     <>
       <FormContainer>
@@ -228,7 +255,7 @@ export default function InputSection() {
             />
             <div id="button-container">
               <Button onClick={() => setClicked(!clicked)}>Mic</Button>
-              <Button onClick={() => setClicked(!clicked)}>Upload</Button>
+              <input type="file" placeholder="Upload" onChange={handleFileChange}/>
               <Button onClick={handleSend}>Send</Button>
             </div>
           </form>
