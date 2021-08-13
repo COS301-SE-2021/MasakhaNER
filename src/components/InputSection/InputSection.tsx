@@ -71,6 +71,25 @@ const Button = styled.button`
   color: #5f5f5f;
 `;
 
+const Upload = styled.input`
+  border: solid 0.1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 20px;
+  height: 35px;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+  }
+  position: relative;
+  color: #5f5f5f;
+`;
+
 const Link = styled.div`
   background-color: white;
   display: grid;
@@ -95,6 +114,26 @@ export default function InputSection() {
   const [input2, setInput2] = useState("");
   const [clicked, setClicked] = useState(false);
   const [outputData, setOutputData] = useState(null);
+  const [wait, setWait] = useState(3);
+  const [up, setUp] = useState(false);
+  const [filename, setFileName] = useState("");
+  const [filecontent, setFileContent] = useState("");
+
+  let subtitle: any;
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const afterOpenModal = () => {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = "#444444";
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const options: any = {
     method: "POST",
@@ -121,26 +160,94 @@ export default function InputSection() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
+  
+  const handleSend = async () => {
+    addToHistory(input)
+    setWait(2);
+    const opts = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //"x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        input: input,
+      }),
+    };
 
-  console.log(clicked);
+    try {
+      const resp = await fetch("/input", opts);
+      console.log(resp);
+      if (resp.status === 200) {
+        const data = await resp.json();
+        console.log(data);
+        // localStorage.setItem("token", data.token);
+        // localStorage.setItem("isAuthenticated", "true");
+        setOutputData(data.output);
+        setInput2(input)
+        console.log("data is ", data.output);
+        // if (data.isadmin) {
+        //   history.push("/Admin");
+        // } else {
+        //   history.push("/Dashboard");
+        // }
+        setWait(1);
+      } else {
+        alert("error, failed!");
+        setWait(0);
+        //history.push("/");
+      }
+      console.log(wait);
+    } catch (error) {
+      console.log("there is an error", error);
+      history.push("/");
+    }
+  };
+
+  // console.log(history);
+  
+
+  const handleFileChange = (e: any) =>{
+    
+    const file = e.target.files[0];
+    const reader : any = new FileReader();
+   //console.log("NAME",file.name)
+    reader.readAsText(file);
+    reader.onload = () => {
+      //console.log("running")
+      setFileName(file.name);
+      
+      setFileContent(reader.result);
+      //console.log("RESULT",typeof(reader.result))
+      setInput(reader.result)
+      
+    }
+
+    
+    
+  }
+  // console.log("THSI IS FILE ANME ",filename)
+  // console.log("THSI IS FILE CONTENT ",filecontent);
+  
   return (
-    <FormContainer>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <Input
-            placeholder="Type here..."
-            id="testSection"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <div id="button-container">
-            <Button onClick={() => setClicked(!clicked)}>Mic</Button>
-            <Button onClick={() => setClicked(!clicked)}>Upload</Button>
-            <Button onClick={() => {setClicked(!clicked); setInput2(input)}}>Send</Button>
-          </div>
-        </form>
-      </div>
-      <div>
+    <>
+      <FormContainer>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <Input
+              placeholder="Type here..."
+              id="testSection"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <div id="button-container">
+              <Button onClick={() => setClicked(!clicked)}>Mic</Button>
+              <Upload type="file" placeholder="Upload" onChange={handleFileChange}/>
+              <Button onClick={handleSend}>Send</Button>
+            </div>
+          </form>
+        </div>
+        <div>
           <OutputSection>
             <Output data={outputData} input={input2}/>
           </OutputSection>
