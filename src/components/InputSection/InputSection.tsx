@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import "./InputSection.css";
 import Output from "../Output/Output";
 import styled from "styled-components";
-import Modal from "react-modal";
 
 const FormContainer = styled.div`
   display: grid;
@@ -110,25 +109,6 @@ const Link = styled.div`
   }
 `;
 
-const FeedbackInput = styled(Input)`
-  height: 6em;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "40%",
-    height: "60%",
-  },
-};
-
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
@@ -155,21 +135,6 @@ export default function InputSection() {
     setIsOpen(false);
   };
 
-  var history: String[] = new Array();
-  const addToHistory = (data: String) => {
-    history.push(data);
-    let stored = localStorage.getItem("history");
-    if (stored == null) {
-      localStorage.setItem("history", history.toString());
-    } else {
-      history = new Array();
-      history = stored.split(",");
-      history.push(data);
-      if (history.length > 5) history.shift();
-      localStorage.setItem("history", history.toString());
-    }
-    console.log(history);
-  };
   const options: any = {
     method: "POST",
     headers: {
@@ -184,15 +149,18 @@ export default function InputSection() {
       .then((res) => res.json())
       .then((data) => {
         setOutputData(data.output);
-        console.log("data is ", data.output);
       })
       .catch((err) => console.log(err));
   }, [clicked]);
 
+  var newEnt = localStorage.getItem('Entity');
+  var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
+  console.log(linklink);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
-
+  
   const handleSend = async () => {
     addToHistory(input)
     setWait(2);
@@ -281,34 +249,18 @@ export default function InputSection() {
         </div>
         <div>
           <OutputSection>
-            {wait==3?"":wait===2? "pending...": wait===1? <Output data={outputData} input={input2}/> : "failed"}
+            <Output data={outputData} input={input2}/>
           </OutputSection>
           <div id="button-container">
-            <Button onClick={openModal}>Feedback</Button>
+            <Button onClick={() => setClicked(!clicked)}>Feedback</Button>
           </div>
-        </div>
-        <div>
-          <Link>
-            <h4>Link Section</h4>
-          </Link>
-        </div>
-      </FormContainer>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
-        <Button onClick={closeModal}>close</Button>
-        <div><Output data={outputData} input={input2}/></div>
-        <form>
-          <FeedbackInput />
-          <br />
-          <Button>Send Feedback</Button>
-        </form>
-      </Modal>
-    </>
+      </div>
+      <div>
+        <Link>
+          <h4>Link Section</h4>
+          <iframe src={linklink} width="600" height="400"></iframe>
+        </Link>
+      </div>
+    </FormContainer>
   );
 }
