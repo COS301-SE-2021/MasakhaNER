@@ -112,7 +112,7 @@ export default function Output({ data, input }: OutputProps) {
   console.log(data);
   // console.log(json[0].start);
   let word = "";
-  data = json;
+  //data = json;
   let j = 0;
   if (data !== null) {
     for (let i = 0; i < arr.length; i++) {
@@ -120,9 +120,9 @@ export default function Output({ data, input }: OutputProps) {
         if (data[j].start === i) {
             // localStorage.setItem('Entity',data[j].word);
           word +=
-            ` <span id="${data[j].entity_group}" onClick="${storeWord(data[j].word)}">` +
+            ` <span id="${data[j].entity.substring(2)}" onClick="${storeWord(data[j].word)}">` +
             data[j].word +
-            `<span id="tag" onClick="${storeWord(data[j].word)}">${data[j].entity_group}</span></span>`;
+            `<span id="tag" onClick="${storeWord(data[j].word)}">${data[j].entity.substring(2)}</span></span>`;
           i = data[j].end - 1;
           j += 1;
         } else {
