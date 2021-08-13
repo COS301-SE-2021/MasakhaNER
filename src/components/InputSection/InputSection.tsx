@@ -122,18 +122,22 @@ export default function InputSection() {
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const afterOpenModal = () => {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = "#444444";
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  var history : String[] = new Array();
+  const addToHistory = (data: String ) => {
+    history.push(data);
+    let stored = localStorage.getItem('history');
+    if(stored == null){
+      localStorage.setItem('history', history.toString());
+    }
+    else{
+      history = new Array();
+      history = stored.split(",");
+      history.push(data);
+      if(history.length > 5) history.shift();
+      localStorage.setItem('history', history.toString());
+    }
+    console.log(history);
+  }
 
   const options: any = {
     method: "POST",
@@ -230,7 +234,6 @@ export default function InputSection() {
   // console.log("THSI IS FILE CONTENT ",filecontent);
   
   return (
-    <>
       <FormContainer>
         <div>
           <form onSubmit={handleSubmit}>
