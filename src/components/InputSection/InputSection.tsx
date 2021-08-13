@@ -252,7 +252,7 @@ export default function InputSection() {
         </div>
         <div>
           <OutputSection>
-            <Output data={outputData} input={input2}/>
+            {wait===3?"":wait===2?"pending...":wait===1?<Output data={outputData} input={input2}/>:"failed"}
           </OutputSection>
           <div id="button-container">
             <Button onClick={() => setClicked(!clicked)}>Feedback</Button>
