@@ -20,7 +20,7 @@ app.config.from_object('config_default.Config')
 # app.config['SECRET_KEY']='secret'
 # app.config['DATABASE']=User()
 # app.config['Database'] = User()
-#I MADE A COMMIT
+
 
 """
     Serves as mock trained data
@@ -134,11 +134,11 @@ def token_required(f):
 
 
 @app.route('/input', methods=["POST"])
-#@token_required
-def model_feedback():
+@token_required
+def model_feedback(user):
 
-    # if not user:
-    #     return jsonify({'response' : 'log in to use model'}),401
+    if not user:
+        return jsonify({'response' : 'log in to use model'}),401
 
     
     user_input = str(request.json["input"])
@@ -160,18 +160,6 @@ def model_feedback():
     Returns:
         JSON object with response
 """
-@app.route('/reset', methods=["POST"])
-def reset_password():
-    db = app.config['DATABASE']
-    if(db != None):
-        user_email = str(request.json['email'])
-        user_new_password = str(request.json['password'])
-        if(db.resetPassword(user_email,user_new_password)):
-            return {'response': 'password reset'}, 200
-        else:
-            return {'response': 'failed'}, 400
-    else:
-        return {'response': 'failed'}, 400
 
 
 @app.route('/register', methods=["POST"])
@@ -256,26 +244,6 @@ def login_user():
         return jsonify({'response': 'authetication failed!'}), 401
 
 # Admin functions
-
-@app.route('/update-details', methods=["POST"])
-@token_required
-def update_details(user):
-
-    if not user:
-        return jsonify({'response' : 'log in to use model'}),401
-
-    #hello
-    db = app.config['DATABASE']
-    if(db != None):
-        user_firstname = str(request.json["firstname"])
-        user_lastname = str(request.json["lastname"])
-        user_email = str(request.json["email"])
-        if(db.update_user_details(user_email, user_firstname, user_lastname)):
-            return {'response': 'updated'}, 200
-        else:
-            return {'response': 'failed'}, 400
-    else:
-        return {'response': 'failed'}, 400
 
 
 """
@@ -512,23 +480,6 @@ def admin_delete_model(user, id):
     else:
         return {'response':'failed'},400
 
-#feedback endpoint
-@app.route('/feedback', methods=["POST"])
-@token_required
-def feedback(user):
-    db = app.config['DATABASE']
-    if(db != None):
-        user_feedback = str(request.json["firstname"])
-        if(db.addFeedback(user_feedback)):
-            return {'response': 'feeback_saved'}, 200
-        else:
-            return {'response': 'failed'}, 400
-    else:
-        return {'response': 'failed'}, 400
-
-
-
-
 """
     main function:
         starts the Flask API
@@ -544,5 +495,6 @@ if __name__ == "__main__":
 # DB_NAME="d1mm3a0c29eepo"
 # DB_PASS="904c29b5f6055f6de8c01b24e1ac3f29736c54ca010dd9b8cc022f1555fe3be7"
 # DB_USER="orikanjrgszuig"
-#feedback endpoint
+
+
 

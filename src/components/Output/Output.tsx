@@ -1,5 +1,5 @@
 import "./Output.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Text = styled.div`
@@ -29,8 +29,8 @@ const Text = styled.div`
     }
   }
   #PER {
-    background-color: #f16f6f;
-    color: #610707;
+    background-color: #c1f177;
+    color: #538606;
     #tag {
       width: 30px;
       color: white;
@@ -45,6 +45,9 @@ const Text = styled.div`
     }
   }
 `;
+// const createMarkup = (text:string) => {
+//   return { __html: <div>${text}</div> };
+// };
 
 // function wikiSearch(entity1){
 
@@ -102,19 +105,24 @@ export default function Output({ data, input }: OutputProps) {
   let tex = "Emir of Kano turban Zhang wey don spend 18 years for Nigeria";
   let arr = [...input];
 
+  function storeWord(word:string){
+    localStorage.setItem('Entity',word);
+  }
+
   console.log(data);
   // console.log(json[0].start);
   let word = "";
-  //data = json;
+  data = json;
   let j = 0;
   if (data !== null) {
     for (let i = 0; i < arr.length; i++) {
       if (j < data.length) {
         if (data[j].start === i) {
+            // localStorage.setItem('Entity',data[j].word);
           word +=
-            ` <span id="${data[j].entity.substring(2)}">` +
+            ` <span id="${data[j].entity_group}" onClick="${storeWord(data[j].word)}">` +
             data[j].word +
-            `<span id="tag"><a href="https://en.wikipedia.org/wiki/${data[j].word}">${data[j].entity.substring(2)}</a></span></span>`;
+            `<span id="tag" onClick="${storeWord(data[j].word)}">${data[j].entity_group}</span></span>`;
           i = data[j].end - 1;
           j += 1;
         } else {
