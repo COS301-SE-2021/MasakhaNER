@@ -144,7 +144,6 @@ export default function InputSection() {
   };
 
   const afterOpenModal = () => {
-    // references are now sync'd and can be accessed.
     subtitle.style.color = "#444444";
   };
 
