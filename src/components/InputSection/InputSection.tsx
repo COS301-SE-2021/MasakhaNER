@@ -97,6 +97,25 @@ const FeedbackInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
+const Upload = styled.input`
+  border: solid 0.1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 20px;
+  height: 35px;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+  }
+  position: relative;
+  color: #5f5f5f;
+`;
+
 const customStyles = {
   content: {
     top: "50%",
@@ -213,6 +232,15 @@ export default function InputSection() {
     }
   };
 
+  const handleFileChange = (e: any) => {
+    const file = e.target.files[0];
+    const reader: any = new FileReader();
+    reader.readAsText(file);
+    reader.onload = () => {
+      setInput(reader.result);
+    };
+  };
+
   // console.log(history);
   return (
     <>
@@ -227,7 +255,11 @@ export default function InputSection() {
             />
             <div id="button-container">
               <Button onClick={() => setClicked(!clicked)}>Mic</Button>
-              <Button onClick={() => setClicked(!clicked)}>Upload</Button>
+              <Upload
+                type="file"
+                placeholder="Upload"
+                onChange={handleFileChange}
+              />
               <Button onClick={handleSend}>Send</Button>
             </div>
           </form>
