@@ -3,9 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Changepass.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import Nav from "../../../components/nav/Nav";
+import { useHistory } from "react-router-dom";
 import Footer from "../../../components/Footer/Footer";
 
+let history;
+
 function Register() {
+  history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -26,14 +30,17 @@ function Register() {
     }),
   };
 
+
   const handleStatus = async () => {
+    
     try {
-      const resp = await fetch("/reset", options);
+      const resp = await fetch("/details/changepassword", options);
       console.log(resp);
       if (resp.status === 200) {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
+        history.push("/login");
       } else {
         alert(resp.status);
         alert("Incorrect email!");
@@ -46,7 +53,7 @@ function Register() {
 
   useEffect(() => {
     if (disabled === false) {
-      fetch("/reset", options)
+      fetch("/details/changepassword", options)
         .then((res) => res.json())
         .then((data) => {
           console.log(data.output);
@@ -116,7 +123,7 @@ function Register() {
               // console.log(password3)
               if(password2===e.target.value){
                 setPasswordErr(true);
-                setDisabled(true)
+                setDisabled(false)
               }
               else{
                 setPasswordErr(false);
@@ -131,7 +138,7 @@ function Register() {
         <br />
         <div className="submit-button">
           <button
-            disabled={disabled}
+            // disabled={disabled}
             id="mainBtn"
             type="submit"
             className="btn btn-dark"
