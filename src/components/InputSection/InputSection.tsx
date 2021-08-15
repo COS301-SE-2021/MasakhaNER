@@ -196,7 +196,6 @@ export default function InputSection() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //"x-access-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
         input: input,
@@ -209,21 +208,13 @@ export default function InputSection() {
       if (resp.status === 200) {
         const data = await resp.json();
         console.log(data);
-        // localStorage.setItem("token", data.token);
-        // localStorage.setItem("isAuthenticated", "true");
         setOutputData(data.output);
         setInput2(input);
         console.log("data is ", data.output);
-        // if (data.isadmin) {
-        //   history.push("/Admin");
-        // } else {
-        //   history.push("/Dashboard");
-        // }
         setWait(1);
       } else {
         alert("error, failed!");
         setWait(0);
-        //history.push("/");
       }
       console.log(wait);
     } catch (error) {
@@ -241,7 +232,6 @@ export default function InputSection() {
     };
   };
 
-  // console.log(history);
   return (
     <>
       <FormContainer>
