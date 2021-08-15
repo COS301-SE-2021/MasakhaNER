@@ -193,7 +193,7 @@ export default function InputSection() {
         // localStorage.setItem("token", data.token);
         // localStorage.setItem("isAuthenticated", "true");
         setOutputData(data.output);
-        setInput2(input)
+        setInput2(input);
         console.log("data is ", data.output);
         // if (data.isadmin) {
         //   history.push("/Admin");
@@ -234,7 +234,15 @@ export default function InputSection() {
         </div>
         <div>
           <OutputSection>
-            {wait==3?"":wait===2? "pending...": wait===1? <Output data={outputData} input={input2}/> : "failed"}
+            {wait == 3 ? (
+              ""
+            ) : wait === 2 ? (
+              "pending..."
+            ) : wait === 1 ? (
+              <Output data={outputData} input={input2} />
+            ) : (
+              "failed"
+            )}
           </OutputSection>
           <div id="button-container">
             <Button onClick={openModal}>Feedback</Button>
@@ -255,7 +263,9 @@ export default function InputSection() {
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
         <Button onClick={closeModal}>close</Button>
-        <div><Output data={outputData} input={input2}/></div>
+        <div>
+          <Output data={outputData} input={input2} />
+        </div>
         <form>
           <FeedbackInput />
           <br />
