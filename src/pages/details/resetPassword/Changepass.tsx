@@ -121,7 +121,7 @@ function Register() {
               //console.log(e.target.value)
               // console.log(password2)
               // console.log(password3)
-              if(password2===e.target.value){
+              if(password===e.target.value){
                 setPasswordErr(true);
                 setDisabled(false)
               }
@@ -138,7 +138,7 @@ function Register() {
         <br />
         <div className="submit-button">
           <button
-            // disabled={disabled}
+            disabled={disabled}
             id="mainBtn"
             type="submit"
             className="btn btn-dark"
