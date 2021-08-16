@@ -94,7 +94,6 @@ const Upload = styled.input`
 const Link = styled.div`
   background-color: white;
   display: grid;
-  grid-template-columns: 65% 35%;
   flex-direction: column;
   justify-content: center;
   height: 43vh;
@@ -295,7 +294,7 @@ export default function InputSection() {
       <div>
         <Link>
           <h4>Link Section</h4>
-          <iframe src={linklink} width="600" height="400"></iframe>
+          <iframe src={linklink}  width="750" height="250"></iframe>
         </Link>
       </div>
     </FormContainer>
