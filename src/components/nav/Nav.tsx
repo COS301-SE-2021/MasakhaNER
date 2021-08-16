@@ -19,7 +19,7 @@ function Nav() {
     const open = Boolean(anchorEl);
 
     const goToDash = () =>{
-        history.push();
+        history.push("/dashboard");
     };
     const goToDetails = () =>{
         history.push("/details/edit");
