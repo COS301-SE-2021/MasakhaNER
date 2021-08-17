@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./InputSection.css";
 import Output from "../Output/Output";
 import styled from "styled-components";
+import Modal from "react-modal";
 
 const FormContainer = styled.div`
   display: grid;
@@ -93,7 +94,6 @@ const Upload = styled.input`
 const Link = styled.div`
   background-color: white;
   display: grid;
-  grid-template-columns: 65% 35%;
   flex-direction: column;
   justify-content: center;
   height: 43vh;
@@ -109,6 +109,25 @@ const Link = styled.div`
   }
 `;
 
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    width: "40%",
+    height: "60%",
+  },
+};
+
+const FeedbackInput = styled(Input)`
+  height: 6em;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
@@ -121,6 +140,19 @@ export default function InputSection() {
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const afterOpenModal = () => {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = "#444444";
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   var history : String[] = new Array();
   const addToHistory = (data: String ) => {
@@ -234,6 +266,7 @@ export default function InputSection() {
   // console.log("THSI IS FILE CONTENT ",filecontent);
   
   return (
+    <>
       <FormContainer>
         <div>
           <form onSubmit={handleSubmit}>
@@ -255,15 +288,34 @@ export default function InputSection() {
             {wait===3?"":wait===2?"pending...":wait===1?<Output data={outputData} input={input2}/>:"failed"}
           </OutputSection>
           <div id="button-container">
-            <Button onClick={() => setClicked(!clicked)}>Feedback</Button>
+            <Button onClick={openModal}>Feedback</Button>
           </div>
       </div>
       <div>
         <Link>
           <h4>Link Section</h4>
-          <iframe src={linklink} width="600" height="400"></iframe>
+          <iframe src={linklink}  width="750" height="250"></iframe>
         </Link>
       </div>
     </FormContainer>
+    <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
+        <Button onClick={closeModal}>close</Button>
+        <div>
+          <Output data={outputData} input={input2} />
+        </div>
+        <form>
+          <FeedbackInput />
+          <br />
+          <Button>Send Feedback</Button>
+        </form>
+      </Modal>
+    </>
   );
 }

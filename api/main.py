@@ -447,13 +447,13 @@ def admin_get_users(user):
 
 #admin model functionality
 @app.route('/models', methods=["POST"])
-@token_required
-def admin_add_models(user):
-    if user is None:
-        return jsonify({'response': 'user unauthirized'}), 401
+# @token_required
+def admin_add_models():
+    # if user is None:
+    #     return jsonify({'response': 'user unauthirized'}), 401
 
-    if user[5]==False:
-        return jsonify({'response': 'user unauthirized'}), 401
+    # if user[5]==False:
+    #     return jsonify({'response': 'user unauthirized'}), 401
 
     db = app.config['DATABASE']
     if(db != None):
@@ -514,11 +514,12 @@ def admin_delete_model(user, id):
 
 #feedback endpoint
 @app.route('/feedback', methods=["POST"])
-@token_required
-def feedback(user):
+#@token_required
+def feedback():
     db = app.config['DATABASE']
     if(db != None):
-        user_feedback = str(request.json["firstname"])
+        user_feedback = str(request.json["feedback"])
+        print(type(user_feedback))
         if(db.addFeedback(user_feedback)):
             return {'response': 'feeback_saved'}, 200
         else:
