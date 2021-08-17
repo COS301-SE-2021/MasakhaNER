@@ -30,3 +30,8 @@ class BasicTests(unittest.TestCase):
     # executed after each test
     def tearDown(self):
         pass#
+
+    def test_endpoint(self):
+        INPUT = {
+        "feedback": "There is always a better way to do something",
+        }
