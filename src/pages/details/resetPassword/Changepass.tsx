@@ -4,83 +4,7 @@ import "./Changepass.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import Nav from "../../../components/nav/Nav";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
 import Footer from "../../../components/Footer/Footer";
-
-const Wrapper = styled.div`
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-  width: 80vw;
-  border: solid 1px #ffffff;
-  margin: 0 auto;
-  margin-top: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
-`;
-
-const Bar = styled.div`
-  width: inherit;
-  height: 5px;
-  background-color: #000;
-  margin-top: 5px;
-`;
-
-const Header = styled.h1`
-  font-size: 3em;
-  margin-bottom: 1em;
-  @media (max-width: 767px) {
-    font-size: 2em;
-  }
-`;
-
-const Input = styled.input`
-  border: solid 1px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  height: 35px;
-  width: 15em;
-  padding: 15px;
-
-  &:hover {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
-    transition: 0.4s;
-  }
-
-  &:focus {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const Button = styled.button`
-  border: solid 1px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
-  width: 10em;
-  background-color: white;
-  border-radius: 20px;
-  height: 35px;
-  width: 15em;
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
-  &:hover {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
-    transition: 0.4s;
-  }
-`;
-
-const ChangepassButton = styled(Button)`
-  background-color: black;
-  color: white;
-`;
 
 let history;
 
@@ -148,17 +72,16 @@ function Register() {
   };
 
   return (
-    <Wrapper>
-      <Header>
-        MasakhaNER
-        <Bar />
-      </Header>
-      <div>
-        <h2>Change Password</h2>
-      </div>
+    <div id="detailspage">
+      <Nav />
+      <div className="signup-form">
       <form id="detForm" onSubmit={handleSubmit}>
+        <div className="registerTop">
+          <h2>Change Password</h2>
+        </div>
+        <div className="form-group">
           <label htmlFor="oldPassword">email:</label>
-          <Input
+          <input
             type="email"
             name="email"
             id="email"
@@ -169,8 +92,9 @@ function Register() {
             }}
             required
           />
+        <div className="form-group">
           <label htmlFor="newPassword">New password:</label>
-          <Input
+          <input
            type="password"
            name="oldPassword"
            id="oldPassword"
@@ -182,8 +106,11 @@ function Register() {
            required
           />
           {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
+        </div>
+        </div>
+        <div className="form-group">
           <label htmlFor="lastName">Confirm New Password:</label>
-          <Input
+          <input
             type="password"
             name="confirmPassword"
             id="confirmPassword"
@@ -207,8 +134,8 @@ function Register() {
             required
           />
         {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
+        </div>
         <br />
-          <ChangepassButton
         <div className="submit-button">
           <button
             disabled={disabled}
@@ -226,11 +153,14 @@ function Register() {
             }}
           >
             Submit
-          </ChangepassButton>
+          </button>
+        </div>
       </form>
+    </div>
       <br />
       <br />
-    </Wrapper>
+      <Footer />
+    </div>
     
   );
 }
