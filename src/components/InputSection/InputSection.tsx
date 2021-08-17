@@ -200,11 +200,11 @@ export default function InputSection() {
   const handleSend = async () => {
     addToHistory(input)
     setWait(2);
-    const opts = {
+    const opts: any = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //"x-access-token": localStorage.getItem("token"),
+        "x-access-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
         input: input,
