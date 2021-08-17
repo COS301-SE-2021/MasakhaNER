@@ -107,6 +107,7 @@ export default function Output({ data, input }: OutputProps) {
 
   function storeWord(word:string){
     localStorage.setItem('Entity',word);
+    //window.location.reload();
   }
 
   console.log(data);
@@ -120,6 +121,7 @@ export default function Output({ data, input }: OutputProps) {
         if (data[j].start === i) {
             // localStorage.setItem('Entity',data[j].word);
             //https://www.google.com/maps/place/
+            //""
           word +=
             ` <span id="${data[j].entity.substring(2)}" onClick="${storeWord(data[j].word)}"><a href="https://en.wikipedia.org/wiki/${data[j].word}">` +
             data[j].word +
