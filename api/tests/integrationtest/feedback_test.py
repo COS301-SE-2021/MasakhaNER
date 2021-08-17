@@ -27,3 +27,6 @@ class BasicTests(unittest.TestCase):
         # mail.init_app(app)
         # self.assertEqual(app.debug, False)
     
+    # executed after each test
+    def tearDown(self):
+        pass#
