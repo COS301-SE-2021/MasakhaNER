@@ -35,3 +35,8 @@ class BasicTests(unittest.TestCase):
         INPUT = {
         "feedback": "There is always a better way to do something",
         }
+        response = self.main.post('/feedback',json=INPUT)
+        print(response.data)
+
+        r = json.loads(response.data)
+        result1 = r['response']
