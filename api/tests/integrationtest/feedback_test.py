@@ -18,4 +18,12 @@ class BasicTests(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
+        app.config.from_object('config_default.Config')
+        self.main = app.test_client()
+        # db.drop_all()
+        # db.create_all()
         
+        # # Disable sending emails during unit testing
+        # mail.init_app(app)
+        # self.assertEqual(app.debug, False)
+    
