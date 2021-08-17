@@ -116,7 +116,7 @@ function Register() {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
-        history.push("/login");
+        history.push("/");
       } else {
         alert(resp.status);
         alert("Incorrect email!");
@@ -208,25 +208,26 @@ function Register() {
           />
         {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
         <br />
-          <ChangepassButton
-        <div className="submit-button">
-          <button
-            disabled={disabled}
-            id="mainBtn"
-            type="submit"
-            className="btn btn-dark"
-            onClick={(e) => {
-              e.preventDefault();
-              if (!validPassword.test(password2)) {
-                setPasswordErr2(true)
-                //alert("use regex");
-              } else {
-              handleStatus();
-              }
-            }}
-          >
-            Submit
-          </ChangepassButton>
+        <ChangepassButton>
+          <div className="submit-button">
+            <button
+              disabled={disabled}
+              id="mainBtn"
+              type="submit"
+              className="btn btn-dark"
+              onClick={(e) => {
+                e.preventDefault();
+                if (!validPassword.test(password2)) {
+                  setPasswordErr2(true)
+                  //alert("use regex");
+                } else {
+                handleStatus();
+                }
+              }}
+            />
+              Submit
+        </div>
+        </ChangepassButton>
       </form>
       <br />
       <br />
