@@ -518,7 +518,7 @@ def admin_delete_model(user, id):
 def feedback(user):
     db = app.config['DATABASE']
     if(db != None):
-        user_feedback = str(request.json["firstname"])
+        user_feedback = str(request.json["feedback"])
         if(db.addFeedback(user_feedback)):
             return {'response': 'feeback_saved'}, 200
         else:
