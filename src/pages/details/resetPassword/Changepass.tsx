@@ -116,7 +116,7 @@ function Register() {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
-        history.push("/");
+        history.push("/login");
       } else {
         alert(resp.status);
         alert("Incorrect email!");
