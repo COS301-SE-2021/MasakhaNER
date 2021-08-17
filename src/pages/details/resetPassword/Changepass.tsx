@@ -40,7 +40,7 @@ function Register() {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
-        history.push("/login");
+        history.push("/");
       } else {
         alert(resp.status);
         alert("Incorrect email!");
