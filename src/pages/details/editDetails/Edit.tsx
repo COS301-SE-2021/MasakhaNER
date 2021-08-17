@@ -116,7 +116,7 @@ function Register() {
         <br />
         <div className="submit-button">
           <button
-            disabled={disabled}
+            //disabled={disabled}
             id="mainBtn"
             type="submit"
             className="btn btn-dark"

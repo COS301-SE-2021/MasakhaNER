@@ -1,0 +1,20 @@
+.abt{
+    background-image: url('../../images/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.out{
+    background-color: rgba(0, 0, 0, 0.801);
+}
+.out h2{
+    text-align: start;
+    color: #e7dfdf;
+}
+.out p, a{
+    text-align: start;
+    color: #e7dfdf;
+    font-size: medium;
+}
+p{
+    font-size: medium;
+}
