@@ -17,4 +17,12 @@ class Test(unittest.TestCase):
 
 
     def test_endpoint(self):
-
+        INPUT = {
+        "id": 192,
+        "firstname": "first",
+        "lastname": "person",
+        "email": "fp@gmail.com",
+        "password": "password",
+        "isadmin":False,
+        "verified":True
+        }
