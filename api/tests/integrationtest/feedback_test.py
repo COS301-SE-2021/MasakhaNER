@@ -41,4 +41,4 @@ class BasicTests(unittest.TestCase):
         r = json.loads(response.data)
         result1 = r['response']
         self.assertEqual(200, response.status_code)
-        self.assertEqual(result1,'registered',msg=" if failed User is valid")
+        self.assertEqual(result1,'feedback added',msg=" if failed User is valid")
