@@ -149,34 +149,26 @@ function Register() {
       <Nav />
       <Wrapper>
         <form id="detForm" onSubmit={handleSubmit}>
-          <div className="registerTop">
-            <h2>Edit Details</h2>
-            <Bar />
-          </div>
-          <div className="form-group">
-            <label htmlFor="firstName">First Name:</label>
-            <Input
-              type="text"
-              name="firstName"
-              className="form-control"
-              value={firstName}
-              onChange={(e) => setfirstName(e.target.value)}
-              required
-              placeholder="Enter your first name"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name:</label>
-            <Input
-              type="text"
-              name="flastName"
-              className="form-control"
-              value={lastName}
-              onChange={(e) => setlastName(e.target.value)}
-              required
-              placeholder="Enter your last name"
-            />
-          </div>
+          <h2>Edit Details</h2>
+          <Bar />
+          <label htmlFor="firstName">First Name:</label>
+          <Input
+            type="text"
+            name="firstName"
+            value={firstName}
+            onChange={(e) => setfirstName(e.target.value)}
+            required
+            placeholder="Enter your first name"
+          />
+          <label htmlFor="lastName">Last Name:</label>
+          <Input
+            type="text"
+            name="flastName"
+            value={lastName}
+            onChange={(e) => setlastName(e.target.value)}
+            required
+            placeholder="Enter your last name"
+          />
           <br />
           <div className="submit-button">
             <Button
