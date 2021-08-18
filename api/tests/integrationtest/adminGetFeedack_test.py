@@ -58,4 +58,4 @@ class Test(unittest.TestCase):
         print(data)
         result = data['response']
         self.assertEqual(200, r.status_code)
-        self.assertEqual(result, 'deleted')
+        self.assertEqual(result, 'feedback')
