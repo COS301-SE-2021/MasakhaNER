@@ -13,9 +13,9 @@ const ModelList = (props: any) => {
       <Datagrid>
         <TextField source="id" />
         <TextField source="modelname" label ='Name' />
-        <TextField source="model" />
+        <TextField  source="model" />
         <DeleteButton basePath="/models" />
-        <EditButton basePath="/models" />
+        <EditButton label= 'Select Model' basePath="/models" />
       </Datagrid>
     </List>
   );
