@@ -19,6 +19,10 @@ class Test(unittest.TestCase):
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
+        db = app.config['DATABASE']
+        sql = "INSERT INTO models (id,modelname,model) VALUES(%s,%s,%s)"
+        db.cur.execute(sql,(0,'TEST MODEL', 'TESTING'))
+        db.conn.commit()
         #app.config['DATABASE'].insertBob()
         self.main = app.test_client()
     
@@ -34,9 +38,15 @@ class Test(unittest.TestCase):
     def test_endpoint(self):
 
         token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.delete('/models/281',headers={'x-access-token':token})
+        r = self.main.delete('/models/0',headers={'x-access-token':token})
         data = json.loads(r.data)
+        db = app.config['DATABASE']
+        sql = "SELECT * FROM models WHERE id=%s"
+        db.cur.execute(sql,(0,))
+        model = db.cur.fetchone()
+        db.conn.commit()
         print(data)
         result = data['response']
+        self.assertEqual(model,None)
         self.assertEqual(200, r.status_code)
         self.assertEqual(result, 'deleted')

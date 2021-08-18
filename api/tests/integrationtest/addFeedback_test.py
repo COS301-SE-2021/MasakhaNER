@@ -31,11 +31,15 @@ class BasicTests(unittest.TestCase):
     
     # executed after each test
     def tearDown(self):
+        db = app.config['DATABASE']
+        sql = "DELETE FROM feedback WHERE feeback = %s;"
+        db.cur.execute(sql,("Integration test feedback",))
+        db.conn.commit()
         pass#
 
     def test_endpoint(self):
         INPUT = {
-        "feedback": "There is always a better way to do something",
+        "feedback": "Integration test feedback",
         }
         token = jwt.encode({'email' :'thirdperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
@@ -47,7 +51,7 @@ class BasicTests(unittest.TestCase):
     
     def test_endpoint2(self):
         INPUT = {
-        "feedback": "There is always a better way to do something",
+        "feedback": "Integration test feedback",
         }
 
         token = jwt.encode({'email' :'thirdperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
@@ -60,7 +64,7 @@ class BasicTests(unittest.TestCase):
     
     def test_endpoint3(self):
         INPUT = {
-        "feedback": "There is always a better way to do something",
+        "feedback": "Integration test feedback",
         }
 
         token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
