@@ -18,4 +18,3 @@ class Test(unittest.TestCase):
 
     def test_endpoint(self):
 
-change-details-test
