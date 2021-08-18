@@ -7,3 +7,7 @@ from datetime import datetime, timedelta
 import os, sys
 sys.path.append('api')
 from main import app
+
+
+class Test(unittest.TestCase):
+    main=None
