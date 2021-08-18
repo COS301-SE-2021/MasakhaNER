@@ -4,6 +4,7 @@ import "./Edit.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import Nav from "../../../components/nav/Nav";
 import Footer from "../../../components/Footer/Footer";
+import styled from "styled-components"
 
 function Register() {
   const [firstName, setfirstName] = useState("");
