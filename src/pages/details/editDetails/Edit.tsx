@@ -7,23 +7,18 @@ import styled from "styled-components"
 
 const Wrapper = styled.div`
   background-color: white;
-  display: grid;
-  grid-template-columns: 65% 35%;
+  display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  height: 90vh;
-  width: 90vw;
+  height: 80vh;
+  width: 80vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
   margin-top: 8vh;
-  margin-bottom: 8vh;
   border-radius: 20px;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
-  padding: 2rem;
-
-  div {
-    text-align: center;
-  }
+  text-align: center;
 `;
 
 const Input = styled.input`
@@ -32,7 +27,6 @@ const Input = styled.input`
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   height: 35px;
-  width: 15em;
   padding: 15px;
 
   &:hover {
