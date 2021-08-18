@@ -4,6 +4,7 @@ import "./InputSection.css";
 import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
+import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
   display: grid;
@@ -261,12 +262,7 @@ export default function InputSection() {
   }
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
-  function CalliFrame() {
-    var newEnt = localStorage.getItem('Entity');
-    var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
-    console.log(linklink);
-    return <iframe src={linklink}  width="750" height="250" id="wikiLink"></iframe>;
-  }
+  
   
   return (
     <>

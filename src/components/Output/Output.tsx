@@ -101,12 +101,24 @@ interface OutputProps {
   input: string;
 }
 
+  
+  // const [newEnt, setnewEnt] = useState("");
+  // const [wikiLink, setwikiLink] = useState("");
+
+  
+
+export function CalliFrame() {
+  var newEnt = localStorage.getItem('Entity');
+  var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
+  console.log(linklink);
+  return <iframe src={linklink}  width="750" height="250" id="wikiLink"></iframe>;
+}
+
 export default function Output({ data, input }: OutputProps) {
   let tex = "Emir of Kano turban Zhang wey don spend 18 years for Nigeria";
   let arr = [...input];
 
   const [ent, setEnt] = useState("");
-
   useEffect(() => {
     localStorage.setItem('Entity',ent);
   },[ent]);
@@ -122,6 +134,7 @@ export default function Output({ data, input }: OutputProps) {
   // console.log(json[0].start);
   let word = "";
   //data = json;
+
   let j = 0;
   if (data !== null) {
     for (let i = 0; i < arr.length; i++) {
@@ -129,13 +142,23 @@ export default function Output({ data, input }: OutputProps) {
         if (data[j].start === i) {
             // localStorage.setItem('Entity',data[j].word);
             //https://www.google.com/maps/place/
-            //"https://en.wikipedia.org/wiki/${data[j].word}"
-          word +=
-            ` <span id="${data[j].entity.substring(2)}" onClick={() => ${setEnt(data[j].word)}}>` +
+            //{${setEnt(data[j].word)}}
+            console.log("The entity", data[j].entity);
+            if (data[j].entity == "B-LOC"){
+              word +=
+            ` <span id="${data[j].entity.substring(2)}"><a href="https://www.google.com/maps/place/${data[j].word}" target="_blank">` +
             data[j].word +
-            `<span id="tag"}>${data[j].entity.substring(2)}</span></span>`;
+            `<span id="tag"}>${data[j].entity.substring(2)}</span></a></span>`;
           i = data[j].end - 1;
           j += 1;
+            }else{
+              word +=
+              ` <span id="${data[j].entity.substring(2)}"><a href="https://en.wikipedia.org/wiki/${data[j].word}" target="_blank">` +
+              data[j].word +
+              `<span id="tag"}>${data[j].entity.substring(2)}</span></a></span>`;
+            i = data[j].end - 1;
+            j += 1;
+            }
         } else {
           word += arr[i];
         }
