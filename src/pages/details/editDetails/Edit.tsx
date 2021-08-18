@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   padding: 2rem;
 
   div {
-    text-align: left;
+    text-align: center;
   }
 `;
 
@@ -48,6 +48,10 @@ const Input = styled.input`
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   }
 `;
+
+const Form = styled.form`
+  margin: 0 auto;
+`
 
 const Button = styled.button`
   border: solid 1px rgba(0, 0, 0, 0.2);
