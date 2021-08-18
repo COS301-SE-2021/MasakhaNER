@@ -3,14 +3,12 @@ import {
     List,
     Datagrid,
     TextField,
-    EmailField,
     EditButton,
     DeleteButton,
-    BooleanField,
   } from "react-admin";
 const  FeedBackList = (props: any) => {
     return (
-        <List {...props}>
+    <List {...props}>
       <Datagrid>
         <TextField source="id" />
         <TextField source="feedback" />
