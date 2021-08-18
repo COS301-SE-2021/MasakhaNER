@@ -33,6 +33,7 @@ export default function AdminUser() {
   return (
     <>
       <Admin
+        theme={theme}
         dataProvider={simpleRestProvider("http://localhost:3000", fetchJson)}
       >
         <Resource
