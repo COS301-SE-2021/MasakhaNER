@@ -213,7 +213,7 @@ def verify_user():
     db = app.config['DATABASE']
     if(db != False):
         user_email = request.json["email"]
-        user_code = request.json["code"]
+        user_code = int(request.json["code"])
         if user_code != None and user_code == db.get_code(user_email):
             print(True)
             db.verify_user(user_email)

@@ -129,6 +129,8 @@ const FeedbackInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
+// Modal.setAppElement("#inputsection");
+
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
@@ -267,7 +269,7 @@ export default function InputSection() {
   return (
     <>
       <FormContainer>
-        <div>
+        <div id="inputsection">
           <form onSubmit={handleSubmit}>
             <Input
               placeholder="Type here..."
