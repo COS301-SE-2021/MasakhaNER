@@ -2,7 +2,7 @@ from transformers import AutoTokenizer, AutoModelForTokenClassification
 from transformers import pipeline
 
 def runModel(input):
-    url = "Davlan/bert-base-multilingual-cased-masakhaner"
+    url = "Davlan/distilbert-base-multilingual-cased-masakhaner"
     tokenizer = AutoTokenizer.from_pretrained(url)
     model = AutoModelForTokenClassification.from_pretrained(url)
     nlp = pipeline("ner", model=model, tokenizer=tokenizer)
