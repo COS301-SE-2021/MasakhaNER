@@ -168,6 +168,7 @@ function Register() {
               setEmail(e.target.value);
             }}
             required
+            placeholder="Enter your email"
           />
           <label htmlFor="newPassword">New password:</label>
           <Input
