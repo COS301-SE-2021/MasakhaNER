@@ -66,13 +66,13 @@ class User:
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
 
             self.cur.execute(sql,(firstname,lastname,encrypted_password,email,False,code,False))
-            #sendemail = Email()
+            # sendemail = Email()
             # message = """\
             # Masakhane Activation Code
 
             # Here is your activation code: 1111 """
-            #sendemail.send_email(message, email)
-            self.conn.commit()
+            # sendemail.send_email(message, email)
+            # self.conn.commit()
             # self.cur.close()
             # self.conn.close()
             return True
