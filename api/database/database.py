@@ -166,6 +166,21 @@ class User:
         # self.conn.close()
         return db_user
 
+    def resetPassword(self, email, newPassword):
+        try:
+            encoded_password = bytes(newPassword, encoding='utf-8')
+            encrypted_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
+            encrypted_password = encrypted_password.decode('UTF-8')
+            print(encrypted_password)
+            sql = "UPDATE users SET password=%s WHERE email=%s;"
+            self.cur.execute(sql,(encrypted_password,email))
+            self.conn.commit()
+            print("done")
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
     def isAdmin(self, email):
         # self.conn = psycopg2.connect(
         #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
@@ -338,6 +353,17 @@ class User:
         # self.conn.close()
         return db_user
 
+    def setModels(self,name):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        print(name)
+        sql="SELECT model FROM models where id=%s"
+        self.cur.execute(sql,(name,))
+        db_user = self.cur.fetchone()
+        self.conn.commit()
+
+        return db_user
+
     def adminDeleteModel(self, id):
         try:
             # self.conn = psycopg2.connect(
@@ -352,6 +378,17 @@ class User:
         except Exception as e:
             print(f"Database connection error: {e}")
             return False
+
+    def addFeedback(self,feedback):
+        try:
+            sql = "INSERT INTO feedback (feedback) VALUES (%s)"
+            self.cur.execute(sql,(feedback,))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
 
     def update_user_details(self, email, name, surname):
          try:

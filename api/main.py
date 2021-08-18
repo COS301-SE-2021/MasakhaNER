@@ -20,7 +20,7 @@ app.config.from_object('config_default.Config')
 # app.config['SECRET_KEY']='secret'
 # app.config['DATABASE']=User()
 # app.config['Database'] = User()
-
+#I MADE A COMMIT
 
 """
     Serves as mock trained data
@@ -160,6 +160,18 @@ def model_feedback(user):
     Returns:
         JSON object with response
 """
+@app.route('/details/changepassword', methods=["POST"])
+def reset_password():
+    db = app.config['DATABASE']
+    if(db != None):
+        user_email = str(request.json['email'])
+        user_new_password = str(request.json['password'])
+        if(db.resetPassword(user_email,user_new_password)):
+            return {'response': 'password reset'}, 200
+        else:
+            return {'response': 'failed'}, 400
+    else:
+        return {'response': 'failed'}, 400
 
 
 @app.route('/register', methods=["POST"])
@@ -436,7 +448,7 @@ def admin_get_users(user):
 #admin model functionality
 @app.route('/models', methods=["POST"])
 @token_required
-def admin_add_models(user):
+def admin_add_models():
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
@@ -500,6 +512,63 @@ def admin_delete_model(user, id):
     else:
         return {'response':'failed'},400
 
+@app.route('/models/<id>', methods=["POST"])
+#@token_required
+def set_model(id):
+
+    # print(user)
+    # if user is None:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    # if user[5]==False:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    db = app.config['DATABASE']
+    if(db != None):
+        model = db.setModels(id)
+        print(model)
+        if(model!=None):
+            # with is like your try .. finally block in this case
+            data=""
+            with open('model.py', 'r') as file:
+                # read a list of lines into data
+                data = file.readlines()
+
+            print(data)
+            print("Your name: " + data[4])
+
+            # now change the 2nd line, note that you have to add a newline
+            data[4] = f'    url = "{model[0]}"\n'
+            print(data[4])
+            # and write everything back
+            with open('model.py', 'w') as file:
+                file.writelines( data )
+            
+            return {'response':'new model set'},200
+
+        else:
+            return {'response':'failed'},400
+    else:
+        return {'response':'failed'},400
+
+#feedback endpoint
+@app.route('/feedback', methods=["POST"])
+@token_required
+def feedback():
+    db = app.config['DATABASE']
+    if(db != None):
+        user_feedback = str(request.json["feedback"])
+        print(type(user_feedback))
+        if(db.addFeedback(user_feedback)):
+            return {'response': 'feeback_saved'}, 200
+        else:
+            return {'response': 'failed'}, 400
+    else:
+        return {'response': 'failed'}, 400
+
+
+
+
 """
     main function:
         starts the Flask API
@@ -515,5 +584,5 @@ if __name__ == "__main__":
 # DB_NAME="d1mm3a0c29eepo"
 # DB_PASS="904c29b5f6055f6de8c01b24e1ac3f29736c54ca010dd9b8cc022f1555fe3be7"
 # DB_USER="orikanjrgszuig"
-
+#feedback endpoint
 
