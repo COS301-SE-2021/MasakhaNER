@@ -135,7 +135,7 @@ function Register() {
           </div>
           <div className="form-group">
             <label htmlFor="firstName">First Name:</label>
-            <input
+            <Input
               type="text"
               name="firstName"
               id="firstName"
@@ -147,7 +147,7 @@ function Register() {
           </div>
           <div className="form-group">
             <label htmlFor="lastName">Last Name:</label>
-            <input
+            <Input
               type="text"
               name="flastName"
               id="lastName"
