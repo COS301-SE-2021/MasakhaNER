@@ -9,3 +9,5 @@ from main import app
 TEST_DB = 'test.db'
 
 class BasicTests(unittest.TestCase):
+
+    main=None
