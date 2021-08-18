@@ -16,3 +16,6 @@ class BasicTests(unittest.TestCase):
 
         app.config.from_object('config_default.Config')
         self.main = app.test_client()
+
+    def tearDown(self):
+        pass#
