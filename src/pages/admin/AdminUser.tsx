@@ -30,7 +30,7 @@ export default function AdminUser() {
           edit={UserEdit}
           create={CreateUser}
         />
-        {/* <Resource name="models" list={ModelList} create={CreateModel} /> */}
+        <Resource name="models" list={ModelList} create={CreateModel} />
         <Resource name="dashboard" list={Input} />
       </Admin>
     </>

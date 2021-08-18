@@ -1,9 +1,17 @@
 .Navbar {
     background-color: rgb(0, 0, 0);
-    padding: 1em;
     margin-bottom: 10em;
     color: white;
     margin-bottom: 60px;
+    display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+    align-items: flex-start;
+}
+menu{
+    align-self: flex-start;
+    margin-top: 50%;
 }
 #navbar-heading {
     margin-bottom: 0;
