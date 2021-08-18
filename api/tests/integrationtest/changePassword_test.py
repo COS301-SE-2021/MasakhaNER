@@ -1,4 +1,5 @@
 import unittest
+import bcrypt
 import jwt
 import requests
 import json
@@ -17,6 +18,16 @@ class BasicTests(unittest.TestCase):
     def setUp(self):
 
         app.config.from_object('config_default.Config')
+        encoded_password = bytes("password", encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
+        db = app.config['DATABASE']
+        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        db.cur.execute(sql,(0,'integeration', 'test',encrypted_password,'integreation@test.com',False,000,True))
+        db.conn.commit()
+        self.main = app.test_client()
         self.main = app.test_client()
 
     def tearDown(self):
