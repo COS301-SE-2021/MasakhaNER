@@ -181,6 +181,7 @@ function Register() {
              setPassword(e.target.value);
            }}
            required
+           placeholder="Enter your old password"
           />
           {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
           <label htmlFor="lastName">Confirm New Password:</label>
