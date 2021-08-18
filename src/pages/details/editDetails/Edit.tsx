@@ -150,6 +150,7 @@ function Register() {
         <form id="detForm" onSubmit={handleSubmit}>
           <div className="registerTop">
             <h2>Edit Details</h2>
+            <Bar />
           </div>
           <div className="form-group">
             <label htmlFor="firstName">First Name:</label>
