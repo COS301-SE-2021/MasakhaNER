@@ -150,7 +150,7 @@ function Register() {
     <div id="detailspage">
       <Nav />
       <Wrapper>
-        <form id="detForm" onSubmit={handleSubmit}>
+        <Form id="detForm" onSubmit={handleSubmit}>
           <div className="registerTop">
             <h2>Edit Details</h2>
           </div>
@@ -196,7 +196,7 @@ function Register() {
           </div>
           {Passworderr ||
             (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
-        </form>
+        </Form>
       </Wrapper>
       <br />
       <br />
