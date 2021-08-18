@@ -29,4 +29,7 @@ class Test(unittest.TestCase):
         r = self.main.delete('/users/1',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
-        
+        result = data['response']
+        self.assertEqual(401, r.status_code)
+        self.assertEqual(result, 'Signature has expired')
+
