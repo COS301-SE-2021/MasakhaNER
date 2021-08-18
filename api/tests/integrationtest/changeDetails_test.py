@@ -11,5 +11,6 @@ from main import app
 class Test(unittest.TestCase):
     main=None
 
+    def setUp(self):
 
 change-details-test
