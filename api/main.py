@@ -267,7 +267,7 @@ def update_details(user):
 
     #hello
     db = app.config['DATABASE']
-    if(db != None):
+    if(db != False):
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
         user_email = user[4]

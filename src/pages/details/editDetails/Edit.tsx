@@ -5,9 +5,10 @@ import ReCAPTCHA from "react-google-recaptcha";
 import Nav from "../../../components/nav/Nav";
 import Footer from "../../../components/Footer/Footer";
 
-function Register() {
+function UpdateDetails() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
+  const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [Emailerr, setEmailErr] = useState(false);
@@ -17,7 +18,7 @@ function Register() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-access=token":localStorage.getItem("token")
+      "x-access=token": localStorage.getItem("token"),
     },
     body: JSON.stringify({
       firstname: firstName,
@@ -28,24 +29,25 @@ function Register() {
   const handleStatus = async () => {
     try {
       const resp = await fetch("/update-details", options);
-      console.log(resp);
+      alert(resp);
       if (resp.status === 200) {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
+        window.location.href = "/Admin#/users";
       } else {
         alert(resp.status);
         alert("Incorrect verification code!");
       }
     } catch (error) {
       console.log("there is an error", error);
-      window.location.href = "/";
+      // window.location.href = "/";
     }
   };
 
   useEffect(() => {
     if (disabled === false) {
-      fetch("/register", options)
+      fetch("/update-details", options)
         .then((res) => res.json())
         .then((data) => {
           console.log(data.output);
@@ -53,11 +55,6 @@ function Register() {
         .catch((err) => console.log(err));
     }
   }, [clicked]);
-
-  const validEmail = new RegExp(
-    "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
-  );
-  const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -102,11 +99,7 @@ function Register() {
             id="mainBtn"
             type="submit"
             className="btn btn-dark"
-            onClick={(e) => {
-              e.preventDefault();
-              handleStatus();
-            }}
-          >
+            onClick={handleStatus}>
             Submit
           </button>
         </div>
@@ -122,4 +115,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default UpdateDetails;
