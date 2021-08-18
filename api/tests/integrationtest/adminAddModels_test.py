@@ -10,7 +10,7 @@ from main import app
 
 class Test(unittest.TestCase):
     main=None
-    # executed prior to each test
+    # executed prior to each testf
 
     def setUp(self):
         # main.config['TESTING'] = True
