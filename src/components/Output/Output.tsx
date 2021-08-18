@@ -109,7 +109,7 @@ export default function Output({ data, input }: OutputProps) {
 
   useEffect(() => {
     localStorage.setItem('Entity',ent);
-  },[ent])
+  },[ent]);
 
   //function storeWord(word:string){
     

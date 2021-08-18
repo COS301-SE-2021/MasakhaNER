@@ -189,9 +189,6 @@ export default function InputSection() {
       .catch((err) => console.log(err));
   }, [clicked]);
 
-  var newEnt = localStorage.getItem('Entity');
-  var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
-  console.log(linklink);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -264,6 +261,12 @@ export default function InputSection() {
   }
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
+  function CalliFrame() {
+    var newEnt = localStorage.getItem('Entity');
+    var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
+    console.log(linklink);
+    return <iframe src={linklink}  width="750" height="250" id="wikiLink"></iframe>;
+  }
   
   return (
     <>
@@ -294,7 +297,7 @@ export default function InputSection() {
       <div>
         <Link>
           <h4>Link Section</h4>
-          <iframe src={linklink}  width="750" height="250" id="wikiLink"></iframe>
+          <CalliFrame/>
         </Link>
       </div>
     </FormContainer>
