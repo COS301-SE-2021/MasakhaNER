@@ -211,7 +211,7 @@ function Register() {
           />
         {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
         <br />
-        <ChangepassButton>
+          <ChangepassButton>
           <div className="submit-button">
             <button
               disabled={disabled}
@@ -227,10 +227,11 @@ function Register() {
                 handleStatus();
                 }
               }}
-            />
+            >
               Submit
-        </div>
-        </ChangepassButton>
+            </button>
+          </div>
+          </ChangepassButton>
       </form>
       <br />
       <br />

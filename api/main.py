@@ -512,7 +512,7 @@ def admin_delete_model(user, id):
     else:
         return {'response':'failed'},400
 
-@app.route('/models/<id>', methods=["POST"])
+@app.route('/models/<id>', methods=["GET"])
 @token_required
 def set_model(user,id):
 
@@ -543,13 +543,36 @@ def set_model(user,id):
             # and write everything back
             with open('model.py', 'w') as file:
                 file.writelines( data )
-            
-            return {'response':'new model set'},200
+            modelres = db.getModel(id)
+            resp ={'id': modelres[0], 'modelname': modelres[1], 'model': modelres[2]}
+            res = Response(response=json.dumps(resp))
+            res.headers.add('Content-Range', 'models 0-10/100')
+            res.headers.add('Content-Type', 'application/json')
+            return res, 200
 
         else:
             return {'response':'failed'},400
     else:
         return {'response':'failed'},400
+
+@app.route('/models/<id>', methods=["PUT"])
+@token_required
+def admin_update_model(user, id):
+    print(id)
+    id = int(id)
+    
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    if user[5]==False:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    db = app.config['DATABASE']
+    if(db != None):
+        print("hello")
+        return jsonify({'id':0,'response':'updated'}),200
+    else:
+        return jsonify({'response':'failed'}),400
 
 #feedback endpoint
 @app.route('/feedback', methods=["POST"])
