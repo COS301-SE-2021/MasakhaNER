@@ -14,7 +14,7 @@ function Nav() {
         history.push('/dashboard');
     }
     const edit = () =>{
-        history.push('/details/changepassword');
+        history.push('/details/edit');
     }
     const about = () =>{
         history.push('/about');
