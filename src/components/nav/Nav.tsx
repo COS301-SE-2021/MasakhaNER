@@ -12,6 +12,9 @@ function Nav() {
     }
     return (
         <div className="Navbar">
+            <button className="btn btn-dark">Dashboard</button>
+            <button className="btn btn-dark">Edit Details</button>
+            <button className="btn btn-dark">About</button>
             <h1 id="navbar-heading">Masakha NER Tool</h1>
             <p id="navbar-subheading">Web-based interface used as a named entity recognition tool for African languages.</p>
             <button onClick = {handleLogout} className="btn btn-dark">Log out</button>
