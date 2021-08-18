@@ -6,6 +6,27 @@ import Nav from "../../../components/nav/Nav";
 import Footer from "../../../components/Footer/Footer";
 import styled from "styled-components"
 
+const Wrapper = styled.div`
+  background-color: white;
+  display: grid;
+  grid-template-columns: 65% 35%;
+  flex-direction: column;
+  justify-content: center;
+  height: 90vh;
+  width: 90vw;
+  border: solid 1px #ffffff;
+  margin: 0 auto;
+  margin-top: 8vh;
+  margin-bottom: 8vh;
+  border-radius: 20px;
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+
+  div {
+    text-align: left;
+  }
+`;
+
 function Register() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
