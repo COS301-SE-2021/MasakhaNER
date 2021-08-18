@@ -28,13 +28,18 @@ class Test(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        #app.config['DATABASE'].deleteBob()
+        app.config['DATABASE'].
         self.main =None
     def test_endpoint(self):
+        INPUT = {
+        "modelname": "model9",
+        "model": "TEST MODEL"
+        }
 
         token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.get('/models',headers={'x-access-token':token})
+        r = self.main.post('/models',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
-        #result = data['response']
+        result = data['response']
         self.assertEqual(200, r.status_code)
+        self.assertEqual(result,'model added')
