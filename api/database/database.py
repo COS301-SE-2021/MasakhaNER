@@ -218,7 +218,7 @@ class User:
         # self.conn.close()
         return db_user
 
-    def getUser(self, id):
+    def getModel(self, id):
         # self.conn = psycopg2.connect(
         #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
         # self.cur = self.conn.cursor()

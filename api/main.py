@@ -543,10 +543,10 @@ def set_model(user,id):
             # and write everything back
             with open('model.py', 'w') as file:
                 file.writelines( data )
-            modelres = model.getModel(id)
+            modelres = db.getModel(id)
             resp ={'id': modelres[0], 'modelname': modelres[1], 'model': modelres[2]}
             res = Response(response=json.dumps(resp))
-            res.headers.add('Content-Range', 'users 0-10/100')
+            res.headers.add('Content-Range', 'models 0-10/100')
             res.headers.add('Content-Type', 'application/json')
             return res, 200
 
