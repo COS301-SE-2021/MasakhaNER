@@ -11,8 +11,7 @@ const  FeedBackList = (props: any) => {
     <List {...props}>
       <Datagrid>
         <TextField source="id" />
-        <TextField source="feedback" />
-        <EditButton  basePath="/feedback"/>
+        <TextField source="feedback"/>
         <DeleteButton basePath="/feedback" />
       </Datagrid>
     </List>
