@@ -21,6 +21,10 @@ class BasicTests(unittest.TestCase):
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
+        db = app.config['DATABASE']
+        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        db.cur.execute(sql,(0,'integeration', 'test','password','integreation@test.com',False,000,True))
+        db.conn.commit()
         self.main = app.test_client()
         # db.drop_all()
         # db.create_all()
@@ -31,7 +35,11 @@ class BasicTests(unittest.TestCase):
     
     # executed after each test
     def tearDown(self):
-        pass#
+        db = app.config['DATABASE']
+        sql = "DELETE FROM users WHERE id =%s"
+        db.cur.execute(sql,(0,))
+        db.conn.commit()
+        db.main = None
 
     def test_endpoint(self):
         #print('hello')
@@ -53,7 +61,7 @@ class BasicTests(unittest.TestCase):
     def test_endpoint2(self):
         #print('hello')
         INPUT = {
-        "email": "test@test.co.za",
+        "email": "integreation@test.com",
         "password": "wrwe5465"
         }
         response = self.main.post('/login',json=INPUT)
@@ -70,8 +78,8 @@ class BasicTests(unittest.TestCase):
     def test_endpoint3(self):
         #print('hello')
         INPUT = {
-        "email": "test@test.co.za",
-        "password": "test"
+        "email": "integreation@test.com",
+        "password": "password"
         }
         response = self.main.post('/login',json=INPUT)
         print(response.data)
@@ -84,7 +92,7 @@ class BasicTests(unittest.TestCase):
         data = jwt.decode(token,app.config['SECRET_KEY'],"HS256")
         user_email=data['email']
         self.assertEqual(200, response.status_code)
-        self.assertEqual(user_email,'test@test.co.za',msg=" if failed User is valid")
+        self.assertEqual(user_email,'integreation@test.com',msg=" if failed User is valid")
 
     # def test_endpoint2(self):
     #     self.main.post('/register',json=self.INPUT)

@@ -21,6 +21,10 @@ class BasicTests(unittest.TestCase):
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
+        db = app.config['DATABASE']
+        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        db.cur.execute(sql,(0,'integeration', 'test','password','integreation@test.com',False,000,True))
+        db.conn.commit()
         self.main = app.test_client()
         # db.drop_all()
         # db.create_all()
@@ -31,7 +35,11 @@ class BasicTests(unittest.TestCase):
     
     # executed after each test
     def tearDown(self):
-        pass#
+        db = app.config['DATABASE']
+        sql = "DELETE FROM users WHERE id =%s"
+        db.cur.execute(sql,(0,))
+        db.conn.commit()
+        db.main = None
 
 
     def test_endpoint(self):
@@ -50,7 +58,7 @@ class BasicTests(unittest.TestCase):
 
     def test_endpoint2(self):
         INPUT = {
-        "email": "test@test.co.za",
+        "email": "integreation@test.com",
         "code": 1234
         }
         #tests with valid user password but wrong code
@@ -64,8 +72,8 @@ class BasicTests(unittest.TestCase):
 
     def test_endpoint3(self):
         INPUT = {
-        "email": "test@test.co.za",
-        "code": 1111
+        "email": "integreation@test.com",
+        "code": 000
         }
         #tests with valid user password and right code
         r = self.main.post('/verify',json=INPUT)
