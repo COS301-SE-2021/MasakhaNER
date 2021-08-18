@@ -105,14 +105,19 @@ export default function Output({ data, input }: OutputProps) {
   let tex = "Emir of Kano turban Zhang wey don spend 18 years for Nigeria";
   let arr = [...input];
 
-  const [ent, setEnt] = useState(0);
+  const [ent, setEnt] = useState(String);
 
-  function storeWord(word:string){
-    localStorage.setItem('Entity',word);
+  useEffect(() => {
+    // Update the document title using the browser API
+    localStorage.setItem('Entity',ent);
+  });
+
+  //function storeWord(word:string){
+    
     //alert('Got called!');
     //document.getElementById('wikiLink').window.location.reload();
     //window.location.reload();
-  }
+  //}
 
   console.log(data);
   // console.log(json[0].start);
@@ -127,7 +132,7 @@ export default function Output({ data, input }: OutputProps) {
             //https://www.google.com/maps/place/
             //"https://en.wikipedia.org/wiki/${data[j].word}"
           word +=
-            ` <span id="${data[j].entity.substring(2)}" onClick={${storeWord(data[j].word)}}>` +
+            ` <span id="${data[j].entity.substring(2)}" onClick={() => ${setEnt(data[j].word)}}>` +
             data[j].word +
             `<span id="tag"}>${data[j].entity.substring(2)}</span></span>`;
           i = data[j].end - 1;
