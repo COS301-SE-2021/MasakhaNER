@@ -60,6 +60,13 @@ const Button = styled.button`
   }
 `;
 
+const Bar = styled.div`
+  width: inherit;
+  height: 5px;
+  background-color: #000;
+  margin-top: 5px;
+`;
+
 function Register() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
