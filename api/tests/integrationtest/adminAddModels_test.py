@@ -28,11 +28,15 @@ class Test(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        app.config['DATABASE'].
+        db = app.config['DATABASE']
+        sql = "DELETE FROM models WHERE modelname = model25;"
+        db.cur.execute(sql,(id,))
+        db.conn.commit()
         self.main =None
+    
     def test_endpoint(self):
         INPUT = {
-        "modelname": "model9",
+        "modelname": "model25",
         "model": "TEST MODEL"
         }
 
