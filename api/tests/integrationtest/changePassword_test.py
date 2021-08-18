@@ -11,3 +11,5 @@ TEST_DB = 'test.db'
 class BasicTests(unittest.TestCase):
 
     main=None
+
+    def setUp(self):
