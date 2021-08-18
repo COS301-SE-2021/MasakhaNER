@@ -26,7 +26,9 @@ class BasicTests(unittest.TestCase):
         "password": "password"
         }
 
-        response = self.main.post('/login',json=INPUT)
+        response = self.main.post('/reset',json=INPUT)
         print(response.data)
 
         r = json.loads(response.data)
+
+        result1 = r['response']
