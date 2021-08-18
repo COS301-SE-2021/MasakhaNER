@@ -176,7 +176,7 @@ function Register() {
           </div>
           <br />
           <div className="submit-button">
-            <button
+            <Button
               disabled={disabled}
               id="mainBtn"
               type="submit"
@@ -188,7 +188,7 @@ function Register() {
               }}
             >
               Submit
-            </button>
+            </Button>
           </div>
           {Passworderr ||
             (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
