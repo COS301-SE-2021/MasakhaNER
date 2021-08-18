@@ -19,3 +19,5 @@ class BasicTests(unittest.TestCase):
 
     def tearDown(self):
         pass#
+
+    def test_endpoint(self):
