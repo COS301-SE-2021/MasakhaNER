@@ -8,6 +8,10 @@ import { Input } from "../../components/input/Input";
 import simpleRestProvider from "ra-data-simple-rest";
 import CreateModel from "../../components/admin/CreateModel";
 import ModelList from "../../components/admin/ModelList";
+import Nav from "../../components/nav/Nav"
+import { createMuiTheme } from '@material-ui/core/styles';
+
+
 
 
 export default function AdminUser() {
