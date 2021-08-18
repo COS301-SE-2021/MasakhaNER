@@ -191,7 +191,7 @@ function Register() {
             id="confirmPassword"
             className="form-control"
             value={password2}
-            placeholder="Enter your new password again"
+            placeholder="Enter your new password"
             onChange={(e) => {
               setPassword2(e.target.value);
               //console.log(e.target.value)
