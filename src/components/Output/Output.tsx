@@ -123,9 +123,9 @@ export default function Output({ data, input }: OutputProps) {
             //https://www.google.com/maps/place/
             //""
           word +=
-            ` <span id="${data[j].entity.substring(2)}" onClick="${storeWord(data[j].word)}"><a href="https://en.wikipedia.org/wiki/${data[j].word}">` +
+            ` <span id="${data[j].entity.substring(2)}" onClick={${storeWord(data[j].word)}}><a href="https://en.wikipedia.org/wiki/${data[j].word}">` +
             data[j].word +
-            `<span id="tag" onClick="${storeWord(data[j].word)}">${data[j].entity.substring(2)}</span></a></span>`;
+            `<span id="tag" onClick={${storeWord(data[j].word)}}>${data[j].entity.substring(2)}</span></a></span>`;
           i = data[j].end - 1;
           j += 1;
         } else {
