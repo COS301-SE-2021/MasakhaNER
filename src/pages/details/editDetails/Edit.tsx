@@ -26,6 +26,29 @@ const Wrapper = styled.div`
   }
 `;
 
+const Input = styled.input`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  height: 35px;
+  width: 15em;
+  padding: 15px;
+
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+  }
+
+  &:focus {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+`;
+
 function Register() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
