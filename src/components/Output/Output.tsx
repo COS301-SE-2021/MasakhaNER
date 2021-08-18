@@ -105,12 +105,11 @@ export default function Output({ data, input }: OutputProps) {
   let tex = "Emir of Kano turban Zhang wey don spend 18 years for Nigeria";
   let arr = [...input];
 
-  const [ent, setEnt] = useState(String);
+  const [ent, setEnt] = useState("");
 
   useEffect(() => {
-    // Update the document title using the browser API
     localStorage.setItem('Entity',ent);
-  });
+  },[ent])
 
   //function storeWord(word:string){
     
