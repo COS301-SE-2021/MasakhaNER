@@ -8,8 +8,6 @@ import Footer from "../../../components/Footer/Footer";
 function Register() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setPassword] = useState("");
   const [clicked, setClicked] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [Emailerr, setEmailErr] = useState(false);
@@ -23,13 +21,12 @@ function Register() {
     body: JSON.stringify({
       firstname: firstName,
       lastname: lastName,
-      email: email
     }),
   };
 
   const handleStatus = async () => {
     try {
-      const resp = await fetch("/updatedetails", options);
+      const resp = await fetch("/update-details", options);
       console.log(resp);
       if (resp.status === 200) {
         alert(resp.status);
@@ -61,22 +58,6 @@ function Register() {
   );
   const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
 
-  const setItem = () => {
-    localStorage.setItem('newEmail', email);
-  }
-
-  const validate = () => {
-    if (!validEmail.test(email)) {
-      setEmailErr(true);
-      console.log(setEmailErr);
-    } else if (!validPassword.test(password)) {
-      setPasswordErr(true);
-      console.log(setEmailErr);
-    } else {
-      setClicked(!clicked);
-      window.location.href = "/verify";
-    }
-  };
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -122,7 +103,6 @@ function Register() {
             className="btn btn-dark"
             onClick={(e) => {
               e.preventDefault();
-              setItem();
               handleStatus();
             }}
           >
