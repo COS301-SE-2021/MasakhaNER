@@ -66,13 +66,13 @@ class User:
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
 
             self.cur.execute(sql,(firstname,lastname,encrypted_password,email,False,code,False))
-            #sendemail = Email()
+            # sendemail = Email()
             # message = """\
             # Masakhane Activation Code
 
             # Here is your activation code: 1111 """
-            #sendemail.send_email(message, email)
-            self.conn.commit()
+            # sendemail.send_email(message, email)
+            # self.conn.commit()
             # self.cur.close()
             # self.conn.close()
             return True
@@ -388,7 +388,57 @@ class User:
         except Exception as e:
             print(f"Database connection error: {e}")
             return False
+    
+    def adminAddFeedback(self,feedback):
+        try:
+            sql = "INSERT INTO feedback (feedback) VALUES (%s)"
+            self.cur.execute(sql,(feedback,))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
 
+    def adminDeleteFeedback(self, id):
+        try:
+            # self.conn = psycopg2.connect(
+            #     dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+            # self.cur = self.conn.cursor()
+            sql = "DELETE FROM feedback WHERE id =%s;"
+            self.cur.execute(sql,(id,))
+            self.conn.commit()
+            # self.cur.close()
+            # self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
+    def adminGetAllFeedback(self):
+        try:
+            sql = "SELECT * FROM feedback"
+            self.cur.execute(sql)
+            feedback = self.cur.fetchall()
+            self.conn.commit()
+            return feedback
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
+    def adminGetFeedback(self, id):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        # self.cur = self.conn.cursor()
+        try:
+            sql = "SELECT * FROM feedback WHERE id=%s;"
+            self.cur.execute(sql,(id,))
+            feedback = self.cur.fetchone()
+            self.conn.commit()
+            return feedback
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return None
+        
 
     def update_user_details(self, email, name, surname):
          try:
