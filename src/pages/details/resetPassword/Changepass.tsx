@@ -157,7 +157,7 @@ function Register() {
         <h2>Change Password</h2>
       </div>
       <form id="detForm" onSubmit={handleSubmit}>
-          <label htmlFor="oldPassword">email:</label>
+          <label htmlFor="oldPassword">Email:</label>
           <Input
             type="email"
             name="email"
