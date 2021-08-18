@@ -294,7 +294,7 @@ export default function InputSection() {
       <div>
         <Link>
           <h4>Link Section</h4>
-          <iframe src={linklink}  width="750" height="250"></iframe>
+          <iframe src={linklink}  width="750" height="250" id="wikiLink"></iframe>
         </Link>
       </div>
     </FormContainer>
