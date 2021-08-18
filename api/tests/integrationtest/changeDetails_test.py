@@ -28,3 +28,4 @@ class Test(unittest.TestCase):
         data = json.loads(r.data)
         print(data)
         result = data['response']
+        self.assertEqual(200, r.status_code)
