@@ -49,10 +49,6 @@ const Input = styled.input`
   }
 `;
 
-const Form = styled.form`
-  margin: 0 auto;
-`
-
 const Button = styled.button`
   border: solid 1px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
@@ -150,7 +146,7 @@ function Register() {
     <div id="detailspage">
       <Nav />
       <Wrapper>
-        <Form id="detForm" onSubmit={handleSubmit}>
+        <form id="detForm" onSubmit={handleSubmit}>
           <div className="registerTop">
             <h2>Edit Details</h2>
           </div>
@@ -196,7 +192,7 @@ function Register() {
           </div>
           {Passworderr ||
             (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
-        </Form>
+        </form>
       </Wrapper>
       <br />
       <br />
