@@ -27,6 +27,7 @@ const Input = styled.input`
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   height: 35px;
+  width: 15em;
   padding: 15px;
 
   &:hover {
@@ -157,11 +158,11 @@ function Register() {
             <Input
               type="text"
               name="firstName"
-              id="firstName"
               className="form-control"
               value={firstName}
               onChange={(e) => setfirstName(e.target.value)}
               required
+              placeholder="Enter your first name"
             />
           </div>
           <div className="form-group">
@@ -169,11 +170,11 @@ function Register() {
             <Input
               type="text"
               name="flastName"
-              id="lastName"
               className="form-control"
               value={lastName}
               onChange={(e) => setlastName(e.target.value)}
               required
+              placeholder="Enter your last name"
             />
           </div>
           <br />
