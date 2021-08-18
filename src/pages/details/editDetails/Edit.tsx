@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Edit.css";
-import ReCAPTCHA from "react-google-recaptcha";
 import Nav from "../../../components/nav/Nav";
 import Footer from "../../../components/Footer/Footer";
 import styled from "styled-components"
@@ -106,60 +105,60 @@ function Register() {
   return (
     <div id="detailspage">
       <Nav />
-      <div className="signup-form">
-      <form id="detForm" onSubmit={handleSubmit}>
-        <div className="registerTop">
-          <h2>Edit Details</h2>
-        </div>
-        <div className="form-group">
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            className="form-control"
-            value={firstName}
-            onChange={(e) => setfirstName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            type="text"
-            name="flastName"
-            id="lastName"
-            className="form-control"
-            value={lastName}
-            onChange={(e) => setlastName(e.target.value)}
-            required
-          />
-        </div>
-        <br />
-        <div className="submit-button">
-          <button
-            disabled={disabled}
-            id="mainBtn"
-            type="submit"
-            className="btn btn-dark"
-            onClick={(e) => {
-              e.preventDefault();
-              setItem();
-              handleStatus();
-            }}
-          >
-            Submit
-          </button>
-        </div>
-        {Passworderr ||
-          (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
-      </form>
-    </div>
+      <Wrapper>
+        <form id="detForm" onSubmit={handleSubmit}>
+          <div className="registerTop">
+            <h2>Edit Details</h2>
+          </div>
+          <div className="form-group">
+            <label htmlFor="firstName">First Name:</label>
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              className="form-control"
+              value={firstName}
+              onChange={(e) => setfirstName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name:</label>
+            <input
+              type="text"
+              name="flastName"
+              id="lastName"
+              className="form-control"
+              value={lastName}
+              onChange={(e) => setlastName(e.target.value)}
+              required
+            />
+          </div>
+          <br />
+          <div className="submit-button">
+            <button
+              disabled={disabled}
+              id="mainBtn"
+              type="submit"
+              className="btn btn-dark"
+              onClick={(e) => {
+                e.preventDefault();
+                setItem();
+                handleStatus();
+              }}
+            >
+              Submit
+            </button>
+          </div>
+          {Passworderr ||
+            (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
+        </form>
+      </Wrapper>
       <br />
       <br />
       <Footer />
     </div>
-    
+
   );
 }
 
