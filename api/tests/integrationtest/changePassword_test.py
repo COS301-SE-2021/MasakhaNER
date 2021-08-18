@@ -32,3 +32,6 @@ class BasicTests(unittest.TestCase):
         r = json.loads(response.data)
 
         result1 = r['response']
+
+        self.assertEqual(401, response.status_code)
+        self.assertEqual(result1,'authetication failed!',msg=" if failed User is valid")
