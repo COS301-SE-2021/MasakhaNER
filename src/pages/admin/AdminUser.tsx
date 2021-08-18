@@ -8,6 +8,7 @@ import { Input } from "../../components/input/Input";
 import simpleRestProvider from "ra-data-simple-rest";
 import CreateModel from "../../components/admin/CreateModel";
 import ModelList from "../../components/admin/ModelList";
+import FeedBackList from "../../components/admin/FeedBackList";
 
 
 export default function AdminUser() {
@@ -31,6 +32,7 @@ export default function AdminUser() {
           create={CreateUser}
         />
         <Resource name="models" list={ModelList} create={CreateModel} />
+        <Resource name="feedback" list={FeedBackList} />
         <Resource name="dashboard" list={Input} />
       </Admin>
     </>
