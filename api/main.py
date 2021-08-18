@@ -269,7 +269,7 @@ def update_details(user):
     if(db != None):
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
-        user_email = str(request.json["email"])
+        user_email = user[4]
         if(db.update_user_details(user_email, user_firstname, user_lastname)):
             return {'response': 'updated'}, 200
         else:
