@@ -21,3 +21,12 @@ class BasicTests(unittest.TestCase):
         pass#
 
     def test_endpoint(self):
+        INPUT = {
+        "email": "rtdcthgcvyug@gmail.com",
+        "password": "password"
+        }
+
+        response = self.main.post('/login',json=INPUT)
+        print(response.data)
+
+        r = json.loads(response.data)
