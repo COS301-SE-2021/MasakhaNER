@@ -7,3 +7,5 @@ sys.path.append('api')
 from main import app
 
 TEST_DB = 'test.db'
+
+class BasicTests(unittest.TestCase):
