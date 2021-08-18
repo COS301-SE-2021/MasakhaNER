@@ -22,14 +22,40 @@ class Test(unittest.TestCase):
 
     def test_endpoint(self):
         INPUT = {
-        "id":299
+        "id":3
         }
 
         token = jwt.encode({'email' :'fgch@gmail.com', 'exp' : datetime.utcnow() - timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.delete('/users/1',json=INPUT,headers={'x-access-token':token})
+        r = self.main.admin_delete_feedback('/users/1',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
         self.assertEqual(401, r.status_code)
         self.assertEqual(result, 'Signature has expired')
 
+    def test_endpoint2(self):
+        INPUT = {
+        "id":1
+        }
+
+        token = jwt.encode({'email' :'people@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        r = self.main.admin_delete_feedback('/users/1',json=INPUT,headers={'x-access-token':token})
+        data = json.loads(r.data)
+        print(data)
+        result = data['response']
+        self.assertEqual(401, r.status_code)
+        self.assertEqual(result, 'user unauthirized')
+
+    def test_endpoint3(self):
+        INPUT = {
+        "id":1
+        }
+        
+
+        token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        r = self.main.admin_delete_feedback('/users/0',json=INPUT,headers={'x-access-token':token})
+        data = json.loads(r.data)
+        print(data)
+        result = data['response']
+        self.assertEqual(200, r.status_code)
+        self.assertEqual(result, 'deleted')
