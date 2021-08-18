@@ -353,6 +353,17 @@ class User:
         # self.conn.close()
         return db_user
 
+    def setModels(self,name):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        print(name)
+        sql="SELECT model FROM models where id=%s"
+        self.cur.execute(sql,(name,))
+        db_user = self.cur.fetchone()
+        self.conn.commit()
+
+        return db_user
+
     def adminDeleteModel(self, id):
         try:
             # self.conn = psycopg2.connect(

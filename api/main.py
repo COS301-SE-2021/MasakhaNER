@@ -134,11 +134,11 @@ def token_required(f):
 
 
 @app.route('/input', methods=["POST"])
-#@token_required
-def model_feedback():
+@token_required
+def model_feedback(user):
 
-    # if not user:
-    #     return jsonify({'response' : 'log in to use model'}),401
+    if not user:
+        return jsonify({'response' : 'log in to use model'}),401
 
     
     user_input = str(request.json["input"])
@@ -447,13 +447,13 @@ def admin_get_users(user):
 
 #admin model functionality
 @app.route('/models', methods=["POST"])
-# @token_required
+@token_required
 def admin_add_models():
-    # if user is None:
-    #     return jsonify({'response': 'user unauthirized'}), 401
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
 
-    # if user[5]==False:
-    #     return jsonify({'response': 'user unauthirized'}), 401
+    if user[5]==False:
+        return jsonify({'response': 'user unauthirized'}), 401
 
     db = app.config['DATABASE']
     if(db != None):
@@ -512,9 +512,48 @@ def admin_delete_model(user, id):
     else:
         return {'response':'failed'},400
 
+@app.route('/models/<id>', methods=["POST"])
+#@token_required
+def set_model(id):
+
+    # print(user)
+    # if user is None:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    # if user[5]==False:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    db = app.config['DATABASE']
+    if(db != None):
+        model = db.setModels(id)
+        print(model)
+        if(model!=None):
+            # with is like your try .. finally block in this case
+            data=""
+            with open('model.py', 'r') as file:
+                # read a list of lines into data
+                data = file.readlines()
+
+            print(data)
+            print("Your name: " + data[4])
+
+            # now change the 2nd line, note that you have to add a newline
+            data[4] = f'    url = "{model[0]}"\n'
+            print(data[4])
+            # and write everything back
+            with open('model.py', 'w') as file:
+                file.writelines( data )
+            
+            return {'response':'new model set'},200
+
+        else:
+            return {'response':'failed'},400
+    else:
+        return {'response':'failed'},400
+
 #feedback endpoint
 @app.route('/feedback', methods=["POST"])
-#@token_required
+@token_required
 def feedback():
     db = app.config['DATABASE']
     if(db != None):
