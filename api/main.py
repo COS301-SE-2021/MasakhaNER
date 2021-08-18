@@ -448,7 +448,7 @@ def admin_get_users(user):
 #admin model functionality
 @app.route('/models', methods=["POST"])
 @token_required
-def admin_add_models():
+def admin_add_models(user):
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
@@ -493,7 +493,6 @@ def admin_get_models(user):
 @token_required
 def admin_delete_model(user, id):
 
-    print(user)
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
@@ -513,15 +512,15 @@ def admin_delete_model(user, id):
         return {'response':'failed'},400
 
 @app.route('/models/<id>', methods=["POST"])
-#@token_required
-def set_model(id):
+@token_required
+def set_model(user,id):
 
     # print(user)
-    # if user is None:
-    #     return jsonify({'response': 'user unauthirized'}), 401
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
 
-    # if user[5]==False:
-    #     return jsonify({'response': 'user unauthirized'}), 401
+    if user[5]==False:
+        return jsonify({'response': 'user unauthirized'}), 401
 
     db = app.config['DATABASE']
     if(db != None):
@@ -533,7 +532,7 @@ def set_model(id):
             with open('model.py', 'r') as file:
                 # read a list of lines into data
                 data = file.readlines()
-
+            #Davlan/distilbert-base-multilingual-cased-masakhaner
             print(data)
             print("Your name: " + data[4])
 
@@ -554,7 +553,11 @@ def set_model(id):
 #feedback endpoint
 @app.route('/feedback', methods=["POST"])
 @token_required
-def feedback():
+def add_feedback(user):
+
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
     db = app.config['DATABASE']
     if(db != None):
         user_feedback = str(request.json["feedback"])
@@ -567,6 +570,84 @@ def feedback():
         return {'response': 'failed'}, 400
 
 
+@app.route('/feedback/<id>', methods=["DELETE"])
+@token_required
+def admin_delete_feedback(user, id):
+
+    id = int(id)
+
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    if user[5]==False:
+        return jsonify({'response': 'user unauthirized'}), 401
+    
+    db = app.config['DATABASE']
+    if(db != None):
+        if(db.adminDeleteFeedback(id)):
+            return {'response':'deleted'},200
+        else:
+            return {'response':'failed'},400
+    else:
+        return {'response':'failed'},400
+
+
+"""
+    admin_get_user function:
+        allows admin to get one user
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
+@app.route('/feedback/<id>', methods=["GET"])
+@token_required
+def admin_get_feedack(user, id):
+    id = int(id)
+    if id is not None:
+        if user is None:
+            return jsonify({'response': 'user unauthirized'}), 401
+
+        if user[5] == False:
+            return jsonify({'response': 'user unauthirized'}), 401
+
+        db = app.config['DATABASE']
+        if(db != None):
+            feedback = db.adminGetFeedback(id)
+            if(feedback != None):
+                resp ={'id': feedback[0], 'firstname': feedback[1]}
+                res = Response(response=json.dumps(resp))
+                res.headers.add('Content-Range', 'feedback 0-10/100')
+                res.headers.add('Content-Type', 'application/json')
+                return res, 200
+            return {'response': 'failed'}, 400
+        return {'response': 'failed'}, 400
+
+    return {'response': 'failed'}, 400
+
+
+@app.route('/feedback', methods=["GET"])
+@token_required
+def admin_get_all_feedback(user):
+    # print(user[5])
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    if user[5] == False:
+        return jsonify({'response': 'user unauthirized'}), 401
+
+    db = app.config['DATABASE']
+    if(db != None):
+        feedback = db.adminGetAllFeedback()
+        resp = []
+        for x in feedback:
+            resp.append({'id': x[0], 'feedback': x[1]})
+        res = Response(response=json.dumps(resp))
+        res.headers.add('Content-Range', 'feedback 0-10/100')
+        res.headers.add('Content-Type', 'application/json')
+        return res, 200
+
+    return {'response': 'failed'}, 400
 
 
 """
@@ -578,6 +659,7 @@ def feedback():
         JSON object with response
 """
 if __name__ == "__main__":
+    print("RUNNING")
     app.run(debug=True)
 
 # DB_HOST="ec2-34-232-191-133.compute-1.amazonaws.com"
