@@ -34,9 +34,9 @@ class Test(unittest.TestCase):
     def test_endpoint(self):
 
         token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.delete('/models/281',headers={'x-access-token':token})
+        r = self.main.post('/models/309',headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
         self.assertEqual(200, r.status_code)
-        self.assertEqual(result, 'deleted')
+        self.assertEqual(result, 'new model set')
