@@ -38,7 +38,7 @@ class BasicTests(unittest.TestCase):
         sql = "DELETE FROM users WHERE email=%s"
         db.cur.execute(sql,("Integration@test.com",))
         db.conn.commit()
-        db.main = None
+        self.main = None
 
     def test_endpoint(self):
         #print('hello')

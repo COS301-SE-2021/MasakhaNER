@@ -39,7 +39,7 @@ class BasicTests(unittest.TestCase):
         sql = "DELETE FROM users WHERE id =%s"
         db.cur.execute(sql,(0,))
         db.conn.commit()
-        db.main = None
+        self.main = None
 
 
     def test_endpoint(self):

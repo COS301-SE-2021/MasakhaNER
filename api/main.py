@@ -244,11 +244,11 @@ def login_user():
     if(db != False):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
-
+        print("hello")
         if db.login(user_email, user_password):
             token = jwt.encode({'email': user_email, 'exp': datetime.utcnow(
             ) + timedelta(hours=2)}, app.config['SECRET_KEY'], algorithm="HS256")
-
+            
 
             return jsonify({'isadmin':db.isAdmin(user_email),'token': token})
         else:

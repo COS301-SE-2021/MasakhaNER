@@ -39,7 +39,7 @@ class BasicTests(unittest.TestCase):
         sql = "DELETE FROM users WHERE id =%s"
         db.cur.execute(sql,(0,))
         db.conn.commit()
-        db.main = None
+        self.main = None
 
     def test_endpoint(self):
         #print('hello')
@@ -58,27 +58,27 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(401, response.status_code)
         self.assertEqual(result1,'authetication failed!',msg=" if failed User is valid")
 
-    def test_endpoint2(self):
+    def test_endpoint4(self):
         #print('hello')
         INPUT = {
         "email": "integreation@test.com",
-        "password": "wrwe5465"
+        "password": "ffrggr"
         }
         response = self.main.post('/login',json=INPUT)
         print(response.data)
         
         r = json.loads(response.data)
-        #print(r)
+        print(r)
 
         result1 = r['response']
 
         self.assertEqual(401, response.status_code)
         self.assertEqual(result1,'authetication failed!',msg=" if failed User is valid")
 
-    def test_endpoint3(self):
+    def test_endpoint5(self):
         #print('hello')
         INPUT = {
-        "email": "integreation@test.com",
+        "email": "rtdcthgcvyug@gmail.com",
         "password": "password"
         }
         response = self.main.post('/login',json=INPUT)
@@ -86,7 +86,6 @@ class BasicTests(unittest.TestCase):
         
         r = json.loads(response.data)
         #print(r)
-       
 
         token = r['token']
         data = jwt.decode(token,app.config['SECRET_KEY'],"HS256")
