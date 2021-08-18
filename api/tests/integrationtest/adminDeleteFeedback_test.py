@@ -27,4 +27,6 @@ class Test(unittest.TestCase):
 
         token = jwt.encode({'email' :'fgch@gmail.com', 'exp' : datetime.utcnow() - timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.delete('/users/1',json=INPUT,headers={'x-access-token':token})
+        data = json.loads(r.data)
+        print(data)
         
