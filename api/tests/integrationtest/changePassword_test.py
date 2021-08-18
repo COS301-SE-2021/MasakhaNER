@@ -13,3 +13,6 @@ class BasicTests(unittest.TestCase):
     main=None
 
     def setUp(self):
+
+        app.config.from_object('config_default.Config')
+        self.main = app.test_client()
