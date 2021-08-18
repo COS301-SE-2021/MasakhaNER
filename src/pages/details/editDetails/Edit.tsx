@@ -13,14 +13,15 @@ function Register() {
   const [Emailerr, setEmailErr] = useState(false);
   const [Passworderr, setPasswordErr] = useState(false);
 
-  const options = {
+  const options: any = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-access=token":localStorage.getItem("token")
     },
     body: JSON.stringify({
       firstname: firstName,
-      lastname: lastName,
+      lastname: lastName
     }),
   };
 

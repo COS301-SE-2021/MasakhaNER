@@ -4,6 +4,7 @@ import "./InputSection.css";
 import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
+import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
   display: grid;
@@ -189,9 +190,6 @@ export default function InputSection() {
       .catch((err) => console.log(err));
   }, [clicked]);
 
-  var newEnt = localStorage.getItem('Entity');
-  var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
-  console.log(linklink);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -265,6 +263,7 @@ export default function InputSection() {
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
   
+  
   return (
     <>
       <FormContainer>
@@ -294,7 +293,7 @@ export default function InputSection() {
       <div>
         <Link>
           <h4>Link Section</h4>
-          <iframe src={linklink}  width="750" height="250"></iframe>
+          <CalliFrame/>
         </Link>
       </div>
     </FormContainer>
