@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         app.config.from_object('config_default.Config')
         #app.config['DATABASE'].insertBob()
         self.main = app.test_client()
-    
+
     def tearDown(self):
         # main.config['TESTING'] = True
         # main.config['WTF_CSRF_ENABLED'] = False
