@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 #import os
 
 
-class mockdatabse:
+class mockdatabase:
     """
     Constructor:
         Connects to the database.
@@ -26,7 +26,18 @@ class mockdatabse:
 
     def __init__(self):
         self.db_list=[]
-        self.db_id=1
+        encoded_password = bytes('password', encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
+        user = [0,'first','person', encrypted_password,'fp@gmail.com',True,0000,True]
+        self.db_list.append(user)
+        
+        user = [1,'second','person', encrypted_password,'secondperson@gmail.com',False,0000,True]
+        self.db_list.append(user)
+
+        self.db_id=2
 
     """
     Register Function:
@@ -48,7 +59,7 @@ class mockdatabse:
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
             encoded_password, bcrypt.gensalt())
-            print(type(encrypted_password))
+            #print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
             code = '1111'
             user_id=self.db_id
@@ -71,16 +82,10 @@ class mockdatabse:
     """
 
     def get_code(self, email):
-        sql = "SELECT activationcode FROM users where email=%s;"
-        self.cur.execute(sql,(email,))
-        var = self.cur.fetchone()
-        self.conn.commit()
-        self.cur.close()
-        self.conn.close()
-        if var != None:
-            return var[0]
-        else:
-            return None
+        user = self.findUserByEmail(email)
+        if user != None:
+            return user[6]
+        return None
 
     """
     Login Function:
@@ -97,7 +102,7 @@ class mockdatabse:
         user = self.findUserByEmail(email)
         if user != None:
             if bcrypt.checkpw(password.encode('UTF-8'), user[3].encode('UTF-8')):
-                print("password works")
+                #print("password works")
                 return True
             else:
                 return False
@@ -115,7 +120,7 @@ class mockdatabse:
         user = self.findUserByEmail(email)
         if user != None:
             if user[7]==True:
-                print("password works")
+                #print("password works")
                 return True
             else:
                 return False
@@ -128,6 +133,12 @@ class mockdatabse:
                 return x
         return None
 
+    def isAdmin(self, email):
+        for x in self.db_list:
+            if x[4] == email and x[5] == True:
+                return True
+        return False
+
     def findUserById(self, id):
         for x in self.db_list:
             if x[0] == id:
@@ -137,6 +148,12 @@ class mockdatabse:
 
     def getAllUsers(self):
         return self.db_list
+    
+    def printList(self):
+        #print(self.db_list)
+        pass#
+
+        #return self.db_list
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         if self.findUserByEmail(email) == None:
@@ -156,29 +173,46 @@ class mockdatabse:
 
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         user = self.findUserById(id)
+        #print('this is the user:', user)
         if user != None:
-            encoded_password = bytes(password, encoding='utf-8')
-            encrypted_password = bcrypt.hashpw(
-            encoded_password, bcrypt.gensalt())
-            encrypted_password = encrypted_password.decode('UTF-8')
-            code = '1111'
-            user[1]=firstname
-            user[2]=lastname
-            user[3]=password
-            user[4]=email
-            user[5]=isadmin
-            user[6]=code
-            user[7]=verified
-            return True
+                encoded_password = bytes(password, encoding='utf-8')
+                encrypted_password = bcrypt.hashpw(
+                encoded_password, bcrypt.gensalt())
+                encrypted_password = encrypted_password.decode('UTF-8')
+                code = '1111'
+                user[1]=firstname
+                user[2]=lastname
+                user[3]=encrypted_password
+                user[4]=email
+                user[5]=isadmin
+                user[6]=code
+                user[7]=verified
+                return True
         else:
             return False
 
     def adminDeleteUser(self, id):
         for x in self.db_list:
+            #print(type(id))
             if x[0] == id:
+                self.db_list.remove(x)
                 return True
         return False
 
+    def clear(self):
+        self.db_list=[]
+        encoded_password = bytes('password', encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
+        user = [0,'first','person', encrypted_password,'fp@gmail.com',True,0000,True]
+        self.db_list.append(user)
+        
+        user = [1,'second','person', encrypted_password,'secondperson@gmail.com',False,0000,True]
+        self.db_list.append(user)
+
+        self.db_id=2
 
 # # class Test(self):
 
