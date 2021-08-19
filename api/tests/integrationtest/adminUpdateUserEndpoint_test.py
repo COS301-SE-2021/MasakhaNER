@@ -1,4 +1,5 @@
 import unittest
+import bcrypt
 import requests
 import json
 import jwt
@@ -19,11 +20,31 @@ class Test(unittest.TestCase):
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
+        encoded_password = bytes("password", encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
+        db = app.config['DATABASE']
+        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        db.cur.execute(sql,(0,'integeration', 'test',encrypted_password,'integreation@test.com',False,000,True))
+        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        db.cur.execute(sql,(1,'integeration', 'test',encrypted_password,'admin@test.com',True,000,True))
+        db.conn.commit()
         self.main = app.test_client()
+        self.main = app.test_client()
+    
+    def tearDown(self):
+        db = app.config['DATABASE']
+        sql = "DELETE FROM users WHERE id =%s"
+        db.cur.execute(sql,(0,))
+        sql = "DELETE FROM users WHERE id =%s"
+        db.cur.execute(sql,(1,))
+        db.conn.commit()
+        self.main = None
     
     def test_endpoint(self):
         INPUT = {
-        "id": 192,
         "firstname": "first",
         "lastname": "person",
         "email": "fp@gmail.com",
@@ -32,8 +53,8 @@ class Test(unittest.TestCase):
         "verified":True
         }
 
-        token = jwt.encode({'email' :'fgch@gmail.com', 'exp' : datetime.utcnow() - timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.put('/users/1',json=INPUT,headers={'x-access-token':token})
+        token = jwt.encode({'email' :'admin@test.com', 'exp' : datetime.utcnow() - timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        r = self.main.put('/users/0',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
@@ -43,7 +64,6 @@ class Test(unittest.TestCase):
 
     def test_endpoint2(self):
         INPUT = {
-        "id": 192,
         "firstname": "first",
         "lastname": "person",
         "email": "fp@gmail.com",
@@ -52,8 +72,8 @@ class Test(unittest.TestCase):
         "verified":True
         }
 
-        token = jwt.encode({'email' :'secondperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.put('/users/1',json=INPUT,headers={'x-access-token':token})
+        token = jwt.encode({'email' :'integreation@test.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        r = self.main.put('/users/0',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
@@ -62,16 +82,16 @@ class Test(unittest.TestCase):
 
     def test_endpoint3(self):
         INPUT = {
-        "firstname": "third",
-        "lastname": "person",
-        "email": "chnaged@gmail.com",
+        "firstname": "test",
+        "lastname": "update",
+        "email": "integrationtestemail@gmail.com",
         "password": "password",
         "isadmin":False,
         "verified":True
         }
 
-        token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.put('/users/198',json=INPUT,headers={'x-access-token':token})
+        token = jwt.encode({'email' :'admin@test.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        r = self.main.put('/users/0',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']

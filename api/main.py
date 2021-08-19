@@ -1,3 +1,4 @@
+from posixpath import dirname
 from model import runModel
 from flask import Response
 from database.database import User
@@ -529,8 +530,11 @@ def set_model(user,id):
         print(model)
         if(model!=None):
             # with is like your try .. finally block in this case
+            dirname = os.path.dirname(__file__)
+            filename = os.path.join(dirname, 'model.py')
+            print(filename)
             data=""
-            with open('model.py', 'r') as file:
+            with open(filename, 'r') as file:
                 # read a list of lines into data
                 data = file.readlines()
             #Davlan/distilbert-base-multilingual-cased-masakhaner
@@ -541,7 +545,7 @@ def set_model(user,id):
             data[4] = f'    url = "{model[0]}"\n'
             print(data[4])
             # and write everything back
-            with open('model.py', 'w') as file:
+            with open(filename, 'w') as file:
                 file.writelines( data )
             
             return {'response':'new model set'},200
@@ -616,7 +620,7 @@ def admin_get_feedack(user, id):
         if(db != None):
             feedback = db.adminGetFeedback(id)
             if(feedback != None):
-                resp ={'id': feedback[0], 'firstname': feedback[1]}
+                resp ={'id': feedback[0], 'feedback': feedback[1]}
                 res = Response(response=json.dumps(resp))
                 res.headers.add('Content-Range', 'feedback 0-10/100')
                 res.headers.add('Content-Type', 'application/json')

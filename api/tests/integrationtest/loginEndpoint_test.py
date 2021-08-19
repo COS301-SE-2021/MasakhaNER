@@ -1,4 +1,5 @@
 import unittest
+import bcrypt
 import requests
 import json
 import jwt
@@ -21,9 +22,14 @@ class BasicTests(unittest.TestCase):
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
+        encoded_password = bytes("password", encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
         db = app.config['DATABASE']
         sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-        db.cur.execute(sql,(0,'integeration', 'test','password','integreation@test.com',False,000,True))
+        db.cur.execute(sql,(0,'integeration', 'test',encrypted_password,'integreation@test.com',False,000,True))
         db.conn.commit()
         self.main = app.test_client()
         # db.drop_all()
@@ -78,7 +84,7 @@ class BasicTests(unittest.TestCase):
     def test_endpoint5(self):
         #print('hello')
         INPUT = {
-        "email": "rtdcthgcvyug@gmail.com",
+        "email": "integreation@test.com",
         "password": "password"
         }
         response = self.main.post('/login',json=INPUT)
