@@ -29,8 +29,8 @@ class Test(unittest.TestCase):
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         db = app.config['DATABASE']
-        sql = "DELETE FROM models WHERE modelname = model25;"
-        db.cur.execute(sql,(id,))
+        sql = "DELETE FROM models WHERE modelname = %s "
+        db.cur.execute(sql,("model25",))
         db.conn.commit()
         self.main =None
     

@@ -568,7 +568,7 @@ def add_feedback(user):
         user_feedback = str(request.json["feedback"])
         print(type(user_feedback))
         if(db.addFeedback(user_feedback)):
-            return {'response': 'feeback_saved'}, 200
+            return {'response': 'feedback saved'}, 200
         else:
             return {'response': 'failed'}, 400
     else:

@@ -32,35 +32,10 @@ class BasicTests(unittest.TestCase):
     # executed after each test
     def tearDown(self):
         db = app.config['DATABASE']
-        sql = "DELETE FROM feedback WHERE feeback = %s;"
+        sql = "DELETE FROM feedback WHERE feedback = %s;"
         db.cur.execute(sql,("Integration test feedback",))
         db.conn.commit()
         pass#
-
-    def test_endpoint(self):
-        INPUT = {
-        "feedback": "Integration test feedback",
-        }
-        token = jwt.encode({'email' :'thirdperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
-        data = json.loads(r.data)
-        print(data)
-        result = data['response']
-        self.assertEqual(401, r.status_code)
-        self.assertEqual(result, 'user unauthirized')
-    
-    def test_endpoint2(self):
-        INPUT = {
-        "feedback": "Integration test feedback",
-        }
-
-        token = jwt.encode({'email' :'thirdperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.add_feedback('/users',json=INPUT,headers={'x-access-token':token})
-        data = json.loads(r.data)
-        print(data)
-        result = data['response']
-        self.assertEqual(401, r.status_code)
-        self.assertEqual(result, 'user unauthirized')
     
     def test_endpoint3(self):
         INPUT = {
@@ -68,9 +43,9 @@ class BasicTests(unittest.TestCase):
         }
 
         token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.add_feedback('/users',json=INPUT,headers={'x-access-token':token})
+        r = self.main.post('/feedback',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
         print(data)
         result = data['response']
         self.assertEqual(200, r.status_code)
-        self.assertEqual(result, 'feedback added')
+        self.assertEqual(result, 'feedback saved')
