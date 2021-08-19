@@ -46,7 +46,7 @@ class Test(unittest.TestCase):
         data = json.loads(r.data)
         
 
-        print(data)
+        #print(data)
 
         result1 = data['output'][0]
         result2 = data['output'][1]
