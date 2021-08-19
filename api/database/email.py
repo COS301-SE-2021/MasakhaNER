@@ -41,5 +41,6 @@ class Email:
             print('email sent')
             return True
         except:
+            print("failed")
             return False;
 

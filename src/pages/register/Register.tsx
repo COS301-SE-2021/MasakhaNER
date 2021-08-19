@@ -110,7 +110,7 @@ function Register() {
       } else {
         alert(resp.status);
         alert("Incorrect verification code!");
-        window.location.href = "/";
+        window.location.href = "/register";
       }
     } catch (error) {
       console.log("there is an error", error);
@@ -132,7 +132,7 @@ function Register() {
   const validEmail = new RegExp(
     "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
   );
-  const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
+  const validPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
 
   const setItem = () => {
     localStorage.setItem("newEmail", email);
