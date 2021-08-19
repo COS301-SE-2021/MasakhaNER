@@ -61,7 +61,8 @@ const Button = styled.button`
   border: solid 1px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
   width: 10em;
-  background-color: white;
+  background-color: black;
+  color: white;
   border-radius: 20px;
   height: 35px;
   width: 15em;
@@ -222,7 +223,6 @@ function Register() {
           disabled={disabled}
           id="mainBtn"
           type="submit"
-          // className="btn btn-dark"
           onClick={(e) => {
             e.preventDefault();
             setItem();
