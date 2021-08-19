@@ -75,11 +75,6 @@ const Button = styled.button`
   }
 `;
 
-const SignUpButton = styled(Button)`
-  background-color: black;
-  color: white;
-`;
-
 function Register() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
