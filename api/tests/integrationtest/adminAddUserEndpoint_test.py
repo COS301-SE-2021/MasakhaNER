@@ -30,39 +30,39 @@ class Test(unittest.TestCase):
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         #app.config['DATABASE'].deleteBob()
         self.main =None
-    def test_endpoint(self):
-        INPUT = {
-        "firstname": "first",
-        "lastname": "person",
-        "email": "fp@gmail.com",
-        "password": "password",
-        "isadmin":False
-        }
+    # def test_endpoint(self):
+    #     INPUT = {
+    #     "firstname": "first",
+    #     "lastname": "person",
+    #     "email": "fp@gmail.com",
+    #     "password": "password",
+    #     "isadmin":False
+    #     }
 
-        token = jwt.encode({'email' :'fgch@gmail.com', 'exp' : datetime.utcnow() - timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
-        data = json.loads(r.data)
-        print(data)
-        result = data['response']
-        self.assertEqual(401, r.status_code)
-        self.assertEqual(result, 'Signature has expired')
+    #     token = jwt.encode({'email' :'fgch@gmail.com', 'exp' : datetime.utcnow() - timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+    #     r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
+    #     data = json.loads(r.data)
+    #     print(data)
+    #     result = data['response']
+    #     self.assertEqual(401, r.status_code)
+    #     self.assertEqual(result, 'Signature has expired')
 
-    def test_endpoint2(self):
-        INPUT = {
-        "firstname": "first",
-        "lastname": "person",
-        "email": "fp@gmail.com",
-        "password": "password",
-        "isadmin":False
-        }
+    # def test_endpoint2(self):
+    #     INPUT = {
+    #     "firstname": "first",
+    #     "lastname": "person",
+    #     "email": "fp@gmail.com",
+    #     "password": "password",
+    #     "isadmin":False
+    #     }
 
-        token = jwt.encode({'email' :'thirdperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
-        data = json.loads(r.data)
-        print(data)
-        result = data['response']
-        self.assertEqual(401, r.status_code)
-        self.assertEqual(result, 'user unauthirized')
+    #     token = jwt.encode({'email' :'thirdperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+    #     r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
+    #     data = json.loads(r.data)
+    #     print(data)
+    #     result = data['response']
+    #     self.assertEqual(401, r.status_code)
+    #     self.assertEqual(result, 'user unauthirized')
     
     def test_endpoint3(self):
         INPUT = {
