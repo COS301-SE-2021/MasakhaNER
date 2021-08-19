@@ -57,7 +57,7 @@ const OutputSection = styled.div`
 const Button = styled.button`
   border: solid 0.1px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  background-color: white;
+  background-color: #4591e7;
   border-radius: 20px;
   height: 35px;
   padding-left: 1em;
@@ -70,7 +70,7 @@ const Button = styled.button`
     transition: 0.4s;
   }
   position: relative;
-  color: #5f5f5f;
+  color: white;
 `;
 
 const Upload = styled.input`
@@ -81,6 +81,7 @@ const Upload = styled.input`
   height: 35px;
   padding-left: 1em;
   padding-right: 1em;
+  width: 8em;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
@@ -157,22 +158,21 @@ export default function InputSection() {
     setIsOpen(false);
   };
 
-  var history : String[] = new Array();
-  const addToHistory = (data: String ) => {
+  var history: String[] = new Array();
+  const addToHistory = (data: String) => {
     history.push(data);
-    let stored = localStorage.getItem('history');
-    if(stored == null){
-      localStorage.setItem('history', history.toString());
-    }
-    else{
+    let stored = localStorage.getItem("history");
+    if (stored == null) {
+      localStorage.setItem("history", history.toString());
+    } else {
       history = new Array();
       history = stored.split(",");
       history.push(data);
-      if(history.length > 5) history.shift();
-      localStorage.setItem('history', history.toString());
+      if (history.length > 5) history.shift();
+      localStorage.setItem("history", history.toString());
     }
     console.log(history);
-  }
+  };
 
   const options: any = {
     method: "POST",
@@ -192,13 +192,12 @@ export default function InputSection() {
       .catch((err) => console.log(err));
   }, [clicked]);
 
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
-  
+
   const handleSend = async () => {
-    addToHistory(input)
+    addToHistory(input);
     setWait(2);
     const opts: any = {
       method: "POST",
@@ -220,7 +219,7 @@ export default function InputSection() {
         // localStorage.setItem("token", data.token);
         // localStorage.setItem("isAuthenticated", "true");
         setOutputData(data.output);
-        setInput2(input)
+        setInput2(input);
         console.log("data is ", data.output);
         // if (data.isadmin) {
         //   history.push("/Admin");
@@ -241,36 +240,31 @@ export default function InputSection() {
   };
 
   // console.log(history);
-  
 
-  const handleFileChange = (e: any) =>{
-    
+  const handleFileChange = (e: any) => {
     const file = e.target.files[0];
-    const reader : any = new FileReader();
-   //console.log("NAME",file.name)
+    const reader: any = new FileReader();
+    //console.log("NAME",file.name)
     reader.readAsText(file);
     reader.onload = () => {
       //console.log("running")
       setFileName(file.name);
-      
+
       setFileContent(reader.result);
       //console.log("RESULT",typeof(reader.result))
-      setInput(reader.result)
-      
-    }
-
-    
-    
-  }
+      setInput(reader.result);
+    };
+  };
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
-  
-  
+
   return (
     <>
       <FormContainer>
         <div id="inputsection">
-          <div><p>Click on each entity to find out more information.</p></div>
+          <div>
+            <p>Click on each entity to find out more information.</p>
+          </div>
           <form onSubmit={handleSubmit}>
             <Input
               placeholder="Type here..."
@@ -279,28 +273,40 @@ export default function InputSection() {
               onChange={(e) => setInput(e.target.value)}
             />
             <div id="button-container">
-              <Button onClick={() => setClicked(!clicked)}>Mic</Button>
-              <Upload type="file" placeholder="Upload" onChange={handleFileChange}/>
+              {/* <Button onClick={() => setClicked(!clicked)}>Mic</Button> */}
+              <Upload
+                type="file"
+                placeholder="Upload"
+                onChange={handleFileChange}
+              />
               <Button onClick={handleSend}>Send</Button>
             </div>
           </form>
         </div>
         <div id="output-section">
           <OutputSection>
-            {wait===3?"":wait===2?"pending...":wait===1?<Output data={outputData} input={input2}/>:"failed"}
+            {wait === 3 ? (
+              ""
+            ) : wait === 2 ? (
+              "pending..."
+            ) : wait === 1 ? (
+              <Output data={outputData} input={input2} />
+            ) : (
+              "failed"
+            )}
           </OutputSection>
           <div id="button-container">
             <Button onClick={openModal}>Feedback</Button>
           </div>
-      </div>
-      <div>
-        {/* <Link>
+        </div>
+        <div>
+          {/* <Link>
           <h4>Link Section</h4>
           <CalliFrame/>
         </Link> */}
-      </div>
-    </FormContainer>
-    <Modal
+        </div>
+      </FormContainer>
+      <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
@@ -311,6 +317,10 @@ export default function InputSection() {
         <Button onClick={closeModal}>close</Button>
         <div>
           <Output data={outputData} input={input2} />
+          <p>
+            If returned data is incorrect please provide the correct entity by
+            placing the entity next to the incorrect output. i.e Name {"<PER>"}
+          </p>
         </div>
         <form>
           <FeedbackInput />

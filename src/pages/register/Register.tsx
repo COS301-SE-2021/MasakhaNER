@@ -58,10 +58,10 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  border: solid 1px rgba(0, 0, 0, 0.2);
+  border: solid 1px #4591e7;
   margin-bottom: 20px;
   width: 10em;
-  background-color: black;
+  background-color: #4591e7;
   color: white;
   border-radius: 20px;
   height: 35px;
@@ -156,10 +156,10 @@ function Register() {
 
   return (
     <Wrapper>
-      <Header>
+      {/* <Header>
         MasakhaNER
         <Bar />
-      </Header>
+      </Header> */}
 
       <form id="regForm" onSubmit={handleSubmit}>
         <div>
