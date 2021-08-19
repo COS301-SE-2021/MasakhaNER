@@ -78,6 +78,7 @@ const Upload = styled.input`
   margin-bottom: 20px;
   background-color: white;
   border-radius: 20px;
+  z-index:1;
   height: 35px;
   padding-left: 1em;
   padding-right: 1em;
@@ -140,6 +141,7 @@ export default function InputSection() {
   const [up, setUp] = useState(false);
   const [filename, setFileName] = useState("");
   const [filecontent, setFileContent] = useState("");
+  const [feedback, setFeedback] = useState("");
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -155,6 +157,32 @@ export default function InputSection() {
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const handleFeedback = async () => {
+    const opts: any = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        feedback: feedback,
+      }),
+    };
+
+    try {
+      const resp = await fetch("/feedback", opts);
+      console.log(resp);
+      if (resp.status === 200) {
+        const data = await resp.json();
+      } else {
+        alert("error, failed!");
+      }
+      console.log(wait);
+    } catch (error) {
+      console.log("there is an error", error);
+    }
   };
 
   var history : String[] = new Array();
@@ -279,7 +307,7 @@ export default function InputSection() {
               onChange={(e) => setInput(e.target.value)}
             />
             <div id="button-container">
-              <Button onClick={() => setClicked(!clicked)}>Mic</Button>
+              {/* <Button onClick={() => setClicked(!clicked)}>Mic</Button> */}
               <Upload type="file" placeholder="Upload" onChange={handleFileChange}/>
               <Button onClick={handleSend}>Send</Button>
             </div>
@@ -312,10 +340,19 @@ export default function InputSection() {
         <div>
           <Output data={outputData} input={input2} />
         </div>
-        <form>
-          <FeedbackInput />
+        <form onSubmit={handleSubmit}>
+          <FeedbackInput 
+          value={feedback}
+          placeholder="Enter your email address"
+          onChange={(e) => {
+            setFeedback(e.target.value);
+          }}/>
           <br />
-          <Button>Send Feedback</Button>
+          <Button onClick={(e) => {
+            e.preventDefault();
+          handleFeedback();
+          closeModal();
+          }}>Send Feedback</Button>
         </form>
       </Modal>
     </>

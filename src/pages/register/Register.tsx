@@ -114,7 +114,7 @@ function Register() {
       } else {
         alert(resp.status);
         alert("Incorrect verification code!");
-        window.location.href = "/";
+        window.location.href = "/register";
       }
     } catch (error) {
       console.log("there is an error", error);

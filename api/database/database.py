@@ -66,13 +66,15 @@ class User:
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
 
             self.cur.execute(sql,(firstname,lastname,encrypted_password,email,False,code,False))
-            # sendemail = Email()
-            # message = """\
-            # Masakhane Activation Code
+            print("go")
+            sendemail = Email()
+            message = """\
+            Masakhane Activation Code
 
-            # Here is your activation code: 1111 """
-            # sendemail.send_email(message, email)
-            # self.conn.commit()
+            Here is your activation code: 1111 """
+            sendemail.send_email(message, email)
+            print("sent")
+            self.conn.commit()
             # self.cur.close()
             # self.conn.close()
             return True
@@ -91,13 +93,15 @@ class User:
     """
 
     def get_code(self, email):
-        # self.conn = psycopg2.connect(
-        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
-        # self.cur = self.conn.cursor()
+        self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        self.cur = self.conn.cursor()
         sql = "SELECT activationcode FROM users where email=%s;"
         self.cur.execute(sql,(email,))
         var = self.cur.fetchone()
-        #self.conn.commit()
+        self.conn.commit()
+        # self.cur.close()
+        # self.conn.close()
         if var != None:
             code = int(var[0])
             return code

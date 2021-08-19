@@ -82,7 +82,7 @@ function Register() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-access=token":localStorage.getItem("token")
+      "x-access-token":localStorage.getItem("token")
     },
     body: JSON.stringify({
       firstname: firstName,
@@ -104,7 +104,7 @@ function Register() {
       }
     } catch (error) {
       console.log("there is an error", error);
-      window.location.href = "/";
+      // window.location.href = "/";
     }
   };
 
@@ -123,10 +123,6 @@ function Register() {
     "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
   );
   const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
-
-  const setItem = () => {
-    localStorage.setItem('newEmail', email);
-  }
 
   const validate = () => {
     if (!validEmail.test(email)) {
@@ -182,7 +178,6 @@ function Register() {
               className="btn btn-dark"
               onClick={(e) => {
                 e.preventDefault();
-                setItem();
                 handleStatus();
               }}
             >
