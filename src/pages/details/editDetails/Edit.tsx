@@ -177,7 +177,6 @@ function Register() {
           <br />
           <div className="submit-button">
             <Button
-              // disabled={disabled}
               id="mainBtn"
               type="submit"
               onClick={(e) => {
