@@ -216,7 +216,7 @@ def verify_user():
         user_email = request.json["email"]
         user_code = request.json["code"]
         if user_code != None and user_code == db.get_code(user_email):
-            print(True)
+            #print(True)
             db.verify_user(user_email)
 
             return {'response': 'verified'}, 200
@@ -327,7 +327,7 @@ def admin_add_user(user):
 @app.route('/users/<id>', methods=["PUT"])
 @token_required
 def admin_update_user(user, id):
-    print(id)
+    #print(id)
     id = int(id)
     
     if user is None:
@@ -338,7 +338,7 @@ def admin_update_user(user, id):
 
     db = app.config['DATABASE']
     if(db != None):
-        print("hello")
+        #print("hello")
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])

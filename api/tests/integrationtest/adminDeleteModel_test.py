@@ -53,7 +53,7 @@ class Test(unittest.TestCase):
         db.cur.execute(sql,(0,))
         model = db.cur.fetchone()
         db.conn.commit()
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(model,None)
         self.assertEqual(200, r.status_code)
