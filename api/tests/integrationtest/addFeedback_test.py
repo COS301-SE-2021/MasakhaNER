@@ -37,7 +37,7 @@ class BasicTests(unittest.TestCase):
         db.conn.commit()
         pass#
     
-    def test_endpoint3(self):
+    def test_endpoint(self):
         INPUT = {
         "feedback": "Integration test feedback",
         }
