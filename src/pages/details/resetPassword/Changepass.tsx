@@ -157,7 +157,7 @@ function Register() {
         <h2>Change Password</h2>
       </div>
       <form id="detForm" onSubmit={handleSubmit}>
-          <label htmlFor="oldPassword">email:</label>
+          <label htmlFor="oldPassword">Email:</label>
           <Input
             type="email"
             name="email"
@@ -168,6 +168,7 @@ function Register() {
               setEmail(e.target.value);
             }}
             required
+            placeholder="Enter your email"
           />
           <label htmlFor="newPassword">New password:</label>
           <Input
@@ -180,6 +181,7 @@ function Register() {
              setPassword(e.target.value);
            }}
            required
+           placeholder="Enter your new password"
           />
           {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
           <label htmlFor="lastName">Confirm New Password:</label>
@@ -189,6 +191,7 @@ function Register() {
             id="confirmPassword"
             className="form-control"
             value={password2}
+            placeholder="Enter your new password"
             onChange={(e) => {
               setPassword2(e.target.value);
               //console.log(e.target.value)
@@ -208,7 +211,7 @@ function Register() {
           />
         {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
         <br />
-        <ChangepassButton>
+          <ChangepassButton>
           <div className="submit-button">
             <button
               disabled={disabled}
@@ -224,10 +227,11 @@ function Register() {
                 handleStatus();
                 }
               }}
-            />
+            >
               Submit
-        </div>
-        </ChangepassButton>
+            </button>
+          </div>
+          </ChangepassButton>
       </form>
       <br />
       <br />

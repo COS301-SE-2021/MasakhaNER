@@ -4,6 +4,7 @@ import "./InputSection.css";
 import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
+// import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
   display: grid;
@@ -21,7 +22,7 @@ const Input = styled.textarea`
   display: inline-block;
   border-radius: 10px;
   width: 25em;
-  height: 16em;
+  height: 25em;
   resize: none;
   text-align: justify;
   padding: 20px;
@@ -39,7 +40,7 @@ const OutputSection = styled.div`
   display: inline-block;
   border-radius: 10px;
   width: 25em;
-  height: 16em;
+  height: 25em;
   resize: none;
   text-align: justify;
   padding: 20px;
@@ -128,6 +129,8 @@ const FeedbackInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
+// Modal.setAppElement("#inputsection");
+
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
@@ -189,9 +192,6 @@ export default function InputSection() {
       .catch((err) => console.log(err));
   }, [clicked]);
 
-  var newEnt = localStorage.getItem('Entity');
-  var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
-  console.log(linklink);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -265,10 +265,12 @@ export default function InputSection() {
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
   
+  
   return (
     <>
       <FormContainer>
-        <div>
+        <div id="inputsection">
+          <div><p>Click on each entity to find out more information.</p></div>
           <form onSubmit={handleSubmit}>
             <Input
               placeholder="Type here..."
@@ -283,7 +285,7 @@ export default function InputSection() {
             </div>
           </form>
         </div>
-        <div>
+        <div id="output-section">
           <OutputSection>
             {wait===3?"":wait===2?"pending...":wait===1?<Output data={outputData} input={input2}/>:"failed"}
           </OutputSection>
@@ -292,10 +294,10 @@ export default function InputSection() {
           </div>
       </div>
       <div>
-        <Link>
+        {/* <Link>
           <h4>Link Section</h4>
-          <iframe src={linklink}  width="750" height="250"></iframe>
-        </Link>
+          <CalliFrame/>
+        </Link> */}
       </div>
     </FormContainer>
     <Modal

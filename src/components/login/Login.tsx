@@ -108,6 +108,10 @@ export default function Login() {
     history.push("/register");
   };
 
+  const changePassword = () =>{
+    history.push("/details/changepassword")
+  }
+
   const handleLogin = async () => {
     const opts = {
       method: "POST",
@@ -172,6 +176,7 @@ export default function Login() {
         required
       />
       <Button onClick={handleLogin}>Login</Button>
+      <p onClick = {changePassword}>forgot password?</p>
       <SignUpButton onClick={register}>Sign up</SignUpButton>
       <p>or log in using</p>
       <GoogleLogin
