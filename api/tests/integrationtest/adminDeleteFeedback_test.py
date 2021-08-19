@@ -30,6 +30,9 @@ class Test(unittest.TestCase):
         self.main = app.test_client()
 
     def tearDown(self):
+        db = app.config['DATABASE']
+        sql = "DELETE FROM users WHERE id =%s"
+        db.cur.execute(sql,(0,))
         self.main =None
 
     def test_endpoint3(self):

@@ -1,5 +1,6 @@
 import unittest
 import requests
+import bcrypt
 import json
 import jwt
 from datetime import datetime, timedelta
@@ -20,6 +21,13 @@ class Test(unittest.TestCase):
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
         db = app.config['DATABASE']
+        encoded_password = bytes("password", encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
+        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        db.cur.execute(sql,(0,'integeration', 'test',encrypted_password,'admin@test.com',True,000,True))
         sql = "INSERT INTO models (id,modelname,model) VALUES(%s,%s,%s)"
         db.cur.execute(sql,(0,'TEST MODEL', 'TESTING'))
         db.conn.commit()
@@ -27,9 +35,9 @@ class Test(unittest.TestCase):
         self.main = app.test_client()
     
     def tearDown(self):
-        # main.config['TESTING'] = True
-        # main.config['WTF_CSRF_ENABLED'] = False
-        # main.config['DEBUG'] = False
+        db = app.config['DATABASE']
+        sql = "DELETE FROM users WHERE id =%s"
+        db.cur.execute(sql,(0,))
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         #app.config['DATABASE'].deleteBob()
