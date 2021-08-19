@@ -44,7 +44,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'admin@test.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.get('/feedback/0',headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         self.assertEqual(200, r.status_code)
         self.assertEqual(0, data['id'])
         self.assertEqual("Test feedback", data['feedback'])

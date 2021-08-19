@@ -38,7 +38,7 @@ class Email:
         try:
             self.server.sendmail(self.sender_email, receiver_email, message)
             self.server.quit() 
-            print('email sent')
+            #print('email sent')
             return True
         except:
             return False;

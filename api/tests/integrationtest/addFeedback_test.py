@@ -1,4 +1,5 @@
 import unittest
+import bcrypt
 import requests
 import json
 from datetime import datetime, timedelta
@@ -21,6 +22,15 @@ class BasicTests(unittest.TestCase):
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
+        db = app.config['DATABASE']
+        encoded_password = bytes("password", encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
+        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        db.cur.execute(sql,(0,'integeration', 'test',encrypted_password,'admin@test.com',True,000,True))
+        db.conn.commit()
         self.main = app.test_client()
         # db.drop_all()
         # db.create_all()
@@ -32,6 +42,8 @@ class BasicTests(unittest.TestCase):
     # executed after each test
     def tearDown(self):
         db = app.config['DATABASE']
+        sql = "DELETE FROM users WHERE id =%s"
+        db.cur.execute(sql,(0,))
         sql = "DELETE FROM feedback WHERE feedback = %s;"
         db.cur.execute(sql,("Integration test feedback",))
         db.conn.commit()
@@ -42,10 +54,10 @@ class BasicTests(unittest.TestCase):
         "feedback": "Integration test feedback",
         }
 
-        token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        token = jwt.encode({'email' :'admin@test.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.post('/feedback',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(200, r.status_code)
         self.assertEqual(result, 'feedback saved')

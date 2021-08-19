@@ -14,11 +14,6 @@ class Test(unittest.TestCase):
     # executed prior to each test
 
     def setUp(self):
-        # main.config['TESTING'] = True
-        # main.config['WTF_CSRF_ENABLED'] = False
-        # main.config['DEBUG'] = False
-        # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
-        # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
         encoded_password = bytes("password", encoding='utf-8')
         encrypted_password = bcrypt.hashpw(
@@ -56,7 +51,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'admin@test.com', 'exp' : datetime.utcnow() - timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.put('/users/0',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(401, r.status_code)
         self.assertEqual(result, 'Signature has expired')
@@ -75,7 +70,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'integreation@test.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.put('/users/0',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(401, r.status_code)
         self.assertEqual(result, 'user unauthirized')
@@ -93,7 +88,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'admin@test.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.put('/users/0',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(200, r.status_code)
         self.assertEqual(result, 'updated')

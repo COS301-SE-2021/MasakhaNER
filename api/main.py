@@ -103,7 +103,7 @@ def token_required(f):
     def decorated(*args, **kwargs):
         user = None
         token = None
-        print(request.headers)
+        # print(request.headers)
         if 'x-access-token' in request.headers:
             #print('here')
             token = request.headers['x-access-token']
@@ -245,7 +245,7 @@ def login_user():
     if(db != False):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
-        print("hello")
+        #print("hello")
         if db.login(user_email, user_password):
             token = jwt.encode({'email': user_email, 'exp': datetime.utcnow(
             ) + timedelta(hours=2)}, app.config['SECRET_KEY'], algorithm="HS256")
@@ -293,7 +293,7 @@ def update_details(user):
 @token_required
 def admin_add_user(user):
 
-    print(user)
+    #print(user)
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
         
@@ -366,7 +366,7 @@ def admin_delete_user(user, id):
 
     id = int(id)
 
-    print(user)
+    #print(user)
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
@@ -527,23 +527,23 @@ def set_model(user,id):
     db = app.config['DATABASE']
     if(db != None):
         model = db.setModels(id)
-        print(model)
+        #print(model)
         if(model!=None):
             # with is like your try .. finally block in this case
             dirname = os.path.dirname(__file__)
             filename = os.path.join(dirname, 'model.py')
-            print(filename)
+            #print(filename)
             data=""
             with open(filename, 'r') as file:
                 # read a list of lines into data
                 data = file.readlines()
             #Davlan/distilbert-base-multilingual-cased-masakhaner
-            print(data)
-            print("Your name: " + data[4])
+            #print(data)
+            #print("Your name: " + data[4])
 
             # now change the 2nd line, note that you have to add a newline
             data[4] = f'    url = "{model[0]}"\n'
-            print(data[4])
+            #print(data[4])
             # and write everything back
             with open(filename, 'w') as file:
                 file.writelines( data )
@@ -566,7 +566,7 @@ def add_feedback(user):
     db = app.config['DATABASE']
     if(db != None):
         user_feedback = str(request.json["feedback"])
-        print(type(user_feedback))
+        #print(type(user_feedback))
         if(db.addFeedback(user_feedback)):
             return {'response': 'feedback saved'}, 200
         else:
@@ -664,7 +664,7 @@ def admin_get_all_feedback(user):
         JSON object with response
 """
 if __name__ == "__main__":
-    print("RUNNING")
+    #print("RUNNING")
     app.run(debug=True)
 
 # DB_HOST="ec2-34-232-191-133.compute-1.amazonaws.com"

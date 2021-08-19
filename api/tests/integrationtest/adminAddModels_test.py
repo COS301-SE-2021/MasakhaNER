@@ -43,7 +43,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.post('/models',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(200, r.status_code)
         self.assertEqual(result,'model added')

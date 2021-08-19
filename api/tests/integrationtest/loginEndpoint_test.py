@@ -54,7 +54,7 @@ class BasicTests(unittest.TestCase):
         "password": "password"
         }
         response = self.main.post('/login',json=INPUT)
-        print(response.data)
+        #print(response.data)
         
         r = json.loads(response.data)
         #print(r)
@@ -71,10 +71,10 @@ class BasicTests(unittest.TestCase):
         "password": "ffrggr"
         }
         response = self.main.post('/login',json=INPUT)
-        print(response.data)
+        #print(response.data)
         
         r = json.loads(response.data)
-        print(r)
+        #print(r)
 
         result1 = r['response']
 
@@ -88,7 +88,7 @@ class BasicTests(unittest.TestCase):
         "password": "password"
         }
         response = self.main.post('/login',json=INPUT)
-        print(response.data)
+        #print(response.data)
         
         r = json.loads(response.data)
         #print(r)
