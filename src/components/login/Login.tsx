@@ -19,6 +19,10 @@ const Wrapper = styled.div`
   margin-top: 8vh;
   border-radius: 20px;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+
+  #google-button {
+    transform: translateY(-7px);
+  }
 `;
 
 const Bar = styled.div`
@@ -108,9 +112,9 @@ export default function Login() {
     history.push("/register");
   };
 
-  const changePassword = () =>{
-    history.push("/details/changepassword")
-  }
+  const changePassword = () => {
+    history.push("/details/changepassword");
+  };
 
   const handleLogin = async () => {
     const opts = {
@@ -176,16 +180,18 @@ export default function Login() {
         required
       />
       <Button onClick={handleLogin}>Login</Button>
-      <p onClick = {changePassword}>forgot password?</p>
+      <p onClick={changePassword}>forgot password?</p>
       <SignUpButton onClick={register}>Sign up</SignUpButton>
       <p>or log in using</p>
-      <GoogleLogin
-        clientId="824866690096-4rqi2a1n6bvj9sfstjcbv999i9pi69i3.apps.googleusercontent.com"
-        buttonText="Log in with Google"
-        onSuccess={responseGoogle}
-        onFailure={responseFailerGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
+      <div id="google-button">
+        <GoogleLogin
+          clientId="824866690096-4rqi2a1n6bvj9sfstjcbv999i9pi69i3.apps.googleusercontent.com"
+          buttonText="Log in with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseFailerGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+      </div>
       <FacebookLogin
         appId="2951110285136034"
         autoLoad={false}

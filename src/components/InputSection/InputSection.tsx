@@ -81,6 +81,7 @@ const Upload = styled.input`
   height: 35px;
   padding-left: 1em;
   padding-right: 1em;
+  width: 8em;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
@@ -317,7 +318,7 @@ export default function InputSection() {
         <div>
           <Output data={outputData} input={input2} />
           <p>
-            If returned data is correct please provide the correct entity by
+            If returned data is incorrect please provide the correct entity by
             placing the entity next to the incorrect output. i.e Name {"<PER>"}
           </p>
         </div>
