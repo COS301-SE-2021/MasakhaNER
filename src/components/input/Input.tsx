@@ -26,8 +26,9 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.h1`
-  font-size: 3em;
+  font-size: 1.3em;
   margin-bottom: 1em;
+  transform: translateX(-65px);
   @media (max-width: 767px) {
     font-size: 2em;
   }
@@ -63,14 +64,14 @@ const History = styled.div`
 export const Input = () => {
   return (
     <>
-      <Header>Train model</Header>
+      <Header>Below, enter text in the input field to send text to the MasashaNER model which will returned text with recognized entities</Header>
       <Wrapper>
         <div>
           <InputSection />
         </div>
         <div>
           <History>
-            <HistorySection/>
+            <HistorySection />
           </History>
         </div>
       </Wrapper>

@@ -32,7 +32,7 @@ function AdminSideBar() {
                 <button className = "btn default" onClick = {displayDashboard}>Dashboard</button>
                 <button className = "btn default" onClick = {getAdminUsers}>Admin Users</button>
                 <button className = "btn default" onClick = {getRegularUsers}>Regular Users</button>
-                <button className = "btn default" onClick = {Models}>Models</button>
+                {/* <button className = "btn default" onClick = {Models}>Models</button> */}
             </div>
             <div id = "output"></div>
         </>

@@ -101,30 +101,75 @@ interface OutputProps {
   input: string;
 }
 
+  
+  // const [newEnt, setnewEnt] = useState("");
+  // const [wikiLink, setwikiLink] = useState("");
+
+  
+
+export function CalliFrame() {
+  var newEnt = localStorage.getItem('Entity');
+  var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
+  console.log(linklink);
+  return <iframe src={linklink}  width="750" height="250" id="wikiLink"></iframe>;
+}
+
 export default function Output({ data, input }: OutputProps) {
   let tex = "Emir of Kano turban Zhang wey don spend 18 years for Nigeria";
   let arr = [...input];
 
+  const [ent, setEnt] = useState("");
+  useEffect(() => {
+    localStorage.setItem('Entity',ent);
+  },[ent]);
+
+  //function storeWord(word:string){
+    
+    //alert('Got called!');
+    //document.getElementById('wikiLink').window.location.reload();
+    //window.location.reload();
+  //}
+
   console.log(data);
   // console.log(json[0].start);
   let word = "";
-  data = json;
+
+  let nogo = true
+
+
   let j = 0;
   if (data !== null) {
     for (let i = 0; i < arr.length; i++) {
-      if (j < data.length) {
+      if(data.length===0){
+        nogo = false
+        break
+      }
+      if(j < data.length) {
         if (data[j].start === i) {
-          word +=
-            ` <span id="${data[j].entity_group}">` +
+            // localStorage.setItem('Entity',data[j].word);
+            //https://www.google.com/maps/place/
+            //{${setEnt(data[j].word)}}
+            console.log("The entity", data[j].entity);
+            if (data[j].entity == "B-LOC"){
+              word +=
+            ` <span id="${data[j].entity.substring(2)}"><a href="https://www.google.com/maps/place/${data[j].word}" target="_blank">` +
             data[j].word +
-            `<span id="tag"><a href="https://en.wikipedia.org/wiki/${data[j].word}">${data[j].entity_group}</a></span></span>`;
+            `<span id="tag"}>${data[j].entity.substring(2)}</span></a></span>`;
           i = data[j].end - 1;
           j += 1;
+            }else{
+              word +=
+              ` <span id="${data[j].entity.substring(2)}"><a href="https://en.wikipedia.org/wiki/${data[j].word}" target="_blank">` +
+              data[j].word +
+              `<span id="tag"}>${data[j].entity.substring(2)}</span></a></span>`;
+            i = data[j].end - 1;
+            j += 1;
+            }
         } else {
-          word += arr[i];
+          word += arr[i]
         }
       } else {
-        word += arr[i];
+        word += arr[i]
       }
       //console.log(j,i)
     }
@@ -132,5 +177,5 @@ export default function Output({ data, input }: OutputProps) {
 
   console.log(word);
   const [text, setText] = useState("hello <span>dude</span>");
-  return <Text className="App">{createText(word)}</Text>;
+  return <Text className="App">{nogo?createText(word):input}</Text>;
 }

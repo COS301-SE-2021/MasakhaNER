@@ -3,9 +3,89 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Changepass.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import Nav from "../../../components/nav/Nav";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 import Footer from "../../../components/Footer/Footer";
 
+const Wrapper = styled.div`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  width: 80vw;
+  border: solid 1px #ffffff;
+  margin: 0 auto;
+  margin-top: 8vh;
+  border-radius: 20px;
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+`;
+
+const Bar = styled.div`
+  width: inherit;
+  height: 5px;
+  background-color: #000;
+  margin-top: 5px;
+`;
+
+const Header = styled.h1`
+  font-size: 3em;
+  margin-bottom: 1em;
+  @media (max-width: 767px) {
+    font-size: 2em;
+  }
+`;
+
+const Input = styled.input`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  height: 35px;
+  width: 15em;
+  padding: 15px;
+
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+  }
+
+  &:focus {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const Button = styled.button`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  width: 10em;
+  background-color: white;
+  border-radius: 20px;
+  height: 35px;
+  width: 15em;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+  }
+`;
+
+const ChangepassButton = styled(Button)`
+  background-color: black;
+  color: white;
+`;
+
+let history;
+
 function Register() {
+  history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -26,14 +106,17 @@ function Register() {
     }),
   };
 
+
   const handleStatus = async () => {
+    
     try {
-      const resp = await fetch("/reset", options);
+      const resp = await fetch("/details/changepassword", options);
       console.log(resp);
       if (resp.status === 200) {
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
+        history.push("/");
       } else {
         alert(resp.status);
         alert("Incorrect email!");
@@ -46,7 +129,7 @@ function Register() {
 
   useEffect(() => {
     if (disabled === false) {
-      fetch("/reset", options)
+      fetch("/details/changepassword", options)
         .then((res) => res.json())
         .then((data) => {
           console.log(data.output);
@@ -65,16 +148,17 @@ function Register() {
   };
 
   return (
-    <div id="detailspage">
-      <Nav />
-      <div className="signup-form">
+    <Wrapper>
+      <Header>
+        MasakhaNER
+        <Bar />
+      </Header>
+      <div>
+        <h2>Change Password</h2>
+      </div>
       <form id="detForm" onSubmit={handleSubmit}>
-        <div className="registerTop">
-          <h2>Change Password</h2>
-        </div>
-        <div className="form-group">
-          <label htmlFor="oldPassword">email:</label>
-          <input
+          <label htmlFor="oldPassword">Email:</label>
+          <Input
             type="email"
             name="email"
             id="email"
@@ -84,10 +168,10 @@ function Register() {
               setEmail(e.target.value);
             }}
             required
+            placeholder="Enter your email"
           />
-        <div className="form-group">
           <label htmlFor="newPassword">New password:</label>
-          <input
+          <Input
            type="password"
            name="oldPassword"
            id="oldPassword"
@@ -97,26 +181,25 @@ function Register() {
              setPassword(e.target.value);
            }}
            required
+           placeholder="Enter your new password"
           />
           {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
-        </div>
-        </div>
-        <div className="form-group">
           <label htmlFor="lastName">Confirm New Password:</label>
-          <input
+          <Input
             type="password"
             name="confirmPassword"
             id="confirmPassword"
             className="form-control"
             value={password2}
+            placeholder="Enter your new password"
             onChange={(e) => {
               setPassword2(e.target.value);
               //console.log(e.target.value)
               // console.log(password2)
               // console.log(password3)
-              if(password2===e.target.value){
+              if(password===e.target.value){
                 setPasswordErr(true);
-                setDisabled(true)
+                setDisabled(false)
               }
               else{
                 setPasswordErr(false);
@@ -127,33 +210,32 @@ function Register() {
             required
           />
         {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
-        </div>
         <br />
-        <div className="submit-button">
-          <button
-            disabled={disabled}
-            id="mainBtn"
-            type="submit"
-            className="btn btn-dark"
-            onClick={(e) => {
-              e.preventDefault();
-              if (!validPassword.test(password2)) {
-                setPasswordErr2(true)
-                //alert("use regex");
-              } else {
-              handleStatus();
-              }
-            }}
-          >
-            Submit
-          </button>
-        </div>
+          <ChangepassButton>
+          <div className="submit-button">
+            <button
+              disabled={disabled}
+              id="mainBtn"
+              type="submit"
+              className="btn btn-dark"
+              onClick={(e) => {
+                e.preventDefault();
+                if (!validPassword.test(password2)) {
+                  setPasswordErr2(true)
+                  //alert("use regex");
+                } else {
+                handleStatus();
+                }
+              }}
+            >
+              Submit
+            </button>
+          </div>
+          </ChangepassButton>
       </form>
-    </div>
       <br />
       <br />
-      <Footer />
-    </div>
+    </Wrapper>
     
   );
 }

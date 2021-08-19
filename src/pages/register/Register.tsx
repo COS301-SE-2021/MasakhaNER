@@ -58,10 +58,11 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  border: solid 1px rgba(0, 0, 0, 0.2);
+  border: solid 1px #4591e7;
   margin-bottom: 20px;
   width: 10em;
-  background-color: white;
+  background-color: #4591e7;
+  color: white;
   border-radius: 20px;
   height: 35px;
   width: 15em;
@@ -72,11 +73,6 @@ const Button = styled.button`
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
   }
-`;
-
-const SignUpButton = styled(Button)`
-  background-color: black;
-  color: white;
 `;
 
 function Register() {
@@ -114,7 +110,7 @@ function Register() {
       } else {
         alert(resp.status);
         alert("Incorrect verification code!");
-        window.location.href = "/";
+        window.location.href = "/register";
       }
     } catch (error) {
       console.log("there is an error", error);
@@ -136,7 +132,7 @@ function Register() {
   const validEmail = new RegExp(
     "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
   );
-  const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
+  const validPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
 
   const setItem = () => {
     localStorage.setItem("newEmail", email);
@@ -160,10 +156,10 @@ function Register() {
 
   return (
     <Wrapper>
-      <Header>
+      {/* <Header>
         MasakhaNER
         <Bar />
-      </Header>
+      </Header> */}
 
       <form id="regForm" onSubmit={handleSubmit}>
         <div>
@@ -222,7 +218,6 @@ function Register() {
           disabled={disabled}
           id="mainBtn"
           type="submit"
-          className="btn btn-dark"
           onClick={(e) => {
             e.preventDefault();
             setItem();

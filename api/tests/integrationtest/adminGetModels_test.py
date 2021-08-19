@@ -28,26 +28,17 @@ class Test(unittest.TestCase):
         encrypted_password = encrypted_password.decode('UTF-8')
         sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
         db.cur.execute(sql,(0,'integeration', 'test',encrypted_password,'admin@test.com',True,000,True))
-        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-        db.cur.execute(sql,(1,'integeration', 'test',encrypted_password,'user@test.com',True,000,True))
         db.conn.commit()
         self.main = app.test_client()
-    
+
     def tearDown(self):
         db = app.config['DATABASE']
         sql = "DELETE FROM users WHERE id =%s"
         db.cur.execute(sql,(0,))
-        sql = "DELETE FROM users WHERE id =%s"
-        db.cur.execute(sql,(1,))
         db.conn.commit()
         self.main =None
-
-    def test_endpoint4(self):
-
+    def test_endpoint(self):
         token = jwt.encode({'email' :'admin@test.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.delete('/users/1',headers={'x-access-token':token})
+        r = self.main.get('/models',headers={'x-access-token':token})
         data = json.loads(r.data)
-        #print(data)
-        result = data['response']
         self.assertEqual(200, r.status_code)
-        self.assertEqual(result, 'deleted')
