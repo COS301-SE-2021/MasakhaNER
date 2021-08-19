@@ -222,7 +222,7 @@ function Register() {
           disabled={disabled}
           id="mainBtn"
           type="submit"
-          className="btn btn-dark"
+          // className="btn btn-dark"
           onClick={(e) => {
             e.preventDefault();
             setItem();
