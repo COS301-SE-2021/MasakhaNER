@@ -1,4 +1,5 @@
 import bcrypt
+import random
 from flask import request
 from dotenv import load_dotenv
 import psycopg2.extras
@@ -61,7 +62,8 @@ class User:
             encoded_password, bcrypt.gensalt())
             #print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
-            code = '1111'
+            code = str(random.randint(1000,9999))
+            
 
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
 
