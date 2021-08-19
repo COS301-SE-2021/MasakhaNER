@@ -102,7 +102,7 @@ class mockdatabase:
         user = self.findUserByEmail(email)
         if user != None:
             if bcrypt.checkpw(password.encode('UTF-8'), user[3].encode('UTF-8')):
-                print("password works")
+                #print("password works")
                 return True
             else:
                 return False
@@ -120,7 +120,7 @@ class mockdatabase:
         user = self.findUserByEmail(email)
         if user != None:
             if user[7]==True:
-                print("password works")
+                #print("password works")
                 return True
             else:
                 return False
@@ -150,7 +150,8 @@ class mockdatabase:
         return self.db_list
     
     def printList(self):
-        print(self.db_list)
+        #print(self.db_list)
+        pass#
 
         #return self.db_list
 
@@ -172,7 +173,7 @@ class mockdatabase:
 
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         user = self.findUserById(id)
-        print('this is the user:', user)
+        #print('this is the user:', user)
         if user != None:
                 encoded_password = bytes(password, encoding='utf-8')
                 encrypted_password = bcrypt.hashpw(

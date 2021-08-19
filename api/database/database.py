@@ -130,10 +130,10 @@ class User:
         self.conn.commit()
         # self.cur.close()
         # self.conn.close()
-        print(db_password)
+        #print(db_password)
         if db_password != None:
             if bcrypt.checkpw(password.encode('UTF-8'), db_password[0].encode('UTF-8')):
-                print("password works")
+                #print("password works")
                 return True
             else:
                 return False
@@ -175,11 +175,11 @@ class User:
             encoded_password = bytes(newPassword, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
             encrypted_password = encrypted_password.decode('UTF-8')
-            print(encrypted_password)
+            #print(encrypted_password)
             sql = "UPDATE users SET password=%s WHERE email=%s;"
             self.cur.execute(sql,(encrypted_password,email))
             self.conn.commit()
-            print("done")
+            #print("done")
             return True
         except Exception as e:
             print(f"Database connection error: {e}")
@@ -289,7 +289,7 @@ class User:
             # self.conn = psycopg2.connect(
             #     dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
             # self.cur = self.conn.cursor()
-            print("running")
+            #print("running")
             #if self.findUserByEmail(email) is None:  
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
@@ -301,7 +301,7 @@ class User:
             self.conn.commit()
             #self.cur.close()
             # self.conn.close()
-            print("done")
+            #print("done")
             return True
         except Exception as e:
             print(f"Database connection error: {e}")
@@ -332,7 +332,7 @@ class User:
             encoded_password, bcrypt.gensalt())
             #print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
-            print(email)
+            #print(email)
             sql="UPDATE users SET password =%s WHERE email= %s;"
             self.cur.execute(sql,(encrypted_password,email))
             self.conn.commit()
@@ -340,7 +340,7 @@ class User:
             # self.conn.close()
             return True
         except Exception as e:
-            print(f"Database connection error: {e}")
+            #print(f"Database connection error: {e}")
             return False
 
     def adminAddModel(self, modelname, model):
@@ -372,7 +372,7 @@ class User:
     def setModels(self,name):
         # self.conn = psycopg2.connect(
         #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
-        print(name)
+        #print(name)
         sql="SELECT model FROM models where id=%s"
         self.cur.execute(sql,(name,))
         db_user = self.cur.fetchone()

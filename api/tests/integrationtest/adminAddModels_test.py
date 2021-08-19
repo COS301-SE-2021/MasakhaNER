@@ -10,7 +10,7 @@ from main import app
 
 class Test(unittest.TestCase):
     main=None
-    # executed prior to each test
+    # executed prior to each testf
 
     def setUp(self):
         # main.config['TESTING'] = True
@@ -18,14 +18,9 @@ class Test(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        app.config.from_object('config_default.TestingConfig')
+        app.config.from_object('config_default.Config')
+        #app.config['DATABASE'].insertBob()
         self.main = app.test_client()
-        # db.drop_all()
-        # db.create_all()
-        
-        # # Disable sending emails during unit testing
-        # mail.init_app(app)
-        # self.assertEqual(app.debug, False)\
     
     def tearDown(self):
         # main.config['TESTING'] = True
@@ -33,22 +28,22 @@ class Test(unittest.TestCase):
         # main.config['DEBUG'] = False
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
-        app.config['DATABASE'].clear()
-        self.main = None
+        db = app.config['DATABASE']
+        sql = "DELETE FROM models WHERE modelname = %s "
+        db.cur.execute(sql,("model25",))
+        db.conn.commit()
+        self.main =None
     
     def test_endpoint(self):
-        INPUT={
-            'input':'Kanye in Paris'
+        INPUT = {
+        "modelname": "model25",
+        "model": "TEST MODEL"
         }
 
-        token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.post('/input',json=INPUT,headers={'x-access-token':token})
+        token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        r = self.main.post('/models',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        
-
         #print(data)
-
-        result1 = data['output'][0]
-        result2 = data['output'][1]
-
+        result = data['response']
         self.assertEqual(200, r.status_code)
+        self.assertEqual(result,'model added')

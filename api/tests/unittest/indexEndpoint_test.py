@@ -43,7 +43,7 @@ class BasicTests(unittest.TestCase):
         pass#
     
     def test_endpoint(self):
-        print('hlo')
+        #print('hlo')
         response = self.main.post('/')
 
 athing = BasicTests()
