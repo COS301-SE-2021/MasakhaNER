@@ -23,7 +23,7 @@ class Email:
             self.server.login(self.sender_email, self.password)
         except Exception as e:
             print(f"Send email error: {e}")
-            return False
+            return None
 
     """
     send_email function:

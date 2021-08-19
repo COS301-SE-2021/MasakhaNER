@@ -218,6 +218,18 @@ class User:
         # self.conn.close()
         return db_user
 
+    def getModel(self, id):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        # self.cur = self.conn.cursor()
+        sql = "SELECT * FROM models WHERE id=%s;"
+        self.cur.execute(sql,(id,))
+        db_model = self.cur.fetchone()
+        self.conn.commit()
+        # self.cur.close()
+        # self.conn.close()
+        return db_model
+
     def insertBob(self):
         # self.conn = psycopg2.connect(
         #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
