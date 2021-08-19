@@ -133,12 +133,18 @@ export default function Output({ data, input }: OutputProps) {
   console.log(data);
   // console.log(json[0].start);
   let word = "";
-  //data = json;
+
+  let nogo = true
+
 
   let j = 0;
   if (data !== null) {
     for (let i = 0; i < arr.length; i++) {
-      if (j < data.length) {
+      if(data.length===0){
+        nogo = false
+        break
+      }
+      if(j < data.length) {
         if (data[j].start === i) {
             // localStorage.setItem('Entity',data[j].word);
             //https://www.google.com/maps/place/
@@ -160,10 +166,10 @@ export default function Output({ data, input }: OutputProps) {
             j += 1;
             }
         } else {
-          word += arr[i];
+          word += arr[i]
         }
       } else {
-        word += arr[i];
+        word += arr[i]
       }
       //console.log(j,i)
     }
@@ -171,5 +177,5 @@ export default function Output({ data, input }: OutputProps) {
 
   console.log(word);
   const [text, setText] = useState("hello <span>dude</span>");
-  return <Text className="App">{createText(word)}</Text>;
+  return <Text className="App">{nogo?createText(word):input}</Text>;
 }

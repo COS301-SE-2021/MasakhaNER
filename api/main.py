@@ -261,7 +261,7 @@ def login_user():
 @app.route('/update-details', methods=["POST"])
 @token_required
 def update_details(user):
-
+    print("hello")
     if not user:
         return jsonify({'response' : 'log in to use model'}),401
 
