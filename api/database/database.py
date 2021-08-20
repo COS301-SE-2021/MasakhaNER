@@ -73,7 +73,8 @@ class User:
             message = """\
             Masakhane Activation Code
 
-            Here is your activation code: 1111 """
+            Here is your activation code: """
+            message+=code
             sendemail.send_email(message, email)
             print("sent")
             self.conn.commit()
