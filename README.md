@@ -23,7 +23,7 @@ A web-based interface that will be used as a named entity recognition tool for A
 
 - [Architecture requirements - StopDaCap](https://docs.google.com/document/d/18KUGhHu3Fjvr40h5DXKYnaO1FYh1Oi7Qg8m_osAix9U/edit?usp=sharing)
 
-- [Technical Installation Manual - StopDaCap](https://drive.google.com/file/d/1-NZ2Pr2M53EcoxdljpvKAdLqwmj-X5xh/view?usp=sharing)
+- [Technical Installation Manual - StopDaCap](https://drive.google.com/file/d/1xQI4BjQdxNMlf6syLtF-Q-VNQLVb4R3T/view?usp=sharing)
 
 - [User Manual - StopDaCap](https://drive.google.com/file/d/1zI5Yt23uLYUkyZP_T0ENNjntovhv2zST/view?usp=sharing)
 
