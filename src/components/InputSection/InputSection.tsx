@@ -354,7 +354,7 @@ export default function InputSection() {
         <form onSubmit={handleSubmit}>
           <FeedbackInput 
           value={feedback}
-          placeholder="Enter your email address"
+          placeholder="Enter feedback"
           onChange={(e) => {
             setFeedback(e.target.value);
           }}/>

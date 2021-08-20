@@ -150,7 +150,7 @@ export default function Output({ data, input }: OutputProps) {
             //https://www.google.com/maps/place/
             //{${setEnt(data[j].word)}}
             console.log("The entity", data[j].entity);
-            if (data[j].entity == "B-LOC"){
+            if (data[j].entity == "B-LOC" || data[j].entity == "I-LOC"){
               word +=
             ` <span id="${data[j].entity.substring(2)}"><a href="https://www.google.com/maps/place/${data[j].word}" target="_blank">` +
             data[j].word +
