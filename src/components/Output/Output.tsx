@@ -12,7 +12,7 @@ const Text = styled.div`
   }
 
   #LOC {
-    background-color: #ffcb69;
+    background-color: #dd9c22;
     color: #634000;
 
     #tag {
@@ -21,7 +21,7 @@ const Text = styled.div`
     }
   }
   #DATE {
-    background-color: #7793e9;
+    background-color: #2148bd;
     color: #092781;
     #tag {
       width: 30px;
@@ -29,7 +29,7 @@ const Text = styled.div`
     }
   }
   #PER {
-    background-color: #c1f177;
+    background-color: #79bb14;
     color: #538606;
     #tag {
       width: 30px;
@@ -37,7 +37,7 @@ const Text = styled.div`
     }
   }
   #ORG {
-    background-color: #eb88b9;
+    background-color: #b8216d;
     color: #8d0649;
     #tag {
       width: 30px;
