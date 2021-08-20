@@ -21,14 +21,20 @@ A web-based interface that will be used as a named entity recognition tool for A
 
 - [SRS Version 2 - StopDaCAp](https://drive.google.com/file/d/1W7VcD3aDbkesO6wtPLqwU1DE3OHYBJ_k/view?usp=sharing)
 
-- [Architecture requirements - StopDaCAp](https://docs.google.com/document/d/18KUGhHu3Fjvr40h5DXKYnaO1FYh1Oi7Qg8m_osAix9U/edit?usp=sharing)
+- [Architecture requirements - StopDaCap](https://docs.google.com/document/d/18KUGhHu3Fjvr40h5DXKYnaO1FYh1Oi7Qg8m_osAix9U/edit?usp=sharing)
+
+- [Technical Installation Manual - StopDaCap](https://drive.google.com/file/d/1-NZ2Pr2M53EcoxdljpvKAdLqwmj-X5xh/view?usp=sharing)
+
+- [User Manual - StopDaCap](https://drive.google.com/file/d/1zI5Yt23uLYUkyZP_T0ENNjntovhv2zST/view?usp=sharing)
 
 
 
 ## Demo Links
 - [StopDaCap - Demo 1](https://drive.google.com/file/d/1nY6zOI-pzEs0-Fn2sCIAineUekJEAGyV/view?usp=sharing)
 
-- [StopDaCap - Demo 2](https://drive.google.com/file/d/13PeCR4WkB-gCx_1qIbWK8FsenK6Cz9Ot/view?usp=sharing)
+- [StopDaCap - Demo 2](https://drive.google.com/file/d/1J1Yli8HXnUWk-BW7b4rEUhJUtx-BiG0e/view?usp=sharing)
+
+- [StopDaCap - Demo 3](https://drive.google.com/file/d/1zhGoAeSDADg1Wf-EFukZqfNyTrqiF_UP/view?usp=sharing)
 
 ## Technology Stack
 <p>Frontend - ReactJS</p>
