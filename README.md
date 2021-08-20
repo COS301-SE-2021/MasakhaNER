@@ -21,6 +21,8 @@ A web-based interface that will be used as a named entity recognition tool for A
 
 - [SRS Version 2 - StopDaCAp](https://drive.google.com/file/d/1W7VcD3aDbkesO6wtPLqwU1DE3OHYBJ_k/view?usp=sharing)
 
+- [SRS Version 3 - StopDaCAp](https://drive.google.com/file/d/1JLw7MORwYhoe5lMGbnOFxqr0KYe9BfV_/view?usp=sharing)
+
 - [Architecture requirements - StopDaCap](https://docs.google.com/document/d/18KUGhHu3Fjvr40h5DXKYnaO1FYh1Oi7Qg8m_osAix9U/edit?usp=sharing)
 
 - [Technical Installation Manual - StopDaCap](https://drive.google.com/file/d/1xQI4BjQdxNMlf6syLtF-Q-VNQLVb4R3T/view?usp=sharing)

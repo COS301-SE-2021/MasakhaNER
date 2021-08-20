@@ -66,9 +66,7 @@ class User:
             
 
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-
             self.cur.execute(sql,(firstname,lastname,encrypted_password,email,False,code,False))
-            print("go")
             sendemail = Email()
             message = """\
             Masakhane Activation Code
