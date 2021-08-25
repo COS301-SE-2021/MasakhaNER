@@ -1,4 +1,5 @@
 import bcrypt
+import random
 from flask import request
 from dotenv import load_dotenv
 import psycopg2.extras
@@ -61,17 +62,19 @@ class User:
             encoded_password, bcrypt.gensalt())
             #print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
-            code = '1111'
+            code = str(random.randint(1000,9999))
+            
 
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-
             self.cur.execute(sql,(firstname,lastname,encrypted_password,email,False,code,False))
-            #sendemail = Email()
-            # message = """\
-            # Masakhane Activation Code
+            sendemail = Email()
+            message = """\
+            Masakhane Activation Code
 
-            # Here is your activation code: 1111 """
-            #sendemail.send_email(message, email)
+            Here is your activation code: """
+            message+=code
+            sendemail.send_email(message, email)
+            print("sent")
             self.conn.commit()
             # self.cur.close()
             # self.conn.close()
@@ -91,13 +94,15 @@ class User:
     """
 
     def get_code(self, email):
-        # self.conn = psycopg2.connect(
-        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
-        # self.cur = self.conn.cursor()
+        self.conn = psycopg2.connect(
+                dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        self.cur = self.conn.cursor()
         sql = "SELECT activationcode FROM users where email=%s;"
         self.cur.execute(sql,(email,))
         var = self.cur.fetchone()
-        #self.conn.commit()
+        self.conn.commit()
+        # self.cur.close()
+        # self.conn.close()
         if var != None:
             code = int(var[0])
             return code
@@ -126,10 +131,10 @@ class User:
         self.conn.commit()
         # self.cur.close()
         # self.conn.close()
-        print(db_password)
+        #print(db_password)
         if db_password != None:
             if bcrypt.checkpw(password.encode('UTF-8'), db_password[0].encode('UTF-8')):
-                print("password works")
+                #print("password works")
                 return True
             else:
                 return False
@@ -171,11 +176,11 @@ class User:
             encoded_password = bytes(newPassword, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
             encrypted_password = encrypted_password.decode('UTF-8')
-            print(encrypted_password)
+            #print(encrypted_password)
             sql = "UPDATE users SET password=%s WHERE email=%s;"
             self.cur.execute(sql,(encrypted_password,email))
             self.conn.commit()
-            print("done")
+            #print("done")
             return True
         except Exception as e:
             print(f"Database connection error: {e}")
@@ -217,6 +222,18 @@ class User:
         # self.cur.close()
         # self.conn.close()
         return db_user
+
+    def getModel(self, id):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        # self.cur = self.conn.cursor()
+        sql = "SELECT * FROM models WHERE id=%s;"
+        self.cur.execute(sql,(id,))
+        db_model = self.cur.fetchone()
+        self.conn.commit()
+        # self.cur.close()
+        # self.conn.close()
+        return db_model
 
     def insertBob(self):
         # self.conn = psycopg2.connect(
@@ -273,7 +290,7 @@ class User:
             # self.conn = psycopg2.connect(
             #     dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
             # self.cur = self.conn.cursor()
-            print("running")
+            #print("running")
             #if self.findUserByEmail(email) is None:  
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
@@ -285,7 +302,7 @@ class User:
             self.conn.commit()
             #self.cur.close()
             # self.conn.close()
-            print("done")
+            #print("done")
             return True
         except Exception as e:
             print(f"Database connection error: {e}")
@@ -316,7 +333,7 @@ class User:
             encoded_password, bcrypt.gensalt())
             #print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
-            print(email)
+            #print(email)
             sql="UPDATE users SET password =%s WHERE email= %s;"
             self.cur.execute(sql,(encrypted_password,email))
             self.conn.commit()
@@ -324,7 +341,7 @@ class User:
             # self.conn.close()
             return True
         except Exception as e:
-            print(f"Database connection error: {e}")
+            #print(f"Database connection error: {e}")
             return False
 
     def adminAddModel(self, modelname, model):
@@ -353,6 +370,17 @@ class User:
         # self.conn.close()
         return db_user
 
+    def setModels(self,name):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        #print(name)
+        sql="SELECT model FROM models where id=%s"
+        self.cur.execute(sql,(name,))
+        db_user = self.cur.fetchone()
+        self.conn.commit()
+
+        return db_user
+
     def adminDeleteModel(self, id):
         try:
             # self.conn = psycopg2.connect(
@@ -368,16 +396,66 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
-    def addFeedback(self,user_feedback):
+    def addFeedback(self,feedback):
         try:
-            sql = "INSERT INTO User_feedback (feedback) VALUES (%s);"
-            self.cur.execute(sql,(user_feedback))
+            sql = "INSERT INTO feedback (feedback) VALUES (%s)"
+            self.cur.execute(sql,(feedback,))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+    
+    def adminAddFeedback(self,feedback):
+        try:
+            sql = "INSERT INTO feedback (feedback) VALUES (%s)"
+            self.cur.execute(sql,(feedback,))
             self.conn.commit()
             return True
         except Exception as e:
             print(f"Database connection error: {e}")
             return False
 
+    def adminDeleteFeedback(self, id):
+        try:
+            # self.conn = psycopg2.connect(
+            #     dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+            # self.cur = self.conn.cursor()
+            sql = "DELETE FROM feedback WHERE id =%s;"
+            self.cur.execute(sql,(id,))
+            self.conn.commit()
+            # self.cur.close()
+            # self.conn.close()
+            return True
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
+    def adminGetAllFeedback(self):
+        try:
+            sql = "SELECT * FROM feedback"
+            self.cur.execute(sql)
+            feedback = self.cur.fetchall()
+            self.conn.commit()
+            return feedback
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return False
+
+    def adminGetFeedback(self, id):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        # self.cur = self.conn.cursor()
+        try:
+            sql = "SELECT * FROM feedback WHERE id=%s;"
+            self.cur.execute(sql,(id,))
+            feedback = self.cur.fetchone()
+            self.conn.commit()
+            return feedback
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return None
+        
 
     def update_user_details(self, email, name, surname):
          try:

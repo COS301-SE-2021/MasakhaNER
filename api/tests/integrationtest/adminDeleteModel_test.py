@@ -1,6 +1,6 @@
 import unittest
-import bcrypt
 import requests
+import bcrypt
 import json
 import jwt
 from datetime import datetime, timedelta
@@ -28,26 +28,33 @@ class Test(unittest.TestCase):
         encrypted_password = encrypted_password.decode('UTF-8')
         sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
         db.cur.execute(sql,(0,'integeration', 'test',encrypted_password,'admin@test.com',True,000,True))
-        sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-        db.cur.execute(sql,(1,'integeration', 'test',encrypted_password,'user@test.com',True,000,True))
+        sql = "INSERT INTO models (id,modelname,model) VALUES(%s,%s,%s)"
+        db.cur.execute(sql,(0,'TEST MODEL', 'TESTING'))
         db.conn.commit()
+        #app.config['DATABASE'].insertBob()
         self.main = app.test_client()
     
     def tearDown(self):
         db = app.config['DATABASE']
         sql = "DELETE FROM users WHERE id =%s"
         db.cur.execute(sql,(0,))
-        sql = "DELETE FROM users WHERE id =%s"
-        db.cur.execute(sql,(1,))
-        db.conn.commit()
+        # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+        # os.path.join(main.config['BASEDIR'], TEST_DB)
+        #app.config['DATABASE'].deleteBob()
         self.main =None
+    
+    def test_endpoint(self):
 
-    def test_endpoint4(self):
-
-        token = jwt.encode({'email' :'admin@test.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
-        r = self.main.delete('/users/1',headers={'x-access-token':token})
+        token = jwt.encode({'email' :'test@test.co.za', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        r = self.main.delete('/models/0',headers={'x-access-token':token})
         data = json.loads(r.data)
+        db = app.config['DATABASE']
+        sql = "SELECT * FROM models WHERE id=%s"
+        db.cur.execute(sql,(0,))
+        model = db.cur.fetchone()
+        db.conn.commit()
         #print(data)
         result = data['response']
+        self.assertEqual(model,None)
         self.assertEqual(200, r.status_code)
         self.assertEqual(result, 'deleted')

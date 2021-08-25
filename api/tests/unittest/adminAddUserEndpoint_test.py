@@ -42,7 +42,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'fgch@gmail.com', 'exp' : datetime.utcnow() - timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(401, r.status_code)
         self.assertEqual(result, 'Signature has expired')
@@ -59,7 +59,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'ejhrfefh@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(401, r.status_code)
         self.assertEqual(result, 'user unauthirized')
@@ -76,7 +76,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'secondperson@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(401, r.status_code)
         self.assertEqual(result, 'user unauthirized')
@@ -93,7 +93,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #rint(data)
         result = data['response']
         self.assertEqual(400, r.status_code)
         self.assertEqual(result, 'failed')
@@ -110,7 +110,7 @@ class Test(unittest.TestCase):
         token = jwt.encode({'email' :'fp@gmail.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
         r = self.main.post('/users',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        print(data)
+        #print(data)
         result = data['response']
         self.assertEqual(200, r.status_code)
         self.assertEqual(result, 'registered')

@@ -19,6 +19,10 @@ const Wrapper = styled.div`
   margin-top: 8vh;
   border-radius: 20px;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+
+  #google-button {
+    transform: translateY(-7px);
+  }
 `;
 
 const Bar = styled.div`
@@ -30,7 +34,6 @@ const Bar = styled.div`
 
 const Header = styled.h1`
   font-size: 3em;
-  margin-bottom: 1em;
   @media (max-width: 767px) {
     font-size: 2em;
   }
@@ -77,7 +80,8 @@ const Button = styled.button`
 `;
 
 const SignUpButton = styled(Button)`
-  background-color: black;
+  background-color: #4591e7;
+  border: solid 1px #4591e7;
   color: white;
 `;
 
@@ -106,6 +110,10 @@ export default function Login() {
 
   const register = () => {
     history.push("/register");
+  };
+
+  const changePassword = () => {
+    history.push("/details/changepassword");
   };
 
   const handleLogin = async () => {
@@ -172,24 +180,26 @@ export default function Login() {
         required
       />
       <Button onClick={handleLogin}>Login</Button>
+      <p onClick={changePassword}>forgot password?</p>
       <SignUpButton onClick={register}>Sign up</SignUpButton>
       <p>or log in using</p>
-      <GoogleLogin
-        clientId="824866690096-4rqi2a1n6bvj9sfstjcbv999i9pi69i3.apps.googleusercontent.com"
-        buttonText=""
-        onSuccess={responseGoogle}
-        onFailure={responseFailerGoogle}
-        cookiePolicy={"single_host_origin"}
-        style={{ width: "500px" }}
-      />
+      <div id="google-button">
+        <GoogleLogin
+          clientId="824866690096-4rqi2a1n6bvj9sfstjcbv999i9pi69i3.apps.googleusercontent.com"
+          buttonText="Log in with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseFailerGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+      </div>
       <FacebookLogin
         appId="2951110285136034"
         autoLoad={false}
         fields="name,email,picture"
         callback={responseFacebook}
         cssClass="btn btn-primary"
-        textButton=""
         icon="fab fa-facebook-f"
+        textButton="   Log in with Facebook"
       />
       {err && <p>Invalid email or password</p>}
     </Wrapper>

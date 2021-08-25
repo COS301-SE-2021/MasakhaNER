@@ -20,6 +20,10 @@ class BasicTests(unittest.TestCase):
         # main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
+        # db = app.config['DATABASE']
+        # sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        # db.cur.execute(sql,(0,'integeration', 'test','password','integreation@test.com',False,000,True))
+        # db.conn.commit()
         self.main = app.test_client()
         # db.drop_all()
         # db.create_all()
@@ -30,18 +34,22 @@ class BasicTests(unittest.TestCase):
     
     # executed after each test
     def tearDown(self):
-        pass#
+        db = app.config['DATABASE']
+        sql = "DELETE FROM users WHERE email=%s"
+        db.cur.execute(sql,("Integration@test.com",))
+        db.conn.commit()
+        self.main = None
 
     def test_endpoint(self):
         #print('hello')
         INPUT = {
-        "firstname": "man",
-        "lastname": "manson",
-        "email": "manson@gmail.com",
+        "firstname": "Integration",
+        "lastname": "test",
+        "email": "Integration@test.com",
         "password": "password"
         }
         response = self.main.post('/register',json=INPUT)
-        print(response.data)
+        #print(response.data)
         
         r = json.loads(response.data)
         #print(r)

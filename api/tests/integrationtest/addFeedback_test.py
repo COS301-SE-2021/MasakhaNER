@@ -1,6 +1,8 @@
 import unittest
+import bcrypt
 import requests
 import json
+from datetime import datetime, timedelta
 import jwt
 import os, sys
 #sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
@@ -8,9 +10,8 @@ sys.path.append('api')
 from main import app
 
 TEST_DB = 'test.db'
- 
+
 class BasicTests(unittest.TestCase):
- 
     main=None
     # executed prior to each test
 
@@ -22,8 +23,13 @@ class BasicTests(unittest.TestCase):
         # os.path.join(main.config['BASEDIR'], TEST_DB)
         app.config.from_object('config_default.Config')
         db = app.config['DATABASE']
+        encoded_password = bytes("password", encoding='utf-8')
+        encrypted_password = bcrypt.hashpw(
+        encoded_password, bcrypt.gensalt())
+        #print(type(encrypted_password))
+        encrypted_password = encrypted_password.decode('UTF-8')
         sql = "INSERT INTO users (id,firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-        db.cur.execute(sql,(0,'integeration', 'test','password','integreation@test.com',False,000,True))
+        db.cur.execute(sql,(0,'integeration', 'test',encrypted_password,'admin@test.com',True,000,True))
         db.conn.commit()
         self.main = app.test_client()
         # db.drop_all()
@@ -38,48 +44,20 @@ class BasicTests(unittest.TestCase):
         db = app.config['DATABASE']
         sql = "DELETE FROM users WHERE id =%s"
         db.cur.execute(sql,(0,))
+        sql = "DELETE FROM feedback WHERE feedback = %s;"
+        db.cur.execute(sql,("Integration test feedback",))
         db.conn.commit()
-        self.main = None
-
-
+        pass#
+    
     def test_endpoint(self):
         INPUT = {
-        "email": "IDONOTEXIT@gmail.com",
-        "code": "1234"
+        "feedback": "Integration test feedback",
         }
-        #tests with non existing user
-        r = self.main.post('/verify',json=INPUT)
+
+        token = jwt.encode({'email' :'admin@test.com', 'exp' : datetime.utcnow() + timedelta(minutes=60)}, app.config['SECRET_KEY'],algorithm="HS256")
+        r = self.main.post('/feedback',json=INPUT,headers={'x-access-token':token})
         data = json.loads(r.data)
-        
-        result1 = data['response']
-
-        self.assertEqual(400, r.status_code)
-        self.assertEqual(result1,'failed',msg=" if failed User is valid")
-
-    def test_endpoint2(self):
-        INPUT = {
-        "email": "integreation@test.com",
-        "code": 1234
-        }
-        #tests with valid user password but wrong code
-        r = self.main.post('/verify',json=INPUT)
-        data = json.loads(r.data)
-        
-        result1 = data['response']
-
-        self.assertEqual(400, r.status_code)
-        self.assertEqual(result1,'failed',msg=" if failed user and code are correct")
-
-    def test_endpoint3(self):
-        INPUT = {
-        "email": "integreation@test.com",
-        "code": 000
-        }
-        #tests with valid user password and right code
-        r = self.main.post('/verify',json=INPUT)
-        data = json.loads(r.data)
-        
-        result1 = data['response']
-
+        #print(data)
+        result = data['response']
         self.assertEqual(200, r.status_code)
-        self.assertEqual(result1,'verified',msg=" if failed user doesnt not exist or code invalid")
+        self.assertEqual(result, 'feedback saved')

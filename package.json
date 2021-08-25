@@ -31,6 +31,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.8.3",
     "react-icons": "^4.2.0",
+    "react-modal": "^3.14.3",
     "react-recaptcha": "^2.3.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -41,10 +42,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-api": "cd api && python main.py",
+    "start-api": "cd api && python3 main.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "message": "WE ARE >IVE"
   },
   "eslintConfig": {
     "extends": [
@@ -68,6 +70,7 @@
   "devDependencies": {
     "@types/react-facebook-login": "^4.1.3",
     "@types/react-google-recaptcha": "^2.1.0",
+    "@types/react-modal": "^3.12.1",
     "@types/react-recaptcha": "^2.3.3",
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.11"

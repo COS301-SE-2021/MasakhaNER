@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./verifyAccount.css"
 import { Link } from 'react-router-dom';
 
 function VerifyAccount() {
   const [code, setCode] = useState("");
+  //const [clicked, setClicked] = useState(false);
 
   const options = {
     method: "POST",
@@ -17,12 +18,17 @@ function VerifyAccount() {
     }),
   };
 
+  // useEffect(() => {
+  //   handleVerify();
+  //}, [clicked]);
+
   const handleVerify = async () => {
     try {
       const resp = await fetch("/verify", options);
       console.log("This is what came back: ", options);
   
       if (resp.status === 200) {
+        const data = await resp.json();
         alert("You have successfully verified your account!");
         window.location.href = "/";
       }
@@ -66,6 +72,7 @@ function VerifyAccount() {
             onClick={(e) => {
               e.preventDefault();
               handleVerify();
+              //setClicked(!clicked);
             }}>Next</button>
         </Link>
       </form>
