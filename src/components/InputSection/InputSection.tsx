@@ -5,6 +5,7 @@ import "./InputSection.css";
 import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
+import { useHistory } from "react-router-dom";
 // import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
@@ -79,7 +80,7 @@ const Upload = styled.input`
   margin-bottom: 20px;
   background-color: white;
   border-radius: 20px;
-  z-index:1;
+  z-index: 1;
   height: 35px;
   padding-left: 1em;
   padding-right: 1em;
@@ -132,6 +133,10 @@ const FeedbackInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
+const VisualizerButton = styled(Button)`
+  background-color: white;
+  color: grey;
+`;
 // Modal.setAppElement("#inputsection");
 
 export default function InputSection() {
@@ -185,6 +190,12 @@ export default function InputSection() {
     } catch (error) {
       console.log("there is an error", error);
     }
+  };
+  let his
+  his = useHistory();
+
+  const visualizer = () => {
+    his.push("/visualizer");
   };
 
   var history: String[] = new Array();
@@ -335,6 +346,7 @@ export default function InputSection() {
         </Link> */}
         </div>
       </FormContainer>
+      <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -352,18 +364,23 @@ export default function InputSection() {
           </p>
         </div>
         <form onSubmit={handleSubmit}>
-          <FeedbackInput 
-          value={feedback}
-          placeholder="Enter feedback"
-          onChange={(e) => {
-            setFeedback(e.target.value);
-          }}/>
+          <FeedbackInput
+            value={feedback}
+            placeholder="Enter feedback"
+            onChange={(e) => {
+              setFeedback(e.target.value);
+            }}
+          />
           <br />
-          <Button onClick={(e) => {
-            e.preventDefault();
-          handleFeedback();
-          closeModal();
-          }}>Send Feedback</Button>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              handleFeedback();
+              closeModal();
+            }}
+          >
+            Send Feedback
+          </Button>
         </form>
       </Modal>
     </>
