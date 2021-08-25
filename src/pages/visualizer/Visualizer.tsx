@@ -44,7 +44,7 @@ const Visualizer = () => {
     window.addEventListener("resize", onWindowResize, false);
 
     animate();
-    return () => mountRef.current.removeChild(renderer.domElement);
+    // return () => mountRef.current.removeChild(renderer.domElement);
   }, []);
 
   return <div ref={mountRef}></div>;
