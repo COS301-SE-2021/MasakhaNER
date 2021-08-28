@@ -1,53 +1,57 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useHistory } from "react-router-dom";
-import Nav from "../../components/nav/Nav";
-import * as THREE from "three";
+import { Canvas } from "@react-three/fiber";
+import { Physics, usePlane, useBox } from "@react-three/cannon";
+import { OrbitControls, Stars } from "@react-three/drei";
+import "./Visualizer.css";
+interface Props {
+  height: number;
+}
+
+const Box: React.FC<Props> = ({height}) => {
+  const [ref, api] = useBox(() => ({ mass: 1, position: [0, 2, 0] }));
+  return (
+    <mesh
+      onClick={() => {
+        api.velocity.set(0, 2, 0);
+      }}
+      ref={ref}
+      position={[3000, 2, 0]}
+    >
+      <boxGeometry args={[1, height, 1]} />
+      <meshLambertMaterial attach="material" color="lightblue" />
+    </mesh>
+  );
+};
+
+const Plane = (props: JSX.IntrinsicElements["mesh"]) => {
+  const [ref] = usePlane(() => ({
+    rotation: [-Math.PI / 2, 0, 0],
+  }));
+  return (
+    <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]} >
+      <planeBufferGeometry attach="geometry" args={[100, 100]} />
+      <meshLambertMaterial attach="material" color="white" />
+    </mesh>
+  );
+};
 
 const Visualizer = () => {
-  const mountRef = useRef(null);
-
-  useEffect(() => {
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    var renderer = new THREE.WebGLRenderer();
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-    mountRef.current.appendChild(renderer.domElement);
-
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    var cube = new THREE.Mesh(geometry, material);
-
-    scene.add(cube);
-    camera.position.z = 5;
-
-    var animate = function () {
-      requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      renderer.render(scene, camera);
-    };
-
-    let onWindowResize = function () {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-
-    window.addEventListener("resize", onWindowResize, false);
-
-    animate();
-    // return () => mountRef.current.removeChild(renderer.domElement);
-  }, []);
-
-  return <div ref={mountRef}></div>;
+  return (
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <Canvas>
+        <OrbitControls />
+        <Stars />
+        <ambientLight intensity={0.4} />
+        <spotLight position={[10, 15, 10]} angle={0.3} />
+        <Physics>
+          <Box height={1} />
+          <Box height={1} />
+          <Plane />
+        </Physics>
+      </Canvas>
+    </div>
+  );
 };
 
 export default Visualizer;
