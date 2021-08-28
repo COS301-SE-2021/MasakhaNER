@@ -52,11 +52,13 @@ const Visualizer = () => {
     [8, 2, 1.5],
 
     // middle
+    [3, -5.5, 0],
     [5, -4, 0],
     [12, -2.5, 0],
     [4, -1, 0],
     [10, 0.5, 0],
     [14, 2, 0],
+    [10, 3.5, 0],
 
     // back
     [3, -4, -1.5],
@@ -72,7 +74,7 @@ const Visualizer = () => {
         <OrbitControls />
         <Stars />
         <ambientLight intensity={0.4} />
-        <spotLight position={[10, 15, 10]} angle={0.3} castShadow />
+        <spotLight position={[10, 20, 10]} angle={0.3} castShadow />
         <Physics>
           {data.map((i) => {
             return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
