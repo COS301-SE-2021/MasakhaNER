@@ -13,7 +13,7 @@ with open("labels.pickle", "rb") as f:
     labels = {v:k for k,v in flabels.items()}
 
 cap = cv2.VideoCapture(0)
-image = cv2.imread("C:/Users/borek/Documents/GitHub/MasakhaNER/api/faceAI/pte.jpg")
+image = cv2.imread("C:/Users/borek/Documents/GitHub/MasakhaNER/api/faceAI/kit.jpg")
 
 #while(True):
 #capture frams
@@ -58,9 +58,7 @@ for(x,y,w,h) in faces:
 #Display frame
 
 cv2.imshow('frame',frame)
-while(True):
-    if cv2.waitKey(20) & 0xFF == ord('q'):
-        break
+cv2.waitKey(0)
 
 #release capture
 # cap.release()
