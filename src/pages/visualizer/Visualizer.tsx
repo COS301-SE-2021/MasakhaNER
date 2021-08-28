@@ -24,7 +24,7 @@ const Box: React.FC<Props> = ({ height, position_x, position_z }) => {
       position={[0, 0, 0]}
     >
       <boxGeometry args={[1, height, 1]} />
-      <meshLambertMaterial attach="material" color="green" />
+      <meshLambertMaterial attach="material" color="grey" />
     </mesh>
   );
 };
