@@ -24,7 +24,7 @@ const Box: React.FC<Props> = ({ height, position_x, position_z }) => {
       position={[0, 0, 0]}
     >
       <boxGeometry args={[1, height, 1]} />
-      <meshLambertMaterial attach="material" color="grey" />
+      <meshLambertMaterial attach="material" color="#dd9c22" />
     </mesh>
   );
 };
@@ -35,7 +35,7 @@ const Plane = () => {
   }));
   return (
     <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeBufferGeometry attach="geometry" args={[100, 100]} />
+      <planeBufferGeometry attach="geometry" args={[30, 30]} />
       <meshLambertMaterial attach="material" color="lightblue" />
     </mesh>
   );
