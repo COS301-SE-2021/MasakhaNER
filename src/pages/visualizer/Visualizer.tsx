@@ -35,7 +35,7 @@ const Plane = () => {
   }));
   return (
     <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeBufferGeometry attach="geometry" args={[30, 30]} />
+      <planeBufferGeometry attach="geometry" args={[30, 20]} />
       <meshLambertMaterial attach="material" color="lightblue" />
     </mesh>
   );
@@ -50,6 +50,7 @@ const Visualizer = () => {
     [2, -1, 1.5],
     [12, 0.5, 1.5],
     [8, 2, 1.5],
+    [5, 3.5, 1.5],
 
     // middle
     [3, -5.5, 0],
