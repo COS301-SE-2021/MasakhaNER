@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
 import { Physics, usePlane, useBox } from "@react-three/cannon";
-import { OrbitControls, Stars, Sky } from "@react-three/drei";
+import { OrbitControls, Stars } from "@react-three/drei";
 import "./Visualizer.css";
 interface Props {
   height: number;
