@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
 import { Physics, usePlane, useBox } from "@react-three/cannon";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { OrbitControls, Stars, Text } from "@react-three/drei";
 import "./Visualizer.css";
 interface Props {
   height: number;
@@ -76,6 +76,9 @@ const Visualizer = () => {
         <Stars />
         <ambientLight intensity={0.4} />
         <spotLight position={[10, 20, 10]} angle={0.3} castShadow />
+        <Text color="black" anchorX="center" anchorY="middle">
+          Hello
+        </Text>
         <Physics>
           {data.map((i) => {
             return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
