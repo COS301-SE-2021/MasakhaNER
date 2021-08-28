@@ -29,7 +29,7 @@ const Box: React.FC<Props> = ({ height, position_x, position_z }) => {
   );
 };
 
-const Plane = (props: JSX.IntrinsicElements["mesh"]) => {
+const Plane = () => {
   const [ref] = usePlane(() => ({
     rotation: [-Math.PI / 2, 0, 0],
   }));
