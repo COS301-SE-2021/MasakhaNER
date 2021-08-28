@@ -16,6 +16,7 @@ while(True):
         roi_color = frame[y:y+h,x:x+w]
         img_item = "my-image.png"
 
+        
 
         cv2.imwrite(img_item, roi_gray)
         
