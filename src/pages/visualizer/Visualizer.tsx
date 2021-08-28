@@ -76,8 +76,8 @@ const Visualizer = () => {
         <Stars />
         <ambientLight intensity={0.4} />
         <spotLight position={[10, 20, 10]} angle={0.3} castShadow />
-        <Text color="black" anchorX="center" anchorY="middle">
-          Hello
+        <Text color="white" anchorX="center" anchorY="middle">
+          LOCATION
         </Text>
         <Physics>
           {data.map((i) => {
