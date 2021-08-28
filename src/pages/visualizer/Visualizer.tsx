@@ -70,7 +70,7 @@ const Visualizer = () => {
   ];
 
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ backgroundColor: "black", width: "100vw", height: "100vh" }}>
       <Canvas>
         <OrbitControls />
         <Stars />
