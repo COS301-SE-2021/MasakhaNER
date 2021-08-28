@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
 import { Physics, usePlane, useBox } from "@react-three/cannon";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { OrbitControls, Stars, Text } from "@react-three/drei";
 import "./Visualizer.css";
 interface Props {
   height: number;
@@ -24,7 +24,7 @@ const Box: React.FC<Props> = ({ height, position_x, position_z }) => {
       position={[0, 0, 0]}
     >
       <boxGeometry args={[1, height, 1]} />
-      <meshLambertMaterial attach="material" color="grey" />
+      <meshLambertMaterial attach="material" color="#dd9c22" />
     </mesh>
   );
 };
@@ -35,7 +35,7 @@ const Plane = () => {
   }));
   return (
     <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeBufferGeometry attach="geometry" args={[100, 100]} />
+      <planeBufferGeometry attach="geometry" args={[30, 20]} />
       <meshLambertMaterial attach="material" color="lightblue" />
     </mesh>
   );
@@ -50,6 +50,7 @@ const Visualizer = () => {
     [2, -1, 1.5],
     [12, 0.5, 1.5],
     [8, 2, 1.5],
+    [5, 3.5, 1.5],
 
     // middle
     [3, -5.5, 0],
@@ -69,12 +70,15 @@ const Visualizer = () => {
   ];
 
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ backgroundColor: "black", width: "100vw", height: "100vh" }}>
       <Canvas>
         <OrbitControls />
         <Stars />
         <ambientLight intensity={0.4} />
         <spotLight position={[10, 20, 10]} angle={0.3} castShadow />
+        <Text color="white" anchorX="center" anchorY="middle">
+          LOCATION
+        </Text>
         <Physics>
           {data.map((i) => {
             return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
