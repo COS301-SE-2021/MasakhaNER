@@ -5,7 +5,7 @@ import cv2
 import pickle
 
 face_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_frontalface_alt2.xml")
-
+recogniser = cv2.face.LBPHFaceRecognizer_create()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.join(BASE_DIR, "images")
@@ -21,7 +21,7 @@ for root, dirs, files in os.walk(image_dir):
                 #get images from dir
                 path = os.path.join(root, file)
                 label = os.path.basename(root).replace(" ","-").lower()
-                print(label, path)
+                #print(label, path)
                 if not label in label_ids:
                     label_ids[label] = current_id
                     current_id += 1
@@ -35,23 +35,14 @@ for root, dirs, files in os.walk(image_dir):
 
                 faces  = face_cascade.detectMultiScale(image_array, scaleFactor=1.5, minNeighbors=5)
                 for(x,y,w,h) in faces:
-                    print(x,y,w,h)
+                    #print(x,y,w,h)
                     roi = image_array[y:y+h,x:x+w]
                     x_train.append(roi)
                     y_labels.append(id_)
-                    roi_color = frame[y:y+h,x:x+w]
-                    img_item = "my-image.png"
-
                     
-
-                    cv2.imwrite(img_item, roi_gray)
-                    
-                    #draw rectangle
-                    color = (0,255,0)
-                    stroke = 2
-                    width = x+w
-                    height = y+h
-                    cv2.rectangle(frame, (x,y), (width,height), color, stroke)
 
 with open("labels.pickle", "wb") as f:
     pickle.dump(label_ids, f)
+
+recogniser.train(x_train, np.array(y_labels))
+recogniser.save("trainner.yml")
