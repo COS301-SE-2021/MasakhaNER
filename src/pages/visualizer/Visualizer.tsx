@@ -42,15 +42,12 @@ const Plane = (props: JSX.IntrinsicElements["mesh"]) => {
 };
 
 const Visualizer = () => {
+  // [height, position_x, position_z]
   const data = [
     [1, -4, 1.5],
-    [1, -2.5, 0],
-    [1, -1, -1.5],
+    [2, -2.5, 0],
+    [3, -1, -1.5],
   ];
-
-  data.map((i, index) => {
-    console.log(i[index]);
-  });
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -60,21 +57,9 @@ const Visualizer = () => {
         <ambientLight intensity={0.4} />
         <spotLight position={[10, 15, 10]} angle={0.3} castShadow />
         <Physics>
-          {/* {data.map((i) => {
-            return <Box height={i[0]} position_x={-4} position_z={0} />;
-          })} */}
-          {/* <Box height={1} position_x={-4} position_z={0} />
-          <Box height={4} position_x={-2.5} position_z={0} />
-          <Box height={9} position_x={-1} position_z={0} />
-          <Box height={2} position_x={0.5} position_z={0} />
-          <Box height={1} position_x={2} position_z={0} />
-          <Box height={7} position_x={3.5} position_z={0} />
-          <Box height={3} position_x={-4} position_z={-1.5} />
-          <Box height={1} position_x={-2.5} position_z={-1.5} />
-          <Box height={5} position_x={-1} position_z={-1.5} />
-          <Box height={1} position_x={0.5} position_z={-1.5} />
-          <Box height={4} position_x={2} position_z={-1.5} />
-          <Box height={3} position_x={3.5} position_z={-1.5} /> */}
+          {data.map((i) => {
+            return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
+          })}
           <Plane />
         </Physics>
       </Canvas>
