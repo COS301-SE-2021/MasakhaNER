@@ -13,8 +13,19 @@ while(True):
     for(x,y,w,h) in faces:
         print(x,y,w,h)
         roi_gray = gray[y:y+h,x:x+w]
+        roi_color = frame[y:y+h,x:x+w]
         img_item = "my-image.png"
+
+
         cv2.imwrite(img_item, roi_gray)
+        
+        #draw rectangle
+        color = (0,255,0)
+        stroke = 2
+        width = x+w
+        height = y+h
+        cv2.rectangle(frame, (x,y), (width,height), color, stroke)
+
 
     #Display frame
     cv2.imshow('frame',frame)
