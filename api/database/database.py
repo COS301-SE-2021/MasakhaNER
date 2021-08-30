@@ -469,4 +469,13 @@ class User:
             print(f"Database connection error: {e}")
             return False
 
+    def getCount(self, name):
+        try:
+            sql = "SELECT count FROM input WHERE name = %s"
+            self.cur.execute(sql,(name,))
+            count = self.cur.fetchone()
+            return count
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return 0
 
