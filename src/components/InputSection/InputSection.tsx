@@ -315,8 +315,10 @@ export default function InputSection() {
        },
        data: formdata
      }).then((res)=>{
+      //handle  response later
+     }.(err)=>{
 
-     })
+     }
   };
 
   return (
