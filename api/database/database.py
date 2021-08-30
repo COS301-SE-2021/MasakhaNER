@@ -512,3 +512,30 @@ class User:
                     print(f"Database connection error: {e}")
                     worked = False
         return worked
+
+    def get_all_input(self):
+        try:
+            sql = "SELECT * FROM input"
+            self.cur.execute(sql)
+            input = self.cur.fetchall()
+            self.conn.commit()
+            f = open("input.txt", "w")
+            val  = 0
+            f.write("[")
+            for row in input:
+                val+=1
+                f.write("{")
+                f.write("id: " + row[0])
+                f.write("name: " + row[1])
+                f.write("entity: " + row[2])
+                f.write("count: " + row[3])
+                if( val == len(input)):
+                    f.write('}')
+                else:
+                    f.write('},')
+
+            f.write("]")
+            return True
+        except Exception as e:
+           print(f"Database connection error: {e}")
+           return False 
