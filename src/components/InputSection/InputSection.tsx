@@ -330,6 +330,7 @@ export default function InputSection() {
                 selectFile({ accept: 'image/*' }, ({ source, name, size, file }) => {
                   // file - is the raw File Object
                   console.log({ source, name, size, file })
+                })  
               }}
             >
               Click to Upload
