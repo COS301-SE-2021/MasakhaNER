@@ -364,8 +364,7 @@ export default function InputSection() {
             <Output data={outputData} input={input2} />
             <p>
               If returned data is incorrect please provide the correct entity by
-              placing the entity next to the incorrect output. i.e Name{" "}
-              {"<PER>"}
+              selecting the correct entity in the drop down menu
             </p>
             <Dropdown data={outputData} input={input2} />
           </div>
