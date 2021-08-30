@@ -676,7 +676,30 @@ def admin_get_all_feedback(user):
 
     return {'response': 'failed'}, 400
 
-
+"""
+    input_entities:
+        allows admin to update a user
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
+@app.route('/input', methods = ["POST"])
+@token_required
+def input_entities(user):
+    if user is None:
+        return jsonify({'response' : 'user unauthorized'})
+    
+    db = app.config['DATABASE']
+    if(db != False):
+        name = str(request.json['name'])
+        entity = str(request.json['entity'])
+        if(db.input(name, entity)):
+            return {'response' : 'update'}, 200
+        else:
+            return {'response' : 'failed'}, 400
+    else: 
+        return {'response' : 'failed'}, 400
 """
     main function:
         starts the Flask API
