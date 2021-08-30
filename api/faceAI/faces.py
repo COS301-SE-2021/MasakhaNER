@@ -1,19 +1,25 @@
-from os import name
+import os
 import numpy as np
 import cv2
 import pickle
 
-face_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_frontalface_alt2.xml")
+dirname = os.path.dirname(__file__)
+filename = os.path.join(dirname, "cascades/data/haarcascade_frontalface_alt2.xml")
+face_cascade = cv2.CascadeClassifier(filename)
+
+filename = os.path.join(dirname, "trainner.yml")
 recogniser = cv2.face.LBPHFaceRecognizer_create()
-recogniser.read("trainner.yml")
+recogniser.read(filename)
 
 labels = {}
-with open("labels.pickle", "rb") as f:
+filename = os.path.join(dirname, "labels.pickle")
+with open(filename, "rb") as f:
     flabels = pickle.load(f)
     labels = {v:k for k,v in flabels.items()}
 
+filename = os.path.join(dirname, "kit.jpg")
 cap = cv2.VideoCapture(0)
-image = cv2.imread("C:/Users/borek/Documents/GitHub/MasakhaNER/api/faceAI/kit.jpg")
+image = cv2.imread(filename)
 
 #while(True):
 #capture frams
