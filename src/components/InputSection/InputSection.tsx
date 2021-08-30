@@ -323,7 +323,7 @@ export default function InputSection() {
               />
               <Button onClick={handleSend}>Send</Button>
             </div>
-            <div>
+            {/* <div>
             <button
               onClick={() => {
                 // Single File Upload
@@ -347,7 +347,7 @@ export default function InputSection() {
             )}
           </div>
           </form>
-        </div>
+        </div> */}
         <div id="output-section">
           <OutputSection>
             {wait === 3 ? (
