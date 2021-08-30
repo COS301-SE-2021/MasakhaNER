@@ -142,15 +142,17 @@ def model_feedback(user):
     if not user:
         return jsonify({'response' : 'log in to use model'}),401
 
-    
     user_input = str(request.json["input"])
     
     model_feedback = str(runModel(user_input))
     model_feedback = eval(model_feedback)
-    #dude = json.dumps(model_feedback[0])
-    #dude = json.loads(dude)
-    dude = {'output':model_feedback}
-    return dude, 200
+    db = app.config['DATABASE']
+    if(db != False):
+        if(db.input(model_feedback)):
+            dude = {'output':model_feedback}
+            return dude, 200
+        else:
+            return {'response' : 'failed'}, 400
 
 
 """
@@ -676,30 +678,6 @@ def admin_get_all_feedback(user):
 
     return {'response': 'failed'}, 400
 
-"""
-    input_entities:
-        allows admin to update a user
-    Parameters:
-        None
-    Returns:
-        JSON object with response
-"""
-@app.route('/input', methods = ["POST"])
-@token_required
-def input_entities(user):
-    if user is None:
-        return jsonify({'response' : 'user unauthorized'})
-    
-    db = app.config['DATABASE']
-    if(db != False):
-        name = str(request.json['name'])
-        entity = str(request.json['entity'])
-        if(db.input(name, entity)):
-            return {'response' : 'update'}, 200
-        else:
-            return {'response' : 'failed'}, 400
-    else: 
-        return {'response' : 'failed'}, 400
 """
     main function:
         starts the Flask API
