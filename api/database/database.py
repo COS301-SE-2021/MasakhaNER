@@ -474,13 +474,19 @@ class User:
             sql = "SELECT count FROM input WHERE name = %s"
             self.cur.execute(sql,(name,))
             count = self.cur.fetchone()
-            return count
+            return count 
         except Exception as e:
             print(f"Database connection error: {e}")
-            return 0
+            return None
 
     def input(self, name, entity):
-        count = getCount(name)
+        count = 0
+        try:
+            sql = "SELECT count FROM input WHERE name = %s"
+            self.cur.execute(sql,(name,))
+            count = self.cur.fetchone()
+        except Exception as e:
+            print(f"Database connection error: {e}")
         if( count > 0):
             try:
                 sql = "INSERT INTO input (name, entity, count) VALUES(%s, %s, %s)"
@@ -500,4 +506,3 @@ class User:
             except Exception as e:
                 print(f"Database connection error: {e}")
                 return False
-
