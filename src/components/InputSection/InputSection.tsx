@@ -6,7 +6,7 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
-import { useFileUpload } from "use-file-upload";
+// import { useFileUpload } from "use-file-upload";
 // import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
@@ -150,7 +150,7 @@ export default function InputSection() {
   const [filename, setFileName] = useState("");
   const [filecontent, setFileContent] = useState("");
   const [feedback, setFeedback] = useState("");
-  const [file, selectFile] = useFileUpload();
+  const [imageFile, setImageFile] = useState("");
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -300,6 +300,10 @@ export default function InputSection() {
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
 
+  const handleImageFile = (e: any) =>{
+    console.log(imageFile);
+  };
+
   return (
     <>
       <FormContainer>
@@ -323,31 +327,14 @@ export default function InputSection() {
               />
               <Button onClick={handleSend}>Send</Button>
             </div>
-            {/* <div>
-            <button
-              onClick={() => {
-                // Single File Upload
-                selectFile({ accept: 'image/*' }, ({ source, name, size, file }) => {
-                  // file - is the raw File Object
-                  console.log({ source, name, size, file })
-                })  
-              }}
-            >
-              Click to Upload
-            </button>
 
-            {file ? (
-              <div>
-                <img src={file.source} alt='preview' />
-                <span> Name: {file.name} </span>
-                <span> Size: {file.size} </span>
-              </div>
-            ) : (
-              <span>No file selected</span>
-            )}
-          </div>
+            <input type="file" 
+            name="fileUpload" 
+            value={imageFile}
+            onChange={(e) => setImageFile(e.target.value)}/>
+            <button onClick={handleImageFile}>Submit</button>
           </form>
-        </div> */}
+        </div>
         <div id="output-section">
           <OutputSection>
             {wait === 3 ? (
