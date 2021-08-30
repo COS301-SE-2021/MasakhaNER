@@ -486,7 +486,7 @@ class User:
                 print(count)
                 self.conn.commit()
             except Exception as e:
-                print(e)
+                print(f"Datebase connection error: {e}")
                 count = -1
             if(count < 0):
                 try:
