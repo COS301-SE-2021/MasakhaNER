@@ -6,7 +6,7 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
-// import { useFileUpload } from "use-file-upload";
+import axios from "axios";
 // import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
@@ -302,6 +302,21 @@ export default function InputSection() {
 
   const handleImageFile = (e: any) =>{
     console.log(imageFile);
+
+    let formdata = new FormData();
+
+    formdata.append("Image". imageFile);
+
+     axios({
+       url: "/some/api",
+       method: "POST",
+       headers:{
+         authorization: "token"
+       },
+       data: formdata
+     }).then((res)=>{
+
+     })
   };
 
   return (
@@ -332,6 +347,7 @@ export default function InputSection() {
             name="fileUpload" 
             value={imageFile}
             onChange={(e) => setImageFile(e.target.value)}/>
+            <img src={imageFile}/>
             <button onClick={handleImageFile}>Submit</button>
           </form>
         </div>
