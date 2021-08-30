@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import "./InputSection.css";
 import Output from "../Output/Output";
+import Dropdown from "../Dropdown/Dropdown";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
+import React from "react";
 // import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
@@ -191,7 +193,7 @@ export default function InputSection() {
       console.log("there is an error", error);
     }
   };
-  let his
+  let his;
   his = useHistory();
 
   const visualizer = () => {
@@ -212,6 +214,7 @@ export default function InputSection() {
       localStorage.setItem("history", history.toString());
     }
     console.log(history);
+    console.log("Data: ", data);
   };
 
   const options: any = {
@@ -355,22 +358,17 @@ export default function InputSection() {
         contentLabel="Example Modal"
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
-        <Button onClick={closeModal}>close</Button>
-        <div>
-          <Output data={outputData} input={input2} />
-          <p>
-            If returned data is incorrect please provide the correct entity by
-            placing the entity next to the incorrect output. i.e Name {"<PER>"}
-          </p>
-        </div>
         <form onSubmit={handleSubmit}>
-          <FeedbackInput
-            value={feedback}
-            placeholder="Enter feedback"
-            onChange={(e) => {
-              setFeedback(e.target.value);
-            }}
-          />
+          <Button onClick={closeModal}>close</Button>
+          <div>
+            <Output data={outputData} input={input2} />
+            <p>
+              If returned data is incorrect please provide the correct entity by
+              placing the entity next to the incorrect output. i.e Name{" "}
+              {"<PER>"}
+            </p>
+            <Dropdown data={outputData} input={input2} />
+          </div>
           <br />
           <Button
             onClick={(e) => {

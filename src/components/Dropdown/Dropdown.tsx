@@ -1,4 +1,3 @@
-import "./Output.css";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
@@ -64,7 +63,7 @@ export function CalliFrame() {
   );
 }
 
-export default function Output({ data, input }: OutputProps) {
+export default function Dropdown({ data, input }: OutputProps) {
   let tex = "Emir of Kano turban Zhang wey don spend 18 years for Nigeria";
   let arr = [...input];
 
@@ -96,7 +95,7 @@ export default function Output({ data, input }: OutputProps) {
               data[j].word +
               `<span id="tag"}>${data[j].entity.substring(
                 2
-              )}</span></a></span>`;
+              )}</span></a><select name="entity"><option value="LOCATION">LOC</option><option value="PERSON">PER</option><option value="ORGANISATION">ORG</option><option value="DATE">DATE</option></select></span>`;
             i = data[j].end - 1;
             j += 1;
           } else {
@@ -109,7 +108,7 @@ export default function Output({ data, input }: OutputProps) {
               data[j].word +
               `<span id="tag"}>${data[j].entity.substring(
                 2
-              )}</span></a></span>`;
+              )}</span></a><select name="entity"><option value="LOCATION">LOC</option></select></span>`;
             i = data[j].end - 1;
             j += 1;
           }
