@@ -479,3 +479,25 @@ class User:
             print(f"Database connection error: {e}")
             return 0
 
+    def input(self, name, entity):
+        count = getCount(name)
+        if( count > 0):
+            try:
+                sql = "INSERT INTO input (name, entity, count) VALUES(%s, %s, %s)"
+                self.cur.execute(sql(name, entity, count))
+                self.conn.commit()
+                return True
+            except Exception as e:
+                print(f"Database connection error: {e}")
+                return False
+        else:
+            count+=1
+            try:
+                sql = "UPDATE input  SET count = %s WHERE name = %s"
+                self.cur.execute(sql(count, name))
+                self.conn.commit()
+                return True
+            except Exception as e:
+                print(f"Database connection error: {e}")
+                return False
+
