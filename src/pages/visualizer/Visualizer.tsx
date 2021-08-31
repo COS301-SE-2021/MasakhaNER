@@ -122,9 +122,6 @@ const Visualizer = () => {
           LOCATION
         </Text>
         <Physics>
-          {/* {data.map((i) => {
-            return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
-          })} */}
           {displayArray.map((i) => {
             return (
               <Box
