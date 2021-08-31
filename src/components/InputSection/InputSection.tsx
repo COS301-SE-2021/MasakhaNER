@@ -303,35 +303,28 @@ export default function InputSection() {
   const handleImageFile = (e: any) =>{
 
     const file = e.target.files[0];
-    const reader: any = new FileReader();
-    //console.log("NAME",file.name)
-    reader.readAsImage(file);
-    reader.onload = () => {
-      //console.log("running")
-      setImageFile(file.name);
+    console.log(file, "$$$$");
+    setImageFile(file.name);
 
-      setFileContent(reader.result);
-    };
+    // console.log(imageFile, "$$$$");
 
-    console.log(imageFile, "$$$$");
+    // let formdata = new FormData();
 
-    let formdata = new FormData();
+    // formdata.append("Image", imageFile);
+    // formdata.append("name", "Sipho");
 
-    formdata.append("Image", imageFile);
-    formdata.append("name", "Sipho");
+    //  axios({
+    //    url: "/some/api",
+    //    method: "POST",
+    //    headers:{
+    //      authorization: "token"
+    //    },
+    //    data: formdata
+    //  }).then((res)=>{
+    //   //handle  response later
+    //  },(err)=>{
 
-     axios({
-       url: "/some/api",
-       method: "POST",
-       headers:{
-         authorization: "token"
-       },
-       data: formdata
-     }).then((res)=>{
-      //handle  response later
-     },(err)=>{
-
-     })
+    //  })
   };
 
   return (
