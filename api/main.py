@@ -701,8 +701,8 @@ def get_person_info(user,):
         return jsonify({'response': 'user unauthirized'}), 401
     
     db = app.config['DATABASE']
-    user_email = str(request.json["email"])
-    user_password = str(request.json["password"])
+    person_name = str(request.json["name"])
+    person_surname = str(request.json["surname"])
 
 
 
