@@ -695,6 +695,7 @@ def admin_get_all_feedback(user):
     return {'response': 'failed'}, 400
 
 @app.route('/people', methods=["GET"])
+@token_required
 
 """
     main function:
