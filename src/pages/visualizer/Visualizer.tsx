@@ -103,6 +103,7 @@ const Visualizer = () => {
       color = "#2148bd";
     } else if (i.entity === "B-ORG" || i.entity === "I-ORG") {
       color = "#2148bd";
+    } else {
     }
     displayArray.push([i.count, color, (x_coord += 1.5), (z_coord += 1.5)]);
   }
