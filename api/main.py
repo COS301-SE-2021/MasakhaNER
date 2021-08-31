@@ -697,8 +697,9 @@ def admin_get_all_feedback(user):
 @app.route('/personinfo', methods=["GET"])
 @token_required
 def get_person_info(user,):
-    user_email = str(request.json["email"])
-    user_password = str(request.json["password"])
+    if user is None:
+        user_email = str(request.json["email"])
+        user_password = str(request.json["password"])
 
 
 
