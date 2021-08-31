@@ -305,7 +305,8 @@ export default function InputSection() {
 
     let formdata = new FormData();
 
-    formdata.append("Image". imageFile);
+    formdata.append("Image", imageFile);
+    formdata.append("name", "Sipho Mswenko");
 
      axios({
        url: "/some/api",
@@ -316,9 +317,9 @@ export default function InputSection() {
        data: formdata
      }).then((res)=>{
       //handle  response later
-     }.(err)=>{
+     },(err)=>{
 
-     }
+     })
   };
 
   return (
