@@ -156,7 +156,7 @@ def model_feedback(user):
 
 @app.route('/input', methods = ["GET"])
 @token_required
-def get_inout(user):
+def get_input(user):
     if not user:
         return jsonify({'response': 'user are not logged in'})
     db = app.config['DATABASE']
@@ -696,7 +696,9 @@ def admin_get_all_feedback(user):
 
 @app.route('/personinfo', methods=["GET"])
 @token_required
-def get_person_info(user):
+def get_person_info(user,):
+    user_email = str(request.json["email"])
+    user_password = str(request.json["password"])
 
 
 
