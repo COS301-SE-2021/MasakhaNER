@@ -694,8 +694,13 @@ def admin_get_all_feedback(user):
 
     return {'response': 'failed'}, 400
 
-@app.route('/people', methods=["GET"])
+@app.route('/personinfo', methods=["GET"])
 @token_required
+def get_person_info(user):
+
+
+
+people endpoint
 
 """
     main function:
