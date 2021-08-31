@@ -532,6 +532,7 @@ class User:
             self.conn.commit()
             return feedback
         except Exception as e:
+            print(f"Database connection error: {e}")
 
 
 
