@@ -698,6 +698,7 @@ def admin_get_all_feedback(user):
 @token_required
 def get_person_info(user,):
     if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
 
