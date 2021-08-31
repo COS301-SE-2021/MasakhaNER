@@ -530,7 +530,7 @@ class User:
             self.cur.execute(sql,(person_name,person_surname))
             person_info=self.cur.fetchall()
             self.conn.commit()
-            return feedback
+            return person_info
         except Exception as e:
             print(f"Database connection error: {e}")
             return None
