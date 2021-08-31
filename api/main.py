@@ -716,32 +716,6 @@ def get_person_info(user,):
 
     return {'response': 'failed'}, 400
 
-    
-
-
-
-people endpoint
-
-def login_user():
-    # print(app.config)
-    # athing = app.config['DB_NAME']
-    # print(type(athing))
-    db = app.config['DATABASE']
-    if(db != False):
-        user_email = str(request.json["email"])
-        user_password = str(request.json["password"])
-        #print("hello")
-        if db.login(user_email, user_password):
-            token = jwt.encode({'email': user_email, 'exp': datetime.utcnow(
-            ) + timedelta(hours=2)}, app.config['SECRET_KEY'], algorithm="HS256")
-            
-
-            return jsonify({'isadmin':db.isAdmin(user_email),'token': token})
-        else:
-            return jsonify({'response': 'authetication failed!'}), 401
-    else:
-        return jsonify({'response': 'authetication failed!'}), 401
-
 
 """
     main function:
