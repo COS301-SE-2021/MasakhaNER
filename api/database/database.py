@@ -523,3 +523,23 @@ class User:
         except Exception as e:
            print(f"Database connection error: {e}")
            return None 
+
+    def getPersonInfo(self, person_name, person_surname):
+
+
+
+
+person info database
+           def adminGetFeedback(self, id):
+        # self.conn = psycopg2.connect(
+        #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
+        # self.cur = self.conn.cursor()
+        try:
+            sql = "SELECT * FROM feedback WHERE id=%s;"
+            self.cur.execute(sql,(id,))
+            feedback = self.cur.fetchone()
+            self.conn.commit()
+            return feedback
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return None
