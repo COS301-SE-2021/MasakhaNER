@@ -306,10 +306,30 @@ export default function InputSection() {
     setImageFile(file.name);
   };
 
-  const handleImageUpload = (e: any) =>{
-    const file = e.target.files[0];
-    console.log(file, "$$$$");
-    setImageFile(file.name);
+  const handleImageUpload = async () => {
+    const opts: any = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        file: imageFile,
+      }),
+    };
+
+    try {
+      const resp = await fetch("/upload-image", opts);
+      console.log(resp);
+      if (resp.status === 200) {
+        const data = await resp.json();
+      } else {
+        alert("error, failed!");
+      }
+      console.log(wait);
+    } catch (error) {
+      console.log("there is an error", error);
+    }
   };
 
   return (
@@ -341,7 +361,7 @@ export default function InputSection() {
             value={imageFile}
             onChange={(e)=>handleImageFile(e)}/>
             <img src={imageFile}/>
-            <button onClick={(e)=>handleImageUpload(e)}>Submit</button>
+            <button onClick={handleImageUpload}>Submit</button>
           </form>
         </div>
         <div id="output-section">
