@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
 import { Physics, usePlane, useBox } from "@react-three/cannon";
@@ -68,6 +68,20 @@ const Visualizer = () => {
     [9, 0.5, -1.5],
     [14, 2, -1.5],
   ];
+
+  const options: any = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": localStorage.getItem("token"),
+    },
+  };
+
+  useEffect(() => {
+    fetch("/input", options)
+      .then((res) => res.json())
+      .then((data) => console.warn("SENT FROM VISULALIZER", data));
+  }, []);
 
   return (
     <div style={{ backgroundColor: "black", width: "100vw", height: "100vh" }}>
