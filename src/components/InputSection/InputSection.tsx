@@ -301,12 +301,24 @@ export default function InputSection() {
   // console.log("THSI IS FILE CONTENT ",filecontent);
 
   const handleImageFile = (e: any) =>{
-    console.log(imageFile);
+
+    const file = e.target.files[0];
+    const reader: any = new FileReader();
+    //console.log("NAME",file.name)
+    reader.readAsImage(file);
+    reader.onload = () => {
+      //console.log("running")
+      setImageFile(file.name);
+
+      setFileContent(reader.result);
+    };
+
+    console.log(imageFile, "$$$$");
 
     let formdata = new FormData();
 
     formdata.append("Image", imageFile);
-    formdata.append("name", "Sipho Mswenko");
+    formdata.append("name", "Sipho");
 
      axios({
        url: "/some/api",
@@ -349,9 +361,9 @@ export default function InputSection() {
             <input type="file" 
             name="fileUpload" 
             value={imageFile}
-            onChange={(e) => setImageFile(e.target.value)}/>
+            onChange={(e)=>handleImageFile(e)}/>
             <img src={imageFile}/>
-            <button onClick={handleImageFile}>Submit</button>
+            <button>Submit</button>
           </form>
         </div>
         <div id="output-section">
