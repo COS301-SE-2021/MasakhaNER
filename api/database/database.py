@@ -525,6 +525,7 @@ class User:
            return None 
 
     def getPersonInfo(self, person_name, person_surname):
+        try:
 
 
 
