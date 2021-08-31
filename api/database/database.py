@@ -531,6 +531,7 @@ class User:
             person_info=self.cur.fetchall()
             self.conn.commit()
             return feedback
+        except Exception as e:
 
 
 
