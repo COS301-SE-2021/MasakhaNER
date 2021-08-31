@@ -87,7 +87,18 @@ const Visualizer = () => {
       });
   }, []);
 
-  console.log("SAVED FROM VISULALIZER", inputData[0].count);
+  console.log("SAVED FROM VISULALIZER", inputData);
+
+  const displayArray: any[] = [];
+
+  let x_coord = 0;
+  let z_coord = 0;
+
+  for (let i of inputData) {
+    displayArray.push([i.count, (x_coord += 1.5), (z_coord += 1.5)]);
+  }
+
+  console.log("Display Array: ", displayArray);
 
   return (
     <div style={{ backgroundColor: "black", width: "100vw", height: "100vh" }}>
@@ -100,7 +111,10 @@ const Visualizer = () => {
           LOCATION
         </Text>
         <Physics>
-          {data.map((i) => {
+          {/* {data.map((i) => {
+            return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
+          })} */}
+          {displayArray.map((i) => {
             return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
           })}
           <Plane />
