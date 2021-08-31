@@ -530,6 +530,7 @@ class User:
             self.cur.execute(sql,(person_name,person_surname))
             person_info=self.cur.fetchall()
             self.conn.commit()
+            return feedback
 
 
 
