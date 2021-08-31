@@ -714,6 +714,8 @@ def get_person_info(user,):
         res.headers.add('Content-Type', 'application/json')
         return res, 200
 
+    return {'response': 'failed'}, 400
+
     
 
 
