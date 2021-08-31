@@ -154,7 +154,23 @@ def model_feedback(user):
         else:
             return {'response' : 'failed'}, 400
 
+@app.route('/input', methods = ["GET"])
+@token_required
+def get_inout(user):
+    if not user:
+        return jsonify({'response': 'user are not logged in'})
+    db = app.config['DATABASE']
+    if(db != None):
+        input = db.get_all_input()
+        reps = []
+        for i in input:
+            reps.append({'id':i[0], 'name': i[1], 'entity': i[2], 'count':i[3]})
+        res = Response(response=json.dumps(reps))
+        res.headers.add('Content-Type', 'application/json')
+        return res,200
+    return {'response': 'failed'}, 400
 
+        
 """
     register_user function:
         registers user to the system and adds them to
