@@ -1,6 +1,6 @@
 import bcrypt
 import random
-from flask import request
+from flask import request, json
 from dotenv import load_dotenv
 import psycopg2.extras
 import psycopg2
@@ -519,24 +519,7 @@ class User:
             self.cur.execute(sql)
             input = self.cur.fetchall()
             self.conn.commit()
-            file = open("input.json", "w")
-            val  = 0
-            file.write("[")
-            for row in input:
-                val+=1
-                file.write("{")
-                file.write("id: " + row[0])
-                file.write("name: " + row[1])
-                file.write("entity: " + row[2])
-                file.write("count: " + row[3])
-                if( val == len(input)):
-                    file.write('}')
-                else:
-                    file.write('},')
-
-            file.write("]")
-            file.close
-            return True
+            return input
         except Exception as e:
            print(f"Database connection error: {e}")
-           return False 
+           return None 
