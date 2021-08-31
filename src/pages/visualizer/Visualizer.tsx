@@ -8,9 +8,10 @@ interface Props {
   height: number;
   position_x: number;
   position_z: number;
+  color: string;
 }
 
-const Box: React.FC<Props> = ({ height, position_x, position_z }) => {
+const Box: React.FC<Props> = ({ height, position_x, position_z, color }) => {
   const [ref, api] = useBox(() => ({
     mass: 0.1,
     position: [position_x, 1, position_z],
@@ -24,7 +25,7 @@ const Box: React.FC<Props> = ({ height, position_x, position_z }) => {
       position={[0, 0, 0]}
     >
       <boxGeometry args={[1, height, 1]} />
-      <meshLambertMaterial attach="material" color="#dd9c22" />
+      <meshLambertMaterial attach="material" color={color} />
     </mesh>
   );
 };
@@ -35,7 +36,7 @@ const Plane = () => {
   }));
   return (
     <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeBufferGeometry attach="geometry" args={[30, 20]} />
+      <planeBufferGeometry attach="geometry" args={[300, 300]} />
       <meshLambertMaterial attach="material" color="lightblue" />
     </mesh>
   );
@@ -93,9 +94,17 @@ const Visualizer = () => {
 
   let x_coord = 0;
   let z_coord = 0;
+  let color;
 
   for (let i of inputData) {
-    displayArray.push([i.count, (x_coord += 1.5), (z_coord += 1.5)]);
+    if (i.entity === "B-LOC" || i.entity === "I-LOC") {
+      color = "#dd9c22";
+    } else if (i.entity === "B-PER" || i.entity === "I-PER") {
+      color = "#2148bd";
+    } else if (i.entity === "B-ORG" || i.entity === "I-ORG") {
+      color = "#2148bd";
+    }
+    displayArray.push([i.count, color, (x_coord += 1.5), (z_coord += 1.5)]);
   }
 
   console.log("Display Array: ", displayArray);
@@ -115,7 +124,14 @@ const Visualizer = () => {
             return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
           })} */}
           {displayArray.map((i) => {
-            return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
+            return (
+              <Box
+                height={i[0]}
+                color={i[1]}
+                position_x={i[2]}
+                position_z={i[3]}
+              />
+            );
           })}
           <Plane />
         </Physics>
