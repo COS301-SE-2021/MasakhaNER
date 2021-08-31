@@ -100,11 +100,11 @@ const Visualizer = () => {
     if (i.entity === "B-LOC" || i.entity === "I-LOC") {
       color = "#dd9c22";
     } else if (i.entity === "B-PER" || i.entity === "I-PER") {
-      color = "#2148bd";
+      color = "#79bb14";
     } else if (i.entity === "B-ORG" || i.entity === "I-ORG") {
       color = "#b8216d";
     } else {
-      color = "#";
+      color = "#2148bd";
     }
     displayArray.push([i.count, color, (x_coord += 1.5), (z_coord += 1.5)]);
   }
