@@ -519,22 +519,23 @@ class User:
             self.cur.execute(sql)
             input = self.cur.fetchall()
             self.conn.commit()
-            f = open("input.txt", "w")
+            file = open("input.json", "w")
             val  = 0
-            f.write("[")
+            file.write("[")
             for row in input:
                 val+=1
-                f.write("{")
-                f.write("id: " + row[0])
-                f.write("name: " + row[1])
-                f.write("entity: " + row[2])
-                f.write("count: " + row[3])
+                file.write("{")
+                file.write("id: " + row[0])
+                file.write("name: " + row[1])
+                file.write("entity: " + row[2])
+                file.write("count: " + row[3])
                 if( val == len(input)):
-                    f.write('}')
+                    file.write('}')
                 else:
-                    f.write('},')
+                    file.write('},')
 
-            f.write("]")
+            file.write("]")
+            file.close
             return True
         except Exception as e:
            print(f"Database connection error: {e}")
