@@ -356,7 +356,7 @@ export default function InputSection() {
             value={imageFile}
             onChange={(e)=>handleImageFile(e)}/>
             <img src={imageFile}/>
-            <button>Submit</button>
+            <button onClick={(e)=>handleImageFile(e)}>Submit</button>
           </form>
         </div>
         <div id="output-section">
