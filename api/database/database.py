@@ -526,6 +526,7 @@ class User:
 
     def getPersonInfo(self, person_name, person_surname):
         try:
+            sql = "SELECT * FROM people WHERE name=%s and surname=%s;"
 
 
 
@@ -536,7 +537,7 @@ person info database
         #         dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
         # self.cur = self.conn.cursor()
         try:
-            sql = "SELECT * FROM feedback WHERE id=%s;"
+            sql = "SELECT * FROM feedback WHERE id=%s and ;"
             self.cur.execute(sql,(id,))
             feedback = self.cur.fetchone()
             self.conn.commit()
