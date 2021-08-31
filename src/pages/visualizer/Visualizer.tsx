@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
 import { Physics, usePlane, useBox } from "@react-three/cannon";
@@ -77,11 +77,17 @@ const Visualizer = () => {
     },
   };
 
+  const [inputData, setInputData] = useState([]);
+
   useEffect(() => {
     fetch("/input", options)
       .then((res) => res.json())
-      .then((data) => console.warn("SENT FROM VISULALIZER", data));
+      .then((data) => {
+        setInputData(data);
+      });
   }, []);
+
+  console.log("SAVED FROM VISULALIZER", inputData[0].count);
 
   return (
     <div style={{ backgroundColor: "black", width: "100vw", height: "100vh" }}>
