@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
 import { Physics, usePlane, useBox } from "@react-three/cannon";
@@ -8,9 +8,10 @@ interface Props {
   height: number;
   position_x: number;
   position_z: number;
+  color: string;
 }
 
-const Box: React.FC<Props> = ({ height, position_x, position_z }) => {
+const Box: React.FC<Props> = ({ height, position_x, position_z, color }) => {
   const [ref, api] = useBox(() => ({
     mass: 0.1,
     position: [position_x, 1, position_z],
@@ -24,7 +25,7 @@ const Box: React.FC<Props> = ({ height, position_x, position_z }) => {
       position={[0, 0, 0]}
     >
       <boxGeometry args={[1, height, 1]} />
-      <meshLambertMaterial attach="material" color="#dd9c22" />
+      <meshLambertMaterial attach="material" color={color} />
     </mesh>
   );
 };
@@ -35,7 +36,7 @@ const Plane = () => {
   }));
   return (
     <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeBufferGeometry attach="geometry" args={[30, 20]} />
+      <planeBufferGeometry attach="geometry" args={[300, 300]} />
       <meshLambertMaterial attach="material" color="lightblue" />
     </mesh>
   );
@@ -69,6 +70,47 @@ const Visualizer = () => {
     [14, 2, -1.5],
   ];
 
+  const options: any = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": localStorage.getItem("token"),
+    },
+  };
+
+  const [inputData, setInputData] = useState([]);
+
+  useEffect(() => {
+    fetch("/input", options)
+      .then((res) => res.json())
+      .then((data) => {
+        setInputData(data);
+      });
+  }, []);
+
+  console.log("SAVED FROM VISULALIZER", inputData);
+
+  const displayArray: any[] = [];
+
+  let x_coord = 0;
+  let z_coord = 0;
+  let color;
+
+  for (let i of inputData) {
+    if (i.entity === "B-LOC" || i.entity === "I-LOC") {
+      color = "#dd9c22";
+    } else if (i.entity === "B-PER" || i.entity === "I-PER") {
+      color = "#79bb14";
+    } else if (i.entity === "B-ORG" || i.entity === "I-ORG") {
+      color = "#b8216d";
+    } else {
+      color = "#2148bd";
+    }
+    displayArray.push([i.count, color, (x_coord += 1.5), (z_coord += 1.5)]);
+  }
+
+  console.log("Display Array: ", displayArray);
+
   return (
     <div style={{ backgroundColor: "black", width: "100vw", height: "100vh" }}>
       <Canvas>
@@ -80,8 +122,15 @@ const Visualizer = () => {
           LOCATION
         </Text>
         <Physics>
-          {data.map((i) => {
-            return <Box height={i[0]} position_x={i[1]} position_z={i[2]} />;
+          {displayArray.map((i) => {
+            return (
+              <Box
+                height={i[0]}
+                color={i[1]}
+                position_x={i[2]}
+                position_z={i[3]}
+              />
+            );
           })}
           <Plane />
         </Physics>
