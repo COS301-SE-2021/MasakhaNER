@@ -301,9 +301,16 @@ export default function InputSection() {
   // console.log("THSI IS FILE CONTENT ",filecontent);
 
   const handleImageFile = (e: any) =>{
-    const file = e.target.files[0];
+    const file = e.target.files;
     console.log(file, "$$$$");
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file[0]);
     setImageFile(file.name);
+
+    reader.onload = (e) => {
+      console.warn("Img Data ", e.target.result);
+    }
   };
 
   const handleImageUpload = async () => {
@@ -360,7 +367,7 @@ export default function InputSection() {
             name="fileUpload" 
             value={imageFile}
             onChange={(e)=>handleImageFile(e)}/>
-            <img src={imageFile}/>
+            {/* <img src={imageFile}/> */}
             <button onClick={handleImageUpload}>Submit</button>
           </form>
         </div>
