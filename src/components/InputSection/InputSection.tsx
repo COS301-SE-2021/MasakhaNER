@@ -306,7 +306,7 @@ export default function InputSection() {
 
     const reader = new FileReader();
     reader.readAsDataURL(file[0]);
-    setImageFile(file.name);
+    setImageFile(e.target.result);
 
     reader.onload = (e) => {
       console.warn("Img Data ", e.target.result);
