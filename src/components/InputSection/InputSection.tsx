@@ -6,8 +6,6 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
-// import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
   display: grid;
