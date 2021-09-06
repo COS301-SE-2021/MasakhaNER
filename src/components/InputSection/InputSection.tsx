@@ -149,6 +149,7 @@ export default function InputSection() {
   const [filename, setFileName] = useState("");
   const [filecontent, setFileContent] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [inputList, setInputList] = useState([{ entity: "", entityName: "" }]);
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -295,6 +296,22 @@ export default function InputSection() {
       setInput(reader.result);
     };
   };
+
+ 
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+ 
+  // handle click event of the Remove button
+  const handleRemoveClick = index => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
 
@@ -364,6 +381,16 @@ export default function InputSection() {
           </p>
         </div>
         <form onSubmit={handleSubmit}>
+        <td>
+        <tr>
+        <select>
+          <option value="grapefruit">Grapefruit</option>
+          <option value="lime">Lime</option>
+          <option selected value="coconut">Coconut</option>
+          <option value="mango">Mango</option>
+        </select>
+        </tr>
+        <tr>
           <FeedbackInput
             value={feedback}
             placeholder="Enter feedback"
@@ -371,6 +398,8 @@ export default function InputSection() {
               setFeedback(e.target.value);
             }}
           />
+          </tr>
+          </td>
           <br />
           <Button
             onClick={(e) => {
