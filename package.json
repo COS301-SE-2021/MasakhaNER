@@ -42,7 +42,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-api": "cd api && python3 main.py",
+    "start-api": "cd api && python main.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
