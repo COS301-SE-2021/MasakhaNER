@@ -299,7 +299,7 @@ export default function InputSection() {
 
  
   // handle input change
-  const handleInputChange = (e: String, index: number) => {
+  const handleInputChange = (e: string, index: number) => {
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;
