@@ -43,7 +43,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-api": "cd api && python main.py",
+    "start-api": "cd api && python3 main.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -67,7 +67,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000",
   "devDependencies": {
     "@types/react-facebook-login": "^4.1.3",
     "@types/react-google-recaptcha": "^2.1.0",
