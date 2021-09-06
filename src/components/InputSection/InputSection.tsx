@@ -299,7 +299,7 @@ export default function InputSection() {
 
  
   // handle input change
-  const handleInputChange = (e, index) => {
+  const handleInputChange = (e: String, index: number) => {
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;
@@ -307,7 +307,7 @@ export default function InputSection() {
   };
  
   // handle click event of the Remove button
-  const handleRemoveClick = index => {
+  const handleRemoveClick = (index: number) => {
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
@@ -386,25 +386,29 @@ export default function InputSection() {
           </p>
         </div>
         <form onSubmit={handleSubmit}>
-        <td>
-        <tr>
-        <select className="entityName">
-          <option value="location">location</option>
-          <option value="person">person</option>
-          <option selected value="organization">organization</option>
-        </select>
-        </tr>
-        <tr>
-          <FeedbackInput
-            value={feedback}
-            placeholder="Enter feedback"
-            onChange={(e) => {
-              setFeedback(e.target.value);
-            }}
-          />
-          </tr>
-          </td>
-          <br />
+        {inputList.map((x, i) => {
+          <div>
+            <input
+              value={x.entity}
+              placeholder="Enter feedback"
+              onChange={(e) => {
+                handleInputChange(e, i)
+              }}
+            />
+              <select className="entityName">
+                <option value="location">location</option>
+                <option value="person">person</option>
+                <option selected value="organization">organization</option>
+              </select>
+            <br />
+            <div className="btn-box">
+                {inputList.length !== 1 && <button
+                  className="mr10"
+                  onClick={() => handleRemoveClick(i)}>Remove</button>}
+                {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
+            </div>
+          </div>
+            })}
           <Button
             onClick={(e) => {
               e.preventDefault();
