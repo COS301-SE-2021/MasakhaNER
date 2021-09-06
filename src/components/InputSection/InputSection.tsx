@@ -312,6 +312,11 @@ export default function InputSection() {
     list.splice(index, 1);
     setInputList(list);
   };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, { entity: "", entityName: "" }]);
+  };
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
 
@@ -383,11 +388,10 @@ export default function InputSection() {
         <form onSubmit={handleSubmit}>
         <td>
         <tr>
-        <select>
-          <option value="grapefruit">Grapefruit</option>
-          <option value="lime">Lime</option>
-          <option selected value="coconut">Coconut</option>
-          <option value="mango">Mango</option>
+        <select className="entityName">
+          <option value="location">location</option>
+          <option value="person">person</option>
+          <option selected value="organization">organization</option>
         </select>
         </tr>
         <tr>
