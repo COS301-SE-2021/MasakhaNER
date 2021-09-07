@@ -148,11 +148,11 @@ def model_feedback(user):
     model_feedback = eval(model_feedback)
     db = app.config['DATABASE']
     if(db != False):
-        if(db.input(model_feedback)):
-            dude = {'output':model_feedback}
-            return dude, 200
-        else:
-            return {'response' : 'failed'}, 400
+        db.input(model_feedback)
+        dude = {'output':model_feedback}
+        return dude, 200
+    else:
+        return {'response' : 'failed'}, 400
 
 @app.route('/input', methods = ["GET"])
 @token_required
