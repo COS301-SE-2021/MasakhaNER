@@ -256,21 +256,13 @@ export default function InputSection() {
       if (resp.status === 200) {
         const data = await resp.json();
         console.log(data);
-        // localStorage.setItem("token", data.token);
-        // localStorage.setItem("isAuthenticated", "true");
         setOutputData(data.output);
         setInput2(input);
         console.log("data is ", data.output);
-        // if (data.isadmin) {
-        //   history.push("/Admin");
-        // } else {
-        //   history.push("/Dashboard");
-        // }
         setWait(1);
       } else {
         alert("error, failed!");
         setWait(0);
-        //history.push("/");
       }
       console.log(wait);
     } catch (error) {
@@ -279,24 +271,19 @@ export default function InputSection() {
     }
   };
 
-  // console.log(history);
 
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
     const reader: any = new FileReader();
-    //console.log("NAME",file.name)
     reader.readAsText(file);
     reader.onload = () => {
-      //console.log("running")
       setFileName(file.name);
 
       setFileContent(reader.result);
-      //console.log("RESULT",typeof(reader.result))
       setInput(reader.result);
     };
   };
-  // console.log("THSI IS FILE ANME ",filename)
-  // console.log("THSI IS FILE CONTENT ",filecontent);
+
 
   return (
     <>
