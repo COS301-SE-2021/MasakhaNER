@@ -18,7 +18,7 @@ export default function HistorySection() {
     
     const mySend = async () => {
         console.log(input)
-        setWait(2);
+        setWait(3);
         const opts: any = {
           method: "POST",
           headers: {
@@ -38,14 +38,11 @@ export default function HistorySection() {
             console.log(data);
             setOutputData(data.output);
             setInput2(input)
-            console.log("input2: " + input2)
-            console.log("data is ", data.output);
             setWait(1);
           } else {
             alert("error, failed!");
             setWait(0);
           }
-          console.log(wait);
         } catch (error) {
           console.log("there is an error", error);
           history.push("/");
@@ -64,7 +61,15 @@ export default function HistorySection() {
                     <li key = {history.toString() } onClick={() => {setClicked(!clicked); setInput(history.toString()); mySend()}}>{history}</li>
                 ))}
             </ul>
-            {wait===3?"":wait===2?"pending...":wait===1?<Output data={outputData} input={input}/>:"failed"}
+            {wait === 3 ? (
+              ""
+            ) : wait === 2 ? (
+              "loading..."
+            ) : wait === 1 ? (
+              <Output data={outputData} input={input2} />
+            ) : (
+              "failed"
+            )}
         </div>
     )
 }
