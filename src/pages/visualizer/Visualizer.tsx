@@ -125,9 +125,9 @@ const Visualizer = () => {
         <Stars />
         <ambientLight intensity={0.4} />
         <spotLight position={[10, 20, 10]} angle={0.3} castShadow />
-        <Text color="white" anchorX="center" anchorY="middle">
+        {/* <Text color="white" anchorX="center" anchorY="middle">
           LOCATION
-        </Text>
+        </Text> */}
         <Physics>
           {data.map((i) => {
             return (
