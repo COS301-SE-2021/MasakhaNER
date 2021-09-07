@@ -6,6 +6,7 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
+import Select from 'react-select';
 // import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
@@ -36,6 +37,13 @@ const Input = styled.textarea`
   &:focus {
     outline: none;
   }
+`;
+
+const FBInput = styled.textarea`
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
 `;
 
 const OutputSection = styled.div`
@@ -298,25 +306,13 @@ export default function InputSection() {
   };
 
  
-  // handle input change
-  const handleInputChange = (e: string, index: number) => {
-    const { name, value } = e.target;
-    const list = [...inputList];
-    list[index][name] = value;
-    setInputList(list);
-  };
- 
-  // handle click event of the Remove button
-  const handleRemoveClick = (index: number) => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-  };
+  const FbOpts = [
+    { value: 'ORG', label: 'Organization' },
+    { value: 'LOC', label: 'Location' },
+    { value: 'PER', label: 'Person' }
+  ]
+  
 
-  // handle click event of the Add button
-  const handleAddClick = () => {
-    setInputList([...inputList, { entity: "", entityName: "" }]);
-  };
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
 
@@ -386,29 +382,15 @@ export default function InputSection() {
           </p>
         </div>
         <form onSubmit={handleSubmit}>
-        {inputList.map((x, i) => {
-          <div>
-            <input
-              value={x.entity}
-              placeholder="Enter feedback"
-              onChange={(e) => {
-                handleInputChange(e, i)
-              }}
+        <FBInput
+              name="firstName"
+              value="firstName"
             />
-              <select className="entityName">
-                <option value="location">location</option>
-                <option value="person">person</option>
-                <option selected value="organization">organization</option>
-              </select>
-            <br />
-            <div className="btn-box">
-                {inputList.length !== 1 && <button
-                  className="mr10"
-                  onClick={() => handleRemoveClick(i)}>Remove</button>}
-                {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
-            </div>
-          </div>
-            })}
+        <select name="cars" id="cars">
+          <option value="organization">organization</option>
+          <option value="person">person</option>
+          <option value="location">location</option>
+        </select>
           <Button
             onClick={(e) => {
               e.preventDefault();
