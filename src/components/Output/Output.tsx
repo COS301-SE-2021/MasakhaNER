@@ -123,15 +123,8 @@ export default function Output({ data, input }: OutputProps) {
     localStorage.setItem('Entity',ent);
   },[ent]);
 
-  //function storeWord(word:string){
-    
-    //alert('Got called!');
-    //document.getElementById('wikiLink').window.location.reload();
-    //window.location.reload();
-  //}
 
   console.log(data);
-  // console.log(json[0].start);
   let word = "";
 
   let nogo = true
@@ -146,9 +139,6 @@ export default function Output({ data, input }: OutputProps) {
       }
       if(j < data.length) {
         if (data[j].start === i) {
-            // localStorage.setItem('Entity',data[j].word);
-            //https://www.google.com/maps/place/
-            //{${setEnt(data[j].word)}}
             console.log("The entity", data[j].entity);
             if (data[j].entity == "B-LOC" || data[j].entity == "I-LOC"){
               word +=
