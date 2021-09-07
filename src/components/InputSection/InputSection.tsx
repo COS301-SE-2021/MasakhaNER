@@ -156,7 +156,7 @@ export default function InputSection() {
   const [up, setUp] = useState(false);
   const [filename, setFileName] = useState("");
   const [filecontent, setFileContent] = useState("");
-  const [feedback, setFeedback] = useState("");
+  const [feedback, setFeedback] = useState([]);
   const [inputList, setInputList] = useState([{ entity: "", entityName: "" }]);
 
   let subtitle: any;
@@ -382,15 +382,56 @@ export default function InputSection() {
           </p>
         </div>
         <form onSubmit={handleSubmit}>
-        <FBInput
-              name="firstName"
-              value="firstName"
+        <input
+              name="feedback"
+              value={feedback[0]}
             />
-        <select name="cars" id="cars">
+        <select name="fbEnt">
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
         </select>
+        <br/>
+        <input
+              name="feedback"
+              value={feedback[1]}
+            />
+        <select name="fbEnt">
+          <option value="organization">organization</option>
+          <option value="person">person</option>
+          <option value="location">location</option>
+        </select>
+        <br/>
+        <input
+              name="feedback"
+              value={feedback[2]}
+            />
+        <select name="fbEnt">
+          <option value="organization">organization</option>
+          <option value="person">person</option>
+          <option value="location">location</option>
+        </select>
+        <br/>
+        <input
+              name="feedback"
+              value={feedback[3]}
+            />
+        <select name="fbEnt">
+          <option value="organization">organization</option>
+          <option value="person">person</option>
+          <option value="location">location</option>
+        </select>
+        <br/>
+        <input
+              name="feedback"
+              value={feedback[4]}
+            />
+        <select name="fbEnt">
+          <option value="organization">organization</option>
+          <option value="person">person</option>
+          <option value="location">location</option>
+        </select>
+        <br/>
           <Button
             onClick={(e) => {
               e.preventDefault();
