@@ -391,6 +391,7 @@ export default function InputSection() {
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
+          <option value="date">Date</option>
         </select>
         <br/>
         <input
@@ -402,6 +403,7 @@ export default function InputSection() {
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
+          <option value="date">Date</option>
         </select>
         <br/>
         <input
@@ -413,6 +415,7 @@ export default function InputSection() {
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
+          <option value="date">Date</option>
         </select>
         <br/>
         <input
@@ -424,6 +427,7 @@ export default function InputSection() {
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
+          <option value="date">Date</option>
         </select>
         <br/>
         <input
@@ -435,6 +439,7 @@ export default function InputSection() {
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
+          <option value="date">Date</option>
         </select>
         <br/>
           <Button
