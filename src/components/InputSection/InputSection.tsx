@@ -387,6 +387,7 @@ export default function InputSection() {
               value={feedback[0]}
             />
         <select name="fbEnt">
+          <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
@@ -397,6 +398,7 @@ export default function InputSection() {
               value={feedback[1]}
             />
         <select name="fbEnt">
+          <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
@@ -407,6 +409,7 @@ export default function InputSection() {
               value={feedback[2]}
             />
         <select name="fbEnt">
+          <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
@@ -417,6 +420,7 @@ export default function InputSection() {
               value={feedback[3]}
             />
         <select name="fbEnt">
+          <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
@@ -427,6 +431,7 @@ export default function InputSection() {
               value={feedback[4]}
             />
         <select name="fbEnt">
+          <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
