@@ -156,8 +156,8 @@ export default function InputSection() {
   const [up, setUp] = useState(false);
   const [filename, setFileName] = useState("");
   const [filecontent, setFileContent] = useState("");
-  const [feedback, setFeedback] = useState([]);
-  const [inputList, setInputList] = useState([{ entity: "", entityName: "" }]);
+  const [feedback, setFeedback] = useState("");
+  // const [feedback, setFeedback] = useState([{ entity: "", entityName: "" }]);
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -384,63 +384,69 @@ export default function InputSection() {
         <form onSubmit={handleSubmit}>
         <input
               name="feedback"
-              value={feedback[0]}
+              // value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
             />
         <select name="fbEnt">
           <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
-          <option value="date">Date</option>
+          <option value="date">date</option>
         </select>
         <br/>
         <input
               name="feedback"
-              value={feedback[1]}
+              // value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
             />
         <select name="fbEnt">
           <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
-          <option value="date">Date</option>
+          <option value="date">date</option>
         </select>
         <br/>
         <input
               name="feedback"
-              value={feedback[2]}
+              //value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
             />
         <select name="fbEnt">
           <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
-          <option value="date">Date</option>
+          <option value="date">date</option>
         </select>
         <br/>
         <input
               name="feedback"
-              value={feedback[3]}
+              //value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
             />
         <select name="fbEnt">
           <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
-          <option value="date">Date</option>
+          <option value="date">date</option>
         </select>
         <br/>
         <input
               name="feedback"
-              value={feedback[4]}
+              //value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
             />
         <select name="fbEnt">
           <option value="empty"></option>
           <option value="organization">organization</option>
           <option value="person">person</option>
           <option value="location">location</option>
-          <option value="date">Date</option>
+          <option value="date">date</option>
         </select>
+        <br/>
         <br/>
           <Button
             onClick={(e) => {
