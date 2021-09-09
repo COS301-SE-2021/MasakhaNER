@@ -16,9 +16,16 @@ interface Props {
   position_x: number;
   position_z: number;
   color: string;
+  name: string;
 }
 
-const Box: React.FC<Props> = ({ height, position_x, position_z, color }) => {
+const Box: React.FC<Props> = ({
+  height,
+  position_x,
+  position_z,
+  color,
+  name,
+}) => {
   // const [ref, api] = useBox(() => ({
   //   mass: 0.1,
   //   position: [position_x, 1, position_z],
@@ -33,12 +40,13 @@ const Box: React.FC<Props> = ({ height, position_x, position_z, color }) => {
       position={[position_x, 1, position_z]}
     >
       <Text
-        color="white"
+        color="black"
         anchorX="center"
         anchorY="middle"
         position={[0, 0, 0.3]}
+        scale={2}
       >
-        LOCATION
+        {name} - {height}
       </Text>
       <boxGeometry args={[0.3, height / 2, 0.3]} />
       <meshLambertMaterial attach="material" color={color} />
@@ -117,8 +125,8 @@ const Visualizer = () => {
 
   const displayArray: any[] = [];
 
-  let x_coord = -10;
-  let z_coord = -10;
+  let x_coord = -5;
+  let z_coord = -5;
   let color;
 
   for (let i of inputData) {
@@ -131,7 +139,7 @@ const Visualizer = () => {
     } else {
       color = "#2148bd";
     }
-    displayArray.push([i.count, color, (x_coord += 1), (z_coord += 1)]);
+    displayArray.push([i.count, color, (x_coord += 1), (z_coord += 1), i.name]);
   }
 
   return (
@@ -143,9 +151,6 @@ const Visualizer = () => {
         <shaderMaterial />
         <ambientLight intensity={1} />
         <spotLight position={[10, 30, 10]} angle={0.3} castShadow />
-        {/* <Text color="white" anchorX="center" anchorY="middle">
-          LOCATION
-        </Text> */}
         {/* <Physics> */}
         {displayArray.map((i) => {
           return (
@@ -154,6 +159,7 @@ const Visualizer = () => {
               color={i[1]}
               position_x={i[2]}
               position_z={i[3]}
+              name={i[4]}
             />
           );
         })}
