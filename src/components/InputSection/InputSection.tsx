@@ -1,12 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
-import { FaTimes } from "react-icons/fa";
 import "./InputSection.css";
 import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
-// import { CalliFrame } from "../Output/Output";
 
 const FormContainer = styled.div`
   display: grid;
@@ -96,24 +94,6 @@ const Upload = styled.input`
   color: #5f5f5f;
 `;
 
-const Link = styled.div`
-  background-color: white;
-  display: grid;
-  flex-direction: column;
-  justify-content: center;
-  height: 43vh;
-  width: 51vw;
-  border: solid 1px #ffffff;
-  margin: 0 auto;
-  margin-bottom: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
-  padding: 2rem;
-  h4 {
-    color: #5f5f5f;
-  }
-`;
-
 const customStyles = {
   content: {
     top: "50%",
@@ -137,17 +117,15 @@ const VisualizerButton = styled(Button)`
   background-color: white;
   color: grey;
 `;
-// Modal.setAppElement("#inputsection");
 
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
-  const [clicked, setClicked] = useState(false);
+  const [clicked] = useState(false);
   const [outputData, setOutputData] = useState(null);
   const [wait, setWait] = useState(3);
-  const [up, setUp] = useState(false);
-  const [filename, setFileName] = useState("");
-  const [filecontent, setFileContent] = useState("");
+  const [, setFileName] = useState("");
+  const [, setFileContent] = useState("");
   const [feedback, setFeedback] = useState("");
 
   let subtitle: any;
@@ -191,7 +169,7 @@ export default function InputSection() {
       console.log("there is an error", error);
     }
   };
-  let his
+  let his;
   his = useHistory();
 
   const visualizer = () => {
@@ -256,21 +234,13 @@ export default function InputSection() {
       if (resp.status === 200) {
         const data = await resp.json();
         console.log(data);
-        // localStorage.setItem("token", data.token);
-        // localStorage.setItem("isAuthenticated", "true");
         setOutputData(data.output);
         setInput2(input);
         console.log("data is ", data.output);
-        // if (data.isadmin) {
-        //   history.push("/Admin");
-        // } else {
-        //   history.push("/Dashboard");
-        // }
         setWait(1);
       } else {
         alert("error, failed!");
         setWait(0);
-        //history.push("/");
       }
       console.log(wait);
     } catch (error) {
@@ -279,24 +249,16 @@ export default function InputSection() {
     }
   };
 
-  // console.log(history);
-
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
     const reader: any = new FileReader();
-    //console.log("NAME",file.name)
     reader.readAsText(file);
     reader.onload = () => {
-      //console.log("running")
       setFileName(file.name);
-
       setFileContent(reader.result);
-      //console.log("RESULT",typeof(reader.result))
       setInput(reader.result);
     };
   };
-  // console.log("THSI IS FILE ANME ",filename)
-  // console.log("THSI IS FILE CONTENT ",filecontent);
 
   return (
     <>
@@ -313,7 +275,6 @@ export default function InputSection() {
               onChange={(e) => setInput(e.target.value)}
             />
             <div id="button-container">
-              {/* <Button onClick={() => setClicked(!clicked)}>Mic</Button> */}
               <Upload
                 type="file"
                 placeholder="Upload"
@@ -339,12 +300,7 @@ export default function InputSection() {
             <Button onClick={openModal}>Feedback</Button>
           </div>
         </div>
-        <div>
-          {/* <Link>
-          <h4>Link Section</h4>
-          <CalliFrame/>
-        </Link> */}
-        </div>
+        <div></div>
       </FormContainer>
       <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton>
       <Modal
