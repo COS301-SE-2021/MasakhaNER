@@ -2,8 +2,15 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
 import { Physics, usePlane, useBox } from "@react-three/cannon";
-import { OrbitControls, Stars, Text } from "@react-three/drei";
+import {
+  OrbitControls,
+  Stars,
+  Sky,
+  shaderMaterial,
+  Text,
+} from "@react-three/drei";
 import "./Visualizer.css";
+
 interface Props {
   height: number;
   position_x: number;
@@ -12,19 +19,28 @@ interface Props {
 }
 
 const Box: React.FC<Props> = ({ height, position_x, position_z, color }) => {
-  const [ref, api] = useBox(() => ({
-    mass: 0.1,
-    position: [position_x, 1, position_z],
-  }));
+  // const [ref, api] = useBox(() => ({
+  //   mass: 0.1,
+  //   position: [position_x, 1, position_z],
+  // }));
   return (
     <mesh
-      onClick={() => {
-        api.velocity.set(0, 0, 0);
-      }}
-      ref={ref}
-      position={[0, 0, 0]}
+      // onClick={() => {
+      //   api.velocity.set(0, 0, 0);
+      // }}
+      // ref={ref}
+      // position={[0, 0, 0]}
+      position={[position_x, 1, position_z]}
     >
-      <boxGeometry args={[1, height, 1]} />
+      <Text
+        color="white"
+        anchorX="center"
+        anchorY="middle"
+        position={[0, 0, 0.3]}
+      >
+        LOCATION
+      </Text>
+      <boxGeometry args={[0.3, height / 2, 0.3]} />
       <meshLambertMaterial attach="material" color={color} />
     </mesh>
   );
@@ -101,8 +117,8 @@ const Visualizer = () => {
 
   const displayArray: any[] = [];
 
-  let x_coord = 0;
-  let z_coord = 0;
+  let x_coord = -10;
+  let z_coord = -10;
   let color;
 
   for (let i of inputData) {
@@ -115,32 +131,34 @@ const Visualizer = () => {
     } else {
       color = "#2148bd";
     }
-    displayArray.push([i.count, color, (x_coord += 1.5), (z_coord += 1.5)]);
+    displayArray.push([i.count, color, (x_coord += 1), (z_coord += 1)]);
   }
 
   return (
-    <div style={{ backgroundColor: "black", width: "100vw", height: "100vh" }}>
+    <div
+      style={{ backgroundColor: "#4591e7", width: "100vw", height: "100vh" }}
+    >
       <Canvas>
         <OrbitControls />
-        <Stars />
-        <ambientLight intensity={0.4} />
-        <spotLight position={[10, 20, 10]} angle={0.3} castShadow />
+        <shaderMaterial />
+        <ambientLight intensity={1} />
+        <spotLight position={[10, 30, 10]} angle={0.3} castShadow />
         {/* <Text color="white" anchorX="center" anchorY="middle">
           LOCATION
         </Text> */}
-        <Physics>
-          {displayArray.map((i) => {
-            return (
-              <Box
-                height={i[0]}
-                color={i[1]}
-                position_x={i[2]}
-                position_z={i[3]}
-              />
-            );
-          })}
-          <Plane />
-        </Physics>
+        {/* <Physics> */}
+        {displayArray.map((i) => {
+          return (
+            <Box
+              height={i[0]}
+              color={i[1]}
+              position_x={i[2]}
+              position_z={i[3]}
+            />
+          );
+        })}
+        {/* <Plane /> */}
+        {/* </Physics> */}
       </Canvas>
     </div>
   );
