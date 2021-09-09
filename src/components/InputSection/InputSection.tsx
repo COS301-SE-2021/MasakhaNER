@@ -160,7 +160,6 @@ export default function InputSection() {
       const resp = await fetch("/feedback", opts);
       console.log(resp);
       if (resp.status === 200) {
-        const data = await resp.json();
       } else {
         alert("error, failed!");
       }
@@ -176,7 +175,7 @@ export default function InputSection() {
     his.push("/visualizer");
   };
 
-  var history: String[] = new Array();
+  var history: any[] = new Array();
   const addToHistory = (data: String) => {
     history.push(data);
     let stored = localStorage.getItem("history");
