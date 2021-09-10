@@ -383,13 +383,72 @@ export default function InputSection() {
         </div>
         <form onSubmit={handleSubmit}>
         <br/>
-          <input/>
-          <select>
+          <input
+             placeholder="Type here..."
+             type="text"
+             name="feedback1"
+          />
+          <select name="feedbackEnt1">
+            <option></option>
             <option>Location</option>
             <option>Person</option>
             <option>Date</option>
             <option>Organization</option>
           </select>
+          <br/>
+          <input
+             placeholder="Type here..."
+             type="text"
+             name="feedback2"
+          />
+          <select name="feedbackEnt2">
+            <option></option>
+            <option>Location</option>
+            <option>Person</option>
+            <option>Date</option>
+            <option>Organization</option>
+          </select>
+          <br/>
+          <input
+             placeholder="Type here..."
+             type="text"
+             name="feedback3"
+          />
+          <select name="feedbackEnt3">
+            <option></option>
+            <option>Location</option>
+            <option>Person</option>
+            <option>Date</option>
+            <option>Organization</option>
+          </select>
+          <br/>
+          <input
+             placeholder="Type here..."
+             type="text"
+             name="feedback4"
+          />
+          <select name="feedbackEnt4">
+            <option></option>
+            <option>Location</option>
+            <option>Person</option>
+            <option>Date</option>
+            <option>Organization</option>
+          </select>
+          <br/>
+          <input
+             placeholder="Type here..."
+             type="text"
+             name="feedback5"
+          />
+          <select name="feedbackEnt5">
+            <option></option>
+            <option>Location</option>
+            <option>Person</option>
+            <option>Date</option>
+            <option>Organization</option>
+          </select>
+          <br/>
+          <br/>
           <Button
             onClick={(e) => {
               e.preventDefault();
