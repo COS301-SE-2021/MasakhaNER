@@ -383,6 +383,13 @@ export default function InputSection() {
         </div>
         <form onSubmit={handleSubmit}>
         <br/>
+          <input/>
+          <select>
+            <option>Location</option>
+            <option>Person</option>
+            <option>Date</option>
+            <option>Organization</option>
+          </select>
           <Button
             onClick={(e) => {
               e.preventDefault();
