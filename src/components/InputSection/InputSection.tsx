@@ -289,6 +289,9 @@ export default function InputSection() {
   };
 
   // console.log(history);
+  const combine(){
+    
+  }
 
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
@@ -452,6 +455,7 @@ export default function InputSection() {
           <Button
             onClick={(e) => {
               e.preventDefault();
+              combine();
               handleFeedback();
               closeModal();
             }}
