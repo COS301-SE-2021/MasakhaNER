@@ -289,9 +289,6 @@ export default function InputSection() {
   };
 
   // console.log(history);
-  const combine(){
-    
-  }
 
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
@@ -393,10 +390,10 @@ export default function InputSection() {
           />
           <select name="feedbackEnt1">
             <option></option>
-            <option>Location</option>
-            <option>Person</option>
-            <option>Date</option>
-            <option>Organization</option>
+            <option value="<LOC>">Location</option>
+            <option value="<PER>">Person</option>
+            <option value="<DAT>">Date</option>
+            <option value="<ORG>">Organization</option>
           </select>
           <br/>
           <input
@@ -406,10 +403,10 @@ export default function InputSection() {
           />
           <select name="feedbackEnt2">
             <option></option>
-            <option>Location</option>
-            <option>Person</option>
-            <option>Date</option>
-            <option>Organization</option>
+            <option value="<LOC>">Location</option>
+            <option value="<PER>">Person</option>
+            <option value="<DAT>">Date</option>
+            <option value="<ORG>">Organization</option>
           </select>
           <br/>
           <input
@@ -419,10 +416,10 @@ export default function InputSection() {
           />
           <select name="feedbackEnt3">
             <option></option>
-            <option>Location</option>
-            <option>Person</option>
-            <option>Date</option>
-            <option>Organization</option>
+            <option value="<LOC>">Location</option>
+            <option value="<PER>">Person</option>
+            <option value="<DAT>">Date</option>
+            <option value="<ORG>">Organization</option>
           </select>
           <br/>
           <input
@@ -432,10 +429,10 @@ export default function InputSection() {
           />
           <select name="feedbackEnt4">
             <option></option>
-            <option>Location</option>
-            <option>Person</option>
-            <option>Date</option>
-            <option>Organization</option>
+            <option value="<LOC>">Location</option>
+            <option value="<PER>">Person</option>
+            <option value="<DAT>">Date</option>
+            <option value="<ORG>">Organization</option>
           </select>
           <br/>
           <input
@@ -445,17 +442,17 @@ export default function InputSection() {
           />
           <select name="feedbackEnt5">
             <option></option>
-            <option>Location</option>
-            <option>Person</option>
-            <option>Date</option>
-            <option>Organization</option>
+            <option value="<LOC>">Location</option>
+            <option value="<PER>">Person</option>
+            <option value="<DAT>">Date</option>
+            <option value="<ORG>">Organization</option>
           </select>
+          {/* <input type="text" name="allFeedback" value={this.form.feedback1.value + this.form.feedback2.value}/> */}
           <br/>
           <br/>
           <Button
             onClick={(e) => {
               e.preventDefault();
-              combine();
               handleFeedback();
               closeModal();
             }}
