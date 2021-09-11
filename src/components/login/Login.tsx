@@ -5,6 +5,7 @@ import "./Login.css";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { History } from "history";
 
 const Wrapper = styled.div`
   background-color: white;
@@ -85,7 +86,7 @@ const SignUpButton = styled(Button)`
   color: white;
 `;
 
-let history;
+let history: History<unknown>;
 
 const responseGoogle = (response: any) => {
   console.log(response);
@@ -137,7 +138,12 @@ export default function Login() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("isAuthenticated", "true");
         if (data.isadmin) {
-          history.push("/Admin");
+          if(history.location.pathname == "/login"){
+            history.push("/users");
+          }
+          else{
+            history.push("/Admin");
+          }
         } else {
           history.push("/Dashboard");
         }
