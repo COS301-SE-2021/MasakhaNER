@@ -1,3 +1,4 @@
+import base64
 from posixpath import dirname
 from model import runModel
 from flask import Response
@@ -721,8 +722,19 @@ def upload_image():
 
     # image = request.json["image"]
     # return {"response": image}, 200
+
+    string = 'data to be encoded'
+    data = base64.b64encode(string.encode())
+
     file = request.json["image"]
+    file = file.partition(",")[2]
+
     print(file)
+    # new_file = base64.encode(file)
+    with open("imageToSave.png", "wb") as fh:
+        fh.write(base64.b64decode(file))
+        # fh.write(data.decode('base64'))
+
     # img = Image.open(file.stream)
 
     # return jsonify({'msg': 'success', 'size': [img.width, img.height]})
