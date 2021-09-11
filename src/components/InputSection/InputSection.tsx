@@ -313,7 +313,12 @@ export default function InputSection() {
   ]
   
   const concatFeedback = () =>{
-    let concatenate = (document.getElementById("Feed1") as HTMLInputElement).value;
+    let concatenate = (document.getElementById("Feed1") as HTMLInputElement).value + (document.getElementById("Ent1") as HTMLInputElement).value + 
+    (document.getElementById("Feed2") as HTMLInputElement).value + (document.getElementById("Ent2") as HTMLInputElement).value +
+    (document.getElementById("Feed3") as HTMLInputElement).value + (document.getElementById("Ent3") as HTMLInputElement).value +
+    (document.getElementById("Feed4") as HTMLInputElement).value + (document.getElementById("Ent4") as HTMLInputElement).value +
+    (document.getElementById("Feed5") as HTMLInputElement).value + (document.getElementById("Ent5") as HTMLInputElement).value;
+    console.log("MY FUNCTION WORKS: " + concatenate);
     setFeedback(concatenate);
   };
 
