@@ -1,3 +1,4 @@
+import base64
 from posixpath import dirname
 from model import runModel
 from flask import Response
@@ -697,6 +698,7 @@ def admin_get_all_feedback(user):
 @app.route('/upload-image', methods=['POST'])
 def upload_file():
     imageData = str(request.json["ImageFile"])
+    decodeit = open('hello_level.jpeg', 'wb')
 
 
 """
