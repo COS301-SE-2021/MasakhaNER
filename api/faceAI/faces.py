@@ -79,6 +79,3 @@ def recognize(img):
     cv2.imwrite('theframe.jpg', frame)
 # cv2.imshow('frames', frame)
 # cv2.waitKey(0)
-
-
-recognize("58.jpg")
