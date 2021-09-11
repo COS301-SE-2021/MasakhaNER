@@ -308,8 +308,9 @@ def admin_add_user(user):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
         user_isadmin = request.json["isadmin"]
-        if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
-            return jsonify({'response': 'registered'}), 200
+        id = db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)
+        if(id != None):
+            return jsonify({'response': 'registered', 'id': id}), 200
         else:
             return {'response': 'failed'}, 400
     else:
@@ -399,7 +400,6 @@ def admin_delete_user(user, id):
 @app.route('/users/<id>', methods=["GET"])
 @token_required
 def admin_get_user(user, id):
-    # print(user[5])
     if id is not None:
         if user is None:
             return jsonify({'response': 'user unauthirized'}), 401
