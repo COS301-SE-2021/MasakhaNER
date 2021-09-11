@@ -127,6 +127,7 @@ export default function InputSection() {
   const [, setFileName] = useState("");
   const [, setFileContent] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [imageFile, setImageFile] = useState("");
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -259,6 +260,45 @@ export default function InputSection() {
     };
   };
 
+  const handleImageFile = (e: any) =>{
+    const file = e.target.files;
+    console.log(file, "$$$$");
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    setImageFile(e.target.result);
+
+    reader.onload = (e) => {
+      console.warn("Img Data ", e.target.result);
+    }
+  };
+
+  const handleImageUpload = async () => {
+    const opts: any = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        file: imageFile,
+      }),
+    };
+
+    try {
+      const resp = await fetch("/upload-image", opts);
+      console.log(resp);
+      if (resp.status === 200) {
+        const data = await resp.json();
+      } else {
+        alert("error, failed!");
+      }
+      console.log(wait);
+    } catch (error) {
+      console.log("there is an error", error);
+    }
+  };
+
   return (
     <>
       <FormContainer>
@@ -281,6 +321,13 @@ export default function InputSection() {
               />
               <Button onClick={handleSend}>Send</Button>
             </div>
+
+            <input type="file" 
+            name="fileUpload" 
+            value={imageFile}
+            onChange={(e)=>handleImageFile(e)}/>
+            {/* <img src={imageFile}/> */}
+            <button onClick={handleImageUpload}>Submit</button>
           </form>
         </div>
         <div id="output-section">
