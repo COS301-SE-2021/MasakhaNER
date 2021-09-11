@@ -697,7 +697,10 @@ def admin_get_all_feedback(user):
 
 @app.route('/upload-image', methods=['POST'])
 @token_required
-def upload_file():
+def upload_file(user):
+    if user is None:
+        return jsonify({'response': 'user unauthirized'}), 401
+
     imageData = str(request.json["ImageFile"])
     decodeit = open('hello_level.jpeg', 'wb')
     decodeit.write(base64.b64decode((imageData)))
