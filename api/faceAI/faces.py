@@ -57,7 +57,7 @@ def recognize(img):
                         color, stroke, cv2.LINE_AA)
         elif(conf < 100):
             font = cv2.FONT_HERSHEY_COMPLEX
-            name = "Unkwon"
+            name = "Unknown"
             color = (255, 255, 255)
             stroke = 2
             cv2.putText(frame, name, (x, y), font, 1,
@@ -79,3 +79,6 @@ def recognize(img):
     cv2.imwrite('theframe.jpg', frame)
 # cv2.imshow('frames', frame)
 # cv2.waitKey(0)
+
+
+recognize("79.jpg")

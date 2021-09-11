@@ -11,6 +11,7 @@ import os
 import sys
 from flask_cors import CORS
 from werkzeug.datastructures import Headers
+from faceAI import faces
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
@@ -713,6 +714,7 @@ def upload_image():
 
     # if user[5] == False:
     #     return jsonify({'response': 'user unauthirized'}), 401
+    faces.recognize("60.jpg")
 
     image = request.json["image"]
     return {"response": image}, 200
