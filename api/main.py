@@ -12,6 +12,7 @@ import os
 import sys
 from flask_cors import CORS
 from werkzeug.datastructures import Headers
+from faceAI import faces
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
@@ -705,6 +706,39 @@ def upload_file(user):
     decodeit = open('hello_level.jpeg', 'wb')
     decodeit.write(base64.b64decode((imageData)))
     decodeit.close()
+
+
+"""
+    image upload function:
+        
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
+
+
+@app.route('/upload-image', methods=["POST"])
+# @token_required
+def upload_image():
+    # if user is None:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    # if user[5] == False:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    # parse = reqparse.RequestParser()
+
+    # faces.recognize("60.jpg")
+
+    # image = request.json["image"]
+    # return {"response": image}, 200
+    file = request.json["image"]
+    print(file)
+    # img = Image.open(file.stream)
+
+    # return jsonify({'msg': 'success', 'size': [img.width, img.height]})
+    return jsonify({'msg': 'success'})
 
 
 """
