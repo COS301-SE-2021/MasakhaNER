@@ -267,9 +267,11 @@ export default function InputSection() {
     const reader = new FileReader();
     reader.readAsDataURL(file[0]);
     setImageFile(e.target.result);
+    console.warn("Image Data: " + e.target.result);
 
     reader.onload = (e) => {
       console.warn("Img Data ", e.target.result);
+      localStorage.setItem("image",e.target.result as string);
     }
   };
 

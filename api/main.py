@@ -716,7 +716,7 @@ def upload_image():
     #     return jsonify({'response': 'user unauthirized'}), 401
     faces.recognize("60.jpg")
 
-    image = request.json["image"]
+    image = request.json["ImageFile"]
     return {"response": image}, 200
 
 
