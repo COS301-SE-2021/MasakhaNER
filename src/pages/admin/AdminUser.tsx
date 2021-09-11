@@ -1,5 +1,3 @@
-import React from "react";
-
 import { fetchUtils, Admin, Resource } from "react-admin";
 import UserList from "../../components/admin/userList";
 import CreateUser from "../../components/admin/CreateUser";
@@ -10,7 +8,6 @@ import CreateModel from "../../components/admin/CreateModel";
 import ModelList from "../../components/admin/ModelList";
 import FeedBackList from "../../components/admin/FeedBackList";
 import ModelEdit from "../../components/admin/ModelEdit";
-
 
 export default function AdminUser() {
   const fetchJson = (url: string, options: any = {}) => {
@@ -32,7 +29,12 @@ export default function AdminUser() {
           edit={UserEdit}
           create={CreateUser}
         />
-        <Resource name="models" edit={ModelEdit} list={ModelList} create={CreateModel} />
+        <Resource
+          name="models"
+          edit={ModelEdit}
+          list={ModelList}
+          create={CreateModel}
+        />
         <Resource name="feedback" list={FeedBackList} />
         <Resource name="dashboard" list={Input} />
       </Admin>
