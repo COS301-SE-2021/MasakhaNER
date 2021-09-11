@@ -20,7 +20,7 @@ def recognize(img):
         flabels = pickle.load(f)
         labels = {v: k for k, v in flabels.items()}
 
-    filename = os.path.join(dirname, "82.jpg")
+    filename = os.path.join(dirname, img)
     cap = cv2.VideoCapture(0)
     image = cv2.imread(filename)
 
