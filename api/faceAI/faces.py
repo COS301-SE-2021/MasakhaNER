@@ -76,6 +76,6 @@ def recognize(img):
 
     # Display frame
 
-    cv2.imwrite('faceAI/huuuhtheframe.jpg', frame)
+    cv2.imwrite('faceAI/a.jpg', frame)
 # cv2.imshow('frames', frame)
 # cv2.waitKey(0)

@@ -292,6 +292,7 @@ export default function InputSection() {
       console.log(resp);
       if (resp.status === 200) {
         const data = await resp.json();
+        console.log(data);
       } else {
         alert("error, failed!");
       }

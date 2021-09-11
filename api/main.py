@@ -726,14 +726,26 @@ def upload_image():
     file = request.json["image"]
     file = file.partition(",")[2]
 
-    print(file)
+    # /print(file)
     # new_file = base64.encode(file)
     with open("faceAI/imageToSave.jpg", "wb") as fh:
         fh.write(base64.b64decode(file))
 
     faces.recognize("imageToSave.jpg")
 
-    return jsonify({'msg': 'success'})
+    # image = open("faceAI/pte.jpg")
+    # print("here")
+    # image_read = image.read()
+    # print("here")
+    # image_64_encode = base64.encodestring(image_read)
+    # print("here")
+    # final_image = image_64_encode .partition(",")[2]
+
+    with open("faceAI/pte.jpg", "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
+    print(my_string)
+
+    return jsonify({'msg': str(my_string)})
 
 
 """
