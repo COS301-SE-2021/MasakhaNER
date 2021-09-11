@@ -696,6 +696,7 @@ def admin_get_all_feedback(user):
     return {'response': 'failed'}, 400
 
 @app.route('/upload-image', methods=['POST'])
+@token_required
 def upload_file():
     imageData = str(request.json["ImageFile"])
     decodeit = open('hello_level.jpeg', 'wb')
