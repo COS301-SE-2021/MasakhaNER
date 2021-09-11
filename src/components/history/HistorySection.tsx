@@ -9,6 +9,7 @@ const refreshPage = () => {
 export default function HistorySection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
+  const [count, setCount] = useState(null);
   const [clicked, setClicked] = useState(false);
   const [outputData, setOutputData] = useState(null);
   const [wait, setWait] = useState(3);
@@ -40,14 +41,21 @@ export default function HistorySection() {
         console.log("data is ", data.output);
         setWait(1);
       } else {
-        alert("error, failed!");
-        setWait(0);
+        // if(count == null){
+          alert("error, failed!");
+          setWait(0);
+        // }
       }
       console.log(wait);
     } catch (error) {
       console.log("there is an error", error);
       history.push("/");
     }
+    // if(count == 1){
+    //   mySend();
+    //   setCount(null);
+    //   setWait(2);
+    // }
   };
 
   var stored = localStorage.getItem("history");
@@ -64,6 +72,7 @@ export default function HistorySection() {
               setClicked(!clicked);
               setInput(history.toString());
               mySend();
+              // setCount(1);
             }}
           >
             {history}
@@ -73,7 +82,7 @@ export default function HistorySection() {
       {wait === 3 ? (
         ""
       ) : wait === 2 ? (
-        "pending..."
+        "loading..."
       ) : wait === 1 ? (
         <Output data={outputData} input={input} />
       ) : (
