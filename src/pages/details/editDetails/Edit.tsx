@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Edit.css";
 import Nav from "../../../components/nav/Nav";
 import Footer from "../../../components/Footer/Footer";
-import styled from "styled-components"
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   background-color: white;
@@ -72,22 +72,20 @@ const Bar = styled.div`
 function Register() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setPassword] = useState("");
-  const [clicked, setClicked] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-  const [Emailerr, setEmailErr] = useState(false);
-  const [Passworderr, setPasswordErr] = useState(false);
+  const [clicked] = useState(false);
+  const [disabled] = useState(true);
+  const [Emailerr] = useState(false);
+  const [Passworderr] = useState(false);
 
   const options: any = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-access-token":localStorage.getItem("token")
+      "x-access-token": localStorage.getItem("token"),
     },
     body: JSON.stringify({
       firstname: firstName,
-      lastname: lastName
+      lastname: lastName,
     }),
   };
 
@@ -105,7 +103,6 @@ function Register() {
       }
     } catch (error) {
       console.log("there is an error", error);
-      // window.location.href = "/";
     }
   };
 
@@ -120,23 +117,6 @@ function Register() {
     }
   }, [clicked]);
 
-  const validEmail = new RegExp(
-    "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
-  );
-  const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
-
-  const validate = () => {
-    if (!validEmail.test(email)) {
-      setEmailErr(true);
-      console.log(setEmailErr);
-    } else if (!validPassword.test(password)) {
-      setPasswordErr(true);
-      console.log(setEmailErr);
-    } else {
-      setClicked(!clicked);
-      window.location.href = "/verify";
-    }
-  };
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -191,7 +171,6 @@ function Register() {
       <br />
       <Footer />
     </div>
-
   );
 }
 

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   List,
   Datagrid,
@@ -18,8 +17,8 @@ const UserList = (props: any) => {
         <TextField source="lastname" />
         <EmailField source="email" />
         <BooleanField label="Admin" source="isadmin" />
-        <BooleanField  source="verified" />
-        <EditButton  basePath="/users"/>
+        <BooleanField source="verified" />
+        <EditButton basePath="/users" />
         <DeleteButton basePath="/users" />
       </Datagrid>
     </List>
