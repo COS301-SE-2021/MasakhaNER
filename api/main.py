@@ -718,26 +718,21 @@ def upload_image():
 
     # parse = reqparse.RequestParser()
 
-    # faces.recognize("60.jpg")
-
     # image = request.json["image"]
     # return {"response": image}, 200
 
     string = 'data to be encoded'
-    data = base64.b64encode(string.encode())
 
     file = request.json["image"]
     file = file.partition(",")[2]
 
     print(file)
     # new_file = base64.encode(file)
-    with open("imageToSave.png", "wb") as fh:
+    with open("faceAI/imageToSave.jpg", "wb") as fh:
         fh.write(base64.b64decode(file))
-        # fh.write(data.decode('base64'))
 
-    # img = Image.open(file.stream)
+    faces.recognize("imageToSave.jpg")
 
-    # return jsonify({'msg': 'success', 'size': [img.width, img.height]})
     return jsonify({'msg': 'success'})
 
 
