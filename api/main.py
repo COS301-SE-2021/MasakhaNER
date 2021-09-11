@@ -741,7 +741,7 @@ def upload_image():
     # print("here")
     # final_image = image_64_encode .partition(",")[2]
 
-    with open("faceAI/pte.jpg", "rb") as img_file:
+    with open("faceAI/a.jpg", "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
     print(my_string)
 

@@ -128,6 +128,7 @@ export default function InputSection() {
   const [, setFileContent] = useState("");
   const [feedback, setFeedback] = useState("");
   const [imageFile, setImageFile] = useState("");
+  const [baseFile, setBaseFile] = useState("");
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -291,8 +292,17 @@ export default function InputSection() {
       const resp = await fetch("/upload-image", opts);
       console.log(resp);
       if (resp.status === 200) {
+        alert(resp.status);
         const data = await resp.json();
-        console.log(data);
+        
+        alert(data.msg);
+        //<img src={URL.createObjectURL(`data:image/jpeg;base64,${encodedBase64}`)}/>
+       console.log(data.msg);
+       var text = data.msg.substring(2);
+       text = text.substring(0, text.length-1)
+       setBaseFile("data:image/jpg;base64, " + text);
+        
+
       } else {
         alert("error, failed!");
       }
@@ -331,7 +341,6 @@ export default function InputSection() {
               value={imageFile}
               onChange={(e) => handleImageFile(e)}
             />
-            {/* <img src={imageFile}/> */}
             <button onClick={handleImageUpload}>Submit</button>
             {console.log("THIS IS IT 3", imageFile)}
           </form>
@@ -351,6 +360,8 @@ export default function InputSection() {
           <div id="button-container">
             <Button onClick={openModal}>Feedback</Button>
           </div>
+          <img src={baseFile} />
+          
         </div>
         <div></div>
       </FormContainer>
