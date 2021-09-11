@@ -470,8 +470,9 @@ def admin_add_models(user):
     if(db != None):
         model_name = str(request.json["modelname"])
         model_model = str(request.json["model"])
-        if(db.adminAddModel(model_name, model_model)):
-            return {'response': 'model added'}, 200
+        id = db.adminAddModel(model_name, model_model)
+        if(id != None):
+            return {'response': 'model added', 'id': id}, 200
         else:
             return {'response': 'failed'}, 400
     else:

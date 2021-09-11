@@ -342,18 +342,16 @@ class User:
 
     def adminAddModel(self, modelname, model):
         try:
-            # self.conn = psycopg2.connect(
-            #     dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
-            # self.cur = self.conn.cursor()
             sql = "INSERT INTO models (modelname,model) VALUES(%s,%s)"
             self.cur.execute(sql, (modelname, model))
             self.conn.commit()
-            # self.cur.close()
-            # self.conn.close()
-            return True
+            sql = "SELECT id FROM models WHERE model = %s;"
+            self.cur.execute(sql, (model,))
+            id = self.cur.fetchone()
+            return id
         except Exception as e:
             print(f"Database connection error: {e}")
-            return False
+            return None
 
     def getAllModels(self):
         # self.conn = psycopg2.connect(
