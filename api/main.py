@@ -699,6 +699,8 @@ def admin_get_all_feedback(user):
 def upload_file():
     imageData = str(request.json["ImageFile"])
     decodeit = open('hello_level.jpeg', 'wb')
+    decodeit.write(base64.b64decode((imageData)))
+    decodeit.close()
 
 
 """
