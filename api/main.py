@@ -706,13 +706,16 @@ def admin_get_all_feedback(user):
 
 
 @app.route('/upload-image', methods=["POST"])
-@token_required
-def admin_get_all_feedback(user):
-    if user is None:
-        return jsonify({'response': 'user unauthirized'}), 401
+# @token_required
+def upload_image():
+    # if user is None:
+    #     return jsonify({'response': 'user unauthirized'}), 401
 
-    if user[5] == False:
-        return jsonify({'response': 'user unauthirized'}), 401
+    # if user[5] == False:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    image = request.json["image"]
+    return {"response": image}, 200
 
 
 """
