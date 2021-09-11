@@ -260,20 +260,22 @@ export default function InputSection() {
     };
   };
 
-  const handleImageFile = (e: any) =>{
+  const handleImageFile = (e: any) => {
     const file = e.target.files;
     console.log(file, "$$$$");
 
     const reader = new FileReader();
     reader.readAsDataURL(file[0]);
     setImageFile(e.target.result);
+    console.log("THIS IS IT 2", imageFile);
 
     reader.onload = (e) => {
-      console.warn("Img Data ", e.target.result);
-    }
+      localStorage.setItem("image", e.target.result as string);
+    };
   };
 
   const handleImageUpload = async () => {
+    console.log("THIS IS IT", imageFile);
     const opts: any = {
       method: "POST",
       headers: {
@@ -281,7 +283,7 @@ export default function InputSection() {
         "x-access-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
-        file: imageFile,
+        image: localStorage.getItem("image"),
       }),
     };
 
@@ -322,12 +324,15 @@ export default function InputSection() {
               <Button onClick={handleSend}>Send</Button>
             </div>
 
-            <input type="file" 
-            name="fileUpload" 
-            value={imageFile}
-            onChange={(e)=>handleImageFile(e)}/>
+            <input
+              type="file"
+              name="fileUpload"
+              value={imageFile}
+              onChange={(e) => handleImageFile(e)}
+            />
             {/* <img src={imageFile}/> */}
             <button onClick={handleImageUpload}>Submit</button>
+            {console.log("THIS IS IT 3", imageFile)}
           </form>
         </div>
         <div id="output-section">

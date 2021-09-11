@@ -81,4 +81,4 @@ def recognize(img):
 # cv2.waitKey(0)
 
 
-recognize("79.jpg")
+recognize("58.jpg")

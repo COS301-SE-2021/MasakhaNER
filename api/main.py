@@ -714,10 +714,19 @@ def upload_image():
 
     # if user[5] == False:
     #     return jsonify({'response': 'user unauthirized'}), 401
-    faces.recognize("60.jpg")
 
-    image = request.json["image"]
-    return {"response": image}, 200
+    # parse = reqparse.RequestParser()
+
+    # faces.recognize("60.jpg")
+
+    # image = request.json["image"]
+    # return {"response": image}, 200
+    file = request.json["image"]
+    print(file)
+    # img = Image.open(file.stream)
+
+    # return jsonify({'msg': 'success', 'size': [img.width, img.height]})
+    return jsonify({'msg': 'success'})
 
 
 """
