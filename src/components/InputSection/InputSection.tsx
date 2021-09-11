@@ -318,7 +318,7 @@ export default function InputSection() {
     (document.getElementById("Feed3") as HTMLInputElement).value + (document.getElementById("Ent3") as HTMLInputElement).value +
     (document.getElementById("Feed4") as HTMLInputElement).value + (document.getElementById("Ent4") as HTMLInputElement).value +
     (document.getElementById("Feed5") as HTMLInputElement).value + (document.getElementById("Ent5") as HTMLInputElement).value;
-    console.log("MY FUNCTION WORKS: " + concatenate);
+   
     setFeedback(concatenate);
   };
 
