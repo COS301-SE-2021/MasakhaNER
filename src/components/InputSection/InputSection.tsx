@@ -312,6 +312,10 @@ export default function InputSection() {
     { value: 'PER', label: 'Person' }
   ]
   
+  const concatFeedback = () =>{
+    let concatenate = (document.getElementById("Feed1") as HTMLInputElement).value;
+    setFeedback(concatenate);
+  };
 
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
@@ -387,8 +391,9 @@ export default function InputSection() {
              placeholder="Type here..."
              type="text"
              name="feedback1"
+             id="Feed1"
           />
-          <select name="feedbackEnt1">
+          <select name="feedbackEnt1" id="Ent1">
             <option></option>
             <option value="<LOC>">Location</option>
             <option value="<PER>">Person</option>
@@ -400,8 +405,9 @@ export default function InputSection() {
              placeholder="Type here..."
              type="text"
              name="feedback2"
+             id="Feed2"
           />
-          <select name="feedbackEnt2">
+          <select name="feedbackEnt2" id="Ent2">
             <option></option>
             <option value="<LOC>">Location</option>
             <option value="<PER>">Person</option>
@@ -413,8 +419,9 @@ export default function InputSection() {
              placeholder="Type here..."
              type="text"
              name="feedback3"
+             id="Feed3"
           />
-          <select name="feedbackEnt3">
+          <select name="feedbackEnt3" id="Ent3">
             <option></option>
             <option value="<LOC>">Location</option>
             <option value="<PER>">Person</option>
@@ -426,8 +433,9 @@ export default function InputSection() {
              placeholder="Type here..."
              type="text"
              name="feedback4"
+             id="Feed4"
           />
-          <select name="feedbackEnt4">
+          <select name="feedbackEnt4" id="Ent4">
             <option></option>
             <option value="<LOC>">Location</option>
             <option value="<PER>">Person</option>
@@ -439,20 +447,22 @@ export default function InputSection() {
              placeholder="Type here..."
              type="text"
              name="feedback5"
+             id="Feed5"
           />
-          <select name="feedbackEnt5">
+          <select name="feedbackEnt5" id="Ent5">
             <option></option>
             <option value="<LOC>">Location</option>
             <option value="<PER>">Person</option>
             <option value="<DAT>">Date</option>
             <option value="<ORG>">Organization</option>
           </select>
-          {/* <input type="text" name="allFeedback" value={this.form.feedback1.value + this.form.feedback2.value}/> */}
+      
           <br/>
           <br/>
           <Button
             onClick={(e) => {
               e.preventDefault();
+              concatFeedback();
               handleFeedback();
               closeModal();
             }}
