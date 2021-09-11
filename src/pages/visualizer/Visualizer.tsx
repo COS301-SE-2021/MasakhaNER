@@ -40,7 +40,7 @@ const Box: React.FC<Props> = ({
       position={[position_x, 1, position_z]}
     >
       <Text
-        color="black"
+        color="white"
         anchorX="center"
         anchorY="middle"
         position={[0, 0, 0.3]}
@@ -61,7 +61,7 @@ const Plane = () => {
   return (
     <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
       <planeBufferGeometry attach="geometry" args={[300, 300]} />
-      <meshLambertMaterial attach="material" color="lightblue" />
+      <meshLambertMaterial attach="material" color="white" />
     </mesh>
   );
 };
@@ -143,12 +143,11 @@ const Visualizer = () => {
   }
 
   return (
-    <div
-      style={{ backgroundColor: "#4591e7", width: "100vw", height: "100vh" }}
-    >
+    <div style={{ backgroundColor: "#000", width: "100vw", height: "100vh" }}>
       <Canvas>
         <OrbitControls />
         <shaderMaterial />
+        <Stars />
         <ambientLight intensity={1} />
         <spotLight position={[10, 30, 10]} angle={0.3} castShadow />
         {/* <Physics> */}
