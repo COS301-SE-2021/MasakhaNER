@@ -696,6 +696,7 @@ def admin_get_all_feedback(user):
 
 @app.route('/upload-image', methods=['POST'])
 def upload_file():
+    uploaded_file = request.files['file']
 
 """
     main function:
