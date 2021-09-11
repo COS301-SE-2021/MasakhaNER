@@ -695,7 +695,7 @@ def admin_get_all_feedback(user):
     return {'response': 'failed'}, 400
 
 @app.route('/upload-image', methods=['POST'])
-
+def upload_file():
 
 """
     main function:
