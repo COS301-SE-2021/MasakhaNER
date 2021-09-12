@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
   margin-top: 80px;
 
-  #wrapper {
+  #wrapper2 {
     h2 {
       span:before {
         content: "";
@@ -217,7 +217,7 @@ function Register() {
       <ImageWrapper id="image2"></ImageWrapper>
       <Wrapper>
         <div
-          id="wrapper"
+          id="wrapper2"
           style={{
             textAlign: "left",
             width: "30em",
