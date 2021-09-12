@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import styled from "styled-components";
+import Login from "../../components/login/Login";
 
 const Container = styled.div`
   display: flex;
@@ -81,6 +82,24 @@ const SignUpButton = styled(Button)`
     border-radius: 5px;
     background-color: #34833b;
     border: solid 1px #34833b;
+  }
+`;
+
+const LoginButton = styled.button`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  width: 10em;
+  background-color: white;
+  border-radius: 5px;
+  height: 35px;
+  width: 20em;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
   }
 `;
 
@@ -226,7 +245,7 @@ function Register() {
           }}
           required
         />
-        <Button
+        <SignUpButton
           disabled={disabled}
           id="mainBtn"
           type="submit"
@@ -237,7 +256,7 @@ function Register() {
           }}
         >
           Sign up
-        </Button>
+        </SignUpButton>
         {Passworderr ||
           (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
       </form>
