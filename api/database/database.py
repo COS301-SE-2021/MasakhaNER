@@ -523,3 +523,6 @@ class User:
             return None
 
     def getPersonInfo(self, person_name, person_surname):
+        try:
+            sql = "SELECT * FROM people WHERE name=%s AND surname=%s;"
+
