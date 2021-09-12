@@ -8,16 +8,13 @@ const refreshPage = () => {
 
 let input1 = " ";
 export default function HistorySection() {
-  // const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
-  // const [count, setCount] = useState(null);
   const [clicked, setClicked] = useState(false);
   const [outputData, setOutputData] = useState(null);
   const [wait, setWait] = useState(3);
   var history: String[] = new Array();
 
   const mySend = async () => {
-    // console.log(input1);
     setWait(2);
     const opts: any = {
       method: "POST",
