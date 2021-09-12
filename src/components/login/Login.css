@@ -6,3 +6,13 @@ body {
   background-image: url("../../images/login-image2.png");
   background-size: cover;
 }
+
+#loading {
+  margin: 0 auto;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  background-image: url("../../images/loading.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

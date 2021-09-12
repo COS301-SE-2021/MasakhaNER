@@ -1,11 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
 import "./Login.css";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { History } from "history";
+import Toast from "../toast/Toast";
 
 const Container = styled.div`
   display: flex;
@@ -127,11 +127,6 @@ const responseGoogle = (response: any) => {
   history.push("/Dashboard");
 };
 
-const responseFacebook = (response: any) => {
-  console.log(response);
-  history.push("/Dashboard");
-};
-
 const responseFailerGoogle = (reoponse: any) => {
   console.log("failed");
   history.push("/");
@@ -141,7 +136,7 @@ export default function Login() {
   history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [err, setEmailErr] = useState(false);
+  const [err] = useState(false);
 
   const register = () => {
     history.push("/register");
@@ -150,6 +145,9 @@ export default function Login() {
   const changePassword = () => {
     history.push("/details/changepassword");
   };
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleLogin = async () => {
     const opts = {
@@ -163,6 +161,7 @@ export default function Login() {
       }),
     };
 
+    setLoading(true);
     try {
       const resp = await fetch("/login", opts);
       console.log(resp);
@@ -172,21 +171,21 @@ export default function Login() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("isAuthenticated", "true");
         if (data.isadmin) {
-          if(history.location.pathname == "/login"){
+          if (history.location.pathname == "/login") {
             history.push("/users");
-          }
-          else{
+          } else {
             history.push("/Admin");
           }
         } else {
           history.push("/Dashboard");
         }
       } else {
-        alert("Incorrect login or user does not exists!!!");
+        setLoading(false);
+        setError(true);
         history.push("/");
       }
     } catch (error) {
-      console.log("there is an error", error);
+      setError(true);
       history.push("/");
     }
   };
@@ -235,7 +234,10 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <Button onClick={handleLogin}>Login</Button>
+        {error && <Toast />}
+        <Button onClick={handleLogin}>
+          {loading ? <div id="loading"></div> : <p>Login</p>}
+        </Button>
         <p onClick={changePassword} style={{ fontSize: "14px" }}>
           forgot password?
           <a style={{ color: "#1c5f22", fontSize: "14px" }}> click here</a>
@@ -251,15 +253,6 @@ export default function Login() {
             cookiePolicy={"single_host_origin"}
           />
         </div>
-        {/* <FacebookLogin
-          appId="2951110285136034"
-          autoLoad={false}
-          fields="name,email,picture"
-          callback={responseFacebook}
-          cssClass="btn btn-primary"
-          icon="fab fa-facebook-f"
-          textButton="   Log in with Facebook"
-        /> */}
         {err && <p>Invalid email or password</p>}
       </Wrapper>
     </Container>
