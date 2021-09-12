@@ -127,6 +127,8 @@ export default function InputSection() {
   const [, setFileName] = useState("");
   const [, setFileContent] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [imageFile, setImageFile] = useState("");
+  const [baseFile, setBaseFile] = useState("");
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -259,6 +261,57 @@ export default function InputSection() {
     };
   };
 
+  const handleImageFile = (e: any) => {
+    const file = e.target.files;
+    console.log(file, "$$$$");
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    setImageFile(e.target.result);
+    console.log("THIS IS IT 2", imageFile);
+
+    reader.onload = (e) => {
+      localStorage.setItem("image", e.target.result as string);
+    };
+  };
+
+  const handleImageUpload = async () => {
+    console.log("THIS IS IT", imageFile);
+    const opts: any = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        image: localStorage.getItem("image"),
+      }),
+    };
+
+    try {
+      const resp = await fetch("/upload-image", opts);
+      console.log(resp);
+      if (resp.status === 200) {
+        alert(resp.status);
+        const data = await resp.json();
+        
+        alert(data.msg);
+        //<img src={URL.createObjectURL(`data:image/jpeg;base64,${encodedBase64}`)}/>
+       console.log(data.msg);
+       var text = data.msg.substring(2);
+       text = text.substring(0, text.length-1)
+       setBaseFile("data:image/jpg;base64, " + text);
+        
+
+      } else {
+        alert("error, failed!");
+      }
+      console.log(wait);
+    } catch (error) {
+      console.log("there is an error", error);
+    }
+  };
+
   return (
     <>
       <FormContainer>
@@ -281,6 +334,15 @@ export default function InputSection() {
               />
               <Button onClick={handleSend}>Send</Button>
             </div>
+
+            <input
+              type="file"
+              name="fileUpload"
+              value={imageFile}
+              onChange={(e) => handleImageFile(e)}
+            />
+            <button onClick={handleImageUpload}>Submit</button>
+            {console.log("THIS IS IT 3", imageFile)}
           </form>
         </div>
         <div id="output-section">
@@ -298,6 +360,8 @@ export default function InputSection() {
           <div id="button-container">
             <Button onClick={openModal}>Feedback</Button>
           </div>
+          <img src={baseFile} />
+          
         </div>
         <div></div>
       </FormContainer>
