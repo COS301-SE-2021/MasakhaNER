@@ -1,0 +1,9 @@
+body {
+    background-color: rgb(250, 250, 250);
+  }
+  
+  #image {
+    background-image: url("../../images/login-image2.png");
+    background-size: cover;
+  }
+  
