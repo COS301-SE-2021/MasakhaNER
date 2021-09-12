@@ -11,6 +11,7 @@ import ModelEdit from "../../components/admin/ModelEdit";
 import authProvider from "../../components/admin/authProvider";
 import { createMuiTheme } from "@material-ui/core/styles";
 import Login from "../../components/login/Login";
+import { purple } from "@material-ui/core/colors";
 
 export default function AdminUser() {
   const fetchJson = (url: string, options: any = {}) => {
@@ -22,7 +23,17 @@ export default function AdminUser() {
   };
   const theme = createMuiTheme({
     palette: {
-      type: 'dark', 
+      type: 'light',
+      // primary: {
+      //   main: '#388e3c',
+      // },
+      secondary: {
+        main: '#11cb5f',
+        contrastText: '#000000',
+      },
+      // success:{
+      //   main: "#388e3c",
+      // }
     },
   });
   const dataProvider = simpleRestProvider("http://localhost:3000", fetchJson);
