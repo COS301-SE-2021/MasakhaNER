@@ -712,7 +712,10 @@ def get_person_info(user,):
         res.headers.add('Content-Range', 'person 0-10/100')
         res.headers.add('Content-Type', 'application/json')
         return res, 200
-    return {'response': 'failed'}, 400
+    else:
+        return {'response': 'failed'}, 400
+ 
+
 
 
 
