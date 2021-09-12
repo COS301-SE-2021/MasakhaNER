@@ -21,23 +21,20 @@ function Nav() {
   return (
     <div className="Navbar">
       <div className="menu">
-        <button onClick={dash} className="btn btn-dark">
+        <div id="logo">
+          <h2>masakhaner</h2>
+        </div>
+        {/* <a onClick={dash} className="btn btn-dark">
           Dashboard
-        </button>
+        </a>
         <button onClick={edit} className="btn btn-dark">
           Edit Details
         </button>
         <button onClick={about} className="btn btn-dark">
           About
-        </button>
+        </button> */}
       </div>
-      <div>
-        <h1 id="navbar-heading">Masakha NER Tool</h1>
-        <p id="navbar-subheading">
-          Web-based interface used as a named entity recognition tool for
-          African languages.
-        </p>
-      </div>
+
       <div>
         <button onClick={handleLogout} className="btn btn-dark">
           Log out

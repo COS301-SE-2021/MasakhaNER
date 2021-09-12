@@ -57,17 +57,19 @@ const OutputSection = styled.div`
 const Button = styled.button`
   border: solid 0.1px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  background-color: #4591e7;
-  border-radius: 20px;
+  background-color: #1c5f22;
+  border-radius: 5px;
   height: 35px;
   padding-left: 1em;
   padding-right: 1em;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    background-color: #34833b;
+    border: solid 1px #34833b;
   }
   position: relative;
   color: white;
@@ -294,15 +296,13 @@ export default function InputSection() {
       if (resp.status === 200) {
         alert(resp.status);
         const data = await resp.json();
-        
+
         alert(data.msg);
         //<img src={URL.createObjectURL(`data:image/jpeg;base64,${encodedBase64}`)}/>
-       console.log(data.msg);
-       var text = data.msg.substring(2);
-       text = text.substring(0, text.length-1)
-       setBaseFile("data:image/jpg;base64, " + text);
-        
-
+        console.log(data.msg);
+        var text = data.msg.substring(2);
+        text = text.substring(0, text.length - 1);
+        setBaseFile("data:image/jpg;base64, " + text);
       } else {
         alert("error, failed!");
       }
@@ -327,7 +327,7 @@ export default function InputSection() {
               onChange={(e) => setInput(e.target.value)}
             />
             <div id="button-container">
-              <Upload
+              <input
                 type="file"
                 placeholder="Upload"
                 onChange={handleFileChange}
@@ -361,7 +361,6 @@ export default function InputSection() {
             <Button onClick={openModal}>Feedback</Button>
           </div>
           <img src={baseFile} />
-          
         </div>
         <div></div>
       </FormContainer>
