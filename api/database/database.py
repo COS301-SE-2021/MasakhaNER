@@ -521,3 +521,5 @@ class User:
         except Exception as e:
             print(f"Database connection error: {e}")
             return None
+
+    def getPersonInfo(self, person_name, person_surname):
