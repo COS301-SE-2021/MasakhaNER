@@ -1,3 +1,4 @@
+import base64
 from posixpath import dirname
 from model import runModel
 from flask import Response
@@ -11,6 +12,7 @@ import os
 import sys
 from flask_cors import CORS
 from werkzeug.datastructures import Headers
+from faceAI import faces
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
@@ -693,6 +695,57 @@ def admin_get_all_feedback(user):
         return res, 200
 
     return {'response': 'failed'}, 400
+
+
+"""
+    image upload function:
+        
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
+
+
+@app.route('/upload-image', methods=["POST"])
+# @token_required
+def upload_image():
+    # if user is None:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    # if user[5] == False:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    # parse = reqparse.RequestParser()
+
+    # image = request.json["image"]
+    # return {"response": image}, 200
+
+    string = 'data to be encoded'
+
+    file = request.json["image"]
+    file = file.partition(",")[2]
+
+    # /print(file)
+    # new_file = base64.encode(file)
+    with open("faceAI/imageToSave.jpg", "wb") as fh:
+        fh.write(base64.b64decode(file))
+
+    faces.recognize("imageToSave.jpg")
+
+    # image = open("faceAI/pte.jpg")
+    # print("here")
+    # image_read = image.read()
+    # print("here")
+    # image_64_encode = base64.encodestring(image_read)
+    # print("here")
+    # final_image = image_64_encode .partition(",")[2]
+
+    with open("faceAI/a.jpg", "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
+    print(my_string)
+
+    return jsonify({'msg': str(my_string)})
 
 
 """
