@@ -37,19 +37,19 @@ const Wrapper = styled.div`
 
       @keyframes animate {
         0% {
-          content: "Karibu tena";
+          content: "Kuanza.";
         }
         25% {
-          content: "Welcome back";
+          content: "Get started.";
         }
         50% {
-          content: "Ku aabọ pada";
+          content: "Bẹ̀rẹ̀.";
         }
         75% {
-          content: "Nnọọ";
+          content: "Tanga.";
         }
         100% {
-          content: "Siyakwamkela emva";
+          content: "Qalisa.";
         }
       }
     }
