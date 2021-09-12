@@ -22,7 +22,7 @@ export default function AdminUser() {
   };
   const theme = createMuiTheme({
     palette: {
-      type: 'light', 
+      type: 'dark', 
     },
   });
   const dataProvider = simpleRestProvider("http://localhost:3000", fetchJson);

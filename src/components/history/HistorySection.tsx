@@ -6,17 +6,18 @@ const refreshPage = () => {
   window.location.reload();
 };
 
+let input1 = " ";
 export default function HistorySection() {
-  const [input, setInput] = useState("");
+  // const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
-  const [count, setCount] = useState(null);
+  // const [count, setCount] = useState(null);
   const [clicked, setClicked] = useState(false);
   const [outputData, setOutputData] = useState(null);
   const [wait, setWait] = useState(3);
   var history: String[] = new Array();
 
   const mySend = async () => {
-    console.log(input);
+    // console.log(input1);
     setWait(2);
     const opts: any = {
       method: "POST",
@@ -25,7 +26,7 @@ export default function HistorySection() {
         "x-access-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
-        input: input,
+        input: input1,
       }),
     };
 
@@ -36,26 +37,19 @@ export default function HistorySection() {
         const data = await resp.json();
         console.log(data);
         setOutputData(data.output);
-        setInput2(input);
-        console.log("input2: " + input2);
+        setInput2(input1);
+        console.log("input: " + input1);
         console.log("data is ", data.output);
         setWait(1);
       } else {
-        // if(count == null){
-          alert("error, failed!");
-          setWait(0);
-        // }
+        alert("error, failed!");
+        setWait(0);
       }
       console.log(wait);
     } catch (error) {
       console.log("there is an error", error);
       history.push("/");
     }
-    // if(count == 1){
-    //   mySend();
-    //   setCount(null);
-    //   setWait(2);
-    // }
   };
 
   var stored = localStorage.getItem("history");
@@ -68,11 +62,10 @@ export default function HistorySection() {
         {history.map((history) => (
           <li
             key={history.toString()}
-            onClick={() => {
+            onClick={(e) => {
               setClicked(!clicked);
-              setInput(history.toString());
+              input1 = history.toString();
               mySend();
-              // setCount(1);
             }}
           >
             {history}
@@ -84,7 +77,7 @@ export default function HistorySection() {
       ) : wait === 2 ? (
         "loading..."
       ) : wait === 1 ? (
-        <Output data={outputData} input={input} />
+        <Output data={outputData} input={input1} />
       ) : (
         "failed"
       )}
