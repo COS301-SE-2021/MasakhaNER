@@ -4,6 +4,19 @@ import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ImageWrapper = styled.div`
+  height: 100vh;
+  width: 45vw;
+  background-image: url("../../images/login-image.png");
+  background-repeat: no-repeat;
+  background-color: #305c16;
+`;
+
 const Wrapper = styled.div`
   background-color: white;
   display: flex;
