@@ -27,6 +27,7 @@ const Wrapper = styled.div`
   width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
+  margin-top: 80px;
 
   #wrapper {
     h2 {
@@ -187,7 +188,9 @@ function Register() {
   const validEmail = new RegExp(
     "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
   );
-  const validPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+  const validPassword = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,}$"
+  );
 
   const setItem = () => {
     localStorage.setItem("newEmail", email);
@@ -210,106 +213,107 @@ function Register() {
   };
 
   return (
-  <Container>
-    <ImageWrapper id="image2"></ImageWrapper>
-    <Wrapper>
-      <div
-        id="wrapper"
-        style={{
-          textAlign: "left",
-          width: "30em",
-          transform: "translateX(75px)",
-        }}
-      >
-      <h2 style={{ fontSize: "50px", color: "#1c5f22" }} id="login-header">
-        <span></span>
-      </h2>
-      <br />
-    </div>
-      <h2
-        style={{
-          fontSize: "30px",
-          transform: "translateX(-78px)",
-          opacity: "0.6",
-        }}
-      >
-        Sign up
-      </h2>
-
-      <form id="regForm" onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="firstName"
-          className="form-control"
-          value={firstName}
-          placeholder="First name"
-          onChange={(e) => setfirstName(e.target.value)}
-          required
-        />
-        <Input
-          type="text"
-          name="flastName"
-          id="lastName"
-          className="form-control"
-          value={lastName}
-          placeholder="Last name"
-          onChange={(e) => setlastName(e.target.value)}
-          required
-        />
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          className="form-control"
-          value={email}
-          placeholder="Email address"
-          onChange={(e) => {
-            setemail(e.target.value);
-            validate();
+    <Container>
+      <ImageWrapper id="image2"></ImageWrapper>
+      <Wrapper>
+        <div
+          id="wrapper"
+          style={{
+            textAlign: "left",
+            width: "30em",
+            transform: "translateX(75px)",
           }}
-          required
-        />
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          className="form-control"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            validate();
-          }}
-          required
-        />
-        <SignUpButton
-          disabled={disabled}
-          id="mainBtn"
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            setItem();
-            handleStatus();
+        >
+          <h2 style={{ fontSize: "50px", color: "#1c5f22" }} id="login-header">
+            <span></span>
+          </h2>
+          <br />
+        </div>
+        <h2
+          style={{
+            fontSize: "30px",
+            transform: "translateX(-110px)",
+            opacity: "0.6",
           }}
         >
           Sign up
-        </SignUpButton>
-        {Passworderr ||
-          (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
-      </form>
+        </h2>
 
-      <p>
-        Please confirm that you are human <br />
-        before submitting...
-      </p>
-      <ReCAPTCHA
-        sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-        onChange={() => {
-          setDisabled(false);
-        }}
-      />
-    </Wrapper>
-  </Container>
+        <form id="regForm" onSubmit={handleSubmit}>
+          <Input
+            style={{ marginTop: "15px" }}
+            type="text"
+            name="firstName"
+            className="form-control"
+            value={firstName}
+            placeholder="First name"
+            onChange={(e) => setfirstName(e.target.value)}
+            required
+          />
+          <Input
+            type="text"
+            name="flastName"
+            id="lastName"
+            className="form-control"
+            value={lastName}
+            placeholder="Last name"
+            onChange={(e) => setlastName(e.target.value)}
+            required
+          />
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            className="form-control"
+            value={email}
+            placeholder="Email address"
+            onChange={(e) => {
+              setemail(e.target.value);
+              validate();
+            }}
+            required
+          />
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            className="form-control"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              validate();
+            }}
+            required
+          />
+          <SignUpButton
+            disabled={disabled}
+            id="mainBtn"
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              setItem();
+              handleStatus();
+            }}
+          >
+            Sign up
+          </SignUpButton>
+          {Passworderr ||
+            (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
+        </form>
+
+        <p>
+          Please confirm that you are human <br />
+          before submitting...
+        </p>
+        <ReCAPTCHA
+          sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+          onChange={() => {
+            setDisabled(false);
+          }}
+        />
+      </Wrapper>
+    </Container>
   );
 }
 
