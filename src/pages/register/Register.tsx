@@ -242,7 +242,7 @@ function Register() {
           name="firstName"
           className="form-control"
           value={firstName}
-          placeholder="first name"
+          placeholder="First name"
           onChange={(e) => setfirstName(e.target.value)}
           required
         />
@@ -252,7 +252,7 @@ function Register() {
           id="lastName"
           className="form-control"
           value={lastName}
-          placeholder="last name"
+          placeholder="Last name"
           onChange={(e) => setlastName(e.target.value)}
           required
         />
@@ -262,7 +262,7 @@ function Register() {
           id="email"
           className="form-control"
           value={email}
-          placeholder="email address"
+          placeholder="Email address"
           onChange={(e) => {
             setemail(e.target.value);
             validate();
@@ -274,7 +274,7 @@ function Register() {
           name="password"
           id="password"
           className="form-control"
-          placeholder="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
