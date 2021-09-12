@@ -34,6 +34,33 @@ const Wrapper = styled.div`
   #google-button {
     transform: translateY(-7px);
   }
+
+  #wrapper {
+    h2 {
+      span:before {
+        content: "";
+        animation: animate infinite 10s;
+      }
+
+      @keyframes animate {
+        0% {
+          content: "Karibu tena";
+        }
+        25% {
+          content: "Welcome back";
+        }
+        50% {
+          content: "Ku aabọ pada";
+        }
+        75% {
+          content: "Nnọọ";
+        }
+        100% {
+          content: "Siyakwamkela emva";
+        }
+      }
+    }
+  }
 `;
 
 const Input = styled.input`
@@ -162,18 +189,29 @@ export default function Login() {
     <Container>
       <ImageWrapper id="image"></ImageWrapper>
       <Wrapper>
-        <div style={{ transform: "translateX(-40px)" }}>
-          <h2 style={{ fontSize: "50px", color: "#1c5f22" }}>Get started</h2>
-          <h2
-            style={{
-              fontSize: "30px",
-              transform: "translateX(-78px)",
-              opacity: "0.6",
-            }}
-          >
-            Log in
+        <div
+          id="wrapper"
+          style={{
+            textAlign: "left",
+            width: "30em",
+            transform: "translateX(75px)",
+          }}
+        >
+          <h2 style={{ fontSize: "50px", color: "#1c5f22" }} id="login-header">
+            <span></span>
           </h2>
+          <br />
         </div>
+        <h2
+          style={{
+            fontSize: "30px",
+            transform: "translateX(-120px)",
+            opacity: "0.6",
+            textAlign: "left",
+          }}
+        >
+          Log in
+        </h2>
         <Input
           style={{ marginTop: "15px" }}
           type="email"
