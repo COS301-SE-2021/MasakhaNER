@@ -12,7 +12,6 @@ const Container = styled.div`
 const ImageWrapper = styled.div`
   height: 100vh;
   width: 45vw;
-  background-image: url("../../images/login-image.png");
   background-repeat: no-repeat;
   background-color: #305c16;
 `;
@@ -24,67 +23,64 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 80vh;
-  width: 80vw;
+  width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
-  margin-top: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
-`;
-
-const Bar = styled.div`
-  width: inherit;
-  height: 5px;
-  background-color: #000;
-  margin-top: 5px;
-`;
-
-const Header = styled.h1`
-  font-size: 3em;
-  margin-bottom: 1em;
-  @media (max-width: 767px) {
-    font-size: 2em;
-  }
 `;
 
 const Input = styled.input`
   border: solid 1px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+  border-radius: 5px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   padding: 15px;
 
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
   }
 
   &:focus {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   }
 `;
 
 const Button = styled.button`
-  border: solid 1px #4591e7;
-  margin-bottom: 20px;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
   width: 10em;
-  background-color: #4591e7;
-  color: white;
-  border-radius: 20px;
+  background-color: white;
+  border-radius: 5px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    border-radius: 5px;
+  }
+`;
+
+const SignUpButton = styled(Button)`
+  background-color: #1c5f22;
+  border: solid 1px #1c5f22;
+  color: white;
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
+    background-color: #34833b;
+    border: solid 1px #34833b;
   }
 `;
 
@@ -168,17 +164,23 @@ function Register() {
   };
 
   return (
+  <Container>
+    <ImageWrapper id="image2"></ImageWrapper>
     <Wrapper>
-      {/* <Header>
-        MasakhaNER
-        <Bar />
-      </Header> */}
+    <div style={{ transform: "translateX(-40px)" }}>
+          <h2 style={{ fontSize: "50px", color: "#1c5f22" }}>Get started</h2>
+          <h2
+            style={{
+              fontSize: "30px",
+              transform: "translateX(-78px)",
+              opacity: "0.6",
+            }}
+          >
+            Sign up
+          </h2>
+        </div>
 
       <form id="regForm" onSubmit={handleSubmit}>
-        <div>
-          <h2>SIGN UP</h2>
-        </div>
-        <label>First name</label>
         <Input
           type="text"
           name="firstName"
@@ -188,7 +190,6 @@ function Register() {
           onChange={(e) => setfirstName(e.target.value)}
           required
         />
-        <label htmlFor="lastName">Last name</label>
         <Input
           type="text"
           name="flastName"
@@ -199,7 +200,6 @@ function Register() {
           onChange={(e) => setlastName(e.target.value)}
           required
         />
-        <label htmlFor="email">Email address</label>
         <Input
           type="email"
           name="email"
@@ -213,7 +213,6 @@ function Register() {
           }}
           required
         />
-        <label>Password</label>
         <Input
           type="password"
           name="password"
@@ -254,6 +253,7 @@ function Register() {
         }}
       />
     </Wrapper>
+  </Container>
   );
 }
 
