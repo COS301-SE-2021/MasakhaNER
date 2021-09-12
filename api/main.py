@@ -708,8 +708,7 @@ def get_person_info(user,):
         resp = []
         for x in person_info:
             resp.append({'name': x[0], 'surname': x[1], 'dob': x[2], 'nationality': x[3], 'role': x[4], 'description': x[5]})
-
-
+        res = Response(response=json.dumps(resp))
 
 
 
