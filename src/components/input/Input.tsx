@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   margin-top: 8vh;
   margin-bottom: 8vh;
   border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2); */
   padding: 2rem;
 
   div {
@@ -64,15 +64,18 @@ const History = styled.div`
 export const Input = () => {
   return (
     <>
-      <Header>Below, enter text in the input field to send text to the MasashaNER model which will returned text with recognized entities</Header>
+      {/* <Header>
+        Below, enter text in the input field to send text to the MasashaNER
+        model which will returned text with recognized entities
+      </Header> */}
       <Wrapper>
         <div>
           <InputSection />
         </div>
         <div>
-          <History>
+          {/* <History>
             <HistorySection />
-          </History>
+          </History> */}
         </div>
       </Wrapper>
     </>

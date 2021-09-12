@@ -1,16 +1,16 @@
 .Navbar {
   background-color: #fff;
   color: #1c5f22;
-  margin-bottom: 10em;
   color: white;
-  margin-bottom: 60px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  height: 60px;
+  height: 80px;
   padding: 20px;
+  box-shadow: -2px 6px 5px -1px rgba(0, 0, 0, 0.03);
+  width: 100vw;
 }
 menu {
   align-self: flex-start;
@@ -25,10 +25,10 @@ menu {
 }
 
 #logo {
-  /* background-image: url("../../images/navbar.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 300px;
-  height: 50px; */
+  color: #1c5f22;
+  transform: translateX(20px);
+}
+
+#navbutton {
   color: #1c5f22;
 }

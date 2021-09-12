@@ -15,14 +15,15 @@ const FormContainer = styled.div`
     display: flex;
     width: 25em;
     justify-content: space-between;
+    transform: translate(61vw, -65px);
   }
 `;
 
 const Input = styled.textarea`
   display: inline-block;
   border-radius: 10px;
-  width: 25em;
-  height: 25em;
+  width: 85vw;
+  height: 4em;
   resize: none;
   text-align: justify;
   padding: 20px;
@@ -39,14 +40,14 @@ const Input = styled.textarea`
 const OutputSection = styled.div`
   display: inline-block;
   border-radius: 10px;
-  width: 25em;
+  width: 70em;
   height: 25em;
   resize: none;
   text-align: justify;
   padding: 20px;
   border-radius: 20px;
-  border: solid 0.1px rgba(153, 153, 153, 0.1);
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
+  /* border: solid 0.1px rgba(153, 153, 153, 0.1); */
+  /* box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05); */
   position: relative;
 
   &:focus {
@@ -316,9 +317,6 @@ export default function InputSection() {
     <>
       <FormContainer>
         <div id="inputsection">
-          <div>
-            <p>Click on each entity to find out more information.</p>
-          </div>
           <form onSubmit={handleSubmit}>
             <Input
               placeholder="Type here..."
@@ -335,14 +333,13 @@ export default function InputSection() {
               <Button onClick={handleSend}>Send</Button>
             </div>
 
-            <input
+            {/* <input
               type="file"
               name="fileUpload"
               value={imageFile}
               onChange={(e) => handleImageFile(e)}
-            />
-            <button onClick={handleImageUpload}>Submit</button>
-            {console.log("THIS IS IT 3", imageFile)}
+            /> */}
+            {/* <Button onClick={handleImageUpload}>Submit</Button> */}
           </form>
         </div>
         <div id="output-section">
@@ -350,21 +347,21 @@ export default function InputSection() {
             {wait === 3 ? (
               ""
             ) : wait === 2 ? (
-              "pending..."
+              <div id="loading"></div>
             ) : wait === 1 ? (
               <Output data={outputData} input={input2} />
             ) : (
               "failed"
             )}
           </OutputSection>
-          <div id="button-container">
+          {/* <div id="button-container">
             <Button onClick={openModal}>Feedback</Button>
-          </div>
+          </div> */}
           <img src={baseFile} />
         </div>
         <div></div>
       </FormContainer>
-      <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton>
+      {/* <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton> */}
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
