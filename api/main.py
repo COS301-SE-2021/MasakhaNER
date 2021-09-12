@@ -704,6 +704,8 @@ def get_person_info(user,):
     if(db != None):
         person_name = str(request.json["name"])
         person_surname = str(request.json["surname"])
+        person_info=db.getPersonInfo(person_name,person_surname)
+        resp = []
 
 
 
