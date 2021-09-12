@@ -696,6 +696,9 @@ def admin_get_all_feedback(user):
 
 @app.route('/personinfo', methods=["GET"])
 @token_required
+def get_person_info(user,):
+    if user is None:
+
 
 
 """
