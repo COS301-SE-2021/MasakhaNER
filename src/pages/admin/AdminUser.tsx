@@ -24,16 +24,13 @@ export default function AdminUser() {
   const theme = createMuiTheme({
     palette: {
       type: 'light',
-      // primary: {
-      //   main: '#388e3c',
-      // },
+      primary: {
+        main: '#388e3c',
+      },
       secondary: {
-        main: '#11cb5f',
+        main: '#1c5f22',
         contrastText: '#000000',
       },
-      // success:{
-      //   main: "#388e3c",
-      // }
     },
   });
   const dataProvider = simpleRestProvider("http://localhost:3000", fetchJson);
