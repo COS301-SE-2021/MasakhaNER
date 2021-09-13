@@ -450,7 +450,7 @@ export default function InputSection() {
         ) : wait === 2 ? (
           <div id="loading"></div>
         ) : wait === 1 ? (
-          <img width="40%" height="60%" src={baseFile} />
+          <img width="100%" height="90%" src={baseFile} />
         ) : (
           "failed"
         )}
