@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
+  padding-bottom: 600px;
   #button-container {
     margin-top: 10px;
     padding-right: 6em;
@@ -123,15 +124,21 @@ const VisualizerButton = styled(Button)`
 
 const ImageUploadHeader = styled.div`
   width: 105vw;
-  height: 350px;
+  height: 450px;
   border-radius: 5px;
   padding: 20px;
   background-color: #1c5f22;
-  transform: translate(-110px, 40px);
+  transform: translate(-110px, 300px);
 
   h1 {
-    color: #7eaf82;
+    /* color: #7eaf82; */
+    color: #fff;
+    transform: translate(88px, 20px);
   }
+`;
+
+const Space = styled.div`
+  height: 200px;
 `;
 
 const TextUploadHeader = styled.div`
@@ -161,10 +168,10 @@ export default function InputSection() {
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [ imageIsOpen, setImageIsOpen] = useState(false);
-  const closeImage = () =>{
+  const [imageIsOpen, setImageIsOpen] = useState(false);
+  const closeImage = () => {
     setImageIsOpen(false);
-  }
+  };
   const openModal = () => {
     setIsOpen(true);
   };
@@ -347,8 +354,8 @@ export default function InputSection() {
   return (
     <>
       <FormContainer>
-        <div id="inputsection">
-          <form onSubmit={handleSubmit}>
+        <div style={{ height: "0px" }} id="inputsection">
+          <form style={{ height: "0px" }} onSubmit={handleSubmit}>
             <Input
               placeholder="Type here..."
               id="testSection"
@@ -364,20 +371,29 @@ export default function InputSection() {
               <Button onClick={handleSend}>Send</Button>
             </div>
             <ImageUploadHeader id="image-upload-header">
-              {/* <h1>Image Recognition Header Section</h1> */}
+              <h1>Facial Recognition</h1>
             </ImageUploadHeader>
             <div
               style={{
-                transform: "translate(0px,150px)",
+                transform: "translate(0px,140px)",
+                zIndex: 99,
               }}
             >
               <input
+                style={{ color: "white", marginBottom: "10px" }}
                 type="file"
                 name="fileUpload"
                 value={imageFile}
                 onChange={(e) => handleImageFile(e)}
               />
-              <Button onClick={() => {handleImageUpload(); setImageIsOpen(true)}}>Submit</Button>
+              <Button
+                onClick={() => {
+                  handleImageUpload();
+                  setImageIsOpen(true);
+                }}
+              >
+                Submit
+              </Button>
             </div>
           </form>
         </div>
@@ -393,9 +409,12 @@ export default function InputSection() {
               "failed"
             )}
           </OutputSection>
-          {/* <div id="button-container">
+          <div
+            id="button-container"
+            style={{ transform: "translate(1080px, -400px)" }}
+          >
             <Button onClick={openModal}>Feedback</Button>
-          </div> */}
+          </div>
         </div>
         <div></div>
       </FormContainer>
@@ -437,7 +456,7 @@ export default function InputSection() {
         </form>
       </Modal>
       <Modal
-        isOpen = {imageIsOpen}
+        isOpen={imageIsOpen}
         onRequestClose={closeImage}
         style={customStyles}
         contentLabel="Example Modal"
