@@ -700,13 +700,14 @@ def admin_get_all_feedback(user):
 @app.route('/personinfo', methods=["POST"])
 @token_required
 def get_person_info(user,names):
+    names2=["Khotso Bore","Master Lee"]
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
     
     db = app.config['DATABASE']
     if(db != None):
         person_info=[]
-        for temp in names:     
+        for temp in names2:     
             person_name = temp.split()[0]
             person_surname = temp.split()[1]
             person_info.apend(db.getPersonInfo(person_name,person_surname))
