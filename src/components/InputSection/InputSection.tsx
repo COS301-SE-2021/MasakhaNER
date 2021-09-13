@@ -121,6 +121,19 @@ const VisualizerButton = styled(Button)`
   color: grey;
 `;
 
+const ImageUploadHeader = styled.div`
+  width: 105vw;
+  height: 300px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #1c5f22;
+  transform: translate(-110px, 0px);
+
+  h1 {
+    color: #7eaf82;
+  }
+`;
+
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
@@ -299,7 +312,6 @@ export default function InputSection() {
         const data = await resp.json();
 
         alert(data.msg);
-        //<img src={URL.createObjectURL(`data:image/jpeg;base64,${encodedBase64}`)}/>
         console.log(data.msg);
         var text = data.msg.substring(2);
         text = text.substring(0, text.length - 1);
@@ -332,14 +344,22 @@ export default function InputSection() {
               />
               <Button onClick={handleSend}>Send</Button>
             </div>
-
-            {/* <input
-              type="file"
-              name="fileUpload"
-              value={imageFile}
-              onChange={(e) => handleImageFile(e)}
-            /> */}
-            {/* <Button onClick={handleImageUpload}>Submit</Button> */}
+            <ImageUploadHeader>
+              <h1>Image Recognition Header Section</h1>
+            </ImageUploadHeader>
+            <div
+              style={{
+                transform: "translate(0px,10px)",
+              }}
+            >
+              <input
+                type="file"
+                name="fileUpload"
+                value={imageFile}
+                onChange={(e) => handleImageFile(e)}
+              />
+              <Button onClick={handleImageUpload}>Submit</Button>
+            </div>
           </form>
         </div>
         <div id="output-section">
