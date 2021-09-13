@@ -8,7 +8,6 @@ function Dashboard() {
     <div id="dash">
       <Nav />
       <Input />
-      <Footer />
     </div>
   );
 }

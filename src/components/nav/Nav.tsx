@@ -1,7 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Nav.css";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 let history;
+
+const ButtonContainer = styled.div`
+  color: #1c5f22;
+  transform: translateY(6px);
+  a {
+    margin-right: 25px;
+  }
+`;
 
 function Nav() {
   history = useHistory();
@@ -21,28 +30,16 @@ function Nav() {
   return (
     <div className="Navbar">
       <div className="menu">
-        <button onClick={dash} className="btn btn-dark">
-          Dashboard
-        </button>
-        <button onClick={edit} className="btn btn-dark">
-          Edit Details
-        </button>
-        <button onClick={about} className="btn btn-dark">
-          About
-        </button>
+        <div id="logo">
+          <h2>masakhaner</h2>
+        </div>
       </div>
-      <div>
-        <h1 id="navbar-heading">Masakha NER Tool</h1>
-        <p id="navbar-subheading">
-          Web-based interface used as a named entity recognition tool for
-          African languages.
-        </p>
-      </div>
-      <div>
-        <button onClick={handleLogout} className="btn btn-dark">
-          Log out
-        </button>
-      </div>
+
+      <ButtonContainer>
+        <a onClick={about}>About</a>
+        <a onClick={edit}>Edit Details</a>
+        <a onClick={handleLogout}>Log out</a>
+      </ButtonContainer>
     </div>
   );
 }

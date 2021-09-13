@@ -1,0 +1,9 @@
+body {
+    background-color: rgb(250, 250, 250);
+  }
+  
+  #image2 {
+    background-image: url("../../images/signup-image.png");
+    background-size: cover;
+  }
+  

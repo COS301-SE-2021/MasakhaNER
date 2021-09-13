@@ -3,6 +3,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import styled from "styled-components";
+import Login from "../../components/login/Login";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ImageWrapper = styled.div`
+  height: 100vh;
+  width: 45vw;
+  background-repeat: no-repeat;
+  background-color: #305c16;
+`;
 
 const Wrapper = styled.div`
   background-color: white;
@@ -11,67 +24,110 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 80vh;
-  width: 80vw;
+  width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
-  margin-top: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
-`;
+  margin-top: 80px;
 
-const Bar = styled.div`
-  width: inherit;
-  height: 5px;
-  background-color: #000;
-  margin-top: 5px;
-`;
+  #wrapper2 {
+    h2 {
+      span:before {
+        content: "";
+        animation: animate infinite 10s;
+      }
 
-const Header = styled.h1`
-  font-size: 3em;
-  margin-bottom: 1em;
-  @media (max-width: 767px) {
-    font-size: 2em;
+      @keyframes animate {
+        0% {
+          content: "Kuanza.";
+        }
+        25% {
+          content: "Get started.";
+        }
+        50% {
+          content: "Bẹ̀rẹ̀.";
+        }
+        75% {
+          content: "Tanga.";
+        }
+        100% {
+          content: "Qalisa.";
+        }
+      }
+    }
   }
 `;
 
 const Input = styled.input`
   border: solid 1px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+  border-radius: 5px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   padding: 15px;
 
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
   }
 
   &:focus {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   }
 `;
 
 const Button = styled.button`
-  border: solid 1px #4591e7;
-  margin-bottom: 20px;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
   width: 10em;
-  background-color: #4591e7;
-  color: white;
-  border-radius: 20px;
+  background-color: white;
+  border-radius: 5px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    border-radius: 5px;
+  }
+`;
+
+const SignUpButton = styled(Button)`
+  background-color: #1c5f22;
+  border: solid 1px #1c5f22;
+  color: white;
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
+    background-color: #34833b;
+    border: solid 1px #34833b;
+  }
+`;
+
+const LoginButton = styled.button`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  width: 10em;
+  background-color: white;
+  border-radius: 5px;
+  height: 35px;
+  width: 20em;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
   }
 `;
 
@@ -132,7 +188,9 @@ function Register() {
   const validEmail = new RegExp(
     "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
   );
-  const validPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+  const validPassword = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,}$"
+  );
 
   const setItem = () => {
     localStorage.setItem("newEmail", email);
@@ -155,92 +213,107 @@ function Register() {
   };
 
   return (
-    <Wrapper>
-      {/* <Header>
-        MasakhaNER
-        <Bar />
-      </Header> */}
-
-      <form id="regForm" onSubmit={handleSubmit}>
-        <div>
-          <h2>SIGN UP</h2>
+    <Container>
+      <ImageWrapper id="image2"></ImageWrapper>
+      <Wrapper>
+        <div
+          id="wrapper2"
+          style={{
+            textAlign: "left",
+            width: "30em",
+            transform: "translateX(75px)",
+          }}
+        >
+          <h2 style={{ fontSize: "50px", color: "#1c5f22" }} id="login-header">
+            <span></span>
+          </h2>
+          <br />
         </div>
-        <label>First name</label>
-        <Input
-          type="text"
-          name="firstName"
-          className="form-control"
-          value={firstName}
-          placeholder="Enter your first name"
-          onChange={(e) => setfirstName(e.target.value)}
-          required
-        />
-        <label htmlFor="lastName">Last name</label>
-        <Input
-          type="text"
-          name="flastName"
-          id="lastName"
-          className="form-control"
-          value={lastName}
-          placeholder="Enter your last name"
-          onChange={(e) => setlastName(e.target.value)}
-          required
-        />
-        <label htmlFor="email">Email address</label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          className="form-control"
-          value={email}
-          placeholder="Enter your email address"
-          onChange={(e) => {
-            setemail(e.target.value);
-            validate();
-          }}
-          required
-        />
-        <label>Password</label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          className="form-control"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            validate();
-          }}
-          required
-        />
-        <Button
-          disabled={disabled}
-          id="mainBtn"
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            setItem();
-            handleStatus();
+        <h2
+          style={{
+            fontSize: "30px",
+            transform: "translateX(-110px)",
+            opacity: "0.6",
           }}
         >
           Sign up
-        </Button>
-        {Passworderr ||
-          (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
-      </form>
+        </h2>
 
-      <p>
-        Please confirm that you are human <br />
-        before submitting...
-      </p>
-      <ReCAPTCHA
-        sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
-        onChange={() => {
-          setDisabled(false);
-        }}
-      />
-    </Wrapper>
+        <form id="regForm" onSubmit={handleSubmit}>
+          <Input
+            style={{ marginTop: "15px" }}
+            type="text"
+            name="firstName"
+            className="form-control"
+            value={firstName}
+            placeholder="First name"
+            onChange={(e) => setfirstName(e.target.value)}
+            required
+          />
+          <Input
+            type="text"
+            name="flastName"
+            id="lastName"
+            className="form-control"
+            value={lastName}
+            placeholder="Last name"
+            onChange={(e) => setlastName(e.target.value)}
+            required
+          />
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            className="form-control"
+            value={email}
+            placeholder="Email address"
+            onChange={(e) => {
+              setemail(e.target.value);
+              validate();
+            }}
+            required
+          />
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            className="form-control"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              validate();
+            }}
+            required
+          />
+          <SignUpButton
+            disabled={disabled}
+            id="mainBtn"
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              setItem();
+              handleStatus();
+            }}
+          >
+            Sign up
+          </SignUpButton>
+          {Passworderr ||
+            (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
+        </form>
+
+        <p>
+          Please confirm that you are human <br />
+          before submitting...
+        </p>
+        <ReCAPTCHA
+          sitekey="6LewewkbAAAAABw16AsxyxxNkLRnaBi0RWukXzVj"
+          onChange={() => {
+            setDisabled(false);
+          }}
+        />
+      </Wrapper>
+    </Container>
   );
 }
 
