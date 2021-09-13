@@ -177,7 +177,7 @@ function Register() {
     <div id="detailspage">
       <Nav />
       <Container>
-      <ImageWrapper id="image2"></ImageWrapper>
+      
       <Wrapper>
         <form id="detForm" onSubmit={handleSubmit}>
         <h2
@@ -230,8 +230,7 @@ function Register() {
             (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
         </form>
       </Wrapper>
-      <br />
-      <br />
+      <ImageWrapper id="image3"></ImageWrapper>
       </Container>
     </div>
   );
