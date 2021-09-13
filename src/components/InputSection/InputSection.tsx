@@ -162,8 +162,8 @@ export default function InputSection() {
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
   const [ imageIsOpen, setImageIsOpen] = useState(false);
-  const openImage = () =>{
-    setImageIsOpen(true);
+  const closeImage = () =>{
+    setImageIsOpen(false);
   }
   const openModal = () => {
     setIsOpen(true);
@@ -441,7 +441,7 @@ export default function InputSection() {
       </Modal>
       <Modal
         isOpen = {imageIsOpen}
-        onRequestClose={closeModal}
+        onRequestClose={closeImage}
         style={customStyles}
         contentLabel="Example Modal"
       >
@@ -450,11 +450,11 @@ export default function InputSection() {
         ) : wait === 2 ? (
           <div id="loading"></div>
         ) : wait === 1 ? (
-          <img src={baseFile} />
+          <img width="40%" height="60%" src={baseFile} />
         ) : (
           "failed"
         )}
-        <Button onClick={closeModal}>close</Button>
+        <Button onClick={closeImage}>close</Button>
       </Modal>
     </>
   );
