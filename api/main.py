@@ -697,19 +697,22 @@ def admin_get_all_feedback(user):
 
     return {'response': 'failed'}, 400
 
-@app.route('/personinfo', methods=["GET"])
+@app.route('/personinfo', methods=["POST"])
 @token_required
-def get_person_info(user,):
+def get_person_info(user,names):
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
     
     db = app.config['DATABASE']
     if(db != None):
-        person_name = str(request.json["name"])
-        person_surname = str(request.json["surname"])
-        person_info=db.getPersonInfo(person_name,person_surname)
-        # resp = []
-        resp = {'name': person_info[1], 'surname': person_info[2], 'dob':person_info[3],'nationality':person_info[4],'description':person_info[5]}
+        person_info=[]
+        for temp in names:     
+            person_name = temp.split()[0]
+            person_surname = temp.split()[1]
+            person_info.apend(db.getPersonInfo(person_name,person_surname))
+        resp = []
+        for person in person_info: 
+            resp.append( {'name': person[1], 'surname': person[2], 'dob':person[3],'nationality':person[4],'description':person[5]})
         # for x in person_info:
         #     resp.append({'name': x[0], 'surname': x[1], 'dob': x[2], 'nationality': x[3], 'role': x[4], 'description': x[5]})
         res = Response(response=json.dumps(resp))
@@ -757,7 +760,8 @@ def upload_image():
     with open("faceAI/imageToSave.jpg", "wb") as fh:
         fh.write(base64.b64decode(file))
 
-    faces.recognize("imageToSave.jpg")
+    names = faces.recognize("imageToSave.jpg")
+
 
     # image = open("faceAI/pte.jpg")
     # print("here")

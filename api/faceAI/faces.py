@@ -38,6 +38,7 @@ def recognize(img):
         flags=cv2.CASCADE_SCALE_IMAGE
     )
     print(faces)
+    names=[];
     for(x, y, w, h) in faces:
         # print(x,y,w,h)
         roi_gray = gray[y:y+h, x:x+w]
@@ -51,6 +52,7 @@ def recognize(img):
 
             font = cv2.FONT_HERSHEY_COMPLEX
             name = labels[id_]
+            names.append(labels[id_])
             color = (255, 255, 255)
             stroke = 2
             cv2.putText(frame, name, (x, y), font, 1,
@@ -77,5 +79,6 @@ def recognize(img):
     # Display frame
 
     cv2.imwrite('faceAI/a.jpg', frame)
+    return names
 # cv2.imshow('frames', frame)
 # cv2.waitKey(0)
