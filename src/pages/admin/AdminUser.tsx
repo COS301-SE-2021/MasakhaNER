@@ -8,6 +8,10 @@ import CreateModel from "../../components/admin/CreateModel";
 import ModelList from "../../components/admin/ModelList";
 import FeedBackList from "../../components/admin/FeedBackList";
 import ModelEdit from "../../components/admin/ModelEdit";
+import authProvider from "../../components/admin/authProvider";
+import { createMuiTheme } from "@material-ui/core/styles";
+import Login from "../../components/login/Login";
+import { purple } from "@material-ui/core/colors";
 
 export default function AdminUser() {
   const fetchJson = (url: string, options: any = {}) => {
@@ -17,11 +21,26 @@ export default function AdminUser() {
     options.headers.set("x-access-token", localStorage.getItem("token"));
     return fetchUtils.fetchJson(url, options);
   };
-
+  const theme = createMuiTheme({
+    palette: {
+      type: 'light',
+      primary: {
+        main: '#388e3c',
+      },
+      secondary: {
+        main: '#1c5f22',
+        contrastText: '#000000',
+      },
+    },
+  });
+  const dataProvider = simpleRestProvider("http://localhost:3000", fetchJson);
   return (
     <>
       <Admin
-        dataProvider={simpleRestProvider("http://localhost:3000", fetchJson)}
+        theme={theme}
+        dataProvider={dataProvider}
+        authProvider = {authProvider}
+        loginPage = {Login}
       >
         <Resource
           name="users"

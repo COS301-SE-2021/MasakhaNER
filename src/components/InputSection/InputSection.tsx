@@ -15,14 +15,15 @@ const FormContainer = styled.div`
     display: flex;
     width: 25em;
     justify-content: space-between;
+    transform: translate(61vw, -65px);
   }
 `;
 
 const Input = styled.textarea`
   display: inline-block;
   border-radius: 10px;
-  width: 25em;
-  height: 25em;
+  width: 85vw;
+  height: 4em;
   resize: none;
   text-align: justify;
   padding: 20px;
@@ -39,14 +40,14 @@ const Input = styled.textarea`
 const OutputSection = styled.div`
   display: inline-block;
   border-radius: 10px;
-  width: 25em;
+  width: 70em;
   height: 25em;
   resize: none;
   text-align: justify;
   padding: 20px;
   border-radius: 20px;
-  border: solid 0.1px rgba(153, 153, 153, 0.1);
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
+  /* border: solid 0.1px rgba(153, 153, 153, 0.1); */
+  /* box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05); */
   position: relative;
 
   &:focus {
@@ -57,17 +58,19 @@ const OutputSection = styled.div`
 const Button = styled.button`
   border: solid 0.1px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  background-color: #4591e7;
-  border-radius: 20px;
+  background-color: #1c5f22;
+  border-radius: 5px;
   height: 35px;
   padding-left: 1em;
   padding-right: 1em;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    background-color: #34833b;
+    border: solid 1px #34833b;
   }
   position: relative;
   color: white;
@@ -118,6 +121,32 @@ const VisualizerButton = styled(Button)`
   color: grey;
 `;
 
+const ImageUploadHeader = styled.div`
+  width: 105vw;
+  height: 350px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #1c5f22;
+  transform: translate(-110px, 40px);
+
+  h1 {
+    color: #7eaf82;
+  }
+`;
+
+const TextUploadHeader = styled.div`
+  width: 105vw;
+  height: 350px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #1c5f22;
+  transform: translate(-110px, 0px);
+
+  h1 {
+    color: #7eaf82;
+  }
+`;
+
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
@@ -132,7 +161,10 @@ export default function InputSection() {
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
-
+  const [ imageIsOpen, setImageIsOpen] = useState(false);
+  const closeImage = () =>{
+    setImageIsOpen(false);
+  }
   const openModal = () => {
     setIsOpen(true);
   };
@@ -277,6 +309,7 @@ export default function InputSection() {
 
   const handleImageUpload = async () => {
     console.log("THIS IS IT", imageFile);
+    setWait(2);
     const opts: any = {
       method: "POST",
       headers: {
@@ -294,17 +327,16 @@ export default function InputSection() {
       if (resp.status === 200) {
         alert(resp.status);
         const data = await resp.json();
-        
-        alert(data.msg);
-        //<img src={URL.createObjectURL(`data:image/jpeg;base64,${encodedBase64}`)}/>
-       console.log(data.msg);
-       var text = data.msg.substring(2);
-       text = text.substring(0, text.length-1)
-       setBaseFile("data:image/jpg;base64, " + text);
-        
 
+        alert(data.msg);
+        console.log(data.msg);
+        var text = data.msg.substring(2);
+        text = text.substring(0, text.length - 1);
+        setBaseFile("data:image/jpg;base64, " + text);
+        setWait(1);
       } else {
         alert("error, failed!");
+        setWait(0);
       }
       console.log(wait);
     } catch (error) {
@@ -316,9 +348,6 @@ export default function InputSection() {
     <>
       <FormContainer>
         <div id="inputsection">
-          <div>
-            <p>Click on each entity to find out more information.</p>
-          </div>
           <form onSubmit={handleSubmit}>
             <Input
               placeholder="Type here..."
@@ -327,22 +356,29 @@ export default function InputSection() {
               onChange={(e) => setInput(e.target.value)}
             />
             <div id="button-container">
-              <Upload
+              <input
                 type="file"
                 placeholder="Upload"
                 onChange={handleFileChange}
               />
               <Button onClick={handleSend}>Send</Button>
             </div>
-
-            <input
-              type="file"
-              name="fileUpload"
-              value={imageFile}
-              onChange={(e) => handleImageFile(e)}
-            />
-            <button onClick={handleImageUpload}>Submit</button>
-            {console.log("THIS IS IT 3", imageFile)}
+            <ImageUploadHeader id="image-upload-header">
+              {/* <h1>Image Recognition Header Section</h1> */}
+            </ImageUploadHeader>
+            <div
+              style={{
+                transform: "translate(0px,150px)",
+              }}
+            >
+              <input
+                type="file"
+                name="fileUpload"
+                value={imageFile}
+                onChange={(e) => handleImageFile(e)}
+              />
+              <Button onClick={() => {handleImageUpload(); setImageIsOpen(true)}}>Submit</Button>
+            </div>
           </form>
         </div>
         <div id="output-section">
@@ -350,22 +386,20 @@ export default function InputSection() {
             {wait === 3 ? (
               ""
             ) : wait === 2 ? (
-              "pending..."
+              <div id="loading"></div>
             ) : wait === 1 ? (
               <Output data={outputData} input={input2} />
             ) : (
               "failed"
             )}
           </OutputSection>
-          <div id="button-container">
+          {/* <div id="button-container">
             <Button onClick={openModal}>Feedback</Button>
-          </div>
-          <img src={baseFile} />
-          
+          </div> */}
         </div>
         <div></div>
       </FormContainer>
-      <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton>
+      {/* <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton> */}
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -401,6 +435,23 @@ export default function InputSection() {
             Send Feedback
           </Button>
         </form>
+      </Modal>
+      <Modal
+        isOpen = {imageIsOpen}
+        onRequestClose={closeImage}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        {wait === 3 ? (
+          ""
+        ) : wait === 2 ? (
+          <div id="loading"></div>
+        ) : wait === 1 ? (
+          <img width="100%" height="90%" src={baseFile} />
+        ) : (
+          "failed"
+        )}
+        <Button onClick={closeImage}>close</Button>
       </Modal>
     </>
   );
