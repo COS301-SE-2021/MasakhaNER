@@ -309,6 +309,7 @@ export default function InputSection() {
 
   const handleImageUpload = async () => {
     console.log("THIS IS IT", imageFile);
+    setWait(2);
     const opts: any = {
       method: "POST",
       headers: {
@@ -332,8 +333,10 @@ export default function InputSection() {
         var text = data.msg.substring(2);
         text = text.substring(0, text.length - 1);
         setBaseFile("data:image/jpg;base64, " + text);
+        setWait(1);
       } else {
         alert("error, failed!");
+        setWait(0);
       }
       console.log(wait);
     } catch (error) {
@@ -377,7 +380,7 @@ export default function InputSection() {
                 value={imageFile}
                 onChange={(e) => handleImageFile(e)}
               />
-              <Button onClick={handleImageUpload}>Submit</Button>
+              <Button onClick={() => {handleImageUpload(); setImageIsOpen(true)}}>Submit</Button>
             </div>
           </form>
         </div>
@@ -442,7 +445,16 @@ export default function InputSection() {
         style={customStyles}
         contentLabel="Example Modal"
       >
+        {wait === 3 ? (
+          ""
+        ) : wait === 2 ? (
+          <div id="loading"></div>
+        ) : wait === 1 ? (
           <img src={baseFile} />
+        ) : (
+          "failed"
+        )}
+        <Button onClick={closeModal}>close</Button>
       </Modal>
     </>
   );
