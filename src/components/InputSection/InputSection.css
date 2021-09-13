@@ -38,3 +38,10 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#image-upload-header {
+  background-image: url("../../images/image-background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

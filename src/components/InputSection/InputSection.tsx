@@ -123,7 +123,20 @@ const VisualizerButton = styled(Button)`
 
 const ImageUploadHeader = styled.div`
   width: 105vw;
-  height: 300px;
+  height: 350px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #1c5f22;
+  transform: translate(-110px, 40px);
+
+  h1 {
+    color: #7eaf82;
+  }
+`;
+
+const TextUploadHeader = styled.div`
+  width: 105vw;
+  height: 350px;
   border-radius: 5px;
   padding: 20px;
   background-color: #1c5f22;
@@ -327,6 +340,9 @@ export default function InputSection() {
 
   return (
     <>
+      {/* <TextUploadHeader id="image-upload-header">
+        <h1>Text Upload Header Section</h1>
+      </TextUploadHeader> */}
       <FormContainer>
         <div id="inputsection">
           <form onSubmit={handleSubmit}>
@@ -344,12 +360,12 @@ export default function InputSection() {
               />
               <Button onClick={handleSend}>Send</Button>
             </div>
-            <ImageUploadHeader>
+            <ImageUploadHeader id="image-upload-header">
               <h1>Image Recognition Header Section</h1>
             </ImageUploadHeader>
             <div
               style={{
-                transform: "translate(0px,10px)",
+                transform: "translate(0px,150px)",
               }}
             >
               <input
