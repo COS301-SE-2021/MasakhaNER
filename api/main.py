@@ -697,9 +697,9 @@ def admin_get_all_feedback(user):
 
     return {'response': 'failed'}, 400
 
-@app.route('/personinfo', methods=["POST"])
+@app.route('/personinfo', methods=["GET"])
 @token_required
-def get_person_info(user,names):
+def get_person_info(user,):
     names2=["Khotso Bore","Master Lee"]
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
@@ -710,8 +710,11 @@ def get_person_info(user,names):
         for temp in names2:     
             person_name = temp.split()[0]
             person_surname = temp.split()[1]
-            person_info.apend(db.getPersonInfo(person_name,person_surname))
+            val=db.getPersonInfo(person_name,person_surname)
+            if(val != None):
+                person_info.append(val)
         resp = []
+        print(person_info)
         for person in person_info: 
             resp.append( {'name': person[1], 'surname': person[2], 'dob':person[3],'nationality':person[4],'description':person[5]})
         # for x in person_info:
