@@ -346,9 +346,6 @@ export default function InputSection() {
 
   return (
     <>
-      {/* <TextUploadHeader id="image-upload-header">
-        <h1>Text Upload Header Section</h1>
-      </TextUploadHeader> */}
       <FormContainer>
         <div id="inputsection">
           <form onSubmit={handleSubmit}>
@@ -367,7 +364,7 @@ export default function InputSection() {
               <Button onClick={handleSend}>Send</Button>
             </div>
             <ImageUploadHeader id="image-upload-header">
-              <h1>Image Recognition Header Section</h1>
+              {/* <h1>Image Recognition Header Section</h1> */}
             </ImageUploadHeader>
             <div
               style={{
