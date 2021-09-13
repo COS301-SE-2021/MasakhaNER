@@ -5,6 +5,19 @@ import Nav from "../../../components/nav/Nav";
 import Footer from "../../../components/Footer/Footer";
 import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ImageWrapper = styled.div`
+  height: 100vh;
+  width: 45vw;
+  background-repeat: no-repeat;
+  background-color: #305c16;
+`;
+
+
 const Wrapper = styled.div`
   background-color: white;
   display: flex;
@@ -12,53 +25,92 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 80vh;
-  width: 80vw;
+  width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
-  margin-top: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  margin-top: 80px;
+
+  #wrapper2 {
+    h2 {
+      span:before {
+        content: "";
+        animation: animate infinite 10s;
+      }
+
+      @keyframes animate {
+        0% {
+          content: "Kuanza.";
+        }
+        25% {
+          content: "Get started.";
+        }
+        50% {
+          content: "Bẹ̀rẹ̀.";
+        }
+        75% {
+          content: "Tanga.";
+        }
+        100% {
+          content: "Qalisa.";
+        }
+      }
+    }
+  }
 `;
 
 const Input = styled.input`
-  border: solid 1px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+ border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   padding: 15px;
 
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
   }
 
   &:focus {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   }
 `;
 
 const Button = styled.button`
-  border: solid 1px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+   border: solid 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
   width: 10em;
-  background-color: black;
-  color: white;
-  border-radius: 20px;
+  background-color: white;
+  border-radius: 5px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    border-radius: 5px;
+  }
+`;
+
+const SignUpButton = styled(Button)`
+  background-color: #1c5f22;
+  border: solid 1px #1c5f22;
+  color: white;
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
+    background-color: #34833b;
+    border: solid 1px #34833b;
   }
 `;
 
@@ -124,30 +176,41 @@ function Register() {
   return (
     <div id="detailspage">
       <Nav />
+      <Container>
+      <ImageWrapper id="image2"></ImageWrapper>
       <Wrapper>
         <form id="detForm" onSubmit={handleSubmit}>
-          <h2>Edit Details</h2>
+        <h2
+          style={{
+            fontSize: "30px",
+            transform: "translateX(-90px)",
+            opacity: "0.6",
+          }}
+        >
+          Edit details
+        </h2>
           <Bar />
           <div className="form-group">
-            <label htmlFor="firstName">First Name:</label>
             <Input
+              style={{ marginTop: "15px" }}
+              className="form-control"
               type="text"
               name="firstName"
               value={firstName}
               onChange={(e) => setfirstName(e.target.value)}
               required
-              placeholder="Enter your first name"
+              placeholder="First name"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="lastName">Last Name:</label>
             <Input
               type="text"
               name="flastName"
               value={lastName}
+              className="form-control"
               onChange={(e) => setlastName(e.target.value)}
               required
-              placeholder="Enter your last name"
+              placeholder="Last name"
             />
           </div>
           <br />
@@ -169,7 +232,7 @@ function Register() {
       </Wrapper>
       <br />
       <br />
-      <Footer />
+      </Container>
     </div>
   );
 }
