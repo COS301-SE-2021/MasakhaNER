@@ -161,7 +161,10 @@ export default function InputSection() {
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
-
+  const [ imageIsOpen, setImageIsOpen] = useState(false);
+  const openImage = () =>{
+    setImageIsOpen(true);
+  }
   const openModal = () => {
     setIsOpen(true);
   };
@@ -393,7 +396,6 @@ export default function InputSection() {
           {/* <div id="button-container">
             <Button onClick={openModal}>Feedback</Button>
           </div> */}
-          <img src={baseFile} />
         </div>
         <div></div>
       </FormContainer>
@@ -433,6 +435,14 @@ export default function InputSection() {
             Send Feedback
           </Button>
         </form>
+      </Modal>
+      <Modal
+        isOpen = {imageIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+          <img src={baseFile} />
       </Modal>
     </>
   );
