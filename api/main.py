@@ -700,7 +700,7 @@ def admin_get_all_feedback(user):
 @app.route('/personinfo', methods=["GET"])
 @token_required
 def get_person_info(user,):
-    names2=["Khotso Bore","Master Lee"]
+    names2=["Khoto Bore","Master Lee"]
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
     
