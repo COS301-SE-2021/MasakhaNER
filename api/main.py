@@ -699,22 +699,22 @@ def admin_get_all_feedback(user):
 
 @app.route('/personinfo', methods=["GET"])
 @token_required
-def get_person_info(user,):
-    names2=["Khoto Bore","Master Lee"]
-    if user is None:
-        return jsonify({'response': 'user unauthirized'}), 401
+def get_person_info(names):
+    # names2=["Khoto Bore","Master Lee"]
+    # if user is None:
+    #     return jsonify({'response': 'user unauthirized'}), 401
     
     db = app.config['DATABASE']
     if(db != None):
         person_info=[]
-        for temp in names2:     
+        for temp in names:     
             person_name = temp.split()[0]
             person_surname = temp.split()[1]
             val=db.getPersonInfo(person_name,person_surname)
             if(val != None):
                 person_info.append(val)
         resp = []
-        print(person_info)
+        # print(person_info)
         for person in person_info: 
             resp.append( {'name': person[1], 'surname': person[2], 'dob':person[3],'nationality':person[4],'description':person[5]})
         # for x in person_info:
@@ -765,6 +765,8 @@ def upload_image():
         fh.write(base64.b64decode(file))
 
     names = faces.recognize("imageToSave.jpg")
+    results=get_person_info(names)
+    print(results)
 
 
     # image = open("faceAI/pte.jpg")
