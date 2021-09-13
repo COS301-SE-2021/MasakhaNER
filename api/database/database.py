@@ -526,7 +526,7 @@ class User:
         try:
             sql = "SELECT * FROM people WHERE name=%s AND surname=%s;"
             self.cur.execute(sql,(person_name,person_surname))
-            person_info=self.cur.fetchall()
+            person_info=self.cur.fetchone()
             self.conn.commit()
             return person_info
         except Exception as e:

@@ -705,9 +705,10 @@ def get_person_info(user,):
         person_name = str(request.json["name"])
         person_surname = str(request.json["surname"])
         person_info=db.getPersonInfo(person_name,person_surname)
-        resp = []
-        for x in person_info:
-            resp.append({'name': x[0], 'surname': x[1], 'dob': x[2], 'nationality': x[3], 'role': x[4], 'description': x[5]})
+        # resp = []
+        resp = {'name': person_info[1], 'surname': person_info[2], 'dob':person_info[3],'nationality':person_info[4],'description':person_info[5]}
+        # for x in person_info:
+        #     resp.append({'name': x[0], 'surname': x[1], 'dob': x[2], 'nationality': x[3], 'role': x[4], 'description': x[5]})
         res = Response(response=json.dumps(resp))
         res.headers.add('Content-Range', 'person 0-10/100')
         res.headers.add('Content-Type', 'application/json')
