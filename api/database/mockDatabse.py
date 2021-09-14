@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import psycopg2.extras
 import psycopg2
 from flask import Flask
-from database.email import Email
+from database.send_email import Email
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
@@ -21,23 +21,25 @@ class mockdatabase:
     Returns:
         Boolean:Returns false if database connection fails
     """
-    db_list=None
-    db_id=None
+    db_list = None
+    db_id = None
 
     def __init__(self):
-        self.db_list=[]
+        self.db_list = []
         encoded_password = bytes('password', encoding='utf-8')
         encrypted_password = bcrypt.hashpw(
-        encoded_password, bcrypt.gensalt())
-        #print(type(encrypted_password))
+            encoded_password, bcrypt.gensalt())
+        # print(type(encrypted_password))
         encrypted_password = encrypted_password.decode('UTF-8')
-        user = [0,'first','person', encrypted_password,'fp@gmail.com',True,0000,True]
-        self.db_list.append(user)
-        
-        user = [1,'second','person', encrypted_password,'secondperson@gmail.com',False,0000,True]
+        user = [0, 'first', 'person', encrypted_password,
+                'fp@gmail.com', True, 0000, True]
         self.db_list.append(user)
 
-        self.db_id=2
+        user = [1, 'second', 'person', encrypted_password,
+                'secondperson@gmail.com', False, 0000, True]
+        self.db_list.append(user)
+
+        self.db_id = 2
 
     """
     Register Function:
@@ -55,20 +57,21 @@ class mockdatabase:
     """
 
     def register(self, firstname, lastname, email, password):
-         if self.findUserByEmail(email) == None:
+        if self.findUserByEmail(email) == None:
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
-            encoded_password, bcrypt.gensalt())
-            #print(type(encrypted_password))
+                encoded_password, bcrypt.gensalt())
+            # print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
             code = '1111'
-            user_id=self.db_id
-            self.db_id+=1
+            user_id = self.db_id
+            self.db_id += 1
 
-            user = [user_id,firstname,lastname,encrypted_password,email,False,code,False]
+            user = [user_id, firstname, lastname,
+                    encrypted_password, email, False, code, False]
             self.db_list.append(user)
             return True
-         else:
+        else:
             return False
 
     """
@@ -119,7 +122,7 @@ class mockdatabase:
     def verify_user(self, email):
         user = self.findUserByEmail(email)
         if user != None:
-            if user[7]==True:
+            if user[7] == True:
                 #print("password works")
                 return True
             else:
@@ -145,27 +148,27 @@ class mockdatabase:
                 return x
         return None
 
-
     def getAllUsers(self):
         return self.db_list
-    
-    def printList(self):
-        #print(self.db_list)
-        pass#
 
-        #return self.db_list
+    def printList(self):
+        # print(self.db_list)
+        pass
+
+        # return self.db_list
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         if self.findUserByEmail(email) == None:
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
-            encoded_password, bcrypt.gensalt())
+                encoded_password, bcrypt.gensalt())
             encrypted_password = encrypted_password.decode('UTF-8')
             code = '1111'
-            user_id=self.db_id
-            self.db_id+=1
+            user_id = self.db_id
+            self.db_id += 1
 
-            user = [user_id,firstname,lastname,encrypted_password,email,isadmin,code,True]
+            user = [user_id, firstname, lastname,
+                    encrypted_password, email, isadmin, code, True]
             self.db_list.append(user)
             return True
         else:
@@ -175,44 +178,46 @@ class mockdatabase:
         user = self.findUserById(id)
         #print('this is the user:', user)
         if user != None:
-                encoded_password = bytes(password, encoding='utf-8')
-                encrypted_password = bcrypt.hashpw(
+            encoded_password = bytes(password, encoding='utf-8')
+            encrypted_password = bcrypt.hashpw(
                 encoded_password, bcrypt.gensalt())
-                encrypted_password = encrypted_password.decode('UTF-8')
-                code = '1111'
-                user[1]=firstname
-                user[2]=lastname
-                user[3]=encrypted_password
-                user[4]=email
-                user[5]=isadmin
-                user[6]=code
-                user[7]=verified
-                return True
+            encrypted_password = encrypted_password.decode('UTF-8')
+            code = '1111'
+            user[1] = firstname
+            user[2] = lastname
+            user[3] = encrypted_password
+            user[4] = email
+            user[5] = isadmin
+            user[6] = code
+            user[7] = verified
+            return True
         else:
             return False
 
     def adminDeleteUser(self, id):
         for x in self.db_list:
-            #print(type(id))
+            # print(type(id))
             if x[0] == id:
                 self.db_list.remove(x)
                 return True
         return False
 
     def clear(self):
-        self.db_list=[]
+        self.db_list = []
         encoded_password = bytes('password', encoding='utf-8')
         encrypted_password = bcrypt.hashpw(
-        encoded_password, bcrypt.gensalt())
-        #print(type(encrypted_password))
+            encoded_password, bcrypt.gensalt())
+        # print(type(encrypted_password))
         encrypted_password = encrypted_password.decode('UTF-8')
-        user = [0,'first','person', encrypted_password,'fp@gmail.com',True,0000,True]
-        self.db_list.append(user)
-        
-        user = [1,'second','person', encrypted_password,'secondperson@gmail.com',False,0000,True]
+        user = [0, 'first', 'person', encrypted_password,
+                'fp@gmail.com', True, 0000, True]
         self.db_list.append(user)
 
-        self.db_id=2
+        user = [1, 'second', 'person', encrypted_password,
+                'secondperson@gmail.com', False, 0000, True]
+        self.db_list.append(user)
+
+        self.db_id = 2
 
 # # class Test(self):
 
