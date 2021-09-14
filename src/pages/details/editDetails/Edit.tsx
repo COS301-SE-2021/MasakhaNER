@@ -12,13 +12,37 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 80vh;
-  width: 80vw;
+  width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
-  margin-top: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  margin-top: 80px;
+
+  #wrapper2 {
+    h2 {
+      span:before {
+        content: "";
+        animation: animate infinite 10s;
+      }
+
+      @keyframes animate {
+        0% {
+          content: "Kuanza.";
+        }
+        25% {
+          content: "Get started.";
+        }
+        50% {
+          content: "Bẹ̀rẹ̀.";
+        }
+        75% {
+          content: "Tanga.";
+        }
+        100% {
+          content: "Qalisa.";
+        }
+      }
+    }
+  }
 `;
 
 const Input = styled.input`
