@@ -14,12 +14,10 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 80vh;
-  width: 80vw;
+  width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
-  margin-top: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 80px;
 `;
 
 const Bar = styled.div`
