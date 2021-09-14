@@ -14,6 +14,7 @@ from flask_cors import CORS
 from werkzeug.datastructures import Headers
 from faceAI import faces
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+dirname = os.path.dirname(__file__)
 
 
 app = Flask(__name__)
@@ -761,7 +762,10 @@ def upload_image():
 
     # /print(file)
     # new_file = base64.encode(file)
-    with open("faceAI/imageToSave.jpg", "wb") as fh:
+    filename = os.path.join(
+    dirname, "imageToSave.jpg")
+
+    with open(filename, "wb") as fh:
         fh.write(base64.b64decode(file))
 
     names = faces.recognize("imageToSave.jpg")
