@@ -699,33 +699,33 @@ def admin_get_all_feedback(user):
     return {'response': 'failed'}, 400
 
 @app.route('/personinfo', methods=["GET"])
-@token_required
+# @token_required
 def get_person_info(names):
     # names2=["Khoto Bore","Master Lee"]
     # if user is None:
     #     return jsonify({'response': 'user unauthirized'}), 401
-    
-    db = app.config['DATABASE']
-    if(db != None):
-        person_info=[]
-        for temp in names:     
-            person_name = temp.split()[0]
-            person_surname = temp.split()[1]
-            val=db.getPersonInfo(person_name,person_surname)
-            if(val != None):
-                person_info.append(val)
-        resp = []
-        # print(person_info)
-        for person in person_info: 
-            resp.append( {'name': person[1], 'surname': person[2], 'dob':person[3],'nationality':person[4],'description':person[5]})
-        # for x in person_info:
-        #     resp.append({'name': x[0], 'surname': x[1], 'dob': x[2], 'nationality': x[3], 'role': x[4], 'description': x[5]})
-        res = Response(response=json.dumps(resp))
-        res.headers.add('Content-Range', 'person 0-10/100')
-        res.headers.add('Content-Type', 'application/json')
-        return res, 200
-    else:
-        return {'response': 'failed'}, 400
+    if(names!=None):
+        db = app.config['DATABASE']
+        if(db != None):
+            person_info=[]
+            for temp in names:     
+                person_name = temp.split()[0]
+                person_surname = "Lee"
+                val=db.getPersonInfo(person_name,person_surname)
+                if(val != None):
+                    person_info.append(val)
+            resp = []
+            # print(person_info)
+            for person in person_info: 
+                resp.append( {'name': person[1], 'surname': person[2], 'dob':person[3],'nationality':person[4],'description':person[5]})
+            # for x in person_info:
+            #     resp.append({'name': x[0], 'surname': x[1], 'dob': x[2], 'nationality': x[3], 'role': x[4], 'description': x[5]})
+            res = Response(response=json.dumps(resp))
+            res.headers.add('Content-Range', 'person 0-10/100')
+            res.headers.add('Content-Type', 'application/json')
+            return res, 200
+        else:
+            return {'response': 'failed'}, 400
  
 
 
