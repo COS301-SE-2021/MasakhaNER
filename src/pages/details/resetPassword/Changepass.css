@@ -88,3 +88,7 @@ body {
   background-image: url("../../../images/forgot.jpg");
   background-size: cover;
 }
+
+#errorMSG{
+  display: none;
+}

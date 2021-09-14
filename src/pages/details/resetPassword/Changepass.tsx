@@ -171,12 +171,22 @@ function Register() {
     e.preventDefault();
   };
 
+  function myFunction() {
+    var x = document.getElementById("errorMSG");
+      x.style.display = "block";
+  }
+
   return (
+    <>
+    <Nav/>
     <Container>
     <ImageWrapper id="image4"></ImageWrapper>
     <Wrapper>
       <div>
-        <h2>Change Password</h2>
+      <h2 style={{ fontSize: "40px", color: "#1c5f22" }} id="login-header">
+        Change Password
+      </h2>
+      <br/>
       </div>
       <form id="detForm" onSubmit={handleSubmit}>
         <Input
@@ -203,7 +213,9 @@ function Register() {
           required
           placeholder="New password"
         />
+        <div >
         {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
+        </div>
         <Input
           type="password"
           name="confirmPassword"
@@ -212,6 +224,7 @@ function Register() {
           value={password2}
           placeholder="Confirm new password"
           onChange={(e) => {
+            myFunction();
             setPassword2(e.target.value);
             if (password === e.target.value) {
               setPasswordErr(true);
@@ -223,7 +236,9 @@ function Register() {
           }}
           required
         />
+        <div className="errorMSG" id="errorMSG">
         {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
+        </div>
         <br />
             <SignUpButton
               disabled={disabled}
@@ -246,6 +261,7 @@ function Register() {
       <br />
     </Wrapper>
     </Container>
+    </>
   );
 }
 
