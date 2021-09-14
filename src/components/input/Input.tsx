@@ -45,7 +45,7 @@ export const Input = () => {
   return (
     <>
       <Header>
-        <h1>Named Entity Recognition Tool</h1>
+        <h1>Named Entity Recognition</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
           tincidunt feugiat sapien vel iaculis. Nulla fringilla lacus ex, non
