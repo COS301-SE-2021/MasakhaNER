@@ -5,6 +5,19 @@ import Nav from "../../../components/nav/Nav";
 import Footer from "../../../components/Footer/Footer";
 import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ImageWrapper = styled.div`
+  height: 100vh;
+  width: 45vw;
+  background-repeat: no-repeat;
+  background-color: #305c16;
+`;
+
+
 const Wrapper = styled.div`
   background-color: white;
   display: flex;
