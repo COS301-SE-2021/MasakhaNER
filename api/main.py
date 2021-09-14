@@ -780,8 +780,8 @@ def upload_image():
     # image_64_encode = base64.encodestring(image_read)
     # print("here")
     # final_image = image_64_encode .partition(",")[2]
-
-    with open("faceAI/a.jpg", "rb") as img_file:
+    # filename2 = os.path.join(dirname, "a.jpg")
+    with open(filename, "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
     print(my_string)
 
