@@ -47,7 +47,3 @@ class Email:
         except:
             # print("failed")
             return False
-
-
-e = Email()
-e.send_email("test", "sinothandomabhena@gmail.com")
