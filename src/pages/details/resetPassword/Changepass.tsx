@@ -88,6 +88,21 @@ const Button = styled.button`
   }
 `;
 
+const SignUpButton = styled(Button)`
+  background-color: #1c5f22;
+  border: solid 1px #1c5f22;
+  color: white;
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
+    background-color: #34833b;
+    border: solid 1px #34833b;
+  }
+`;
+
 const ChangepassButton = styled(Button)`
   background-color: black;
   color: white;
@@ -157,16 +172,13 @@ function Register() {
   };
 
   return (
+    <Container>
+    <ImageWrapper id="image4"></ImageWrapper>
     <Wrapper>
-      <Header>
-        MasakhaNER
-        <Bar />
-      </Header>
       <div>
         <h2>Change Password</h2>
       </div>
       <form id="detForm" onSubmit={handleSubmit}>
-        <label htmlFor="oldPassword">Email:</label>
         <Input
           type="email"
           name="email"
@@ -177,9 +189,8 @@ function Register() {
             setEmail(e.target.value);
           }}
           required
-          placeholder="Enter your email"
+          placeholder="Email address"
         />
-        <label htmlFor="newPassword">New password:</label>
         <Input
           type="password"
           name="oldPassword"
@@ -190,17 +201,16 @@ function Register() {
             setPassword(e.target.value);
           }}
           required
-          placeholder="Enter your new password"
+          placeholder="New password"
         />
         {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
-        <label htmlFor="lastName">Confirm New Password:</label>
         <Input
           type="password"
           name="confirmPassword"
           id="confirmPassword"
           className="form-control"
           value={password2}
-          placeholder="Enter your new password"
+          placeholder="Confirm new password"
           onChange={(e) => {
             setPassword2(e.target.value);
             if (password === e.target.value) {
@@ -215,9 +225,7 @@ function Register() {
         />
         {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
         <br />
-        <ChangepassButton>
-          <div className="submit-button">
-            <button
+            <SignUpButton
               disabled={disabled}
               id="mainBtn"
               type="submit"
@@ -232,13 +240,12 @@ function Register() {
               }}
             >
               Submit
-            </button>
-          </div>
-        </ChangepassButton>
+            </SignUpButton>
       </form>
       <br />
       <br />
     </Wrapper>
+    </Container>
   );
 }
 
