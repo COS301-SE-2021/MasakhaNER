@@ -72,18 +72,19 @@ const Input = styled.input`
 
 const Button = styled.button`
   border: solid 1px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   width: 10em;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 5px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    border-radius: 5px;
   }
 `;
 
