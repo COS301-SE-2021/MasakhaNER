@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import psycopg2.extras
 import psycopg2
 from flask import Flask
-from database.email import Email
+from database.send_email import Email
 import os
 import sys
 import functools
@@ -264,13 +264,14 @@ class User:
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         try:
-            
+
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
                 encoded_password, bcrypt.gensalt())
             encrypted_password = encrypted_password.decode('UTF-8')
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-            self.cur.execute(sql, (firstname, lastname, encrypted_password, email, isadmin, 000, True))
+            self.cur.execute(
+                sql, (firstname, lastname, encrypted_password, email, isadmin, 000, True))
             self.conn.commit()
             sql = "SELECT id FROM users WHERE email = %s;"
             self.cur.execute(sql, (email,))

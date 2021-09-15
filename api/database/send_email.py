@@ -1,4 +1,6 @@
-import smtplib, ssl
+import smtplib
+import ssl
+
 
 class Email:
     """
@@ -8,7 +10,8 @@ class Email:
         None
     Returns:
         Boolean:Returns false if database connection fails
-    """ 
+    """
+
     def __init__(self):
         self.smtp_server = "smtp.gmail.com"
         self.port = 587  # For starttls
@@ -16,10 +19,10 @@ class Email:
         self.password = "stopdacapcos301"
         self.context = ssl.create_default_context()
         try:
-            self.server = smtplib.SMTP(self.smtp_server,self.port)
+            self.server = smtplib.SMTP(self.smtp_server, self.port)
             self.server.ehlo()
             self.server.starttls(context=self.context)
-            self.server.ehlo() 
+            self.server.ehlo()
             self.server.login(self.sender_email, self.password)
         except Exception as e:
             print(f"Send email error: {e}")
@@ -33,14 +36,14 @@ class Email:
         receiver_email(string): email address of user
     Returns:
         Boolean:Returns false if email sending fails
-    """ 
+    """
+
     def send_email(self, message, receiver_email):
         try:
             self.server.sendmail(self.sender_email, receiver_email, message)
-            self.server.quit() 
+            self.server.quit()
             #print('email sent')
             return True
         except:
-            print("failed")
-            return False;
-
+            # print("failed")
+            return False

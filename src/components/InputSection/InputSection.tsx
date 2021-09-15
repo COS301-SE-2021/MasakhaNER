@@ -128,7 +128,7 @@ const ImageUploadHeader = styled.div`
   border-radius: 5px;
   padding: 20px;
   background-color: #1c5f22;
-  transform: translate(-110px, 300px);
+  transform: translate(-10vw, 300px);
 
   h1 {
     /* color: #7eaf82; */
@@ -332,10 +332,10 @@ export default function InputSection() {
       const resp = await fetch("/upload-image", opts);
       console.log(resp);
       if (resp.status === 200) {
-        alert(resp.status);
+        // alert(resp.status);
         const data = await resp.json();
 
-        alert(data.msg);
+        // alert(data.msg);
         console.log(data.msg);
         var text = data.msg.substring(2);
         text = text.substring(0, text.length - 1);
