@@ -4,7 +4,7 @@
     background-size: cover;
 }
 .about{
-    background-color: rgba(3, 3, 3, 0.801);
+    background-color: rgba(3, 3, 3, 0.555);
 }
 .out{
     padding-top: 50px;
@@ -14,10 +14,11 @@
 }
 .out h4{
     text-align: start;
-    color: #1c5f22;
+    color: #2bad36;
+    font-weight: bold;
 }
 .out a{
-    color: #1c5f22;
+    color: #2bad36;;
     font-style: italic;
 }
 .out p, a{
