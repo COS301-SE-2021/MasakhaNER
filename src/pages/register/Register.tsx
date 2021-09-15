@@ -4,6 +4,8 @@ import "./Register.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import styled from "styled-components";
 import Login from "../../components/login/Login";
+import { translate } from "react-admin";
+import Toast from "../../components/toast/Toast";
 
 const Container = styled.div`
   display: flex;
@@ -153,24 +155,31 @@ function Register() {
       password: password,
     }),
   };
+  const [loading, setLoading] = useState(false);
+  const [signupError, setError] = useState(false);
 
   const handleStatus = async () => {
+    setLoading(true);
     try {
       const resp = await fetch("/register", options);
-      console.log(resp);
+      // console.log(resp);
       if (resp.status === 200) {
-        alert(resp.status);
+        // alert(resp.status);
         const data = await resp.json();
         console.log(data);
         window.location.href = "/verify";
       } else {
-        alert(resp.status);
-        alert("Incorrect verification code!");
-        window.location.href = "/register";
+        // alert(resp.status);
+        setError(true);
+        setLoading(false);
+        // alert("Incorrect verification code!");
+        // window.location.href = "/register";
       }
     } catch (error) {
-      console.log("there is an error", error);
-      window.location.href = "/";
+      setLoading(false);
+      setError(true);
+      // console.log("there is an error", error);
+      // window.location.href = "/";
     }
   };
 
@@ -286,6 +295,9 @@ function Register() {
             }}
             required
           />
+          {signupError && (
+            <p style={{ color: "#cf6969" }}>Email already exists</p>
+          )}
           <SignUpButton
             disabled={disabled}
             id="mainBtn"
@@ -296,7 +308,13 @@ function Register() {
               handleStatus();
             }}
           >
-            Sign up
+            {loading ? (
+              <div id="loading"></div>
+            ) : (
+              <p style={{ color: "#fff", transform: "translate(0px,4px)" }}>
+                Sign up
+              </p>
+            )}
           </SignUpButton>
           {Passworderr ||
             (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}

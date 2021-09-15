@@ -10,14 +10,14 @@ const Alert = styled.div`
 `;
 
 interface Props {
-  type: string;
+  message: string;
 }
 
-const Toast = () => {
+const Toast = (message: Props) => {
   return (
     <>
       <Alert>
-        <p>Incorrect details, please try again</p>
+        <p>{message}</p>
       </Alert>
     </>
   );

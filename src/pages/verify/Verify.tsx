@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./verifyAccount.css"
-import { Link } from 'react-router-dom';
+import "./verifyAccount.css";
+import { Link } from "react-router-dom";
 
 function VerifyAccount() {
   const [code, setCode] = useState("");
@@ -13,8 +13,8 @@ function VerifyAccount() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      "email": localStorage.getItem("newEmail"),
-      "code": code
+      email: localStorage.getItem("newEmail"),
+      code: code,
     }),
   };
 
@@ -26,22 +26,20 @@ function VerifyAccount() {
     try {
       const resp = await fetch("/verify", options);
       console.log("This is what came back: ", options);
-  
+
       if (resp.status === 200) {
         const data = await resp.json();
         alert("You have successfully verified your account!");
-        window.location.href = "/";
-      }
-      else {
+        window.location.href = "/Dashboard";
+      } else {
         alert("Incorrect verification code!");
         window.location.href = "/verify";
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.log("there is an error", error);
       window.location.href = "/verify";
     }
-  }
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -73,11 +71,14 @@ function VerifyAccount() {
               e.preventDefault();
               handleVerify();
               //setClicked(!clicked);
-            }}>Next</button>
+            }}
+          >
+            Next
+          </button>
         </Link>
       </form>
     </div>
-  )
+  );
 }
 
-export default VerifyAccount
+export default VerifyAccount;

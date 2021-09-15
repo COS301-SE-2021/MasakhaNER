@@ -238,7 +238,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <Toast />}
+        {error && <p style={{ color: "#cf6969" }}>Incorrect details</p>}
         <Button onClick={handleLogin}>
           {loading ? <div id="loading"></div> : <p>Login</p>}
         </Button>
