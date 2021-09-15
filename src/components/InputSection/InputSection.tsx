@@ -120,6 +120,7 @@ const FeedbackInput = styled(Input)`
 const VisualizerButton = styled(Button)`
   background-color: white;
   color: grey;
+  transform: translate(0px, -900px);
 `;
 
 const ImageUploadHeader = styled.div`
@@ -418,7 +419,7 @@ export default function InputSection() {
         </div>
         <div></div>
       </FormContainer>
-      {/* <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton> */}
+      <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
