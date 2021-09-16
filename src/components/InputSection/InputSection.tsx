@@ -169,8 +169,12 @@ export default function InputSection() {
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
   const [imageIsOpen, setImageIsOpen] = useState(false);
+  const [feedbackImage, setfeedbackImage] = useState(false);
   const closeImage = () => {
     setImageIsOpen(false);
+  };
+  const closeImgFeedback = () => {
+    setfeedbackImage(false);
   };
   const openModal = () => {
     setIsOpen(true);
@@ -185,6 +189,28 @@ export default function InputSection() {
     setIsOpen(false);
   };
 
+  const sendImage = async() =>{
+    const opts: any ={
+      method: "POST",
+      headers:{
+        "Content-Type":"application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        image: localStorage.getItem("feedback-image"),
+      }),
+    };
+
+    try{
+      const resp = await fetch("/feadback-image", opts);
+      if(resp.status ===200){
+      }else{
+        alert("error, failed!");
+      }
+    }catch(error){
+      console.log("There is an error:",error);
+    }
+  };
   const handleFeedback = async () => {
     const opts: any = {
       method: "POST",
@@ -394,6 +420,7 @@ export default function InputSection() {
               >
                 Submit
               </Button>
+              <Button onClick={() => {setfeedbackImage(true);}}>Feedback</Button>
             </div>
           </form>
         </div>
@@ -461,6 +488,8 @@ export default function InputSection() {
         style={customStyles}
         contentLabel="Example Modal"
       >
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Image Recognition</h2>
+
         {wait === 3 ? (
           ""
         ) : wait === 2 ? (
@@ -471,6 +500,31 @@ export default function InputSection() {
           "failed"
         )}
         <Button onClick={closeImage}>close</Button>
+      </Modal>
+      <Modal
+        isOpen={feedbackImage}
+        onRequestClose = {closeImgFeedback}
+        style = {customStyles}
+        contentLabel = "Example Model"
+      > 
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
+        <Button onClick={closeImgFeedback}>closs</Button>
+        <p>
+          If you are image recognition was incorrect kindly 
+          upload the image of the parson.
+        </p>
+        <input
+          style={{ color: "grey", marginBottom: "10px" }}
+          type="file"
+          name="fileUpload"
+          value={imageFile}
+          onChange={(e) => handleImageFile(e)}
+        />
+        <Button
+          onClick={sendImage}
+        >
+          Submit
+        </Button>
       </Modal>
     </>
   );
