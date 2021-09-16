@@ -24,38 +24,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
+  height: 100vh;
   width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
-  margin-top: 80px;
-
-  #wrapper2 {
-    h2 {
-      span:before {
-        content: "";
-        animation: animate infinite 10s;
-      }
-
-      @keyframes animate {
-        0% {
-          content: "Kuanza.";
-        }
-        25% {
-          content: "Get started.";
-        }
-        50% {
-          content: "Bẹ̀rẹ̀.";
-        }
-        75% {
-          content: "Tanga.";
-        }
-        100% {
-          content: "Qalisa.";
-        }
-      }
-    }
-  }
+  align-self: flex-end;
 `;
 
 const Input = styled.input`
@@ -114,12 +87,6 @@ const SignUpButton = styled(Button)`
   }
 `;
 
-const Bar = styled.div`
-  width: inherit;
-  height: 5px;
-  background-color: #000;
-  margin-top: 5px;
-`;
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -180,17 +147,9 @@ function Register() {
       
       <Wrapper>
         <form id="detForm" onSubmit={handleSubmit}>
-        <h2
-          style={{
-            fontSize: "30px",
-            transform: "translateX(-90px)",
-            opacity: "0.6",
-          }}
-        >
+        <h2 style={{ fontSize: "30px", color: "#1c5f22" }} id="login-header">
           Edit details
         </h2>
-          <Bar />
-          <div className="form-group">
             <Input
               style={{ marginTop: "15px" }}
               className="form-control"
@@ -201,8 +160,6 @@ function Register() {
               required
               placeholder="First name"
             />
-          </div>
-          <div className="form-group">
             <Input
               type="text"
               name="flastName"
@@ -212,10 +169,9 @@ function Register() {
               required
               placeholder="Last name"
             />
-          </div>
           <br />
           <div className="submit-button">
-            <Button
+            <SignUpButton
               id="mainBtn"
               type="submit"
               onClick={(e) => {
@@ -224,7 +180,7 @@ function Register() {
               }}
             >
               Submit
-            </Button>
+            </SignUpButton>
           </div>
           {Passworderr ||
             (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
