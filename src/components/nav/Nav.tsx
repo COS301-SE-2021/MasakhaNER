@@ -31,7 +31,7 @@ function Nav() {
     <div className="Navbar">
       <div className="menu">
         <div id="logo">
-          <h2>masakhaner</h2>
+          <h2 onClick={dash}>masakhaner</h2>
         </div>
       </div>
 
