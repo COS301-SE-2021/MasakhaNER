@@ -120,6 +120,7 @@ const FeedbackInput = styled(Input)`
 const VisualizerButton = styled(Button)`
   background-color: white;
   color: grey;
+  transform: translate(0px, -900px);
 `;
 
 const ImageUploadHeader = styled.div`
@@ -268,7 +269,7 @@ export default function InputSection() {
   };
 
   useEffect(() => {
-    fetch("/input", options)
+    fetch("/api/input", options)
       .then((res) => res.json())
       .then((data) => {
         setOutputData(data.output);
@@ -295,7 +296,7 @@ export default function InputSection() {
     };
 
     try {
-      const resp = await fetch("/input", opts);
+      const resp = await fetch("/api/input", opts);
       console.log(resp);
       if (resp.status === 200) {
         const data = await resp.json();
@@ -445,7 +446,7 @@ export default function InputSection() {
         </div>
         <div></div>
       </FormContainer>
-      {/* <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton> */}
+      <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}

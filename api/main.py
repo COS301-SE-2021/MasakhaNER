@@ -123,7 +123,7 @@ def token_required(f):
     return decorated
 
 
-@app.route('/input', methods=["POST"])
+@app.route('/api/input', methods=["POST"])
 @token_required
 def model_feedback(user):
 
@@ -239,7 +239,7 @@ def verify_user():
 """
 
 
-@app.route('/login', methods=["POST"])
+@app.route('/api/login', methods=["POST"])
 def login_user():
     # print(app.config)
     # athing = app.config['DB_NAME']
@@ -310,7 +310,8 @@ def admin_add_user(user):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
         user_isadmin = request.json["isadmin"]
-        id = db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)
+        id = db.adminAddUser(user_firstname, user_lastname,
+                             user_email, user_password, user_isadmin)
         if(id != None):
             return jsonify({'response': 'registered', 'id': id}), 200
         else:

@@ -1,6 +1,6 @@
 import "./App.css";
 import Dashboard from "./pages/dashboard/Dashboard";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Login from "./components/login/Login";
 import Register from "./pages/register/Register";
 import Verify from "./pages/verify/Verify";
@@ -15,6 +15,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          <Redirect from='/Admin#/logins' to="/" />
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/dashboard" component={Dashboard}  />

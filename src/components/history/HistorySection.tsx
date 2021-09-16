@@ -28,7 +28,7 @@ export default function HistorySection() {
     };
 
     try {
-      const resp = await fetch("/input", opts);
+      const resp = await fetch("/api/input", opts);
       console.log(resp);
       if (resp.status === 200) {
         const data = await resp.json();

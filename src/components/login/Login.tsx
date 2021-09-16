@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import GoogleLogin from "react-google-login";
 import "./Login.css";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect, Link } from "react-router-dom";
 import styled from "styled-components";
 import { History } from "history";
 import Toast from "../toast/Toast";
@@ -57,7 +57,7 @@ const Wrapper = styled.div`
           content: "Nnọọ";
         }
         100% {
-          content: "Siyakwamkela emva";
+          content: "Siyakwamukela";
         }
       }
     }
@@ -163,7 +163,7 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const resp = await fetch("/login", opts);
+      const resp = await fetch("/api/login", opts);
       console.log(resp);
       if (resp.status === 200) {
         const data = await resp.json();
@@ -172,7 +172,7 @@ export default function Login() {
         localStorage.setItem("isAuthenticated", "true");
         if (data.isadmin) {
           if (history.location.pathname == "/login") {
-            history.push("/users");
+            history.push("/");
           } else {
             history.push("/Admin");
           }

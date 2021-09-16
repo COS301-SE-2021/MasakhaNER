@@ -46,14 +46,11 @@ function VerifyAccount() {
   };
 
   return (
-    <div className="veryify-form">
+    <div className="verify-form">
       <form onSubmit={handleSubmit}>
         <h3>Enter Confirmation Code</h3>
-        <p>
-          Enter the confirmation code we sent to your email.
-          <em>{localStorage.getItem("newEmail")}</em>
-        </p>
-        <div className="form-group">
+        <p>Enter the confirmation code we sent to your email.<em>{localStorage.getItem("newEmail")}</em></p>
+        <div className="form-grp">
           <input
             type="text"
             placeholder="Confirmation Code"
@@ -69,7 +66,7 @@ function VerifyAccount() {
         <Link to="/dashboard">
           <button
             type="submit"
-            className="btn btn-dark"
+            className="next"
             onClick={(e) => {
               e.preventDefault();
               handleVerify();
