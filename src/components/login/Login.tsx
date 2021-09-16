@@ -177,7 +177,13 @@ export default function Login() {
             history.push("/Admin");
           }
         } else {
-          history.push("/Dashboard");
+          if (history.location.pathname == "/login") {
+            window.close();
+            window.open("http://localhost:3000/dashboard");
+          }
+          else{
+            history.push("/dashboard");
+          }
         }
       } else {
         setLoading(false);
