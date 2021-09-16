@@ -163,7 +163,7 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const resp = await fetch("/login", opts);
+      const resp = await fetch("/api/login", opts);
       console.log(resp);
       if (resp.status === 200) {
         const data = await resp.json();

@@ -114,7 +114,7 @@ const Visualizer = () => {
   const [inputData, setInputData] = useState([]);
 
   useEffect(() => {
-    fetch("/input", options)
+    fetch("/api/input", options)
       .then((res) => res.json())
       .then((data) => {
         setInputData(data);
