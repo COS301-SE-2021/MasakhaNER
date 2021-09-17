@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
-import { Physics, usePlane, useBox } from "@react-three/cannon";
+import { usePlane } from "@react-three/cannon";
 import {
   OrbitControls,
   Stars,
@@ -114,7 +114,7 @@ const Visualizer = () => {
   const [inputData, setInputData] = useState([]);
 
   useEffect(() => {
-    fetch("/api/input", options)
+    fetch("/input", options)
       .then((res) => res.json())
       .then((data) => {
         setInputData(data);
