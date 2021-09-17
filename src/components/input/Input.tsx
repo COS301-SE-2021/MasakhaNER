@@ -58,11 +58,7 @@ export const Input = () => {
         <div>
           <InputSection />
         </div>
-        <div>
-          {/* <History>
-            <HistorySection />
-          </History> */}
-        </div>
+        <div></div>
       </Wrapper>
     </>
   );
