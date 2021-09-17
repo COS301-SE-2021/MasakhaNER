@@ -120,7 +120,7 @@ const FeedbackInput = styled(Input)`
 const VisualizerButton = styled(Button)`
   background-color: white;
   color: grey;
-  transform: translate(0px, -900px);
+  transform: translate(0px, -890px);
 `;
 
 const ImageUploadHeader = styled.div`
@@ -138,11 +138,17 @@ const ImageUploadHeader = styled.div`
   }
 
   p {
+    /* padding: 20px; */
     color: #fff;
-    opacity: 0.8;
-    width: 400px;
+    opacity: 1;
+    width: 500px;
     margin-top: 30px;
     transform: translate(88px, 0px);
+  }
+
+  a {
+    opacity: 1;
+    color: #7eaf82;
   }
 `;
 
@@ -382,9 +388,10 @@ export default function InputSection() {
             <ImageUploadHeader id="image-upload-header">
               <h1>Facial Recognition</h1>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-                tincidunt feugiat sapien vel iaculis. Nulla fringilla lacus ex,
-                non sagittis neque commodo sit amet.
+                Built with the power of OpenCV, this facial recognition system
+                was built and trained with the faces of popular African figures.{" "}
+                <br /> Upload an image of an Africa figure and submit to see the
+                results.
               </p>
             </ImageUploadHeader>
             <div
