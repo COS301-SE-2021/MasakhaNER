@@ -115,9 +115,7 @@ export default function Dropdown({ data, input }: OutputProps) {
               )}</span></a><select name="entity"><option value="<LOC>">LOC</option><option value="<PER>">PER</option><option value="<ORG>">ORG</option><option value="<DAT>">DATE</option></select></select></span>`;
             i = data[j].end - 1;
             j += 1;
-            if ((document.getElementById("EntName") as HTMLInputElement).value != null){
-              feed += (document.getElementById("EntName") as HTMLInputElement).value;
-            }
+            feed += (document.getElementById("EntName") as HTMLInputElement).value;
           }
         } else {
           word += arr[i];
