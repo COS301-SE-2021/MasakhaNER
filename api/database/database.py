@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import psycopg2.extras
 import psycopg2
 from flask import Flask
-from database.email import Email
+from database.send_email import Email
 import os
 import sys
 import functools
@@ -264,25 +264,22 @@ class User:
 
     def adminAddUser(self, firstname, lastname, email, password, isadmin):
         try:
-            # self.conn = psycopg2.connect(
-            #     dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
-            # self.cur = self.conn.cursor()
+
             encoded_password = bytes(password, encoding='utf-8')
             encrypted_password = bcrypt.hashpw(
                 encoded_password, bcrypt.gensalt())
-            # print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
-
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
             self.cur.execute(
                 sql, (firstname, lastname, encrypted_password, email, isadmin, 000, True))
             self.conn.commit()
-            # self.cur.close()
-            # self.conn.close()
-            return True
+            sql = "SELECT id FROM users WHERE email = %s;"
+            self.cur.execute(sql, (email,))
+            id = self.cur.fetchone()
+            return id
         except Exception as e:
             print(f"Database connection error: {e}")
-            return False
+            return None
 
     def adminUpdateUser(self, id, firstname, lastname, email, password, isadmin, verified):
         try:
@@ -346,18 +343,16 @@ class User:
 
     def adminAddModel(self, modelname, model):
         try:
-            # self.conn = psycopg2.connect(
-            #     dbname=self.DB_NAME, user=self.DB_USER, password=self.DB_PASS, host=self.DB_HOST)
-            # self.cur = self.conn.cursor()
             sql = "INSERT INTO models (modelname,model) VALUES(%s,%s)"
             self.cur.execute(sql, (modelname, model))
             self.conn.commit()
-            # self.cur.close()
-            # self.conn.close()
-            return True
+            sql = "SELECT id FROM models WHERE model = %s;"
+            self.cur.execute(sql, (model,))
+            id = self.cur.fetchone()
+            return id
         except Exception as e:
             print(f"Database connection error: {e}")
-            return False
+            return None
 
     def getAllModels(self):
         # self.conn = psycopg2.connect(

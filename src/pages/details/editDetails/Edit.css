@@ -1,0 +1,9 @@
+body {
+    background-color: rgb(250, 250, 250);
+  }
+  
+  #image3 {
+    background-image: url("../../../images/change.jpg");
+    background-size: cover;
+  }
+  

@@ -45,14 +45,6 @@ const Text = styled.div`
     }
   }
 `;
-// const createMarkup = (text:string) => {
-//   return { __html: <div>${text}</div> };
-// };
-
-// function wikiSearch(entity1){
-
-// }
-
 
 const createText = (text: string) => {
   return <div dangerouslySetInnerHTML={{ __html: text }}></div>;
@@ -101,17 +93,13 @@ interface OutputProps {
   input: string;
 }
 
-  
-  // const [newEnt, setnewEnt] = useState("");
-  // const [wikiLink, setwikiLink] = useState("");
-
-  
-
 export function CalliFrame() {
-  var newEnt = localStorage.getItem('Entity');
-  var linklink = 'https://en.wikipedia.org/wiki/' + newEnt;
+  var newEnt = localStorage.getItem("Entity");
+  var linklink = "https://en.wikipedia.org/wiki/" + newEnt;
   console.log(linklink);
-  return <iframe src={linklink}  width="750" height="250" id="wikiLink"></iframe>;
+  return (
+    <iframe src={linklink} width="750" height="250" id="wikiLink"></iframe>
+  );
 }
 
 export default function Output({ data, input }: OutputProps) {
@@ -120,62 +108,58 @@ export default function Output({ data, input }: OutputProps) {
 
   const [ent, setEnt] = useState("");
   useEffect(() => {
-    localStorage.setItem('Entity',ent);
-  },[ent]);
+    localStorage.setItem("Entity", ent);
+  }, [ent]);
 
-  //function storeWord(word:string){
-    
-    //alert('Got called!');
-    //document.getElementById('wikiLink').window.location.reload();
-    //window.location.reload();
-  //}
-
-  console.log(data);
-  // console.log(json[0].start);
   let word = "";
 
-  let nogo = true
-
+  let nogo = true;
 
   let j = 0;
   if (data !== null) {
     for (let i = 0; i < arr.length; i++) {
-      if(data.length===0){
-        nogo = false
-        break
+      if (data.length === 0) {
+        nogo = false;
+        break;
       }
-      if(j < data.length) {
+      if (j < data.length) {
         if (data[j].start === i) {
-            // localStorage.setItem('Entity',data[j].word);
-            //https://www.google.com/maps/place/
-            //{${setEnt(data[j].word)}}
-            console.log("The entity", data[j].entity);
-            if (data[j].entity == "B-LOC" || data[j].entity == "I-LOC"){
-              word +=
-            ` <span id="${data[j].entity.substring(2)}"><a href="https://www.google.com/maps/place/${data[j].word}" target="_blank">` +
-            data[j].word +
-            `<span id="tag"}>${data[j].entity.substring(2)}</span></a></span>`;
-          i = data[j].end - 1;
-          j += 1;
-            }else{
-              word +=
-              ` <span id="${data[j].entity.substring(2)}"><a href="https://en.wikipedia.org/wiki/${data[j].word}" target="_blank">` +
+          console.log("The entity", data[j].entity);
+          if (data[j].entity == "B-LOC" || data[j].entity == "I-LOC") {
+            word +=
+              ` <span id="${data[j].entity.substring(
+                2
+              )}"><a href="https://www.google.com/maps/place/${
+                data[j].word
+              }" target="_blank">` +
               data[j].word +
-              `<span id="tag"}>${data[j].entity.substring(2)}</span></a></span>`;
+              `<span id="tag"}>${data[j].entity.substring(
+                2
+              )}</span></a></span>`;
             i = data[j].end - 1;
             j += 1;
-            }
+          } else {
+            word +=
+              ` <span id="${data[j].entity.substring(
+                2
+              )}"><a href="https://en.wikipedia.org/wiki/${
+                data[j].word
+              }" target="_blank">` +
+              data[j].word +
+              `<span id="tag"}>${data[j].entity.substring(
+                2
+              )}</span></a></span>`;
+            i = data[j].end - 1;
+            j += 1;
+          }
         } else {
-          word += arr[i]
+          word += arr[i];
         }
       } else {
-        word += arr[i]
+        word += arr[i];
       }
-      //console.log(j,i)
     }
   }
 
-  console.log(word);
-  const [text, setText] = useState("hello <span>dude</span>");
-  return <Text className="App">{nogo?createText(word):input}</Text>;
+  return <Text className="App">{nogo ? createText(word) : input}</Text>;
 }
