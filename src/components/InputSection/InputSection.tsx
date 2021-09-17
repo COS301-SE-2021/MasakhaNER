@@ -171,6 +171,7 @@ export default function InputSection() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [imageIsOpen, setImageIsOpen] = useState(false);
   const [feedbackImage, setfeedbackImage] = useState(false);
+  const [name, setName] = useState("");
   const closeImage = () => {
     setImageIsOpen(false);
   };
@@ -221,6 +222,7 @@ export default function InputSection() {
       },
       body: JSON.stringify({
         feedback: feedback,
+        name: name,
       }),
     };
 
@@ -511,9 +513,13 @@ export default function InputSection() {
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
         <Button onClick={closeImgFeedback}>closs</Button>
         <p>
-          If you are image recognition was incorrect kindly 
+          If you are image recognition was incorrect kindly enter the name and
           upload the image of the parson.
-        </p>
+        </p>Name: 
+        <input
+          onChange = {(e) => setName(e.target.value)}
+        ></input>
+        <br/>
         <input
           style={{ color: "grey", marginBottom: "10px" }}
           type="file"
