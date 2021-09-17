@@ -96,7 +96,7 @@ export default function Dropdown({ data, input }: OutputProps) {
               data[j].word +
               `<span id="tag"}>${data[j].entity.substring(
                 2
-              )}</span></a><select name="entity"><option value="<LOC>">LOC</option><option value="<PER>">PER</option><option value="<ORG>">ORG</option><option value="<DAT>">DATE</option></select></span>`;
+              )}</span></a><select name="entity" id="EntName"><option value="<LOC>">LOC</option><option value="<PER>">PER</option><option value="<ORG>">ORG</option><option value="<DAT>">DATE</option></select></span>`;
             i = data[j].end - 1;
             j += 1;
             if ((document.getElementById("EntName") as HTMLInputElement).value != null){
