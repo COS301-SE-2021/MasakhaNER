@@ -75,5 +75,9 @@
     "@types/react-router-dom": "^5.1.9",
     "@types/styled-components": "^5.1.11",
     "@types/three": "^0.131.0"
-  }
+  },
+  "typeRoots": [
+    "../node_modules/@types",
+    "../@types"
+  ]
 }
