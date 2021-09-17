@@ -8,6 +8,29 @@ import { useHistory } from "react-router-dom";
 import Select from 'react-select';
 // import { CalliFrame } from "../Output/Output";
 
+const FeedInput = styled.input`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  height: 35px;
+  width: 20em;
+  padding: 15px;
+
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+  }
+
+  &:focus {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+`;
+
 const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
@@ -466,7 +489,7 @@ export default function InputSection() {
         </div>
         <form onSubmit={handleSubmit}>
         <br/>
-          <input
+          <FeedInput
              placeholder="Type here..."
              type="text"
              name="feedback1"
@@ -480,7 +503,7 @@ export default function InputSection() {
             <option value="<ORG>">Organization</option>
           </select>
           <br/>
-          <input
+          <FeedInput
              placeholder="Type here..."
              type="text"
              name="feedback2"
@@ -494,7 +517,7 @@ export default function InputSection() {
             <option value="<ORG>">Organization</option>
           </select>
           <br/>
-          <input
+          <FeedInput
              placeholder="Type here..."
              type="text"
              name="feedback3"
@@ -508,7 +531,7 @@ export default function InputSection() {
             <option value="<ORG>">Organization</option>
           </select>
           <br/>
-          <input
+          <FeedInput
              placeholder="Type here..."
              type="text"
              name="feedback4"
@@ -522,7 +545,7 @@ export default function InputSection() {
             <option value="<ORG>">Organization</option>
           </select>
           <br/>
-          <input
+          <FeedInput
              placeholder="Type here..."
              type="text"
              name="feedback5"
