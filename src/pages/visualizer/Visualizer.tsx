@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
-import { Physics, usePlane, useBox } from "@react-three/cannon";
+import { usePlane } from "@react-three/cannon";
 import {
   OrbitControls,
   Stars,
@@ -39,7 +39,7 @@ const Box: React.FC<Props> = ({
       // position={[0, 0, 0]}
       position={[position_x, 1, position_z]}
     >
-      <Text
+      {/* <Text
         color="white"
         anchorX="center"
         anchorY="middle"
@@ -47,7 +47,7 @@ const Box: React.FC<Props> = ({
         scale={2}
       >
         {name} - {height}
-      </Text>
+      </Text> */}
       <boxGeometry args={[0.3, height / 2, 0.3]} />
       <meshLambertMaterial attach="material" color={color} />
     </mesh>
