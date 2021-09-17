@@ -298,6 +298,10 @@ export default function InputSection() {
       setInput(reader.result);
     };
   };
+
+  const concatenate = () =>{
+
+  }
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
 
@@ -371,7 +375,9 @@ export default function InputSection() {
           <br />
           <Button
             onClick={(e) => {
+              alert(input2);
               e.preventDefault();
+              concatenate();
               handleFeedback();
               closeModal();
             }}
