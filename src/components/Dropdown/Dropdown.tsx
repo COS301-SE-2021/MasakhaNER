@@ -95,7 +95,7 @@ export default function Dropdown({ data, input }: OutputProps) {
               data[j].word +
               `<span id="tag"}>${data[j].entity.substring(
                 2
-              )}</span></a><select name="entity"><option value="LOCATION">LOC</option><option value="PERSON">PER</option><option value="ORGANISATION">ORG</option><option value="DATE">DATE</option></select></span>`;
+              )}</span></a><select name="entity"><option value="<LOC>">LOC</option><option value="<PER>">PER</option><option value="<ORG>">ORG</option><option value="<DAT>">DATE</option></select></span>`;
             i = data[j].end - 1;
             j += 1;
           } else {
@@ -108,7 +108,7 @@ export default function Dropdown({ data, input }: OutputProps) {
               data[j].word +
               `<span id="tag"}>${data[j].entity.substring(
                 2
-              )}</span></a><select name="entity"><option value="LOCATION">LOC</option></select></span>`;
+              )}</span></a><select name="entity"><option value="<LOC>">LOC</option><option value="<PER>">PER</option><option value="<ORG>">ORG</option><option value="<DAT>">DATE</option></select></select></span>`;
             i = data[j].end - 1;
             j += 1;
           }
