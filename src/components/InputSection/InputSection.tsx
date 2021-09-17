@@ -243,7 +243,7 @@ export default function InputSection() {
   };
 
   useEffect(() => {
-    fetch("/api/input", options)
+    fetch("/input", options)
       .then((res) => res.json())
       .then((data) => {
         setOutputData(data.output);
