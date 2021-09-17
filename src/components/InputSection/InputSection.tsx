@@ -270,7 +270,7 @@ export default function InputSection() {
     };
 
     try {
-      const resp = await fetch("/api/input", opts);
+      const resp = await fetch("/input", opts);
       console.log(resp);
       if (resp.status === 200) {
         const data = await resp.json();

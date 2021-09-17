@@ -123,7 +123,7 @@ def token_required(f):
     return decorated
 
 
-@app.route('/api/input', methods=["POST"])
+@app.route('/input', methods=["POST"])
 @token_required
 def model_feedback(user):
 
@@ -239,7 +239,7 @@ def verify_user():
 """
 
 
-@app.route('/api/login', methods=["POST"])
+@app.route('/login', methods=["POST"])
 def login_user():
     # print(app.config)
     # athing = app.config['DB_NAME']

@@ -39,7 +39,7 @@ const Box: React.FC<Props> = ({
       // position={[0, 0, 0]}
       position={[position_x, 1, position_z]}
     >
-      {/* <Text
+      <Text
         color="white"
         anchorX="center"
         anchorY="middle"
@@ -47,7 +47,7 @@ const Box: React.FC<Props> = ({
         scale={2}
       >
         {name} - {height}
-      </Text> */}
+      </Text>
       <boxGeometry args={[0.3, height / 2, 0.3]} />
       <meshLambertMaterial attach="material" color={color} />
     </mesh>
@@ -114,7 +114,7 @@ const Visualizer = () => {
   const [inputData, setInputData] = useState([]);
 
   useEffect(() => {
-    fetch("/api/input", options)
+    fetch("/input", options)
       .then((res) => res.json())
       .then((data) => {
         setInputData(data);

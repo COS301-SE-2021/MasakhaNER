@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "strictNullChecks": false,
     "allowSyntheticDefaultImports": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",

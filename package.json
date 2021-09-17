@@ -43,7 +43,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-api": "cd api && python main.py",
+    "start-api": "cd api && python3 main.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -76,8 +76,5 @@
     "@types/styled-components": "^5.1.11",
     "@types/three": "^0.131.0"
   },
-  "typeRoots": [
-    "../node_modules/@types",
-    "../@types"
-  ]
+  "proxy":"http://localhost:5000"
 }

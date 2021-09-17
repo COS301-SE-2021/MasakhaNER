@@ -20,16 +20,16 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          {/* <Redirect from="/Admin#/logins" to="/" /> */}
+          <Redirect from="/Admin#/logins" to="/" />
           <Route exact path="/" component={Login} />
-          {/* <Route exact path="/register" component={Register} />
-          <Route exact path="/dashboard" component={Dashboard}  />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/verify" component={Verify} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/details/edit" component={Edit} />
           <Route exact path="/details/changepassword" component={Changepass} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/visualizer" component={Visualizer} /> */}
+          <Route exact path="/visualizer" component={Visualizer} />
         </Switch>
       </Router>
     </div>
