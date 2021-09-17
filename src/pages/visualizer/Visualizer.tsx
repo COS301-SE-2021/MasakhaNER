@@ -19,40 +19,40 @@ interface Props {
   name: string;
 }
 
-const Box: React.FC<Props> = ({
-  height,
-  position_x,
-  position_z,
-  color,
-  name,
-}) => {
-  // const [ref, api] = useBox(() => ({
-  //   mass: 0.1,
-  //   position: [position_x, 1, position_z],
-  // }));
-  return (
-    <mesh
-      // onClick={() => {
-      //   api.velocity.set(0, 0, 0);
-      // }}
-      // ref={ref}
-      // position={[0, 0, 0]}
-      position={[position_x, 1, position_z]}
-    >
-      <Text
-        color="white"
-        anchorX="center"
-        anchorY="middle"
-        position={[0, 0, 0.3]}
-        scale={2}
-      >
-        {name} - {height}
-      </Text>
-      <boxGeometry args={[0.3, height / 2, 0.3]} />
-      <meshLambertMaterial attach="material" color={color} />
-    </mesh>
-  );
-};
+// const Box: React.FC<Props> = ({
+//   height,
+//   position_x,
+//   position_z,
+//   color,
+//   name,
+// }) => {
+//   // const [ref, api] = useBox(() => ({
+//   //   mass: 0.1,
+//   //   position: [position_x, 1, position_z],
+//   // }));
+//   return (
+//     <mesh
+//       // onClick={() => {
+//       //   api.velocity.set(0, 0, 0);
+//       // }}
+//       // ref={ref}
+//       // position={[0, 0, 0]}
+//       position={[position_x, 1, position_z]}
+//     >
+//       <Text
+//         color="white"
+//         anchorX="center"
+//         anchorY="middle"
+//         position={[0, 0, 0.3]}
+//         scale={2}
+//       >
+//         {name} - {height}
+//       </Text>
+//       <boxGeometry args={[0.3, height / 2, 0.3]} />
+//       <meshLambertMaterial attach="material" color={color} />
+//     </mesh>
+//   );
+// };
 
 const Plane = () => {
   const [ref] = usePlane(() => ({
@@ -144,13 +144,13 @@ const Visualizer = () => {
 
   return (
     <div style={{ backgroundColor: "#000", width: "100vw", height: "100vh" }}>
-      <Canvas>
+      {/* <Canvas>
         <OrbitControls />
         <shaderMaterial />
         <Stars />
         <ambientLight intensity={1} />
         <spotLight position={[10, 30, 10]} angle={0.3} castShadow />
-        {/* <Physics> */}
+        
         {displayArray.map((i) => {
           return (
             <Box
@@ -162,9 +162,8 @@ const Visualizer = () => {
             />
           );
         })}
-        {/* <Plane /> */}
-        {/* </Physics> */}
-      </Canvas>
+        
+      </Canvas> */}
     </div>
   );
 };
