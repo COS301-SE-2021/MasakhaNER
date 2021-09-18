@@ -703,7 +703,7 @@ def admin_get_feedack(user, id):
 
 @app.route('/feedback', methods=["GET"])
 @cross_origin()
-@token_required
+# @token_required
 def admin_get_all_feedback(user):
     # print(user[5])
     if user is None:
