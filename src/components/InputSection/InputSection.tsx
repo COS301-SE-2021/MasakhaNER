@@ -10,25 +10,21 @@ import Select from 'react-select';
 
 const FeedInput = styled.input`
   border: solid 1px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
   height: 35px;
   width: 20em;
-  padding: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+`;
 
-  &:hover {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
-    transition: 0.4s;
-  }
-
-  &:focus {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
-  }
+const FeedSelect = styled.select`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  height: 35px; 
+  width: 5em;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 `;
 
 const FormContainer = styled.div`
@@ -495,13 +491,13 @@ export default function InputSection() {
              name="feedback1"
              id="Feed1"
           />
-          <select name="feedbackEnt1" id="Ent1">
+          <FeedSelect name="feedbackEnt1" id="Ent1">
             <option></option>
-            <option value="<LOC>">Location</option>
-            <option value="<PER>">Person</option>
-            <option value="<DAT>">Date</option>
-            <option value="<ORG>">Organization</option>
-          </select>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
           <br/>
           <FeedInput
              placeholder="Type here..."
@@ -509,13 +505,13 @@ export default function InputSection() {
              name="feedback2"
              id="Feed2"
           />
-          <select name="feedbackEnt2" id="Ent2">
+          <FeedSelect name="feedbackEnt2" id="Ent2">
             <option></option>
-            <option value="<LOC>">Location</option>
-            <option value="<PER>">Person</option>
-            <option value="<DAT>">Date</option>
-            <option value="<ORG>">Organization</option>
-          </select>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
           <br/>
           <FeedInput
              placeholder="Type here..."
@@ -523,13 +519,13 @@ export default function InputSection() {
              name="feedback3"
              id="Feed3"
           />
-          <select name="feedbackEnt3" id="Ent3">
+          <FeedSelect name="feedbackEnt3" id="Ent3">
             <option></option>
-            <option value="<LOC>">Location</option>
-            <option value="<PER>">Person</option>
-            <option value="<DAT>">Date</option>
-            <option value="<ORG>">Organization</option>
-          </select>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
           <br/>
           <FeedInput
              placeholder="Type here..."
@@ -537,13 +533,13 @@ export default function InputSection() {
              name="feedback4"
              id="Feed4"
           />
-          <select name="feedbackEnt4" id="Ent4">
+          <FeedSelect name="feedbackEnt4" id="Ent4">
             <option></option>
-            <option value="<LOC>">Location</option>
-            <option value="<PER>">Person</option>
-            <option value="<DAT>">Date</option>
-            <option value="<ORG>">Organization</option>
-          </select>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
           <br/>
           <FeedInput
              placeholder="Type here..."
@@ -551,13 +547,13 @@ export default function InputSection() {
              name="feedback5"
              id="Feed5"
           />
-          <select name="feedbackEnt5" id="Ent5">
+          <FeedSelect name="feedbackEnt5" id="Ent5">
             <option></option>
-            <option value="<LOC>">Location</option>
-            <option value="<PER>">Person</option>
-            <option value="<DAT>">Date</option>
-            <option value="<ORG>">Organization</option>
-          </select>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
       
           <br/>
           <br/>
