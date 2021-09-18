@@ -135,13 +135,13 @@ def model_feedback(user):
         return jsonify({'response': 'log in to use model'}), 401
 
     user_input = str(request.json["input"])
-    stuff = ner.run()
+    #stuff = ner.run()
     # model_feedback = str(runModel(user_input))
     # model_feedback = eval(model_feedback)
     db = app.config['DATABASE']
     if(db != False):
         # db.input(model_feedback)
-        dude = {'output': stuff}
+        dude = {'output': "stuff"}
         #dude = {'output': "model_feedback"}
         return dude, 200
     else:
