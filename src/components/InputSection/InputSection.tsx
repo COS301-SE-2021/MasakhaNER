@@ -5,7 +5,6 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
-import Select from "react-select";
 import { isConstructorDeclaration } from "typescript";
 // import { CalliFrame } from "../Output/Output";
 
@@ -355,27 +354,48 @@ export default function InputSection() {
   ];
 
   const concatFeedback = () => {
-    let concatenate =
-      (document.getElementById("Feed1") as HTMLInputElement).value +
-      (document.getElementById("Ent1") as HTMLInputElement).value +
-      (document.getElementById("Feed2") as HTMLInputElement).value +
-      (document.getElementById("Ent2") as HTMLInputElement).value +
-      (document.getElementById("Feed3") as HTMLInputElement).value +
-      (document.getElementById("Ent3") as HTMLInputElement).value +
-      (document.getElementById("Feed4") as HTMLInputElement).value +
-      (document.getElementById("Ent4") as HTMLInputElement).value +
-      (document.getElementById("Feed5") as HTMLInputElement).value +
-      (document.getElementById("Ent5") as HTMLInputElement).value;
+    let finalText = input;
+    let newText = "";
 
-    console.warn(concatenate);
-    setFeedback(concatenate);
+    if ((document.getElementById("Feed1") as HTMLInputElement).value != null){
+      if (finalText.includes((document.getElementById("Feed1") as HTMLInputElement).value)){
+        newText = finalText.replace((document.getElementById("Feed1") as HTMLInputElement).value, (document.getElementById("Feed1") as HTMLInputElement).value+(document.getElementById("Ent1") as HTMLInputElement).value);
+        finalText = newText;
+      }
+    }
+    if ((document.getElementById("Feed2") as HTMLInputElement).value != null){
+      if (finalText.includes((document.getElementById("Feed2") as HTMLInputElement).value)){
+        newText = finalText.replace((document.getElementById("Feed2") as HTMLInputElement).value, (document.getElementById("Feed2") as HTMLInputElement).value+(document.getElementById("Ent2") as HTMLInputElement).value);
+        finalText = newText;
+      }
+    }
+    if ((document.getElementById("Feed3") as HTMLInputElement).value != null){
+      if (finalText.includes((document.getElementById("Feed3") as HTMLInputElement).value)){
+        newText = finalText.replace((document.getElementById("Feed3") as HTMLInputElement).value, (document.getElementById("Feed3") as HTMLInputElement).value+(document.getElementById("Ent3") as HTMLInputElement).value);
+        finalText = newText;
+      }
+    }
+    if ((document.getElementById("Feed4") as HTMLInputElement).value != null){
+      if (finalText.includes((document.getElementById("Feed4") as HTMLInputElement).value)){
+        newText = finalText.replace((document.getElementById("Feed4") as HTMLInputElement).value, (document.getElementById("Feed4") as HTMLInputElement).value+(document.getElementById("Ent4") as HTMLInputElement).value);
+        finalText = newText;
+      }
+    }
+    if ((document.getElementById("Feed5") as HTMLInputElement).value != null){
+      if (finalText.includes((document.getElementById("Feed5") as HTMLInputElement).value)){
+        newText = finalText.replace((document.getElementById("Feed5") as HTMLInputElement).value, (document.getElementById("Feed5") as HTMLInputElement).value+(document.getElementById("Ent5") as HTMLInputElement).value);
+        finalText = newText;
+      }
+    }
+    console.warn(newText);
+    setFeedback(newText);
   };
 
   // console.log("THSI IS FILE ANME ",filename)
   // console.log("THSI IS FILE CONTENT ",filecontent);
   const handleImageFile = (e: any) => {
     const file = e.target.files;
-    console.log(file, "$$$$");
+    // console.log(file, "$$$$");
 
     const reader = new FileReader();
     reader.readAsDataURL(file[0]);
