@@ -1,13 +1,38 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
-import { usePlane } from "@react-three/cannon";
-import { OrbitControls, Stars, Text } from "@react-three/drei";
+import { Physics, usePlane, useBox } from "@react-three/cannon";
+import {
+  OrbitControls,
+  Stars,
+  Sky,
+  shaderMaterial,
+  Text,
+} from "@react-three/drei";
 import "./Visualizer.css";
 
+// interface Props {
+//   height: number;
+//   position_x: number;
+//   position_z: number;
+//   color: string;
+//   name: string;
+// }
+
 const Box = ({ height, position_x, position_z, color, name }) => {
+  // const [ref, api] = useBox(() => ({
+  //   mass: 0.1,
+  //   position: [position_x, 1, position_z],
+  // }));
   return (
-    <mesh position={[position_x, 1, position_z]}>
+    <mesh
+      // onClick={() => {
+      //   api.velocity.set(0, 0, 0);
+      // }}
+      // ref={ref}
+      // position={[0, 0, 0]}
+      position={[position_x, 1, position_z]}
+    >
       <Text
         color="white"
         anchorX="center"
@@ -36,6 +61,7 @@ const Plane = () => {
 };
 
 const Visualizer = () => {
+  // [height, position_x, position_z]
   const data = [
     // front
     [9, "#dd9c22", -4, 1.5],
