@@ -252,12 +252,19 @@ def login_user():
         if db.login(user_email, user_password):
             token = jwt.encode({'email': user_email, 'exp': datetime.utcnow(
             ) + timedelta(hours=2)}, app.config['SECRET_KEY'], algorithm="HS256")
+            response = jsonify(
+                {'isadmin': db.isAdmin(user_email), 'token': token})
+            response.headers.add("Access-Control-Allow-Origin", "*")
 
-            return jsonify({'isadmin': db.isAdmin(user_email), 'token': token}).headers.add("Access-Control-Allow-Origin", "*")
+            return response, 200
         else:
-            return jsonify({'response': 'authetication failed!'}).headers.add("Access-Control-Allow-Origin", "*"), 401
+            response = jsonify({'response': 'authetication failed!'})
+            response.headers.add("Access-Control-Allow-Origin", "*")
+            return response, 401
     else:
-        return jsonify({'response': 'authetication failed!'}).headers.add("Access-Control-Allow-Origin", "*"), 401
+        response = jsonify({'response': 'authetication failed!'})
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response, 401
 
 # Admin functions
 
