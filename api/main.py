@@ -311,7 +311,8 @@ def admin_add_user(user):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
         user_isadmin = request.json["isadmin"]
-        id = db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)
+        id = db.adminAddUser(user_firstname, user_lastname,
+                             user_email, user_password, user_isadmin)
         if(id != None):
             return jsonify({'response': 'registered', 'id': id}), 200
         else:

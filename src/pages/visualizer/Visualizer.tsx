@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Canvas } from "@react-three/fiber";
-import { Physics, usePlane, useBox } from "@react-three/cannon";
+import { usePlane } from "@react-three/cannon";
 import {
   OrbitControls,
   Stars,

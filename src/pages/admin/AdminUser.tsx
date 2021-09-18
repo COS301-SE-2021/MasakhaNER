@@ -8,10 +8,11 @@ import CreateModel from "../../components/admin/CreateModel";
 import ModelList from "../../components/admin/ModelList";
 import FeedBackList from "../../components/admin/FeedBackList";
 import ModelEdit from "../../components/admin/ModelEdit";
-import authProvider from "../../components/admin/authProvider";
 import { createMuiTheme } from "@material-ui/core/styles";
 import Login from "../../components/login/Login";
 import { purple } from "@material-ui/core/colors";
+import Logout from "../../components/logout/Logout";
+import Dashboard from "../dashboard/Dashboard";
 
 export default function AdminUser() {
   const fetchJson = (url: string, options: any = {}) => {
@@ -39,8 +40,8 @@ export default function AdminUser() {
       <Admin
         theme={theme}
         dataProvider={dataProvider}
-        authProvider = {authProvider}
         loginPage = {Login}
+        logoutButton = {Logout}
       >
         <Resource
           name="users"
@@ -55,7 +56,7 @@ export default function AdminUser() {
           create={CreateModel}
         />
         <Resource name="feedback" list={FeedBackList} />
-        <Resource name="dashboard" list={Input} />
+        <Resource name="dashboard" list={Dashboard} />
       </Admin>
     </>
   );
