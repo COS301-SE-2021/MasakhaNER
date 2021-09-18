@@ -8,17 +8,13 @@ import {
 } from "react-router-dom";
 import Login from "./components/login/Login";
 import Register from "./pages/register/Register";
-// import Dashboard from "./pages/dashboard/Dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
 import Verify from "./pages/verify/Verify";
 import Admin from "./pages/admin/AdminUser";
 import Edit from "./pages/details/editDetails/Edit";
 import Changepass from "./pages/details/resetPassword/Changepass";
 import About from "./pages/about/About";
-// import Visualizer from "./pages/visualizer/Visualizer";
-import { Suspense } from "react-is";
-
-const Visualizer = lazy(() => import("./pages/visualizer/Visualizer"));
-const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
+import Visualizer from "./pages/visualizer/Visualizer";
 
 function App() {
   return (
@@ -28,10 +24,8 @@ function App() {
           {/* <Redirect from="/Admin#/logins" to="/" /> */}
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Suspense fallback={<div>Loading</div>}>
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/visualizer" component={Visualizer} />
-          </Suspense>
+          <Route exact path="/dashboard" component={Dashboard} />
+          {/* <Route exact path="/visualizer" component={Visualizer} /> */}
           <Route exact path="/verify" component={Verify} />
           {/* <Route exact path="/admin" component={Admin} /> */}
           {/* <Route exact path="/details/edit" component={Edit} /> */}
