@@ -256,16 +256,16 @@ def login_user():
             ) + timedelta(hours=2)}, app.config['SECRET_KEY'], algorithm="HS256")
             response = jsonify(
                 {'isadmin': db.isAdmin(user_email), 'token': token})
-            response.headers.add("Access-Control-Allow-Origin", "*")
+            # response.headers.add("Access-Control-Allow-Origin", "*")
 
             return response, 200
         else:
             response = jsonify({'response': 'authetication failed!'})
-            response.headers.add("Access-Control-Allow-Origin", "*")
+            # response.headers.add("Access-Control-Allow-Origin", "*")
             return response, 401
     else:
         response = jsonify({'response': 'authetication failed!'})
-        response.headers.add("Access-Control-Allow-Origin", "*")
+        # response.headers.add("Access-Control-Allow-Origin", "*")
         return response, 401
 
 # Admin functions
