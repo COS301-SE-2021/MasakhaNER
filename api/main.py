@@ -704,7 +704,7 @@ def admin_get_feedack(user, id):
 @app.route('/feedback', methods=["GET"])
 @cross_origin()
 # @token_required
-def admin_get_all_feedback(user):
+def admin_get_all_feedback():
     # print(user[5])
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
