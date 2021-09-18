@@ -17,7 +17,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 app = Flask(__name__)
 app.config.from_object('config_default.Config')
 
-runModel("load")
+# runModel("load")
 
 # app.config['SECRET_KEY']='secret'
 # app.config['DATABASE']=User()
