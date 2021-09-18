@@ -31,7 +31,8 @@ const ImageWrapper = styled.div`
 const Bar = styled.div`
   width: inherit;
   height: 5px;
-  background-color: #000;
+  background-color: green;
+  // color:#1c5f22
   margin-top: 5px;
 `;
 
@@ -84,8 +85,20 @@ const Button = styled.button`
 `;
 
 const ChangepassButton = styled(Button)`
-  background-color: black;
+  // background-color: black;
+  // color: white;
+  background-color: #1c5f22;
+  border: solid 1px #1c5f22;
   color: white;
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
+    background-color: #34833b;
+    border: solid 1px #34833b;
+  }
 `;
 
 let history;
@@ -165,19 +178,20 @@ const Container = styled.div`
 
   return (
     <div id="detailspage">
-      <Nav />
+      
       <Container>
       <Wrapper>
-        <Header>
+        <Header style={{ fontSize: "30px", color: "#1c5f22" }} id="login-header">
           MasakhaNER
           <Bar />
         </Header>
         <div>
-          <h2>Change Password</h2>
+          <h2  style={{ color: "#1c5f22" }}id="login-header">Change Password</h2>
         </div>
         <form id="detForm" onSubmit={handleSubmit}>
           <label htmlFor="oldPassword">Email:</label>
           <Input
+            style={{ marginTop: "15px",color: "#1c5f22" }}
             type="email"
             name="email"
             id="email"
@@ -225,8 +239,9 @@ const Container = styled.div`
           />
           {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
           <br />
+          <div className="submit-button">
           <ChangepassButton>
-            <div className="submit-button">
+            {/* <div className="submit-button"> */}
               <button
                 disabled={disabled}
                 id="mainBtn"
@@ -243,13 +258,14 @@ const Container = styled.div`
               >
                 Submit
               </button>
-            </div>
+            {/* </div> */}
           </ChangepassButton>
+          </div>
         </form>
         <br />
         <br />
       </Wrapper>
-      <ImageWrapper id="image3"></ImageWrapper>
+      {/* <ImageWrapper id="image3"></ImageWrapper> */}
       </Container>
     </div>
   );

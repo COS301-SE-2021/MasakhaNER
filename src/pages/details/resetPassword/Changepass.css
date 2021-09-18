@@ -1,4 +1,4 @@
-*{
+/* *{
   margin: 0;
   padding: 0;
 }
@@ -60,15 +60,15 @@ a, p{
   margin-top: auto;
   margin-bottom: auto;
 }
-.form-group input{
+/* .form-group input{
   border: 10px solid white;
   background-color: white;
   box-shadow: 5px 5px 5px rgb(221, 221, 221);
   border-radius: 0 0 5px 5px;
   width: 100%;
-}
+} */
 
-.reCAP{
+/* .reCAP{
   align-self: start;
   width: 45%;
   height: 45%;
@@ -78,6 +78,10 @@ a, p{
 
 em{
   font-weight: bold;
+} */ 
+
+body {
+  background-color: rgb(250, 250, 250);
 }
 
 #image3{
