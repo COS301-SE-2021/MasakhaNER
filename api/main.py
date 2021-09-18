@@ -10,6 +10,7 @@ from functools import wraps
 import jwt
 import os
 import sys
+import predict_ner as ner
 from flask_cors import CORS, cross_origin
 from werkzeug.datastructures import Headers
 # from faceAI import faces
@@ -133,13 +134,13 @@ def model_feedback(user):
         return jsonify({'response': 'log in to use model'}), 401
 
     user_input = str(request.json["input"])
-
-    model_feedback = str(runModel(user_input))
-    model_feedback = eval(model_feedback)
+    stuff = ner.run()
+    # model_feedback = str(runModel(user_input))
+    # model_feedback = eval(model_feedback)
     db = app.config['DATABASE']
     if(db != False):
-        db.input(model_feedback)
-        dude = {'output': model_feedback}
+        # db.input(model_feedback)
+        dude = {'output': stuff}
         #dude = {'output': "model_feedback"}
         return dude, 200
     else:
