@@ -15,7 +15,7 @@ class Email2:
             print("THE ERROR IS", e)
 
     def sendMessage(self, sendto, message):
-        message = Mail(from_email="stopdacap301@gmail.com",
+        message = Mail(from_email="masakhaner.301@gmail.com",
                        to_emails=sendto,
                        subject="Verification Code",
                        plain_text_content=message,
