@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Changepass.css";
-import ReCAPTCHA from "react-google-recaptcha";
-import Nav from "../../../components/nav/Nav";
+// import ReCAPTCHA from "react-google-recaptcha";
+// import Nav from "../../../components/nav/Nav";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import Footer from "../../../components/Footer/Footer";
+// import Footer from "../../../components/Footer/Footer";
 
 const Wrapper = styled.div`
   background-color: white;
@@ -13,14 +13,16 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
-  width: 80vw;
+  // height: 80vh;
+  // width: 80vw;
+  height: 100vh;
+  width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
   align-self: flex-end;
   margin-top: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+  // border-radius: 20px;
+  // box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
 `;
 
 const Bar = styled.div`
@@ -75,13 +77,15 @@ const Button = styled.button`
   // border-radius: 20px;
   border-radius: 5px;
   height: 35px;
-  width: 15em;
+  // width: 15em;
+  width: 20em;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    border-radius: 5px;
   }
 `;
 
@@ -89,7 +93,7 @@ const ChangepassButton = styled(Button)`
   // background-color: black;
   // color: white;
   background-color: #1c5f22;
-  border: solid 1px #1c5f22;
+  // border: solid 1px #1c5f22;
   color: white;
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
@@ -126,12 +130,6 @@ function Register() {
     }),
   };
 
-  const ImageWrapper = styled.div`
-  height: 100vh;
-  width: 45vw;
-  background-repeat: no-repeat;
-  background-color: #305c16;
-`;
 
 const Container = styled.div`
   display: flex;
@@ -181,17 +179,13 @@ const Container = styled.div`
     <div id="detailspage"> 
       <Container>
       <Wrapper>
-        <Header style={{ fontSize: "30px", color: "#1c5f22" }} id="login-header">
+        {/* <Header style={{ fontSize: "30px", color: "#1c5f22" }} id="login-header">
           MasakhaNER
           <Bar />
-        </Header>
-        {/* <div>
-          <h2  style={{ color: "#1c5f22" }}id="login-header">Change Password</h2>
-        </div> */}
+        </Header> */}
         <form id="detForm" onSubmit={handleSubmit}>
-          {/* <label htmlFor="oldPassword">Email:</label> */}
+          <label style={{color: "#1c5f22", font: "30px" }} htmlFor="oldPassword">Email:</label>
           <Input
-            style={{ marginTop: "15px",color: "#1c5f22" }}
             type="email"
             name="email"
             id="email"
@@ -203,7 +197,7 @@ const Container = styled.div`
             required
             placeholder="Enter your email"
           />
-          <label style={{color: "#1c5f22" }}htmlFor="newPassword">New password:</label>
+          <label style={{color: "#1c5f22", font: "30px" }}htmlFor="newPassword">New password:</label>
           <Input
             type="password"
             name="oldPassword"
@@ -239,14 +233,13 @@ const Container = styled.div`
           />
           {!Passworderr && <p style={{color: "#1c5f22" }}color="red">PASSWORDS MUST MATCH</p>}
           <br />
-          <div /* className="submit-button" */>
-          <ChangepassButton>
-            <div className="submit-button">
-              <button
+          <div className="submit-button">
+          <ChangepassButton
                 // disabled={disabled}
                 id="mainBtn"
                 type="submit"
                 // className="btn btn-dark"
+                className="sc-cAmkOX sc-icwmCI eCzbWA hOxvSE"
                 onClick={(e) => {
                   e.preventDefault();
                   if (!validPassword.test(password2)) {
@@ -257,8 +250,6 @@ const Container = styled.div`
                 }}
               >
                 Submit
-              </button>
-            </div>
           </ChangepassButton>
           </div>
         </form>
