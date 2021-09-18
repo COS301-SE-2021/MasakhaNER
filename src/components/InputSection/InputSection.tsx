@@ -59,6 +59,25 @@ const Input = styled.textarea`
   }
 `;
 
+const TextInput = styled.textarea`
+  display: inline-block;
+  border-radius: 10px;
+  width: 60vw;
+  height: 4em;
+  resize: none;
+  text-align: justify;
+  padding: 20px;
+  border-radius: 20px;
+  border: solid 0.1px rgba(153, 153, 153, 0.1);
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
+  position: relative;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+
 const FBInput = styled.textarea`
   border: 0;
   outline: 0;
@@ -404,7 +423,7 @@ export default function InputSection() {
       <FormContainer>
         <div style={{ height: "0px" }} id="inputsection">
           <form style={{ height: "0px" }} onSubmit={handleSubmit}>
-            <Input
+            <TextInput
               placeholder="Type here..."
               id="testSection"
               value={input}
