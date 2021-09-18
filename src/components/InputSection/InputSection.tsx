@@ -5,7 +5,8 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
-import Select from 'react-select';
+import Select from "react-select";
+import { isConstructorDeclaration } from "typescript";
 // import { CalliFrame } from "../Output/Output";
 
 const FeedInput = styled.input`
@@ -20,7 +21,7 @@ const FeedInput = styled.input`
 
 const FeedSelect = styled.select`
   border: solid 1px rgba(0, 0, 0, 0.2);
-  height: 35px; 
+  height: 35px;
   width: 5em;
   padding: 5px;
   border-radius: 5px;
@@ -76,7 +77,6 @@ const TextInput = styled.textarea`
     outline: none;
   }
 `;
-
 
 const FBInput = styled.textarea`
   border: 0;
@@ -348,20 +348,26 @@ export default function InputSection() {
     };
   };
 
- 
   const FbOpts = [
-    { value: 'ORG', label: 'Organization' },
-    { value: 'LOC', label: 'Location' },
-    { value: 'PER', label: 'Person' }
-  ]
-  
-  const concatFeedback = () =>{
-    let concatenate = (document.getElementById("Feed1") as HTMLInputElement).value + (document.getElementById("Ent1") as HTMLInputElement).value + 
-    (document.getElementById("Feed2") as HTMLInputElement).value + (document.getElementById("Ent2") as HTMLInputElement).value +
-    (document.getElementById("Feed3") as HTMLInputElement).value + (document.getElementById("Ent3") as HTMLInputElement).value +
-    (document.getElementById("Feed4") as HTMLInputElement).value + (document.getElementById("Ent4") as HTMLInputElement).value +
-    (document.getElementById("Feed5") as HTMLInputElement).value + (document.getElementById("Ent5") as HTMLInputElement).value;
-   
+    { value: "ORG", label: "Organization" },
+    { value: "LOC", label: "Location" },
+    { value: "PER", label: "Person" },
+  ];
+
+  const concatFeedback = () => {
+    let concatenate =
+      (document.getElementById("Feed1") as HTMLInputElement).value +
+      (document.getElementById("Ent1") as HTMLInputElement).value +
+      (document.getElementById("Feed2") as HTMLInputElement).value +
+      (document.getElementById("Ent2") as HTMLInputElement).value +
+      (document.getElementById("Feed3") as HTMLInputElement).value +
+      (document.getElementById("Ent3") as HTMLInputElement).value +
+      (document.getElementById("Feed4") as HTMLInputElement).value +
+      (document.getElementById("Ent4") as HTMLInputElement).value +
+      (document.getElementById("Feed5") as HTMLInputElement).value +
+      (document.getElementById("Ent5") as HTMLInputElement).value;
+
+    console.warn(concatenate);
     setFeedback(concatenate);
   };
 
@@ -503,12 +509,12 @@ export default function InputSection() {
           </p>
         </div>
         <form onSubmit={handleSubmit}>
-        <br/>
+          <br />
           <FeedInput
-             placeholder="Type here..."
-             type="text"
-             name="feedback1"
-             id="Feed1"
+            placeholder="Type here..."
+            type="text"
+            name="feedback1"
+            id="Feed1"
           />
           <FeedSelect name="feedbackEnt1" id="Ent1">
             <option></option>
@@ -517,12 +523,12 @@ export default function InputSection() {
             <option value="<DAT>">DAT</option>
             <option value="<ORG>">ORG</option>
           </FeedSelect>
-          <br/>
+          <br />
           <FeedInput
-             placeholder="Type here..."
-             type="text"
-             name="feedback2"
-             id="Feed2"
+            placeholder="Type here..."
+            type="text"
+            name="feedback2"
+            id="Feed2"
           />
           <FeedSelect name="feedbackEnt2" id="Ent2">
             <option></option>
@@ -531,12 +537,12 @@ export default function InputSection() {
             <option value="<DAT>">DAT</option>
             <option value="<ORG>">ORG</option>
           </FeedSelect>
-          <br/>
+          <br />
           <FeedInput
-             placeholder="Type here..."
-             type="text"
-             name="feedback3"
-             id="Feed3"
+            placeholder="Type here..."
+            type="text"
+            name="feedback3"
+            id="Feed3"
           />
           <FeedSelect name="feedbackEnt3" id="Ent3">
             <option></option>
@@ -545,12 +551,12 @@ export default function InputSection() {
             <option value="<DAT>">DAT</option>
             <option value="<ORG>">ORG</option>
           </FeedSelect>
-          <br/>
+          <br />
           <FeedInput
-             placeholder="Type here..."
-             type="text"
-             name="feedback4"
-             id="Feed4"
+            placeholder="Type here..."
+            type="text"
+            name="feedback4"
+            id="Feed4"
           />
           <FeedSelect name="feedbackEnt4" id="Ent4">
             <option></option>
@@ -559,12 +565,12 @@ export default function InputSection() {
             <option value="<DAT>">DAT</option>
             <option value="<ORG>">ORG</option>
           </FeedSelect>
-          <br/>
+          <br />
           <FeedInput
-             placeholder="Type here..."
-             type="text"
-             name="feedback5"
-             id="Feed5"
+            placeholder="Type here..."
+            type="text"
+            name="feedback5"
+            id="Feed5"
           />
           <FeedSelect name="feedbackEnt5" id="Ent5">
             <option></option>
@@ -573,9 +579,9 @@ export default function InputSection() {
             <option value="<DAT>">DAT</option>
             <option value="<ORG>">ORG</option>
           </FeedSelect>
-      
-          <br/>
-          <br/>
+
+          <br />
+          <br />
           <Button
             onClick={(e) => {
               e.preventDefault();
