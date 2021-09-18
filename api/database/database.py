@@ -6,6 +6,7 @@ import psycopg2.extras
 import psycopg2
 from flask import Flask
 from database.send_email import Email
+from database.send_email2 import Email2
 import os
 import sys
 import functools
@@ -62,6 +63,8 @@ class User:
             # print(type(encrypted_password))
             encrypted_password = encrypted_password.decode('UTF-8')
             code = str(random.randint(1000, 9999))
+
+            sendemail2 = Email2()
 
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
             self.cur.execute(
