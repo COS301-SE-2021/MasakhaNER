@@ -165,91 +165,92 @@ const Container = styled.div`
 
   return (
     <div id="detailspage">
+      <Nav />
       <Container>
-    <Wrapper>
-      <Header>
-        MasakhaNER
-        <Bar />
-      </Header>
-      <div>
-        <h2>Change Password</h2>
-      </div>
-      <form id="detForm" onSubmit={handleSubmit}>
-        <label htmlFor="oldPassword">Email:</label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          className="form-control"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          required
-          placeholder="Enter your email"
-        />
-        <label htmlFor="newPassword">New password:</label>
-        <Input
-          type="password"
-          name="oldPassword"
-          id="oldPassword"
-          className="form-control"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          required
-          placeholder="Enter your new password"
-        />
-        {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
-        <label htmlFor="lastName">Confirm New Password:</label>
-        <Input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          className="form-control"
-          value={password2}
-          placeholder="Enter your new password"
-          onChange={(e) => {
-            setPassword2(e.target.value);
-            if (password === e.target.value) {
-              setPasswordErr(true);
-              setDisabled(false);
-            } else {
-              setPasswordErr(false);
-              setDisabled(true);
-            }
-          }}
-          required
-        />
-        {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
+      <Wrapper>
+        <Header>
+          MasakhaNER
+          <Bar />
+        </Header>
+        <div>
+          <h2>Change Password</h2>
+        </div>
+        <form id="detForm" onSubmit={handleSubmit}>
+          <label htmlFor="oldPassword">Email:</label>
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            required
+            placeholder="Enter your email"
+          />
+          <label htmlFor="newPassword">New password:</label>
+          <Input
+            type="password"
+            name="oldPassword"
+            id="oldPassword"
+            className="form-control"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            required
+            placeholder="Enter your new password"
+          />
+          {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
+          <label htmlFor="lastName">Confirm New Password:</label>
+          <Input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            className="form-control"
+            value={password2}
+            placeholder="Enter your new password"
+            onChange={(e) => {
+              setPassword2(e.target.value);
+              if (password === e.target.value) {
+                setPasswordErr(true);
+                setDisabled(false);
+              } else {
+                setPasswordErr(false);
+                setDisabled(true);
+              }
+            }}
+            required
+          />
+          {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
+          <br />
+          <ChangepassButton>
+            <div className="submit-button">
+              <button
+                disabled={disabled}
+                id="mainBtn"
+                type="submit"
+                className="btn btn-dark"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (!validPassword.test(password2)) {
+                    setPasswordErr2(true);
+                  } else {
+                    handleStatus();
+                  }
+                }}
+              >
+                Submit
+              </button>
+            </div>
+          </ChangepassButton>
+        </form>
         <br />
-        <ChangepassButton>
-          <div className="submit-button">
-            <button
-              disabled={disabled}
-              id="mainBtn"
-              type="submit"
-              className="btn btn-dark"
-              onClick={(e) => {
-                e.preventDefault();
-                if (!validPassword.test(password2)) {
-                  setPasswordErr2(true);
-                } else {
-                  handleStatus();
-                }
-              }}
-            >
-              Submit
-            </button>
-          </div>
-        </ChangepassButton>
-      </form>
-      <br />
-      <br />
-    </Wrapper>
-    <ImageWrapper id="image3"></ImageWrapper>
-    </Container>
+        <br />
+      </Wrapper>
+      <ImageWrapper id="image3"></ImageWrapper>
+      </Container>
     </div>
   );
 }
