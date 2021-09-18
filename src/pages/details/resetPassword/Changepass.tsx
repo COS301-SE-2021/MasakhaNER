@@ -152,6 +152,7 @@ function Register() {
   };
 
   return (
+    <div id="detailspage">
     <Wrapper>
       <Header>
         MasakhaNER
@@ -234,6 +235,7 @@ function Register() {
       <br />
       <br />
     </Wrapper>
+    </div>
   );
 }
 
