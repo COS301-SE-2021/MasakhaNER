@@ -64,8 +64,6 @@ class User:
             encrypted_password = encrypted_password.decode('UTF-8')
             code = str(random.randint(1000, 9999))
 
-            sendemail2 = Email2()
-
             sql = "INSERT INTO users (firstname,lastname,password,email,isadmin,activationcode, verified) VALUES(%s,%s,%s,%s,%s,%s,%s)"
             self.cur.execute(
                 sql, (firstname, lastname, encrypted_password, email, False, code, False))
@@ -76,6 +74,7 @@ class User:
             Here is your activation code: """
             message += code
             #sendemail.send_email(message, email)
+            sendemail2 = Email2()
             sendemail2.sendMessage(email, message)
             print("sent")
             self.conn.commit()
