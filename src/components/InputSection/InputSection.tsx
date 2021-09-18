@@ -361,8 +361,11 @@ export default function InputSection() {
     (document.getElementById("Feed3") as HTMLInputElement).value + (document.getElementById("Ent3") as HTMLInputElement).value +
     (document.getElementById("Feed4") as HTMLInputElement).value + (document.getElementById("Ent4") as HTMLInputElement).value +
     (document.getElementById("Feed5") as HTMLInputElement).value + (document.getElementById("Ent5") as HTMLInputElement).value;
-   
-    setFeedback(concatenate);
+    
+    console.warn("Feedback: ", concatenate);
+    if (concatenate != null){
+      setFeedback(concatenate);
+    }
   };
 
   // console.log("THSI IS FILE ANME ",filename)
