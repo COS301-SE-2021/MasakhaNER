@@ -240,7 +240,6 @@ def verify_user():
 
 
 @app.route('/login', methods=["POST"])
-@cross_origin()
 def login_user():
     # print(app.config)
     # athing = app.config['DB_NAME']
