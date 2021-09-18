@@ -8,6 +8,9 @@ import Login from "../../components/login/Login";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -15,6 +18,11 @@ const ImageWrapper = styled.div`
   width: 45vw;
   background-repeat: no-repeat;
   background-color: #305c16;
+
+  @media only screen and (max-width: 600px) {
+    height: 27vh;
+    width: 100vw;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -54,6 +62,11 @@ const Wrapper = styled.div`
         }
       }
     }
+  }
+
+  @media only screen and (max-width: 600px) {
+    height: 80vh;
+    width: 100vw;
   }
 `;
 
