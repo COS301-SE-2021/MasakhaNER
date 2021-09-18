@@ -10,13 +10,14 @@ from functools import wraps
 import jwt
 import os
 import sys
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from werkzeug.datastructures import Headers
 # from faceAI import faces
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object('config_default.Config')
 
 """
@@ -240,6 +241,7 @@ def verify_user():
 
 
 @app.route('/login', methods=["POST"])
+@cross_origin()
 def login_user():
     # print(app.config)
     # athing = app.config['DB_NAME']
