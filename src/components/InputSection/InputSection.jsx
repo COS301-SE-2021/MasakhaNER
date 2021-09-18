@@ -343,6 +343,45 @@ export default function InputSection() {
       }),
     };
 
+    const concatFeedback = () => {
+      let finalText = input;
+      let newText = "";
+  
+      if ((document.getElementById("Feed1") as HTMLInputElement).value != null){
+        if (finalText.includes((document.getElementById("Feed1") as HTMLInputElement).value)){
+          newText = finalText.replace((document.getElementById("Feed1") as HTMLInputElement).value, (document.getElementById("Feed1") as HTMLInputElement).value+(document.getElementById("Ent1") as HTMLInputElement).value);
+          finalText = newText;
+        }
+      }
+      if ((document.getElementById("Feed2") as HTMLInputElement).value != null){
+        if (finalText.includes((document.getElementById("Feed2") as HTMLInputElement).value)){
+          newText = finalText.replace((document.getElementById("Feed2") as HTMLInputElement).value, (document.getElementById("Feed2") as HTMLInputElement).value+(document.getElementById("Ent2") as HTMLInputElement).value);
+          finalText = newText;
+        }
+      }
+      if ((document.getElementById("Feed3") as HTMLInputElement).value != null){
+        if (finalText.includes((document.getElementById("Feed3") as HTMLInputElement).value)){
+          newText = finalText.replace((document.getElementById("Feed3") as HTMLInputElement).value, (document.getElementById("Feed3") as HTMLInputElement).value+(document.getElementById("Ent3") as HTMLInputElement).value);
+          finalText = newText;
+        }
+      }
+      if ((document.getElementById("Feed4") as HTMLInputElement).value != null){
+        if (finalText.includes((document.getElementById("Feed4") as HTMLInputElement).value)){
+          newText = finalText.replace((document.getElementById("Feed4") as HTMLInputElement).value, (document.getElementById("Feed4") as HTMLInputElement).value+(document.getElementById("Ent4") as HTMLInputElement).value);
+          finalText = newText;
+        }
+      }
+      if ((document.getElementById("Feed5") as HTMLInputElement).value != null){
+        if (finalText.includes((document.getElementById("Feed5") as HTMLInputElement).value)){
+          newText = finalText.replace((document.getElementById("Feed5") as HTMLInputElement).value, (document.getElementById("Feed5") as HTMLInputElement).value+(document.getElementById("Ent5") as HTMLInputElement).value);
+          finalText = newText;
+        }
+      }
+      console.warn(newText);
+      setFeedback(newText);
+    };
+  
+
     try {
       const resp = await fetch("/upload-image", opts);
       console.log(resp);
