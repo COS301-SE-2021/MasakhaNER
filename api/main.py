@@ -256,22 +256,20 @@ def login_user():
             ) + timedelta(hours=2)}, app.config['SECRET_KEY'], algorithm="HS256")
             response = jsonify(
                 {'isadmin': db.isAdmin(user_email), 'token': token})
-            # response.headers.add("Access-Control-Allow-Origin", "*")
 
             return response, 200
         else:
             response = jsonify({'response': 'authetication failed!'})
-            # response.headers.add("Access-Control-Allow-Origin", "*")
             return response, 401
     else:
         response = jsonify({'response': 'authetication failed!'})
-        # response.headers.add("Access-Control-Allow-Origin", "*")
         return response, 401
 
 # Admin functions
 
 
 @app.route('/update-details', methods=["POST"])
+@cross_origin()
 @token_required
 def update_details(user):
     if not user:
@@ -302,6 +300,7 @@ def update_details(user):
 
 
 @app.route('/users', methods=["POST"])
+@cross_origin()
 @token_required
 def admin_add_user(user):
 
@@ -339,6 +338,7 @@ def admin_add_user(user):
 # """
 
 @app.route('/users/<id>', methods=["PUT"])
+@cross_origin()
 @token_required
 def admin_update_user(user, id):
     # print(id)
@@ -377,6 +377,7 @@ def admin_update_user(user, id):
 
 
 @app.route('/users/<id>', methods=["DELETE"])
+@cross_origin()
 @token_required
 def admin_delete_user(user, id):
 
@@ -410,6 +411,7 @@ def admin_delete_user(user, id):
 
 
 @app.route('/users/<id>', methods=["GET"])
+@cross_origin()
 @token_required
 def admin_get_user(user, id):
     if id is not None:
@@ -443,6 +445,7 @@ def admin_get_user(user, id):
 
 
 @app.route('/users', methods=["GET"])
+@cross_origin()
 @token_required
 def admin_get_users(user):
     # print(user[5])
@@ -470,6 +473,7 @@ def admin_get_users(user):
 
 
 @app.route('/models', methods=["POST"])
+@cross_origin()
 @token_required
 def admin_add_models(user):
     if user is None:
@@ -492,6 +496,7 @@ def admin_add_models(user):
 
 
 @app.route('/models', methods=["GET"])
+@cross_origin()
 @token_required
 def admin_get_models(user):
     if user is None:
@@ -515,6 +520,7 @@ def admin_get_models(user):
 
 
 @app.route('/models/<id>', methods=["DELETE"])
+@cross_origin()
 @token_required
 def admin_delete_model(user, id):
 
@@ -538,6 +544,7 @@ def admin_delete_model(user, id):
 
 
 @app.route('/models/<id>', methods=["GET"])
+@cross_origin()
 @token_required
 def set_model(user, id):
 
@@ -586,6 +593,7 @@ def set_model(user, id):
 
 
 @app.route('/models/<id>', methods=["PUT"])
+@cross_origin()
 @token_required
 def admin_update_model(user, id):
     print(id)
@@ -608,6 +616,7 @@ def admin_update_model(user, id):
 
 
 @app.route('/feedback', methods=["POST"])
+@cross_origin()
 @token_required
 def add_feedback(user):
 
@@ -627,6 +636,7 @@ def add_feedback(user):
 
 
 @app.route('/feedback/<id>', methods=["DELETE"])
+@cross_origin()
 @token_required
 def admin_delete_feedback(user, id):
 
@@ -659,6 +669,7 @@ def admin_delete_feedback(user, id):
 
 
 @app.route('/feedback/<id>', methods=["GET"])
+@cross_origin()
 @token_required
 def admin_get_feedack(user, id):
     id = int(id)
@@ -685,6 +696,7 @@ def admin_get_feedack(user, id):
 
 
 @app.route('/feedback', methods=["GET"])
+@cross_origin()
 @token_required
 def admin_get_all_feedback(user):
     # print(user[5])
