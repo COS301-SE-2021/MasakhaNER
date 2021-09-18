@@ -14,7 +14,7 @@ import Admin from "./pages/admin/AdminUser";
 import Edit from "./pages/details/editDetails/Edit";
 import Changepass from "./pages/details/resetPassword/Changepass";
 import About from "./pages/about/About";
-import Visualizer from "./pages/visualizer/Visualizer";
+// import Visualizer from "./pages/visualizer/Visualizer";
 
 function App() {
   return (
@@ -31,6 +31,10 @@ function App() {
           {/* <Route exact path="/details/edit" component={Edit} /> */}
           {/* <Route exact path="/details/changepassword" component={Changepass} /> */}
           {/* <Route exact path="/about" component={About} /> */}
+<<<<<<< HEAD
+=======
+          {/* <Route exact path="/visualizer" component={Visualizer} /> */}
+>>>>>>> parent of e1095dc06 (added visualizer)
         </Switch>
       </Router>
     </div>
