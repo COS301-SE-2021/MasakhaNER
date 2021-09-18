@@ -784,7 +784,7 @@ def upload_image():
     # filename2 = os.path.join(dirname, "a.jpg")
     with open(filename, "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
-    print(my_string)
+    # print(my_string)
 
     return jsonify({'msg': str(my_string)})
 

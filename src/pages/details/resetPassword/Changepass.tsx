@@ -21,6 +21,12 @@ const Wrapper = styled.div`
   border-radius: 20px;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
 `;
+const ImageWrapper = styled.div`
+  height: 100vh;
+  width: 45vw;
+  background-repeat: no-repeat;
+  background-color: #305c16;
+`;
 
 const Bar = styled.div`
   width: inherit;
