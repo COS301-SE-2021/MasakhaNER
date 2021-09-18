@@ -111,6 +111,13 @@ function Register() {
       confirmPassword: password2,
     }),
   };
+  
+  const ImageWrapper = styled.div`
+  height: 100vh;
+  width: 45vw;
+  background-repeat: no-repeat;
+  background-color: #305c16;
+`;
 
   const handleStatus = async () => {
     try {
@@ -153,6 +160,7 @@ function Register() {
 
   return (
     <div id="detailspage">
+      <Container>
     <Wrapper>
       <Header>
         MasakhaNER
@@ -236,6 +244,7 @@ function Register() {
       <br />
     </Wrapper>
     <ImageWrapper id="image3"></ImageWrapper>
+    </Container>
     </div>
   );
 }
