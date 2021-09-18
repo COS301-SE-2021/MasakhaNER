@@ -1,5 +1,7 @@
 import smtplib
 import ssl
+# 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
+# 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
 
 
 class Email:
@@ -14,7 +16,7 @@ class Email:
 
     def __init__(self):
         self.smtp_server = "smtp.gmail.com"
-        self.port = 465  # For starttls
+        self.port = 587  # For starttls
         self.sender_email = "masakhaner.301@gmail.com"
         self.password = "stopdacapcos301"
         self.context = ssl.create_default_context()
