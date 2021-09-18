@@ -138,9 +138,9 @@ def model_feedback(user):
     model_feedback = eval(model_feedback)
     db = app.config['DATABASE']
     if(db != False):
-       # db.input(model_feedback)
-        #dude = {'output': model_feedback}
-        dude = {'output': "model_feedback"}
+        db.input(model_feedback)
+        dude = {'output': model_feedback}
+        #dude = {'output': "model_feedback"}
         return dude, 200
     else:
         return {'response': 'failed'}, 400
