@@ -213,7 +213,10 @@ export default function InputSection() {
     };
 
     try {
-      const resp = await fetch("/feedback", opts);
+      const resp = await fetch(
+        "https://masakha-api.herokuapp.com/feedback",
+        opts
+      );
       console.log(resp);
       if (resp.status === 200) {
       } else {
@@ -257,7 +260,7 @@ export default function InputSection() {
   };
 
   useEffect(() => {
-    fetch("/input", options)
+    fetch("https://masakha-api.herokuapp.com/input", options)
       .then((res) => res.json())
       .then((data) => {
         setOutputData(data.output);
@@ -284,7 +287,7 @@ export default function InputSection() {
     };
 
     try {
-      const resp = await fetch("/input", opts);
+      const resp = await fetch("https://masakha-api.herokuapp.com/input", opts);
       console.log(resp);
       if (resp.status === 200) {
         const data = await resp.json();
@@ -344,7 +347,10 @@ export default function InputSection() {
     };
 
     try {
-      const resp = await fetch("/upload-image", opts);
+      const resp = await fetch(
+        "https://masakha-api.herokuapp.com/upload-image",
+        opts
+      );
       console.log(resp);
       if (resp.status === 200) {
         // alert(resp.status);

@@ -108,7 +108,10 @@ function Register() {
 
   const handleStatus = async () => {
     try {
-      const resp = await fetch("/details/changepassword", options);
+      const resp = await fetch(
+        "https://masakha-api.herokuapp.com/details/changepassword",
+        options
+      );
       console.log(resp);
       if (resp.status === 200) {
         alert(resp.status);
@@ -127,7 +130,7 @@ function Register() {
 
   useEffect(() => {
     if (disabled === false) {
-      fetch("/details/changepassword", options)
+      fetch("https://masakha-api.herokuapp.com/details/changepassword", options)
         .then((res) => res.json())
         .then((data) => {
           console.log(data.output);

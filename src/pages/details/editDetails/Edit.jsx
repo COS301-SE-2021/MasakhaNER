@@ -108,7 +108,10 @@ function Register() {
 
   const handleStatus = async () => {
     try {
-      const resp = await fetch("/update-details", options);
+      const resp = await fetch(
+        "https://masakha-api.herokuapp.com/update-details",
+        options
+      );
       console.log(resp);
       if (resp.status === 200) {
         alert(resp.status);
@@ -125,7 +128,7 @@ function Register() {
 
   useEffect(() => {
     if (disabled === false) {
-      fetch("/register", options)
+      fetch("https://masakha-api.herokuapp.com/register", options)
         .then((res) => res.json())
         .then((data) => {
           console.log(data.output);

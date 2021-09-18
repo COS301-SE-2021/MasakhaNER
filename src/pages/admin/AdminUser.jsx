@@ -32,7 +32,10 @@ export default function AdminUser() {
       },
     },
   });
-  const dataProvider = simpleRestProvider("http://localhost:3000", fetchJson);
+  const dataProvider = simpleRestProvider(
+    "https://masakha-api.herokuapp.com",
+    fetchJson
+  );
   return (
     <>
       <Admin
