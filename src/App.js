@@ -1,4 +1,5 @@
 import "./App.css";
+import { lazy } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,13 +8,17 @@ import {
 } from "react-router-dom";
 import Login from "./components/login/Login";
 import Register from "./pages/register/Register";
-import Dashboard from "./pages/dashboard/Dashboard";
+// import Dashboard from "./pages/dashboard/Dashboard";
 import Verify from "./pages/verify/Verify";
 import Admin from "./pages/admin/AdminUser";
 import Edit from "./pages/details/editDetails/Edit";
 import Changepass from "./pages/details/resetPassword/Changepass";
 import About from "./pages/about/About";
-import Visualizer from "./pages/visualizer/Visualizer";
+// import Visualizer from "./pages/visualizer/Visualizer";
+import { Suspense } from "react-is";
+
+const Visualizer = lazy(() => import("./pages/visualizer/Visualizer"));
+const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 
 function App() {
   return (
@@ -23,13 +28,15 @@ function App() {
           {/* <Redirect from="/Admin#/logins" to="/" /> */}
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Suspense fallback={<div>Loading</div>}>
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/visualizer" component={Visualizer} />
+          </Suspense>
           <Route exact path="/verify" component={Verify} />
           {/* <Route exact path="/admin" component={Admin} /> */}
           {/* <Route exact path="/details/edit" component={Edit} /> */}
           {/* <Route exact path="/details/changepassword" component={Changepass} /> */}
           {/* <Route exact path="/about" component={About} /> */}
-          <Route exact path="/visualizer" component={Visualizer} />
         </Switch>
       </Router>
     </div>
