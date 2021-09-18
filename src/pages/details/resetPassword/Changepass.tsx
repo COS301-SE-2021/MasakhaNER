@@ -111,12 +111,17 @@ function Register() {
       confirmPassword: password2,
     }),
   };
-  
+
   const ImageWrapper = styled.div`
   height: 100vh;
   width: 45vw;
   background-repeat: no-repeat;
   background-color: #305c16;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
   const handleStatus = async () => {
