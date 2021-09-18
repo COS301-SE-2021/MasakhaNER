@@ -235,6 +235,7 @@ function Register() {
       <br />
       <br />
     </Wrapper>
+    <ImageWrapper id="image3"></ImageWrapper>
     </div>
   );
 }
