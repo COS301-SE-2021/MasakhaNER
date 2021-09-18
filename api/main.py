@@ -125,6 +125,7 @@ def token_required(f):
 
 
 @app.route('/input', methods=["POST"])
+@cross_origin()
 @token_required
 def model_feedback(user):
 
@@ -145,6 +146,7 @@ def model_feedback(user):
 
 
 @app.route('/input', methods=["GET"])
+@cross_origin()
 @token_required
 def get_inout(user):
     if not user:
@@ -174,6 +176,7 @@ def get_inout(user):
 
 
 @app.route('/details/changepassword', methods=["POST"])
+@cross_origin()
 def reset_password():
     db = app.config['DATABASE']
     if(db != None):
@@ -188,6 +191,7 @@ def reset_password():
 
 
 @app.route('/register', methods=["POST"])
+@cross_origin()
 def register_user():
 
     db = app.config['DATABASE']
@@ -215,6 +219,7 @@ def register_user():
 
 
 @app.route('/verify', methods=["POST"])
+@cross_origin()
 def verify_user():
     db = app.config['DATABASE']
     if(db != False):
