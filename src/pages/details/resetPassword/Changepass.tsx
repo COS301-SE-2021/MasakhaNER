@@ -177,19 +177,18 @@ const Container = styled.div`
   };
 
   return (
-    <div id="detailspage">
-      
+    <div id="detailspage"> 
       <Container>
       <Wrapper>
         <Header style={{ fontSize: "30px", color: "#1c5f22" }} id="login-header">
           MasakhaNER
           <Bar />
         </Header>
-        <div>
+        {/* <div>
           <h2  style={{ color: "#1c5f22" }}id="login-header">Change Password</h2>
-        </div>
+        </div> */}
         <form id="detForm" onSubmit={handleSubmit}>
-          <label htmlFor="oldPassword">Email:</label>
+          {/* <label htmlFor="oldPassword">Email:</label> */}
           <Input
             style={{ marginTop: "15px",color: "#1c5f22" }}
             type="email"
@@ -203,7 +202,7 @@ const Container = styled.div`
             required
             placeholder="Enter your email"
           />
-          <label htmlFor="newPassword">New password:</label>
+          <label style={{color: "#1c5f22" }}htmlFor="newPassword">New password:</label>
           <Input
             type="password"
             name="oldPassword"
@@ -217,7 +216,7 @@ const Container = styled.div`
             placeholder="Enter your new password"
           />
           {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
-          <label htmlFor="lastName">Confirm New Password:</label>
+          <label style={{color: "#1c5f22" }} htmlFor="lastName">Confirm New Password:</label>
           <Input
             type="password"
             name="confirmPassword"
@@ -237,16 +236,16 @@ const Container = styled.div`
             }}
             required
           />
-          {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
+          {!Passworderr && <p style={{color: "#1c5f22" }}color="red">PASSWORDS MUST MATCH</p>}
           <br />
-          <div className="submit-button">
+          <div /* className="submit-button" */>
           <ChangepassButton>
-            {/* <div className="submit-button"> */}
+            <div className="submit-button">
               <button
-                disabled={disabled}
+                // disabled={disabled}
                 id="mainBtn"
                 type="submit"
-                className="btn btn-dark"
+                // className="btn btn-dark"
                 onClick={(e) => {
                   e.preventDefault();
                   if (!validPassword.test(password2)) {
@@ -258,7 +257,7 @@ const Container = styled.div`
               >
                 Submit
               </button>
-            {/* </div> */}
+            </div>
           </ChangepassButton>
           </div>
         </form>

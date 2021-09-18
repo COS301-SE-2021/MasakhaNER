@@ -144,7 +144,6 @@ function Register() {
     <div id="detailspage">
       <Nav />
       <Container>
-      
       <Wrapper>
         <form id="detForm" onSubmit={handleSubmit}>
         <h2 style={{ fontSize: "30px", color: "#1c5f22" }} id="login-header">
