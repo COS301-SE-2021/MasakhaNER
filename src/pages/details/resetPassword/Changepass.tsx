@@ -17,15 +17,10 @@ const Wrapper = styled.div`
   width: 80vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
+  align-self: flex-end;
   margin-top: 8vh;
   border-radius: 20px;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
-`;
-const ImageWrapper = styled.div`
-  height: 100vh;
-  width: 45vw;
-  background-repeat: no-repeat;
-  background-color: #305c16;
 `;
 
 const Bar = styled.div`
@@ -46,23 +41,27 @@ const Header = styled.h1`
 
 const Input = styled.input`
   border: solid 1px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+  // border-radius: 20px;
+  border-radius: 5px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   height: 35px;
-  width: 15em;
+  width: 20em;
+  // width: 15em;
   padding: 15px;
 
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    // border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
   }
 
   &:focus {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    // border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   }
 `;
