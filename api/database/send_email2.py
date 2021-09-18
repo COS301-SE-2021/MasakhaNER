@@ -10,7 +10,7 @@ class Email2:
                        to_emails="borekhotso@gmail.com",
                        subject="Heroku is ass",
                        plain_text_content="i hope this works honestly",
-                       html_content="<strong>please just work</strong>")
+                       html_content="<strong>i hope this works honestly</strong>")
         try:
             sg = SendGridAPIClient(
                 "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")
@@ -19,4 +19,4 @@ class Email2:
             print(response.body)
             print(response.header)
         except Exception as e:
-            print(e)
+            print("THE ERROR IS", e)
