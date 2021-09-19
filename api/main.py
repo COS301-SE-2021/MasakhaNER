@@ -740,6 +740,7 @@ def admin_get_all_feedback(user):
 
 @app.route('/upload-image', methods=["POST"])
 # @token_required
+@cross_origin()
 def upload_image():
     string = 'data to be encoded'
 
