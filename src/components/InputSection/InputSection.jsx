@@ -345,7 +345,7 @@ const createText = (text) => {
         for (let i = 0; i < data.output.length; i++) {
           if(data.output[i].entity=="PERSON"){
             // if(word.includes(data.output[i].name))
-            word=word.replace(data.output[i].name,`<span id="${data[j].entity.substring(2)}"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `</a>`+ "PER")
+            word=word.replace(data.output[i].name,`<span id="PER"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `</a></span><span id="tag">PER</span></a></span>`+ "PER")
           }else if (data.output[i].entity=="LOCATION"){
             word=word.replace(data.output[i].name,`<a href="https://www.google.com/maps/place/${data.output[i].name}" target="_blank">`+ data.output[i].name+`</a>`+ "LOC")
           }else if(data.output[i].entity=="ORGANISATION"){
@@ -358,7 +358,7 @@ const createText = (text) => {
 
         // let word=data.output[0].name+" "+data.output[0].entity;
         // <Text className="App">{nogo ? createText(word) : input}</Text>
-        setInput2(`<Text className="App">{nogo ? createText(word) : input}</Text>`);
+        setInput2(word);
         console.log("data is ", data.output);
         setWait(1);
       } else {
