@@ -14,6 +14,7 @@ import Admin from "./pages/admin/AdminUser";
 import Edit from "./pages/details/editDetails/Edit";
 import Changepass from "./pages/details/resetPassword/Changepass";
 import About from "./pages/about/About";
+import Visualizer from "./pages/visualizer/Visualizer";
 
 function App() {
   return (
