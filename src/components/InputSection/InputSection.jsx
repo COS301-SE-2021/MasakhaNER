@@ -351,7 +351,7 @@ const createText = (text) => {
           }else if(data.output[i].entity=="ORGANISATION"){
             word=word.replace(data.output[i].name,`<span id="ORG"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `<span id="tag">ORG</span></a></span>`)
           }else if(data.output[i].entity=="DATE"){
-            word=word.replace(data.output[i].name,`<a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+ data.output[i].name+`</a>`+"DAT")
+            word=word.replace(data.output[i].name,`<span id="ORG"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+ data.output[i].name+`</a>`+"DAT")
           }
           
         }
