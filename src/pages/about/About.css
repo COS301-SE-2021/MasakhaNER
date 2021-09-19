@@ -39,3 +39,9 @@
 p{
     font-size: medium;
 }
+
+@media only screen and (max-width: 600px) {
+    .vision_mission, .owners, .tool{
+        width: 80%;
+    }
+  }
