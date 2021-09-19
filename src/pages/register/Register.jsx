@@ -162,7 +162,7 @@ function Register() {
       );
       console.log(resp);
       if (resp.status === 200) {
-        alert(resp.status);
+        // alert(resp.status);
         const data = await resp.json();
         console.log(data);
         window.location.href = "/verify";

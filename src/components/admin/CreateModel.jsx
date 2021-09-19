@@ -1,6 +1,6 @@
 import { Create, SimpleForm, TextInput } from "react-admin";
 
-const CreateModel = (props: any) => {
+const CreateModel = (props) => {
   return (
     <Create title="Add a Model" {...props}>
       <SimpleForm>
