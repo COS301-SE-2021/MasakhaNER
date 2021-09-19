@@ -293,7 +293,9 @@ export default function InputSection() {
         const data = await resp.json();
         console.log(data);
         setOutputData(data.output);
-        setInput2(input);
+        let word=input;
+        // let word=data.output[0].name+" "+data.output[0].entity;
+        setInput2(word);
         console.log("data is ", data.output);
         setWait(1);
       } else {
