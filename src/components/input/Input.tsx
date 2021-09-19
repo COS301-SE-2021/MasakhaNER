@@ -47,11 +47,10 @@ export const Input = () => {
       <Header>
         <h1>Named Entity Recognition</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-          tincidunt feugiat sapien vel iaculis. Nulla fringilla lacus ex, non
-          sagittis neque commodo sit amet. Maecenas consectetur fringilla
-          dignissim. Integer iaculis venenatis ante sed euismod. Quisque vitae
-          pulvinar purus. Ut bibendum volutpat fringilla.
+          Enter text below to send to the MasakhaNER model. The model will
+          decompose the uploaded text and recognise four entities. Organisation,
+          Location, Date and Person. <br /> <br /> Enter text below or upload a
+          text file containing text you want like to send to the model.
         </p>
       </Header>
       <Wrapper>
