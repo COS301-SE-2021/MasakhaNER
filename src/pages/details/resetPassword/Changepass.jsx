@@ -20,6 +20,11 @@ const Wrapper = styled.div`
   margin-top: 8vh;
   border-radius: 20px;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+
+  @media only screen and (max-width: 600px) {
+    height: 80vh;
+    width: 100vw;
+  }
 `;
 
 const Bar = styled.div`
