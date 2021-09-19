@@ -297,6 +297,7 @@ export default function InputSection() {
         for (let i = 0; i < data.output.length; i++) {
           if(data.output[i].entity=="PERSON"){
             if(word.includes(data.output[i].name))
+            word=word.replace(data.output[i].name,data.output[i].name+" "+"PER" )
         // let word=data.output[0].name+" "+data.output[0].entity;
         setInput2(word);
         console.log("data is ", data.output);
