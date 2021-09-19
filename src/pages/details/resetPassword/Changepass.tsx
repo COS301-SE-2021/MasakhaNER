@@ -89,7 +89,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [clicked, setClicked] = useState(false);
+  const [clicked] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [Passworderr, setPasswordErr] = useState(false);
   const [Passworderr2, setPasswordErr2] = useState(false);
@@ -102,13 +102,11 @@ function Register() {
     body: JSON.stringify({
       email: email,
       password: password,
-      confirmPassword: password2
+      confirmPassword: password2,
     }),
   };
 
-
   const handleStatus = async () => {
-    
     try {
       const resp = await fetch("/details/changepassword", options);
       console.log(resp);
@@ -157,61 +155,56 @@ function Register() {
         <h2>Change Password</h2>
       </div>
       <form id="detForm" onSubmit={handleSubmit}>
-          <label htmlFor="oldPassword">Email:</label>
-          <Input
-            type="email"
-            name="email"
-            id="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            required
-            placeholder="Enter your email"
-          />
-          <label htmlFor="newPassword">New password:</label>
-          <Input
-           type="password"
-           name="oldPassword"
-           id="oldPassword"
-           className="form-control"
-           value={password}
-           onChange={(e) => {
-             setPassword(e.target.value);
-           }}
-           required
-           placeholder="Enter your new password"
-          />
-          {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
-          <label htmlFor="lastName">Confirm New Password:</label>
-          <Input
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            className="form-control"
-            value={password2}
-            placeholder="Enter your new password"
-            onChange={(e) => {
-              setPassword2(e.target.value);
-              //console.log(e.target.value)
-              // console.log(password2)
-              // console.log(password3)
-              if(password===e.target.value){
-                setPasswordErr(true);
-                setDisabled(false)
-              }
-              else{
-                setPasswordErr(false);
-                setDisabled(true)
-              }
-            }}
-            
-            required
-          />
+        <label htmlFor="oldPassword">Email:</label>
+        <Input
+          type="email"
+          name="email"
+          id="email"
+          className="form-control"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          required
+          placeholder="Enter your email"
+        />
+        <label htmlFor="newPassword">New password:</label>
+        <Input
+          type="password"
+          name="oldPassword"
+          id="oldPassword"
+          className="form-control"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          required
+          placeholder="Enter your new password"
+        />
+        {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
+        <label htmlFor="lastName">Confirm New Password:</label>
+        <Input
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          className="form-control"
+          value={password2}
+          placeholder="Enter your new password"
+          onChange={(e) => {
+            setPassword2(e.target.value);
+            if (password === e.target.value) {
+              setPasswordErr(true);
+              setDisabled(false);
+            } else {
+              setPasswordErr(false);
+              setDisabled(true);
+            }
+          }}
+          required
+        />
         {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
         <br />
-          <ChangepassButton>
+        <ChangepassButton>
           <div className="submit-button">
             <button
               disabled={disabled}
@@ -221,22 +214,20 @@ function Register() {
               onClick={(e) => {
                 e.preventDefault();
                 if (!validPassword.test(password2)) {
-                  setPasswordErr2(true)
-                  //alert("use regex");
+                  setPasswordErr2(true);
                 } else {
-                handleStatus();
+                  handleStatus();
                 }
               }}
             >
               Submit
             </button>
           </div>
-          </ChangepassButton>
+        </ChangepassButton>
       </form>
       <br />
       <br />
     </Wrapper>
-    
   );
 }
 
