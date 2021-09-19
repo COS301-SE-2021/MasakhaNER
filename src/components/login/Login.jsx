@@ -191,7 +191,9 @@ export default function Login() {
           }
         } else {
           if (history.location.pathname === "/login") {
-            window.open("http://localhost:3000/dashboard");
+            window.open(
+              "https://masakha-ner-fy8z8.ondigitalocean.app//dashboard"
+            );
             window.close();
           }
           history.push("/dashboard");
