@@ -302,6 +302,7 @@ export default function InputSection() {
             word=word.replace(data.output[i].name,data.output[i].name+" "+"LOC" )
           }else if(data.output[i].entity=="ORGANISATION"){
             word=word.replace(data.output[i].name,data.output[i].name+" "+"ORG" )
+          }else if(data.output[i].entity=="DATE"){
         // let word=data.output[0].name+" "+data.output[0].entity;
         setInput2(word);
         console.log("data is ", data.output);
