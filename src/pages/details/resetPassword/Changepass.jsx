@@ -248,9 +248,9 @@ function Register() {
               {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
             </div>
             <br />
-            <div class="alert alert-success" role="alert" id="successMSG" >
+            {/* <div class="alert alert-success" role="alert" id="successMSG" >
               Email has been sent!
-            </div>
+            </div> */}
             <SignUpButton
               // disabled={disabled}
               id="mainBtn"
