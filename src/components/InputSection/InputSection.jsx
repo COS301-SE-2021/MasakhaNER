@@ -272,6 +272,53 @@ export default function InputSection() {
     e.preventDefault();
   };
 
+  const Text = styled.div`
+  line-height: 33px;
+  color: #5f5f5f;
+
+  span {
+    border-radius: 8px;
+    padding: 3px;
+  }
+
+  #LOC {
+    background-color: #dd9c22;
+    color: #634000;
+
+    #tag {
+      width: 30px;
+      color: white;
+    }
+  }
+  #DATE {
+    background-color: #2148bd;
+    color: #092781;
+    #tag {
+      width: 30px;
+      color: white;
+    }
+  }
+  #PER {
+    background-color: #79bb14;
+    color: #538606;
+    #tag {
+      width: 30px;
+      color: white;
+    }
+  }
+  #ORG {
+    background-color: #b8216d;
+    color: #8d0649;
+    #tag {
+      width: 30px;
+      color: white;
+    }
+  }
+`;
+
+const createText = (text) => {
+  return <div dangerouslySetInnerHTML={{ __html: text }}></div>;
+};
   const handleSend = async () => {
     addToHistory(input);
     setWait(2);
@@ -285,7 +332,7 @@ export default function InputSection() {
         input: input,
       }),
     };
-
+    let nogo = true;
     try {
       const resp = await fetch("https://masakha-api.herokuapp.com/input", opts);
       console.log(resp);
@@ -293,7 +340,25 @@ export default function InputSection() {
         const data = await resp.json();
         console.log(data);
         setOutputData(data.output);
-        setInput2(input);
+        let word=input;
+        let appWord="";
+        for (let i = 0; i < data.output.length; i++) {
+          if(data.output[i].entity=="PERSON"){
+            // if(word.includes(data.output[i].name))
+            word=word.replace(data.output[i].name,`<span id="PER"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `<span id="tag">PER</span></a></span>`)
+          }else if (data.output[i].entity=="LOCATION"){
+            word=word.replace(data.output[i].name,`<span id="LOC"><a href="https://www.google.com/maps/place/${data.output[i].name}" target="_blank">`+ data.output[i].name+`<span id="tag">LOC</span></a></span>`)
+          }else if(data.output[i].entity=="ORGANISATION"){
+            word=word.replace(data.output[i].name,`<span id="ORG"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `<span id="tag">ORG</span></a></span>`)
+          }else if(data.output[i].entity=="DATE"){
+            word=word.replace(data.output[i].name,`<span id="DATE"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+ data.output[i].name+`<span id="tag">DAT</span></a></span>`)
+          }
+          
+        }
+
+        // let word=data.output[0].name+" "+data.output[0].entity;
+        // <Text className="App">{nogo ? createText(word) : input}</Text>
+        setInput2(word);
         console.log("data is ", data.output);
         setWait(1);
       } else {
