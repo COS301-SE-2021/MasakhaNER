@@ -294,6 +294,7 @@ export default function InputSection() {
         console.log(data);
         setOutputData(data.output);
         let word=input;
+        for (let i = 0; i < data.output.length; i++) {
         // let word=data.output[0].name+" "+data.output[0].entity;
         setInput2(word);
         console.log("data is ", data.output);
