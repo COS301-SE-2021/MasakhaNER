@@ -34,7 +34,8 @@ export default function AdminUser() {
   });
   const dataProvider = simpleRestProvider(
     "https://masakha-api.herokuapp.com",
-    fetchJson
+    fetchJson,
+    "X-Total-Count"
   );
   return (
     <>

@@ -192,7 +192,7 @@ export default function Login() {
         } else {
           if (history.location.pathname === "/login") {
             window.open(
-              "https://masakha-ner-fy8z8.ondigitalocean.app//dashboard"
+              "https://masakha-ner-fy8z8.ondigitalocean.app/dashboard"
             );
             window.close();
           }
