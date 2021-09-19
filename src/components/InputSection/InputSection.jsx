@@ -232,7 +232,10 @@ export default function InputSection() {
     };
 
     try {
-      const resp = await fetch("/feedback", opts);
+      const resp = await fetch(
+        "https://masakha-api.herokuapp.com/feedback",
+        opts
+      );
       console.log(resp);
       if (resp.status === 200) {
       } else {
@@ -276,7 +279,7 @@ export default function InputSection() {
   };
 
   useEffect(() => {
-    fetch("/input", options)
+    fetch("https://masakha-api.herokuapp.com/input", options)
       .then((res) => res.json())
       .then((data) => {
         setOutputData(data.output);
@@ -303,7 +306,7 @@ export default function InputSection() {
     };
 
     try {
-      const resp = await fetch("/input", opts);
+      const resp = await fetch("https://masakha-api.herokuapp.com/input", opts);
       console.log(resp);
       if (resp.status === 200) {
         const data = await resp.json();
@@ -388,12 +391,14 @@ export default function InputSection() {
 
   const handleImageUpload = async () => {
     console.log("THIS IS IT", imageFile);
-    setWait(2);
+    // setWait(2);
     const opts = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-access-token": localStorage.getItem("token"),
+        // "Content-Length": "200000000",
+        // Connection: "keep-alive",
       },
       body: JSON.stringify({
         image: localStorage.getItem("image"),
@@ -402,13 +407,16 @@ export default function InputSection() {
   
 
     try {
-      const resp = await fetch("/upload-image", opts);
+      const resp = await fetch(
+        "https://masakha-api.herokuapp.com/upload-image",
+        opts
+      );
       console.log(resp);
       if (resp.status === 200) {
-        // alert(resp.status);
+        console.log(resp.status);
         const data = await resp.json();
 
-        // alert(data.msg);
+        console.log(data.msg);
         console.log(data.msg);
         var text = data.msg.substring(2);
         text = text.substring(0, text.length - 1);

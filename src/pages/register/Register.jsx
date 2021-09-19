@@ -162,7 +162,7 @@ function Register() {
       );
       console.log(resp);
       if (resp.status === 200) {
-        alert(resp.status);
+        // alert(resp.status);
         const data = await resp.json();
         console.log(data);
         window.location.href = "/verify";
@@ -179,7 +179,7 @@ function Register() {
 
   useEffect(() => {
     if (disabled === false) {
-      fetch("/register", options)
+      fetch("https://masakha-api.herokuapp.com/register", options)
         .then((res) => res.json())
         .then((data) => {
           console.log(data.output);

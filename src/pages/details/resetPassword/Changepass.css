@@ -79,3 +79,16 @@ a, p{
 em{
   font-weight: bold;
 }
+
+body {
+  background-color: rgb(250, 250, 250);
+}
+
+#image4 {
+  background-image: url("../../../images/forgot.jpg");
+  background-size: cover;
+}
+
+#errorMSG{
+  display: none;
+}
