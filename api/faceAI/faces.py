@@ -76,6 +76,7 @@ def recognize(img):
 
     # Display frame
 
-    cv2.imwrite('faceAI/a.jpg', frame)
+    filename = os.path.join(dirname, "a.jpg")
+    cv2.imwrite(filename, frame)
 # cv2.imshow('frames', frame)
 # cv2.waitKey(0)

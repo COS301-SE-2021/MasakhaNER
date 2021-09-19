@@ -161,7 +161,7 @@ pretrained_data = [
     ['Carol', 'PERSON'],
     ['Amanda', 'PERSON'],
     ['Melissa', 'PERSON'],
-    ['Deborah', 'PERSON'],  
+    ['Deborah', 'PERSON'],
     ['Apple', 'ORGANISATION'],
     ['Alphabet', 'ORGANISATION'],
     ['Microsoft', 'ORGANISATION'],
@@ -920,11 +920,17 @@ def upload_image():
     # with open("faceAI/imageToSave.jpg", "wb") as fh:
     #     fh.write(base64.b64decode(file))
     print(os.path.join(os.path.dirname(__file__), "faceAI/a.jpg"))
-    faces.recognize("55.jpg")
+    faces.recognize("63.jpg")
     with open(os.path.join(os.path.dirname(__file__), "faceAI/a.jpg"), "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
-    print(my_string)
+    # print(my_string)
 
+    # return jsonify({'msg': str(my_string)}).headers.add("Content-Length", "200000000")
+    # return response.RawResponse(
+    #     ctx, response_data="OK",
+    #     status_code=200,
+    #     headers={"content-type": "application/json"}
+    # )
     return jsonify({'msg': str(my_string)})
 
 
