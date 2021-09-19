@@ -100,7 +100,7 @@ const Visualizer = () => {
   const [inputData, setInputData] = useState([]);
 
   useEffect(() => {
-    fetch("/input", options)
+    fetch("https://masakha-api.herokuapp.com/input", options)
       .then((res) => res.json())
       .then((data) => {
         setInputData(data);
