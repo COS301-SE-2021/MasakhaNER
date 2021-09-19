@@ -3,7 +3,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Edit.css";
 import Nav from "../../../components/nav/Nav";
 import Footer from "../../../components/Footer/Footer";
-import styled from "styled-components"
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ImageWrapper = styled.div`
+  height: 100vh;
+  width: 45vw;
+  background-repeat: no-repeat;
+  background-color: #305c16;
+`;
+
 
 const Wrapper = styled.div`
   background-color: white;
@@ -11,83 +24,87 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
-  width: 80vw;
+  height: 100vh;
+  width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
-  margin-top: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  align-self: flex-end;
 `;
 
 const Input = styled.input`
-  border: solid 1px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+ border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   padding: 15px;
 
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
   }
 
   &:focus {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   }
 `;
 
 const Button = styled.button`
-  border: solid 1px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+   border: solid 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
   width: 10em;
-  background-color: black;
-  color: white;
-  border-radius: 20px;
+  background-color: white;
+  border-radius: 5px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    border-radius: 5px;
   }
 `;
 
-const Bar = styled.div`
-  width: inherit;
-  height: 5px;
-  background-color: #000;
-  margin-top: 5px;
+const SignUpButton = styled(Button)`
+  background-color: #1c5f22;
+  border: solid 1px #1c5f22;
+  color: white;
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
+    background-color: #34833b;
+    border: solid 1px #34833b;
+  }
 `;
+
 
 function Register() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setPassword] = useState("");
-  const [clicked, setClicked] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-  const [Emailerr, setEmailErr] = useState(false);
-  const [Passworderr, setPasswordErr] = useState(false);
+  const [clicked] = useState(false);
+  const [disabled] = useState(true);
+  const [Emailerr] = useState(false);
+  const [Passworderr] = useState(false);
 
   const options: any = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-access-token":localStorage.getItem("token")
+      "x-access-token": localStorage.getItem("token"),
     },
     body: JSON.stringify({
       firstname: firstName,
-      lastname: lastName
+      lastname: lastName,
     }),
   };
 
@@ -105,7 +122,6 @@ function Register() {
       }
     } catch (error) {
       console.log("there is an error", error);
-      // window.location.href = "/";
     }
   };
 
@@ -120,23 +136,6 @@ function Register() {
     }
   }, [clicked]);
 
-  const validEmail = new RegExp(
-    "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
-  );
-  const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
-
-  const validate = () => {
-    if (!validEmail.test(email)) {
-      setEmailErr(true);
-      console.log(setEmailErr);
-    } else if (!validPassword.test(password)) {
-      setPasswordErr(true);
-      console.log(setEmailErr);
-    } else {
-      setClicked(!clicked);
-      window.location.href = "/verify";
-    }
-  };
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -144,35 +143,35 @@ function Register() {
   return (
     <div id="detailspage">
       <Nav />
+      <Container>
+      
       <Wrapper>
         <form id="detForm" onSubmit={handleSubmit}>
-          <h2>Edit Details</h2>
-          <Bar />
-          <div className="form-group">
-            <label htmlFor="firstName">First Name:</label>
+        <h2 style={{ fontSize: "30px", color: "#1c5f22" }} id="login-header">
+          Edit details
+        </h2>
             <Input
+              style={{ marginTop: "15px" }}
+              className="form-control"
               type="text"
               name="firstName"
               value={firstName}
               onChange={(e) => setfirstName(e.target.value)}
               required
-              placeholder="Enter your first name"
+              placeholder="First name"
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name:</label>
             <Input
               type="text"
               name="flastName"
               value={lastName}
+              className="form-control"
               onChange={(e) => setlastName(e.target.value)}
               required
-              placeholder="Enter your last name"
+              placeholder="Last name"
             />
-          </div>
           <br />
           <div className="submit-button">
-            <Button
+            <SignUpButton
               id="mainBtn"
               type="submit"
               onClick={(e) => {
@@ -181,17 +180,15 @@ function Register() {
               }}
             >
               Submit
-            </Button>
+            </SignUpButton>
           </div>
           {Passworderr ||
             (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
         </form>
       </Wrapper>
-      <br />
-      <br />
-      <Footer />
+      <ImageWrapper id="image3"></ImageWrapper>
+      </Container>
     </div>
-
   );
 }
 

@@ -1,10 +1,9 @@
-import React from "react";
 import { Edit, SimpleForm, TextInput } from "react-admin";
 
 const UserEdit = (props: any) => {
   return (
     <Edit title="Edit User" {...props}>
-      <SimpleForm >
+      <SimpleForm>
         <TextInput disabled source="id" />
         <TextInput source="firstname" />
         <TextInput source="lastname" />
