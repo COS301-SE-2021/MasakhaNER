@@ -12,9 +12,9 @@ export default function About() {
             <h4>Our Vision and Mission</h4>
             <p>
               Our mission is to strengthhen and spur NLP research in African
-              languages, for Africans, by Africans. Des[ite the fact that 2000
-              of the worlds languages are African, African are barely
-              represented in technology.This has resulted in technological space
+              languages, for Africans, by Africans. Despite the fact that 2000
+              of the worlds languages are African, Africa is barely
+              represented in technology. This has resulted in a technological space
               that does not understand African names, cultures, places or
               history. Our vision is for Africans to shape and own these
               technological advances towards human dignity, well-being and

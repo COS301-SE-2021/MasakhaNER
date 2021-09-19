@@ -6,6 +6,7 @@ import Nav from "../../../components/nav/Nav";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../../../components/Footer/Footer";
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
 
 const Container = styled.div`
   display: flex;
@@ -176,9 +177,13 @@ function Register() {
     x.style.display = "block";
   }
 
+  function MSGdiv(){
+    var x = document.getElementById("successMSG");
+    x.style.display = "block";
+  }
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <Container>
         <ImageWrapper id="image4"></ImageWrapper>
         <Wrapper>
@@ -204,7 +209,7 @@ function Register() {
               required
               placeholder="Email address"
             />
-            <Input
+            {/* <Input
               type="password"
               name="oldPassword"
               id="oldPassword"
@@ -238,23 +243,28 @@ function Register() {
                 }
               }}
               required
-            />
+            /> */}
             <div className="errorMSG" id="errorMSG">
               {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
             </div>
             <br />
+            <div class="alert alert-success" role="alert" id="successMSG" >
+              Email has been sent!
+            </div>
             <SignUpButton
-              disabled={disabled}
+              // disabled={disabled}
               id="mainBtn"
               type="submit"
               className="btn btn-dark"
               onClick={(e) => {
                 e.preventDefault();
-                if (!validPassword.test(password2)) {
-                  setPasswordErr2(true);
-                } else {
-                  handleStatus();
-                }
+                handleStatus();
+                MSGdiv();
+                // if (!validPassword.test(password2)) {
+                //   setPasswordErr2(true);
+                // } else {
+                //   handleStatus();
+                // }
               }}
             >
               Submit
