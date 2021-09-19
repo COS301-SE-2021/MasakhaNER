@@ -1,4 +1,5 @@
 import base64
+from faceAI import faces
 from posixpath import dirname
 from model import runModel
 from flask import Response
@@ -10,6 +11,7 @@ from functools import wraps
 import jwt
 import os
 import sys
+import predict_ner as ner
 from flask_cors import CORS, cross_origin
 from werkzeug.datastructures import Headers
 # from faceAI import faces
@@ -303,13 +305,13 @@ def model_feedback(user):
         return jsonify({'response': 'log in to use model'}), 401
 
     user_input = str(request.json["input"])
-
-    model_feedback = str(runModel(user_input))
-    model_feedback = eval(model_feedback)
+    #stuff = ner.run()
+    # model_feedback = str(runModel(user_input))
+    # model_feedback = eval(model_feedback)
     db = app.config['DATABASE']
     if(db != False):
-        db.input(model_feedback)
-        dude = {'output': model_feedback}
+        # db.input(model_feedback)
+        dude = {'output': "stuff"}
         #dude = {'output': "model_feedback"}
         return dude, 200
     else:
@@ -906,23 +908,24 @@ def admin_get_all_feedback(user):
 """
 
 
-# @app.route('/upload-image', methods=["POST"])
-# # @token_required
-# def upload_image():
-#     string = 'data to be encoded'
+@app.route('/upload-image', methods=["POST"])
+# @token_required
+@cross_origin()
+def upload_image():
+    string = 'data to be encoded'
 
-#     file = request.json["image"]
-#     file = file.partition(",")[2]
+    # file = request.json["image"]
+    # file = file.partition(",")[2]
 
-#     with open("faceAI/imageToSave.jpg", "wb") as fh:
-#         fh.write(base64.b64decode(file))
+    # with open("faceAI/imageToSave.jpg", "wb") as fh:
+    #     fh.write(base64.b64decode(file))
+    print(os.path.join(os.path.dirname(__file__), "faceAI/a.jpg"))
+    faces.recognize("55.jpg")
+    with open(os.path.join(os.path.dirname(__file__), "faceAI/a.jpg"), "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
+    print(my_string)
 
-#     faces.recognize("imageToSave.jpg")
-#     with open("faceAI/a.jpg", "rb") as img_file:
-#         my_string = base64.b64encode(img_file.read())
-#     print(my_string)
-
-#     return jsonify({'msg': str(my_string)})
+    return jsonify({'msg': str(my_string)})
 
 
 """
