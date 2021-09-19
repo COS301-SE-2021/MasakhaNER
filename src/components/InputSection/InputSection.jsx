@@ -294,12 +294,13 @@ export default function InputSection() {
         console.log(data);
         setOutputData(data.output);
         let word=input;
+        let appWord="";
         for (let i = 0; i < data.output.length; i++) {
           if(data.output[i].entity=="PERSON"){
             if(word.includes(data.output[i].name))
             word=word.replace(data.output[i].name,data.output[i].name+" "+"PER" )
           }else if (data.output[i].entity=="LOCATION"){
-            word=word.replace(data.output[i].name,data.output[i].name+" "+"LOC" )
+            word=word.replace(data.output[i].name,data.output[i].name+" "+`<a href="https://www.google.com/maps/place/${data.output[i].name}" target="_blank">`+ "LOC"+ `</a>`)
           }else if(data.output[i].entity=="ORGANISATION"){
             word=word.replace(data.output[i].name,data.output[i].name+" "+"ORG" )
           }else if(data.output[i].entity=="DATE"){
