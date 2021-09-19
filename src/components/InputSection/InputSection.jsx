@@ -334,12 +334,14 @@ export default function InputSection() {
 
   const handleImageUpload = async () => {
     console.log("THIS IS IT", imageFile);
-    setWait(2);
+    // setWait(2);
     const opts = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-access-token": localStorage.getItem("token"),
+        // "Content-Length": "200000000",
+        // Connection: "keep-alive",
       },
       body: JSON.stringify({
         image: localStorage.getItem("image"),
@@ -353,10 +355,10 @@ export default function InputSection() {
       );
       console.log(resp);
       if (resp.status === 200) {
-        // alert(resp.status);
+        console.log(resp.status);
         const data = await resp.json();
 
-        // alert(data.msg);
+        console.log(data.msg);
         console.log(data.msg);
         var text = data.msg.substring(2);
         text = text.substring(0, text.length - 1);

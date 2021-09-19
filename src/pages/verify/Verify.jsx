@@ -24,16 +24,13 @@ function VerifyAccount() {
 
   const handleVerify = async () => {
     try {
-      const resp = await fetch(
-        "https://masakha-api.herokuapp.com/verify",
-        options
-      );
+      const resp = await fetch("/verify", options);
       console.log("This is what came back: ", options);
 
       if (resp.status === 200) {
         const data = await resp.json();
         alert("You have successfully verified your account!");
-        window.location.href = "/";
+        window.location.href = "/Dashboard";
       } else {
         alert("Incorrect verification code!");
         window.location.href = "/verify";
@@ -49,14 +46,14 @@ function VerifyAccount() {
   };
 
   return (
-    <div className="veryify-form">
+    <div className="verify-form">
       <form onSubmit={handleSubmit}>
         <h3>Enter Confirmation Code</h3>
         <p>
           Enter the confirmation code we sent to your email.
           <em>{localStorage.getItem("newEmail")}</em>
         </p>
-        <div className="form-group">
+        <div className="form-grp">
           <input
             type="text"
             placeholder="Confirmation Code"
@@ -72,7 +69,7 @@ function VerifyAccount() {
         <Link to="/dashboard">
           <button
             type="submit"
-            className="btn btn-dark"
+            className="next"
             onClick={(e) => {
               e.preventDefault();
               handleVerify();
