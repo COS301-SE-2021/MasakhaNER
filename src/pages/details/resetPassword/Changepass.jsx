@@ -7,6 +7,18 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../../../components/Footer/Footer";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ImageWrapper = styled.div`
+  height: 100vh;
+  width: 45vw;
+  background-repeat: no-repeat;
+  background-color: #305c16;
+`;
+
 const Wrapper = styled.div`
   background-color: white;
   display: flex;
@@ -14,12 +26,10 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 80vh;
-  width: 80vw;
+  width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
-  margin-top: 8vh;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 80px;
 `;
 
 const Bar = styled.div`
@@ -39,41 +49,57 @@ const Header = styled.h1`
 
 const Input = styled.input`
   border: solid 1px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+  border-radius: 5px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   padding: 15px;
 
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
   }
 
   &:focus {
     border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   }
 `;
 
 const Button = styled.button`
   border: solid 1px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   width: 10em;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 5px;
   height: 35px;
-  width: 15em;
+  width: 20em;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    border-radius: 5px;
+  }
+`;
+
+const SignUpButton = styled(Button)`
+  background-color: #1c5f22;
+  border: solid 1px #1c5f22;
+  color: white;
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
+    background-color: #34833b;
+    border: solid 1px #34833b;
   }
 `;
 
@@ -108,10 +134,7 @@ function Register() {
 
   const handleStatus = async () => {
     try {
-      const resp = await fetch(
-        "https://masakha-api.herokuapp.com/details/changepassword",
-        options
-      );
+      const resp = await fetch("/details/changepassword", options);
       console.log(resp);
       if (resp.status === 200) {
         alert(resp.status);
@@ -130,7 +153,7 @@ function Register() {
 
   useEffect(() => {
     if (disabled === false) {
-      fetch("https://masakha-api.herokuapp.com/details/changepassword", options)
+      fetch("/details/changepassword", options)
         .then((res) => res.json())
         .then((data) => {
           console.log(data.output);
@@ -148,68 +171,79 @@ function Register() {
     e.preventDefault();
   };
 
+  function myFunction() {
+    var x = document.getElementById("errorMSG");
+    x.style.display = "block";
+  }
+
   return (
-    <Wrapper>
-      <Header>
-        MasakhaNER
-        <Bar />
-      </Header>
-      <div>
-        <h2>Change Password</h2>
-      </div>
-      <form id="detForm" onSubmit={handleSubmit}>
-        <label htmlFor="oldPassword">Email:</label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          className="form-control"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          required
-          placeholder="Enter your email"
-        />
-        <label htmlFor="newPassword">New password:</label>
-        <Input
-          type="password"
-          name="oldPassword"
-          id="oldPassword"
-          className="form-control"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          required
-          placeholder="Enter your new password"
-        />
-        {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
-        <label htmlFor="lastName">Confirm New Password:</label>
-        <Input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          className="form-control"
-          value={password2}
-          placeholder="Enter your new password"
-          onChange={(e) => {
-            setPassword2(e.target.value);
-            if (password === e.target.value) {
-              setPasswordErr(true);
-              setDisabled(false);
-            } else {
-              setPasswordErr(false);
-              setDisabled(true);
-            }
-          }}
-          required
-        />
-        {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
-        <br />
-        <ChangepassButton>
-          <div className="submit-button">
-            <button
+    <>
+      <Nav />
+      <Container>
+        <ImageWrapper id="image4"></ImageWrapper>
+        <Wrapper>
+          <div>
+            <h2
+              style={{ fontSize: "40px", color: "#1c5f22" }}
+              id="login-header"
+            >
+              Change Password
+            </h2>
+            <br />
+          </div>
+          <form id="detForm" onSubmit={handleSubmit}>
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              className="form-control"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              required
+              placeholder="Email address"
+            />
+            <Input
+              type="password"
+              name="oldPassword"
+              id="oldPassword"
+              className="form-control"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
+              placeholder="New password"
+            />
+            <div>
+              {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
+            </div>
+            <Input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              className="form-control"
+              value={password2}
+              placeholder="Confirm new password"
+              onChange={(e) => {
+                myFunction();
+                setPassword2(e.target.value);
+                if (password === e.target.value) {
+                  setPasswordErr(true);
+                  setDisabled(false);
+                } else {
+                  setPasswordErr(false);
+                  setDisabled(true);
+                }
+              }}
+              required
+            />
+            <div className="errorMSG" id="errorMSG">
+              {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
+            </div>
+            <br />
+            <SignUpButton
               disabled={disabled}
               id="mainBtn"
               type="submit"
@@ -224,13 +258,13 @@ function Register() {
               }}
             >
               Submit
-            </button>
-          </div>
-        </ChangepassButton>
-      </form>
-      <br />
-      <br />
-    </Wrapper>
+            </SignUpButton>
+          </form>
+          <br />
+          <br />
+        </Wrapper>
+      </Container>
+    </>
   );
 }
 
