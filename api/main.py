@@ -914,8 +914,8 @@ def admin_get_all_feedback(user):
 def upload_image():
     string = 'data to be encoded'
 
-    # file = request.json["image"]
-    # file = file.partition(",")[2]
+    file = request.json["image"]
+    file = file.partition(",")[2]
 
     # with open("faceAI/imageToSave.jpg", "wb") as fh:
     #     fh.write(base64.b64decode(file))
