@@ -917,10 +917,11 @@ def upload_image():
     file = request.json["image"]
     file = file.partition(",")[2]
 
-    # with open("faceAI/imageToSave.jpg", "wb") as fh:
-    #     fh.write(base64.b64decode(file))
-    print(os.path.join(os.path.dirname(__file__), "faceAI/a.jpg"))
-    faces.recognize("63.jpg")
+    #os.path.join(os.path.dirname(__file__), "faceAI/imageToSave.jpg")
+    with open(os.path.join(os.path.dirname(__file__), "faceAI/imageToSave.jpg"), "wb") as fh:
+        fh.write(base64.b64decode(file))
+    #print(os.path.join(os.path.dirname(__file__), "faceAI/a.jpg"))
+    faces.recognize("imageToSave.jpg")
     with open(os.path.join(os.path.dirname(__file__), "faceAI/a.jpg"), "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
     # print(my_string)
