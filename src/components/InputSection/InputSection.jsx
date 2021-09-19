@@ -169,6 +169,25 @@ const TextUploadHeader = styled.div`
   }
 `;
 
+const FeedInput = styled.input`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  height: 35px;
+  width: 20em;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+`;
+
+const FeedSelect = styled.select`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  height: 35px;
+  width: 5em;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+`;
+
 export default function InputSection() {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
@@ -307,6 +326,44 @@ export default function InputSection() {
     }
   };
 
+  const concatFeedback = () => {
+    let finalText = input;
+    let newText = "";
+
+    if ((document.getElementById("Feed1")).value != null){
+      if (finalText.includes((document.getElementById("Feed1")).value)){
+        newText = finalText.replace((document.getElementById("Feed1")).value, (document.getElementById("Feed1")).value+(document.getElementById("Ent1")).value);
+        finalText = newText;
+      }
+    }
+    if ((document.getElementById("Feed2")).value != null){
+      if (finalText.includes((document.getElementById("Feed2")).value)){
+        newText = finalText.replace((document.getElementById("Feed2")).value, (document.getElementById("Feed2")).value+(document.getElementById("Ent2")).value);
+        finalText = newText;
+      }
+    }
+    if ((document.getElementById("Feed3")).value != null){
+      if (finalText.includes((document.getElementById("Feed3")).value)){
+        newText = finalText.replace((document.getElementById("Feed3")).value, (document.getElementById("Feed3")).value+(document.getElementById("Ent3")).value);
+        finalText = newText;
+      }
+    }
+    if ((document.getElementById("Feed4")).value != null){
+      if (finalText.includes((document.getElementById("Feed4")).value)){
+        newText = finalText.replace((document.getElementById("Feed4")).value, (document.getElementById("Feed4")).value+(document.getElementById("Ent4")).value);
+        finalText = newText;
+      }
+    }
+    if ((document.getElementById("Feed5")).value != null){
+      if (finalText.includes((document.getElementById("Feed5")).value)){
+        newText = finalText.replace((document.getElementById("Feed5")).value, (document.getElementById("Feed5")).value+(document.getElementById("Ent5")).value);
+        finalText = newText;
+      }
+    }
+    console.warn(newText);
+    setFeedback(newText);
+  };
+  
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -347,6 +404,7 @@ export default function InputSection() {
         image: localStorage.getItem("image"),
       }),
     };
+  
 
     try {
       const resp = await fetch(
@@ -485,17 +543,84 @@ export default function InputSection() {
           </p>
         </div>
         <form onSubmit={handleSubmit}>
-          <FeedbackInput
-            value={feedback}
-            placeholder="Enter feedback"
-            onChange={(e) => {
-              setFeedback(e.target.value);
-            }}
+        <br />
+          <FeedInput
+            placeholder="Type here..."
+            type="text"
+            name="feedback1"
+            id="Feed1"
           />
+          <FeedSelect name="feedbackEnt1" id="Ent1">
+            <option></option>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
+          <br />
+          <FeedInput
+            placeholder="Type here..."
+            type="text"
+            name="feedback2"
+            id="Feed2"
+          />
+          <FeedSelect name="feedbackEnt2" id="Ent2">
+            <option></option>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
+          <br />
+          <FeedInput
+            placeholder="Type here..."
+            type="text"
+            name="feedback3"
+            id="Feed3"
+          />
+          <FeedSelect name="feedbackEnt3" id="Ent3">
+            <option></option>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
+          <br />
+          <FeedInput
+            placeholder="Type here..."
+            type="text"
+            name="feedback4"
+            id="Feed4"
+          />
+          <FeedSelect name="feedbackEnt4" id="Ent4">
+            <option></option>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
+          <br />
+          <FeedInput
+            placeholder="Type here..."
+            type="text"
+            name="feedback5"
+            id="Feed5"
+          />
+          <FeedSelect name="feedbackEnt5" id="Ent5">
+            <option></option>
+            <option value="<LOC>">LOC</option>
+            <option value="<PER>">PER</option>
+            <option value="<DAT>">DAT</option>
+            <option value="<ORG>">ORG</option>
+          </FeedSelect>
+
+          <br />
+          <br />
           <br />
           <Button
             onClick={(e) => {
               e.preventDefault();
+              concatFeedback();
               handleFeedback();
               closeModal();
             }}
