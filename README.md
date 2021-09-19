@@ -28,9 +28,9 @@ A web-based interface that will be used as a named entity recognition tool for A
 
 - [Architecture requirements - StopDaCap](https://docs.google.com/document/d/18KUGhHu3Fjvr40h5DXKYnaO1FYh1Oi7Qg8m_osAix9U/edit?usp=sharing)
 
-- [Technical Installation Manual - StopDaCap](https://drive.google.com/file/d/1xQI4BjQdxNMlf6syLtF-Q-VNQLVb4R3T/view?usp=sharing)
+- [Technical Installation Manual - StopDaCap](https://drive.google.com/file/d/1r211IqysQYGpIEJYGTEo9Cl8KlPkBhi5/view?usp=sharing)
 
-- [User Manual - StopDaCap](https://drive.google.com/file/d/1zI5Yt23uLYUkyZP_T0ENNjntovhv2zST/view?usp=sharing)
+- [User Manual - StopDaCap](https://drive.google.com/file/d/1O_gWV3s0NPwuQITzyDAXyX9_u3udCgea/view?usp=sharing)
 
 ## Demo Links
 
@@ -40,7 +40,7 @@ A web-based interface that will be used as a named entity recognition tool for A
 
 - [StopDaCap - Demo 3](https://drive.google.com/file/d/1zhGoAeSDADg1Wf-EFukZqfNyTrqiF_UP/view?usp=sharing)
 
-- [StopDaCap - Demo 4]()
+- [StopDaCap - Demo 4](https://drive.google.com/file/d/1B4ZiopojuVTGxoV0dDo6avp0NKysU1gk/view?usp=sharing)
 
 ## Technology Stack
 
