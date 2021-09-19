@@ -21,6 +21,7 @@ const ImageWrapper = styled.div`
   @media only screen and (max-width: 600px) {
     height: 27vh;
     width: 100vw;
+    transform: translate(-50vw, -65px);
   }
 `;
 

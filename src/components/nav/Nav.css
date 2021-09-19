@@ -36,6 +36,6 @@ menu {
 @media screen and (max-width: 600px) {
   .Navbar  {
     width: 100vw;
-    height: 10vh;
+    height: 15vh;
   }
 }
