@@ -343,9 +343,9 @@ export default function InputSection() {
         // "Content-Length": "200000000",
         // Connection: "keep-alive",
       },
-      // body: JSON.stringify({
-      //   image: localStorage.getItem("image"),
-      // }),
+      body: JSON.stringify({
+        image: localStorage.getItem("image"),
+      }),
     };
 
     try {
