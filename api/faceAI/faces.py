@@ -32,7 +32,7 @@ def recognize(img):
     #faces  = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5,minSize=(60, 60),flags=cv2.CASCADE_SCALE_IMAGE)
     faces = face_cascade.detectMultiScale(
         gray,
-        scaleFactor=1.1,
+        scaleFactor=1.2,
         minNeighbors=5,
         minSize=(30, 30),
         flags=cv2.CASCADE_SCALE_IMAGE
@@ -45,7 +45,7 @@ def recognize(img):
 
         id_, conf = recogniser.predict(roi_gray)
         print(conf)
-        if conf < 51:
+        if conf < 75:
             # print(id_)
             # print(labels[id_])
 
@@ -80,3 +80,7 @@ def recognize(img):
     cv2.imwrite(filename, frame)
 # cv2.imshow('frames', frame)
 # cv2.waitKey(0)
+
+
+if __name__ == "__main__":
+    recognize("59.jpg")

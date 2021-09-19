@@ -18,7 +18,9 @@ label_ids = {}
 y_labels = []
 x_train = []
 
+
 for root, dirs, files in os.walk(image_dir):
+    numpic = 0
     for file in files:
         if file.endswith("png") or file.endswith("jpg"):
             # get images from dir
@@ -46,10 +48,17 @@ for root, dirs, files in os.walk(image_dir):
                     roi = image_array[y:y+h, x:x+w]
                     x_train.append(roi)
                     y_labels.append(id_)
+                    numpic += 1
+            else:
+                os.remove(path)
+
+            if(numpic > 100):
+                break
 
 filename = os.path.join(dirname, "labels.pickle")
 with open(filename, "wb") as f:
     pickle.dump(label_ids, f)
 
+filename = os.path.join(dirname, "trainner.yml")
 recogniser.train(x_train, np.array(y_labels))
-recogniser.save("trainner.yml")
+recogniser.save(filename)
