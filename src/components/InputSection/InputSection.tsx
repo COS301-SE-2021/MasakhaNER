@@ -390,6 +390,7 @@ export default function InputSection() {
               <p>
                 Built with the power of OpenCV, this facial recognition system
                 was built and trained with the faces of popular African figures.{" "}
+                <br />
                 <br /> Upload an image of an Africa figure and submit to see the
                 results.
               </p>
