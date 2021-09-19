@@ -8,6 +8,9 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  @media only screen and (max-width: 600px) {
+    padding-top: 30%;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -15,6 +18,10 @@ const ImageWrapper = styled.div`
   width: 45vw;
   background-repeat: no-repeat;
   background-color: #305c16;
+  @media only screen and (max-width: 600px) {
+    height: 27vh;
+    width: 100vw;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -28,6 +35,10 @@ const Wrapper = styled.div`
   border: solid 1px #ffffff;
   margin: 0 auto;
   align-self: flex-end;
+  @media only screen and (max-width: 600px) {
+    height: 80vh;
+    width: 100vw;
+  }
 `;
 
 const Input = styled.input`
