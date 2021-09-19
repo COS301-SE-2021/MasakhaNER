@@ -4,7 +4,7 @@ export default (type, params) => {
   if (type === AUTH_LOGIN) {
     const { username, password } = params;
     const request = new Request(
-      "https://masakha-ner-fy8z8.ondigitalocean.app//login",
+      "https://masakha-ner-fy8z8.ondigitalocean.app/login",
       {
         method: "POST",
         body: JSON.stringify({ username, password }),
