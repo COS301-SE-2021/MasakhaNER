@@ -299,6 +299,7 @@ export default function InputSection() {
             if(word.includes(data.output[i].name))
             word=word.replace(data.output[i].name,data.output[i].name+" "+"PER" )
           }else if (data.output[i].entity=="LOCATION"){
+            word=word.replace(data.output[i].name,data.output[i].name+" "+"LOC" )
         // let word=data.output[0].name+" "+data.output[0].entity;
         setInput2(word);
         console.log("data is ", data.output);
