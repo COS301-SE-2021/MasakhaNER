@@ -15,8 +15,8 @@ const Container = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  height: 27vh;
-  width: 100vw;
+  height: 100vh;
+  width: 45vw;
   background-image: url("../../images/login-image.png");
   background-repeat: no-repeat;
   background-color: #305c16;
@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  height: 100vh;
   width: 55vw;
   border: solid 1px #ffffff;
   margin: 0 auto;
