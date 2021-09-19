@@ -249,9 +249,11 @@ def train_model(user_input):
     newlist = []
     for x in user_input:
         for y in pretrained_data:
-            if x.lower() == y[0]:
+            #print(x, " ", y[0])
+            if x.lower() == y[0].lower():
                 newlist.append({"name": x, "entity": y[1]})
                 break
+        #newlist.append({"name": x, "entity": "none"})
     return newlist
 
 
@@ -306,12 +308,13 @@ def model_feedback(user):
 
     user_input = str(request.json["input"])
     #stuff = ner.run()
+    feedback = train_model(user_input.split())
     # model_feedback = str(runModel(user_input))
     # model_feedback = eval(model_feedback)
     db = app.config['DATABASE']
     if(db != False):
         # db.input(model_feedback)
-        dude = {'output': "stuff"}
+        dude = {'output': feedback}
         #dude = {'output': "model_feedback"}
         return dude, 200
     else:
