@@ -36,6 +36,10 @@ const Input = styled.textarea`
   &:focus {
     outline: none;
   }
+
+  @media only screen and (max-width: 600px) {
+    width: 185vw;
+  }
 `;
 
 const OutputSection = styled.div`
@@ -53,6 +57,10 @@ const OutputSection = styled.div`
 
   &:focus {
     outline: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 185vw;
   }
 `;
 
@@ -124,7 +132,7 @@ const VisualizerButton = styled(Button)`
 `;
 
 const ImageUploadHeader = styled.div`
-  width: 105vw;
+  width: 100vw;
   height: 450px;
   border-radius: 5px;
   padding: 20px;
@@ -132,13 +140,11 @@ const ImageUploadHeader = styled.div`
   transform: translate(-10vw, 300px);
 
   h1 {
-    /* color: #7eaf82; */
     color: #fff;
     transform: translate(88px, 20px);
   }
 
   p {
-    /* padding: 20px; */
     color: #fff;
     opacity: 1;
     width: 500px;
@@ -149,6 +155,10 @@ const ImageUploadHeader = styled.div`
   a {
     opacity: 1;
     color: #7eaf82;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 200vw;
   }
 `;
 
@@ -437,13 +447,11 @@ export default function InputSection() {
             )}
           </OutputSection>
           <div
-            id="button-container"
-            style={{ transform: "translate(1080px, -400px)" }}
+           className="btn-container"
           >
             <Button onClick={openModal}>Feedback</Button>
           </div>
         </div>
-        <div></div>
       </FormContainer>
       <h1
         style={{

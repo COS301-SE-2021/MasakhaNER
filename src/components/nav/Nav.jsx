@@ -10,6 +10,9 @@ const ButtonContainer = styled.div`
   a {
     margin-right: 25px;
   }
+  @media only screen and (max-width: 450px) {
+    transform: translateY(9px);
+  }
 `;
 
 function Nav() {

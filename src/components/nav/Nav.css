@@ -32,3 +32,10 @@ menu {
 #navbutton {
   color: #1c5f22;
 }
+
+@media screen and (max-width: 600px) {
+  .Navbar  {
+    width: 180vw;
+    height: 10vh;
+  }
+}

@@ -22,6 +22,10 @@ const Wrapper = styled.div`
   div {
     text-align: left;
   }
+  @media only screen and (max-width: 600px) {
+    height: 80vh;
+    width: 100vw;
+  }
 `;
 
 const Header = styled.h1`
@@ -37,6 +41,10 @@ const Header = styled.h1`
   h1 {
     opacity: 0.7;
     color: #1c5f22;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 100vw;
   }
 `;
 

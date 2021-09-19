@@ -1,8 +1,5 @@
-.inputSection {
-  /* margin: 0 auto; */
-  /* width: 70%; */
-  /* padding: 10px; */
-  /* text-align: center; */
+.btn-container {
+  transform: translate(1080px, -400px);
 }
 .inputButton {
   justify-content: center;
@@ -44,4 +41,10 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+@media screen and (max-width: 600px) {
+  .btn-container{
+    transform: translate(800px, -400px);
+  }
 }
