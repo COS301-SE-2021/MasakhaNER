@@ -24,19 +24,22 @@ function VerifyAccount() {
 
   const handleVerify = async () => {
     try {
-      const resp = await fetch("/verify", options);
+      const resp = await fetch(
+        "https://masakha-api.herokuapp.com/verify",
+        options
+      );
       console.log("This is what came back: ", options);
 
       if (resp.status === 200) {
         const data = await resp.json();
-        alert("You have successfully verified your account!");
-        window.location.href = "/Dashboard";
+        // alert("You have successfully verified your account!");
+        window.location.href = "/";
       } else {
-        alert("Incorrect verification code!");
+        // alert("Incorrect verification code!");
         window.location.href = "/verify";
       }
     } catch (error) {
-      console.log("there is an error", error);
+      // console.log("there is an error", error);
       window.location.href = "/verify";
     }
   };
