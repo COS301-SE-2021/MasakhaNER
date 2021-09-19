@@ -345,11 +345,11 @@ const createText = (text) => {
         for (let i = 0; i < data.output.length; i++) {
           if(data.output[i].entity=="PERSON"){
             // if(word.includes(data.output[i].name))
-            word=word.replace(data.output[i].name,`<span id="PER"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `</a></span><span id="tag">PER</span></a></span>`+ "PER")
+            word=word.replace(data.output[i].name,`<span id="PER"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `<span id="tag">PER</span></a></span>`)
           }else if (data.output[i].entity=="LOCATION"){
-            word=word.replace(data.output[i].name,`<a href="https://www.google.com/maps/place/${data.output[i].name}" target="_blank">`+ data.output[i].name+`</a>`+ "LOC")
+            word=word.replace(data.output[i].name,`<span id="LOC"><a href="https://www.google.com/maps/place/${data.output[i].name}" target="_blank">`+ data.output[i].name+`<span id="tag">LOC</span></a></span>`)
           }else if(data.output[i].entity=="ORGANISATION"){
-            word=word.replace(data.output[i].name,`<a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+ data.output[i].name+`</a>`+"ORG")
+            word=word.replace(data.output[i].name,`<span id="ORG"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `<span id="tag">ORG</span></a></span>`)
           }else if(data.output[i].entity=="DATE"){
             word=word.replace(data.output[i].name,`<a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+ data.output[i].name+`</a>`+"DAT")
           }
