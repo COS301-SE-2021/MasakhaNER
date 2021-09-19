@@ -139,7 +139,16 @@ const Visualizer = () => {
     } else {
       color = "#2148bd";
     }
-    displayArray.push([i.count, color, (x_coord += 1), (z_coord += 1), i.name]);
+
+    if (i.count > 20) {
+      displayArray.push([
+        i.count,
+        color,
+        (x_coord += 1),
+        (z_coord += 1),
+        i.name,
+      ]);
+    }
   }
 
   return (

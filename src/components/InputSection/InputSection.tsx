@@ -120,7 +120,7 @@ const FeedbackInput = styled(Input)`
 const VisualizerButton = styled(Button)`
   background-color: white;
   color: grey;
-  transform: translate(0px, -900px);
+  transform: translate(0px, -890px);
 `;
 
 const ImageUploadHeader = styled.div`
@@ -135,6 +135,20 @@ const ImageUploadHeader = styled.div`
     /* color: #7eaf82; */
     color: #fff;
     transform: translate(88px, 20px);
+  }
+
+  p {
+    /* padding: 20px; */
+    color: #fff;
+    opacity: 1;
+    width: 500px;
+    margin-top: 30px;
+    transform: translate(88px, 0px);
+  }
+
+  a {
+    opacity: 1;
+    color: #7eaf82;
   }
 `;
 
@@ -373,6 +387,12 @@ export default function InputSection() {
             </div>
             <ImageUploadHeader id="image-upload-header">
               <h1>Facial Recognition</h1>
+              <p>
+                Built with the power of OpenCV, this facial recognition system
+                was built and trained with the faces of popular African figures.{" "}
+                <br /> Upload an image of an Africa figure and submit to see the
+                results.
+              </p>
             </ImageUploadHeader>
             <div
               style={{
@@ -419,7 +439,27 @@ export default function InputSection() {
         </div>
         <div></div>
       </FormContainer>
-      <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton>
+      <h1
+        style={{
+          color: "#1c5f22",
+          transform: "translate(0px, -900px)",
+          opacity: "0.7",
+        }}
+      >
+        Data Visualizer
+      </h1>
+      <p
+        style={{
+          color: "#000",
+          transform: "translate(0px, -900px)",
+          opacity: "0.6",
+        }}
+      >
+        Displays the most passed in words and their corresponding entities
+      </p>
+      <VisualizerButton onClick={visualizer}>
+        <p>3D Visualizer</p>
+      </VisualizerButton>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
