@@ -72,7 +72,7 @@ class User:
 
             Here is your activation code: """
             message += code
-            sendemail.send_email(message, email)
+            sendemail.sendMessage(email, message)
             print("sent")
             self.conn.commit()
             # self.cur.close()
