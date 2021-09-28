@@ -1,3 +1,4 @@
+import base64
 from posixpath import dirname
 from model import runModel
 from flask import Response
@@ -11,17 +12,12 @@ import os
 import sys
 from flask_cors import CORS
 from werkzeug.datastructures import Headers
+from faceAI import faces
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
-from model import runModel
 
 app = Flask(__name__)
 app.config.from_object('config_default.Config')
-
-# app.config['SECRET_KEY']='secret'
-# app.config['DATABASE']=User()
-# app.config['Database'] = User()
-#I MADE A COMMIT
 
 """
     Serves as mock trained data
@@ -105,34 +101,26 @@ def token_required(f):
         token = None
         # print(request.headers)
         if 'x-access-token' in request.headers:
-            #print('here')
+            # print('here')
             token = request.headers['x-access-token']
-            #print(token)
+            # print(token)
 
         if not token:
             return jsonify({'response': 'Token is missing!'}), 401
 
         try:
-            #print("here")
-            db=app.config['DATABASE']
-            #print("here2")
-            data = jwt.decode(token,app.config['SECRET_KEY'],"HS256")
+            # print("here")
+            db = app.config['DATABASE']
+            # print("here2")
+            data = jwt.decode(token, app.config['SECRET_KEY'], "HS256")
             #print("data is ",data)
             user = db.findUserByEmail(data['email'])
         except Exception as e:
-            return jsonify({'response' : str(e)}),401
+            return jsonify({'response': str(e)}), 401
 
         return f(user, *args, **kwargs)
 
     return decorated
-
-# @app.route('/', methods=["POST"])
-# def index():
-
-#     db = app.config['DATABASE']
-#     db.printList()
-#     return {'output':'working'},200
-
 
 
 @app.route('/input', methods=["POST"])
@@ -140,17 +128,37 @@ def token_required(f):
 def model_feedback(user):
 
     if not user:
-        return jsonify({'response' : 'log in to use model'}),401
+        return jsonify({'response': 'log in to use model'}), 401
 
-    
     user_input = str(request.json["input"])
-    
+
     model_feedback = str(runModel(user_input))
     model_feedback = eval(model_feedback)
-    #dude = json.dumps(model_feedback[0])
-    #dude = json.loads(dude)
-    dude = {'output':model_feedback}
-    return dude, 200
+    db = app.config['DATABASE']
+    if(db != False):
+        db.input(model_feedback)
+        dude = {'output': model_feedback}
+        return dude, 200
+    else:
+        return {'response': 'failed'}, 400
+
+
+@app.route('/input', methods=["GET"])
+@token_required
+def get_inout(user):
+    if not user:
+        return jsonify({'response': 'user are not logged in'})
+    db = app.config['DATABASE']
+    if(db != None):
+        input = db.get_all_input()
+        reps = []
+        for i in input:
+            reps.append({'id': i[0], 'name': i[1],
+                        'entity': i[2], 'count': i[3]})
+        res = Response(response=json.dumps(reps))
+        res.headers.add('Content-Type', 'application/json')
+        return res, 200
+    return {'response': 'failed'}, 400
 
 
 """
@@ -162,13 +170,15 @@ def model_feedback(user):
     Returns:
         JSON object with response
 """
+
+
 @app.route('/details/changepassword', methods=["POST"])
 def reset_password():
     db = app.config['DATABASE']
     if(db != None):
         user_email = str(request.json['email'])
         user_new_password = str(request.json['password'])
-        if(db.resetPassword(user_email,user_new_password)):
+        if(db.resetPassword(user_email, user_new_password)):
             return {'response': 'password reset'}, 200
         else:
             return {'response': 'failed'}, 400
@@ -178,12 +188,6 @@ def reset_password():
 
 @app.route('/register', methods=["POST"])
 def register_user():
-
-    # "firstname":"kanye",
-    # "lastname":"west",
-    # "email":"kw@gmail.com",
-    # "password":"12345"
-    #return {'response':'registered'},200
 
     db = app.config['DATABASE']
     if(db != None):
@@ -216,7 +220,6 @@ def verify_user():
         user_email = request.json["email"]
         user_code = int(request.json["code"])
         if user_code != None and user_code == db.get_code(user_email):
-            #print(True)
             db.verify_user(user_email)
 
             return {'response': 'verified'}, 200
@@ -245,13 +248,12 @@ def login_user():
     if(db != False):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
-        #print("hello")
+        # print("hello")
         if db.login(user_email, user_password):
             token = jwt.encode({'email': user_email, 'exp': datetime.utcnow(
             ) + timedelta(hours=2)}, app.config['SECRET_KEY'], algorithm="HS256")
-            
 
-            return jsonify({'isadmin':db.isAdmin(user_email),'token': token})
+            return jsonify({'isadmin': db.isAdmin(user_email), 'token': token})
         else:
             return jsonify({'response': 'authetication failed!'}), 401
     else:
@@ -259,13 +261,14 @@ def login_user():
 
 # Admin functions
 
+
 @app.route('/update-details', methods=["POST"])
 @token_required
 def update_details(user):
     if not user:
-        return jsonify({'response' : 'log in to use model'}),401
+        return jsonify({'response': 'log in to use model'}), 401
 
-    #hello
+    # hello
     db = app.config['DATABASE']
     if(db != None):
         user_firstname = str(request.json["firstname"])
@@ -288,17 +291,18 @@ def update_details(user):
         JSON object with response
 """
 
+
 @app.route('/users', methods=["POST"])
 @token_required
 def admin_add_user(user):
 
-    #print(user)
+    # print(user)
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
-        
-    if user[5]==False:
+
+    if user[5] == False:
         return jsonify({'response': 'user unauthirized'}), 401
-    
+
     db = app.config['DATABASE']
     if(db != None):
         user_firstname = str(request.json["firstname"])
@@ -306,12 +310,14 @@ def admin_add_user(user):
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
         user_isadmin = request.json["isadmin"]
-        if(db.adminAddUser(user_firstname, user_lastname, user_email, user_password, user_isadmin)):
-            return jsonify({'response':'registered'}),200
+        id = db.adminAddUser(user_firstname, user_lastname,
+                             user_email, user_password, user_isadmin)
+        if(id != None):
+            return jsonify({'response': 'registered', 'id': id}), 200
         else:
-            return {'response':'failed'},400
+            return {'response': 'failed'}, 400
     else:
-        return {'response':'failed'},400
+        return {'response': 'failed'}, 400
 
 
 # """
@@ -326,60 +332,62 @@ def admin_add_user(user):
 @app.route('/users/<id>', methods=["PUT"])
 @token_required
 def admin_update_user(user, id):
-    #print(id)
+    # print(id)
     id = int(id)
-    
+
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
-    if user[5]==False:
+    if user[5] == False:
         return jsonify({'response': 'user unauthirized'}), 401
 
     db = app.config['DATABASE']
     if(db != None):
-        #print("hello")
+        # print("hello")
         user_firstname = str(request.json["firstname"])
         user_lastname = str(request.json["lastname"])
         user_email = str(request.json["email"])
         user_password = str(request.json["password"])
         user_isadmin = str(request.json["isadmin"])
         user_verified = str(request.json["verified"])
-        if(db.adminUpdateUser(id,user_firstname, user_lastname, user_email, user_password, user_isadmin,user_verified)):
-            return jsonify({'id':0,'response':'updated'}),200
+        if(db.adminUpdateUser(id, user_firstname, user_lastname, user_email, user_password, user_isadmin, user_verified)):
+            return jsonify({'id': 0, 'response': 'updated'}), 200
         else:
-            return jsonify({'response':'failed'}),400
+            return jsonify({'response': 'failed'}), 400
     else:
-        return jsonify({'response':'failed'}),400
+        return jsonify({'response': 'failed'}), 400
 
 # """
 #     admin_delete_user function:
 #         allows admin to delete a user
 #     Parameters:
 #         None
-#     Returns:  
+#     Returns:
 #         JSON object with response
 # """
+
+
 @app.route('/users/<id>', methods=["DELETE"])
 @token_required
 def admin_delete_user(user, id):
 
     id = int(id)
 
-    #print(user)
+    # print(user)
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
-    if user[5]==False:
+    if user[5] == False:
         return jsonify({'response': 'user unauthirized'}), 401
-    
+
     db = app.config['DATABASE']
     if(db != None):
         if(db.adminDeleteUser(id)):
-            return {'response':'deleted'},200
+            return {'response': 'deleted'}, 200
         else:
-            return {'response':'failed'},400
+            return {'response': 'failed'}, 400
     else:
-        return {'response':'failed'},400
+        return {'response': 'failed'}, 400
 
 
 """
@@ -390,10 +398,11 @@ def admin_delete_user(user, id):
     Returns:
         JSON object with response
 """
+
+
 @app.route('/users/<id>', methods=["GET"])
 @token_required
 def admin_get_user(user, id):
-    # print(user[5])
     if id is not None:
         if user is None:
             return jsonify({'response': 'user unauthirized'}), 401
@@ -404,14 +413,15 @@ def admin_get_user(user, id):
         db = app.config['DATABASE']
         if(db != None):
             user = db.getUser(id)
-            resp ={'id': user[0], 'firstname': user[1], 'lastname': user[2], 'password': user[3],
-                            'email': user[4], 'isadmin': user[5], 'activationCode': user[6], 'verified': user[7]}
+            resp = {'id': user[0], 'firstname': user[1], 'lastname': user[2], 'password': user[3],
+                    'email': user[4], 'isadmin': user[5], 'activationCode': user[6], 'verified': user[7]}
             res = Response(response=json.dumps(resp))
             res.headers.add('Content-Range', 'users 0-10/100')
             res.headers.add('Content-Type', 'application/json')
             return res, 200
 
     return {'response': 'failed'}, 400
+
 
 """
     admin_get_users function:
@@ -421,6 +431,7 @@ def admin_get_user(user, id):
     Returns:
         JSON object with response
 """
+
 
 @app.route('/users', methods=["GET"])
 @token_required
@@ -446,26 +457,29 @@ def admin_get_users(user):
 
     return {'response': 'failed'}, 400
 
-#admin model functionality
+# admin model functionality
+
+
 @app.route('/models', methods=["POST"])
 @token_required
 def admin_add_models(user):
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
-    if user[5]==False:
+    if user[5] == False:
         return jsonify({'response': 'user unauthirized'}), 401
 
     db = app.config['DATABASE']
     if(db != None):
         model_name = str(request.json["modelname"])
         model_model = str(request.json["model"])
-        if(db.adminAddModel(model_name, model_model)):
-            return {'response':'model added'},200
+        id = db.adminAddModel(model_name, model_model)
+        if(id != None):
+            return {'response': 'model added', 'id': id}, 200
         else:
-            return {'response':'failed'},400
+            return {'response': 'failed'}, 400
     else:
-        return {'response':'failed'},400
+        return {'response': 'failed'}, 400
 
 
 @app.route('/models', methods=["GET"])
@@ -482,13 +496,14 @@ def admin_get_models(user):
         models = db.getAllModels()
         resp = []
         for x in models:
-            resp.append({'id':x[0],'modelname': x[1], 'model': x[2]})
+            resp.append({'id': x[0], 'modelname': x[1], 'model': x[2]})
         res = Response(response=json.dumps(resp))
         res.headers.add('Content-Range', 'models 0-10/100')
         res.headers.add('Content-Type', 'application/json')
         return res, 200
 
     return {'response': 'failed'}, 400
+
 
 @app.route('/models/<id>', methods=["DELETE"])
 @token_required
@@ -497,7 +512,7 @@ def admin_delete_model(user, id):
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
-    if user[5]==False:
+    if user[5] == False:
         return jsonify({'response': 'user unauthirized'}), 401
 
     db = User()
@@ -506,78 +521,83 @@ def admin_delete_model(user, id):
         # user_id = str(request.json["id"])
         # if(db.adminDeleteUser(user_id)):
         if(db.adminDeleteModel(id)):
-            return {'response':'deleted'},200
+            return {'response': 'deleted'}, 200
         else:
-            return {'response':'failed'},400
+            return {'response': 'failed'}, 400
     else:
-        return {'response':'failed'},400
+        return {'response': 'failed'}, 400
+
 
 @app.route('/models/<id>', methods=["GET"])
 @token_required
-def set_model(user,id):
+def set_model(user, id):
 
     # print(user)
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
-    if user[5]==False:
+    if user[5] == False:
         return jsonify({'response': 'user unauthirized'}), 401
 
     db = app.config['DATABASE']
     if(db != None):
         model = db.setModels(id)
-        #print(model)
-        if(model!=None):
+        # print(model)
+        if(model != None):
             # with is like your try .. finally block in this case
             dirname = os.path.dirname(__file__)
             filename = os.path.join(dirname, 'model.py')
-            #print(filename)
-            data=""
+            # print(filename)
+            data = ""
             with open(filename, 'r') as file:
                 # read a list of lines into data
                 data = file.readlines()
-            #Davlan/distilbert-base-multilingual-cased-masakhaner
-            #print(data)
+            # Davlan/distilbert-base-multilingual-cased-masakhaner
+            # print(data)
             #print("Your name: " + data[4])
 
             # now change the 2nd line, note that you have to add a newline
             data[4] = f'    url = "{model[0]}"\n'
-            #print(data[4])
+            # print(data[4])
             # and write everything back
             with open(filename, 'w') as file:
-                file.writelines( data )
+                file.writelines(data)
             modelres = db.getModel(id)
-            resp ={'id': modelres[0], 'modelname': modelres[1], 'model': modelres[2]}
+            resp = {'id': modelres[0],
+                    'modelname': modelres[1], 'model': modelres[2]}
             res = Response(response=json.dumps(resp))
             res.headers.add('Content-Range', 'models 0-10/100')
             res.headers.add('Content-Type', 'application/json')
             return res, 200
 
         else:
-            return {'response':'failed'},400
+            return {'response': 'failed'}, 400
     else:
-        return {'response':'failed'},400
+        return {'response': 'failed'}, 400
+
 
 @app.route('/models/<id>', methods=["PUT"])
 @token_required
 def admin_update_model(user, id):
     print(id)
     id = int(id)
-    
+
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
-    if user[5]==False:
+    if user[5] == False:
         return jsonify({'response': 'user unauthirized'}), 401
 
     db = app.config['DATABASE']
     if(db != None):
         print("hello")
-        return jsonify({'id':0,'response':'updated'}),200
+        return jsonify({'id': 0, 'response': 'updated'}), 200
     else:
-        return jsonify({'response':'failed'}),400
+        return jsonify({'response': 'failed'}), 400
 
-#feedback endpoint
+# feedback endpoint
+
+
 @app.route('/feedback', methods=["POST"])
 @token_required
 def add_feedback(user):
@@ -588,7 +608,7 @@ def add_feedback(user):
     db = app.config['DATABASE']
     if(db != None):
         user_feedback = str(request.json["feedback"])
-        #print(type(user_feedback))
+        # print(type(user_feedback))
         if(db.addFeedback(user_feedback)):
             return {'response': 'feedback saved'}, 200
         else:
@@ -606,17 +626,17 @@ def admin_delete_feedback(user, id):
     if user is None:
         return jsonify({'response': 'user unauthirized'}), 401
 
-    if user[5]==False:
+    if user[5] == False:
         return jsonify({'response': 'user unauthirized'}), 401
-    
+
     db = app.config['DATABASE']
     if(db != None):
         if(db.adminDeleteFeedback(id)):
-            return {'response':'deleted'},200
+            return {'response': 'deleted'}, 200
         else:
-            return {'response':'failed'},400
+            return {'response': 'failed'}, 400
     else:
-        return {'response':'failed'},400
+        return {'response': 'failed'}, 400
 
 
 """
@@ -627,6 +647,8 @@ def admin_delete_feedback(user, id):
     Returns:
         JSON object with response
 """
+
+
 @app.route('/feedback/<id>', methods=["GET"])
 @token_required
 def admin_get_feedack(user, id):
@@ -642,7 +664,7 @@ def admin_get_feedack(user, id):
         if(db != None):
             feedback = db.adminGetFeedback(id)
             if(feedback != None):
-                resp ={'id': feedback[0], 'feedback': feedback[1]}
+                resp = {'id': feedback[0], 'feedback': feedback[1]}
                 res = Response(response=json.dumps(resp))
                 res.headers.add('Content-Range', 'feedback 0-10/100')
                 res.headers.add('Content-Type', 'application/json')
@@ -678,6 +700,57 @@ def admin_get_all_feedback(user):
 
 
 """
+    image upload function:
+        
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
+
+
+@app.route('/upload-image', methods=["POST"])
+# @token_required
+def upload_image():
+    # if user is None:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    # if user[5] == False:
+    #     return jsonify({'response': 'user unauthirized'}), 401
+
+    # parse = reqparse.RequestParser()
+
+    # image = request.json["image"]
+    # return {"response": image}, 200
+
+    string = 'data to be encoded'
+
+    file = request.json["image"]
+    file = file.partition(",")[2]
+
+    # /print(file)
+    # new_file = base64.encode(file)
+    with open("faceAI/imageToSave.jpg", "wb") as fh:
+        fh.write(base64.b64decode(file))
+
+    faces.recognize("imageToSave.jpg")
+
+    # image = open("faceAI/pte.jpg")
+    # print("here")
+    # image_read = image.read()
+    # print("here")
+    # image_64_encode = base64.encodestring(image_read)
+    # print("here")
+    # final_image = image_64_encode .partition(",")[2]
+
+    with open("faceAI/a.jpg", "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
+    print(my_string)
+
+    return jsonify({'msg': str(my_string)})
+
+
+"""
     main function:
         starts the Flask API
     Parameters:
@@ -686,12 +759,11 @@ def admin_get_all_feedback(user):
         JSON object with response
 """
 if __name__ == "__main__":
-    #print("RUNNING")
+    # print("RUNNING")
     app.run(debug=True)
 
 # DB_HOST="ec2-34-232-191-133.compute-1.amazonaws.com"
 # DB_NAME="d1mm3a0c29eepo"
 # DB_PASS="904c29b5f6055f6de8c01b24e1ac3f29736c54ca010dd9b8cc022f1555fe3be7"
 # DB_USER="orikanjrgszuig"
-#feedback endpoint
-
+# feedback endpoint
