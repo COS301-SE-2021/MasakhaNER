@@ -355,10 +355,15 @@ export default function InputSection() {
      
       let text = result.text
       setText(text);
+      setText(result.text);
+      console.warn("AI TEXT:", text);
+      console.warn("AI CON:", confidence);
+
   
     })
   }
  
+  console.warn("AI TEXT 2:", text);
 
   const handleImageUpload = async () => {
     console.log("THIS IS IT", imageFile);
@@ -403,7 +408,6 @@ export default function InputSection() {
       <img 
            src={imagePath} className="App-image" alt="logo"/>
           <input type="file" onChange={handleChange} />
-          <h1>OVER HERE</h1>
           <p> Text: {text} </p>
           <button onClick={handleClick} style={{height:50}}> convert to text</button>
         <div style={{ height: "0px" }} id="inputsection">
