@@ -117,10 +117,12 @@ const FeedbackInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
-const VisualizerButton = styled(Button)`
-  background-color: white;
+const Visualizer = styled.div`
+  background-color: #d8d8d8;
   color: grey;
   transform: translate(0px, -890px);
+  width: 1000px;
+  height: 300px;
 `;
 
 const ImageUploadHeader = styled.div`
@@ -129,7 +131,7 @@ const ImageUploadHeader = styled.div`
   border-radius: 5px;
   padding: 20px;
   background-color: #1c5f22;
-  transform: translate(-10vw, 300px);
+  transform: translate(-10vw, 600px);
 
   h1 {
     /* color: #7eaf82; */
@@ -397,7 +399,7 @@ export default function InputSection() {
             </ImageUploadHeader>
             <div
               style={{
-                transform: "translate(0px,140px)",
+                transform: "translate(0px,440px)",
                 zIndex: 99,
               }}
             >
@@ -458,9 +460,9 @@ export default function InputSection() {
       >
         Displays the most passed in words and their corresponding entities
       </p>
-      <VisualizerButton onClick={visualizer}>
-        <p>3D Visualizer</p>
-      </VisualizerButton>
+      <Visualizer>
+        <p>Sean Nkosi</p>
+      </Visualizer>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
