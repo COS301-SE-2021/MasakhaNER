@@ -182,6 +182,8 @@ export default function InputSection() {
   const [feedback, setFeedback] = useState("");
   const [imageFile, setImageFile] = useState("");
   const [baseFile, setBaseFile] = useState("");
+  const [imagePath, setImagePath] = useState("");
+  const [text, setText] = useState("");
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -201,6 +203,10 @@ export default function InputSection() {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  const handleChange = (event) => {
+    setImage(URL.createObjectURL(event.target.files[0]));
+  }
 
   const handleFeedback = async () => {
     const opts: any = {
