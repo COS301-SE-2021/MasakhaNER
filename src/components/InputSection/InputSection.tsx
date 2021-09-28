@@ -5,6 +5,7 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
+import Tesseract from 'tesseract.js';
 
 const FormContainer = styled.div`
   display: grid;
@@ -204,8 +205,8 @@ export default function InputSection() {
     setIsOpen(false);
   };
 
-  const handleChange = (event) => {
-    setImage(URL.createObjectURL(event.target.files[0]));
+  const handleChange = (e: any) => {
+    setImagePath(URL.createObjectURL(e.target.files[0]));
   }
 
   const handleFeedback = async () => {
@@ -337,6 +338,28 @@ export default function InputSection() {
     };
   };
 
+  const handleClick = () => {
+  
+    Tesseract.recognize(
+      imagePath,'eng',
+      { 
+        logger: (m: any) => console.log(m) 
+      }
+    )
+    .catch ((err: any) => {
+      console.error(err);
+    })
+    .then((result: any) => {
+      // Get Confidence score
+      let confidence = result.confidence
+     
+      let text = result.text
+      setText(text);
+  
+    })
+  }
+ 
+
   const handleImageUpload = async () => {
     console.log("THIS IS IT", imageFile);
     setWait(2);
@@ -377,6 +400,12 @@ export default function InputSection() {
   return (
     <>
       <FormContainer>
+      <img 
+           src={imagePath} className="App-image" alt="logo"/>
+          <input type="file" onChange={handleChange} />
+          <h1>OVER HERE</h1>
+          <p> Text: {text} </p>
+          <button onClick={handleClick} style={{height:50}}> convert to text</button>
         <div style={{ height: "0px" }} id="inputsection">
           <form style={{ height: "0px" }} onSubmit={handleSubmit}>
             <Input
