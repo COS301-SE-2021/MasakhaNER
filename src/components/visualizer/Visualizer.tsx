@@ -12,7 +12,6 @@ let data =__DATA__;
 let outData = new Array();
 export default function Visualizer() {
     const [color, setColor] = useState("black");
-    // const [word, setWord] = useState("PER");
     const [wait, setWait] = useState(1);
     const [out, SetOut] = useState (data);
 
@@ -34,6 +33,7 @@ export default function Visualizer() {
             data.sort((a, b) => a.count < b.count ? 1 : -1);
             let count = 0;
             if(word == "Person"){
+                setColor("#79bb14");
                 for( let x in data){
                     if((data[x].entity == "B-PER" || data[x].entity == "I-PER") && count < 6){
                         outData[count] = data[x];
@@ -42,6 +42,7 @@ export default function Visualizer() {
                 }
             }
             else if(word == "Date"){
+                setColor("#2148bd");
                 for( let x in data){
                     if((data[x].entity == "B-DATE" || data[x].entity == "I-DATE") && count < 6){
                         outData[count] = data[x];
@@ -50,6 +51,7 @@ export default function Visualizer() {
                 }
             }
             else if(word == "Location"){
+                setColor("#dd9c22");
                 for( let x in data){
                     if((data[x].entity == "B-LOC" || data[x].entity == "I-LOC") && count < 6){
                         outData[count] = data[x];
@@ -58,6 +60,7 @@ export default function Visualizer() {
                 }
             }
             else{
+                setColor("#b8216d");
                 for( let x in data){
                     if((data[x].entity == "B-ORG" || data[x].entity == "I-ORG") && count < 6){
                         outData[count] = data[x];
@@ -101,11 +104,11 @@ export default function Visualizer() {
             )}
         <BlackLine />
         <select onChange ={ (e) => {getData(e.target.value)}}>
-            <option value = ""></option>
-            <option value = "Person">Person</option>
-            <option value = "Organisation">Organisation</option>
-            <option value = "Location">Location</option>
-            <option value = "Date">Date</option>
+            <option style = {{background : ""}}></option>
+            <option style = {{color : "#79bb14"}} value = "Person">Person</option>
+            <option style = {{color : "#b8216d"}} value = "Organisation">Organisation</option>
+            <option style = {{color : "#dd9c22"}} value = "Location">Location</option>
+            <option style = {{color : "#2148bd"}} value = "Date">Date</option>
         </select>
         </Container>
     );
