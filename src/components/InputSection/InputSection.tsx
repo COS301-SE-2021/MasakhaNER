@@ -5,7 +5,7 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
-
+import Visualizer from "../visualizer/Visualizer";
 const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
@@ -117,7 +117,7 @@ const FeedbackInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
-const Visualizer = styled.div`
+const Visualizered = styled.div`
   background-color: #d8d8d8;
   color: grey;
   transform: translate(0px, -890px);
@@ -460,9 +460,9 @@ export default function InputSection() {
       >
         Displays the most passed in words and their corresponding entities
       </p>
-      <Visualizer>
-        <p>Sean Nkosi</p>
-      </Visualizer>
+      <Visualizered>
+        <Visualizer/>
+      </Visualizered>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
