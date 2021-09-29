@@ -101,6 +101,7 @@ export default function Visualizer() {
             )}
         <BlackLine />
         <select onChange ={ (e) => {getData(e.target.value)}}>
+            <option value = ""></option>
             <option value = "Person">Person</option>
             <option value = "Organisation">Organisation</option>
             <option value = "Location">Location</option>
