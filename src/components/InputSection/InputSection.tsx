@@ -447,6 +447,7 @@ export default function InputSection() {
           color: "#1c5f22",
           transform: "translate(0px, -800px)",
           opacity: "0.7",
+          fontSize: "30px",
         }}
       >
         Data Visualizer
