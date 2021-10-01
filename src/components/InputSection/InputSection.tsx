@@ -23,7 +23,7 @@ const FormContainer = styled.div`
 const Input = styled.textarea`
   display: inline-block;
   border-radius: 10px;
-  width: 85vw;
+  width: 60vw;
   height: 4em;
   resize: none;
   text-align: justify;
@@ -116,6 +116,7 @@ const FeedbackInput = styled(Input)`
   width: 100%;
   margin-bottom: 20px;
 `;
+
 
 const Visualizer = styled.div`
   background-color: #d8d8d8;
