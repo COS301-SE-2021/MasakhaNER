@@ -5,7 +5,6 @@ import { useState } from "react";
 const InfoBlock = styled.div`
   width: 100%;
   height: 30vh;
-  /* background-color: #f3f3f3; */
   margin-top: 7vh;
   text-align: left;
   padding-top: 4vh;
@@ -24,15 +23,15 @@ const InfoBlock = styled.div`
 
 const Containter = styled.div`
   width: 100%;
-  height: 35vh;
+  height: 30vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
 `;
 
 const InputBox = styled.input`
-  width: 26vw;
-  margin-right: 100px;
+  width: 32vw;
+  margin-right: 80px;
   border-radius: 10px;
   border: solid 0.1px rgba(153, 153, 153, 0.2);
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
@@ -44,8 +43,8 @@ const InputBox = styled.input`
 `;
 
 const OutputBox = styled.div`
-  width: 26vw;
-  margin-left: 100px;
+  width: 32vw;
+  margin-left: 80px;
   border-radius: 10px;
   border: solid 0.1px rgba(153, 153, 153, 0.2);
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
@@ -60,7 +59,7 @@ const Button = styled.button`
   padding-left: 1em;
   padding-right: 1em;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
-  transform: translateX(-28.5vw);
+  transform: translateX(-33vw);
   margin-top: 10px;
 
   &:hover {
@@ -73,6 +72,11 @@ const Button = styled.button`
   }
   position: relative;
   color: white;
+`;
+
+const Select = styled.select`
+  margin-bottom: 10px;
+  border-radius: 5px;
 `;
 
 const Translate = () => {
@@ -111,6 +115,12 @@ const Translate = () => {
           containing text you want like to send to the model.
         </p>
       </InfoBlock>
+      <Select style={{ transform: "translateX(-450px)" }}>
+        <option value="english">English</option>
+      </Select>
+      <Select style={{ transform: "translateX(90px)" }}>
+        <option value="swahili">Swahili</option>
+      </Select>
       <Containter>
         <InputBox
           onClick={handleSend}
