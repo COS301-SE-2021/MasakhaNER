@@ -118,7 +118,7 @@ const FeedbackInput = styled(Input)`
 `;
 
 const Visualizered = styled.div`
-  background-color: #d8d8d8;
+  background-color: #f7f7f7;
   color: grey;
   transform: translate(0px, -890px);
   width: 1000px;
@@ -461,7 +461,7 @@ export default function InputSection() {
         Displays the most passed in words and their corresponding entities
       </p>
       <Visualizered>
-        <Visualizer/>
+        <Visualizer />
       </Visualizered>
       <Modal
         isOpen={modalIsOpen}
