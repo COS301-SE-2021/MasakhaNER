@@ -387,7 +387,7 @@ export default function InputSection() {
               />
               <Button onClick={handleSend}>Send</Button>
             </div>
-            <ImageUploadHeader id="image-upload-header">
+            {/* <ImageUploadHeader id="image-upload-header">
               <h1>Facial Recognition</h1>
               <p>
                 Built with the power of OpenCV, this facial recognition system
@@ -396,8 +396,8 @@ export default function InputSection() {
                 <br /> Upload an image of an Africa figure and submit to see the
                 results.
               </p>
-            </ImageUploadHeader>
-            <div
+            </ImageUploadHeader> */}
+            {/* <div
               style={{
                 transform: "translate(0px,440px)",
                 zIndex: 99,
@@ -418,7 +418,7 @@ export default function InputSection() {
               >
                 Submit
               </Button>
-            </div>
+            </div> */}
           </form>
         </div>
         <div id="output-section">
