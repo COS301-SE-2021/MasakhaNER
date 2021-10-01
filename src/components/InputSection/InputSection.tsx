@@ -307,6 +307,41 @@ export default function InputSection() {
     }
   };
 
+  const handleTrans = async () => {
+    setWait(2);
+    const opts: any = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        input: input,
+      }),
+    };
+
+    try {
+      const resp = await fetch("/translate", opts);
+      console.log(resp);
+      if (resp.status === 200) {
+        const data = await resp.json();
+        console.log(data);
+        setOutputData(data.output);
+        setInput2(input);
+        console.log("data is ", data.output);
+        setWait(1);
+      } else {
+        alert("error, failed!");
+        setWait(0);
+      }
+      console.log(wait);
+    } catch (error) {
+      console.log("there is an error", error);
+      history.push("/");
+    }
+  };
+
+
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
     const reader: any = new FileReader();
@@ -387,6 +422,7 @@ export default function InputSection() {
                 onChange={handleFileChange}
               />
               <Button onClick={handleSend}>Send</Button>
+              <Button onClick={handleTrans}>Translate</Button>
             </div>
             <ImageUploadHeader id="image-upload-header">
               <h1>Facial Recognition</h1>
