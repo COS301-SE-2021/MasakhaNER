@@ -1,6 +1,9 @@
 import Nav from "../../components/nav/Nav";
 import styled from "styled-components";
 import { useState } from "react";
+import React from 'react';
+import useSpeechToText from 'react-hook-speech-to-text';
+
 
 const InfoBlock = styled.div`
   width: 100%;
@@ -41,6 +44,8 @@ const InputBox = styled.input`
     outline: none;
   }
 `;
+
+
 
 const OutputBox = styled.div`
   width: 32vw;
@@ -103,6 +108,26 @@ const Translate = () => {
       .then((data) => setData(data));
   };
 
+  const {
+    error,
+    isRecording,
+    results,
+    startSpeechToText,
+    stopSpeechToText,
+    interimResult
+  } = useSpeechToText({
+    continuous: true,
+    timeout: 10000,
+    speechRecognitionProperties: { interimResults: true }
+  });
+
+  if (isRecording){
+    while (isRecording){
+      
+    }
+    setInput(interimResult);
+  }
+
   return (
     <>
       <Nav />
@@ -129,6 +154,17 @@ const Translate = () => {
         />
         <OutputBox></OutputBox>
       </Containter>
+      <div>
+      <Button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
+        {isRecording ? 'Stop Recording' : 'Start Recording'}
+      </Button>
+      <ul>
+      {results.map((result, index) => (
+          <li key={index}>{result}</li>
+        ))}
+        {interimResult && <li>{interimResult}</li>}
+      </ul>
+    </div>
       <Button>Translate</Button>
     </>
   );

@@ -31,6 +31,7 @@
     "react-google-login": "^5.2.2",
     "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.8.3",
+    "react-hook-speech-to-text": "^0.8.0",
     "react-icons": "^4.2.0",
     "react-modal": "^3.14.3",
     "react-recaptcha": "^2.3.10",
@@ -76,5 +77,5 @@
     "@types/styled-components": "^5.1.11",
     "@types/three": "^0.131.0"
   },
-  "proxy":"http://localhost:5000"
+  "proxy": "http://localhost:5000"
 }
