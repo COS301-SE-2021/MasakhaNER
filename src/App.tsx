@@ -14,6 +14,7 @@ import Edit from "./pages/details/editDetails/Edit";
 import Changepass from "./pages/details/resetPassword/Changepass";
 import About from "./pages/about/About";
 import Visualizer from "./pages/visualizer/Visualizer";
+import Translate from "./pages/translate/Translate";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/details/changepassword" component={Changepass} />
           <Route exact path="/about" component={About} />
           <Route exact path="/visualizer" component={Visualizer} />
+          <Route exact path="/translate" component={Translate} />
         </Switch>
       </Router>
     </div>

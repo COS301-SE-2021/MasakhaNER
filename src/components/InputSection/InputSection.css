@@ -26,7 +26,9 @@
 }
 
 #output-section {
-  transform: translate(-400px, 80px);
+  transform: translate(-400px, 350px);
+  background-color: black;
+  width: 0vw;
 }
 
 #loading {
