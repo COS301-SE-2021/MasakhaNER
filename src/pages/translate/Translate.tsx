@@ -1,9 +1,8 @@
 import Nav from "../../components/nav/Nav";
 import styled from "styled-components";
-import { useState } from "react";
-import React from 'react';
-import useSpeechToText from 'react-hook-speech-to-text';
-
+import { useEffect, useState } from "react";
+import React from "react";
+import useSpeechToText from "react-hook-speech-to-text";
 
 const InfoBlock = styled.div`
   width: 100%;
@@ -32,7 +31,7 @@ const Containter = styled.div`
   justify-content: center;
 `;
 
-const InputBox = styled.input`
+const InputBox = styled.textarea`
   width: 32vw;
   margin-right: 80px;
   border-radius: 10px;
@@ -44,8 +43,6 @@ const InputBox = styled.input`
     outline: none;
   }
 `;
-
-
 
 const OutputBox = styled.div`
   width: 32vw;
@@ -114,19 +111,19 @@ const Translate = () => {
     results,
     startSpeechToText,
     stopSpeechToText,
-    interimResult
+    interimResult,
   } = useSpeechToText({
     continuous: true,
     timeout: 10000,
-    speechRecognitionProperties: { interimResults: true }
+    speechRecognitionProperties: { interimResults: true },
   });
 
-  if (isRecording){
-    while (isRecording){
-      
-    }
-    setInput(interimResult);
-  }
+  useEffect(() => {
+    results.map((result) => {
+      console.log(result);
+      setInput(result as string);
+    });
+  });
 
   return (
     <>
@@ -154,18 +151,12 @@ const Translate = () => {
         />
         <OutputBox></OutputBox>
       </Containter>
-      <div>
-      <Button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
-        {isRecording ? 'Stop Recording' : 'Start Recording'}
-      </Button>
-      <ul>
-      {results.map((result, index) => (
-          <li key={index}>{result}</li>
-        ))}
-        {interimResult && <li>{interimResult}</li>}
-      </ul>
-    </div>
-      <Button>Translate</Button>
+      <div style={{ transform: "translateX(80px)" }}>
+        <Button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
+          {isRecording ? "Stop Recording" : "Start Recording"}
+        </Button>
+        <Button style={{ marginLeft: "10px" }}>Translate</Button>
+      </div>
     </>
   );
 };
