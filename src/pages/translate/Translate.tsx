@@ -137,11 +137,11 @@ const Translate = () => {
           containing text you want like to send to the model.
         </p>
       </InfoBlock>
-      <Select style={{ transform: "translateX(-450px)" }}>
+      <Select style={{ transform: "translateX(-430px)" }}>
         <option value="english">English</option>
       </Select>
-      <Select style={{ transform: "translateX(90px)" }}>
-        <option value="swahili">Swahili</option>
+      <Select style={{ transform: "translateX(70px)" }}>
+        <option value="Igbo">Igbo</option>
       </Select>
       <Containter>
         <InputBox

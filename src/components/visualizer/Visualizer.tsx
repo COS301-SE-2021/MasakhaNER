@@ -99,9 +99,9 @@ export default function Visualizer() {
       {wait === 3 ? (
         ""
       ) : wait === 2 ? (
-        <div style={{ transform: "translateX(-250px)" }} id="loading"></div>
+        <div style={{ transform: "translate(-250px)" }} id="loading"></div>
       ) : wait === 1 ? (
-        <MainContainer style={{ transform: "translateX(-250px)" }}>
+        <MainContainer style={{ transform: "translate(-250px)" }}>
           {outData.map(({ count, name }, i) => {
             return (
               <BarChartContainer key={i}>

@@ -18,7 +18,7 @@ const FormContainer = styled.div`
     display: flex;
     width: 25em;
     justify-content: space-between;
-    transform: translate(61vw, -65px);
+    transform: translate(61vw, -190px);
   }
 `;
 
@@ -495,7 +495,6 @@ export default function InputSection() {
             {/* <Button onClick={openModal}>Feedback</Button> */}
           </div>
         </div>
-        <div></div>
       </FormContainer>
       <h1
         style={{
