@@ -748,7 +748,22 @@ def upload_image():
     print(my_string)
 
     return jsonify({'msg': str(my_string)})
-
+"""
+    transale_model function:
+        send data from the user to the model
+    Parameters:
+        None
+    Returns:
+        JSON object with response
+"""
+@app.route('/translate', methods=["POST"])
+@token_required
+def transale_model(user):
+    if not user:
+        return jsonify({'response': 'log in to use model'}), 401
+    text = request.json['input']
+    output = 'This will bw the translated data'
+    return {'response': 'translated', 'input': text,'output': output}, 200
 
 """
     main function:
