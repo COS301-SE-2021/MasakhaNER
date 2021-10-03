@@ -118,7 +118,7 @@ const FeedbackInput = styled(Input)`
 `;
 
 const Visualizered = styled.div`
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   color: grey;
   transform: translate(0px, -890px);
   width: 1000px;
@@ -387,7 +387,7 @@ export default function InputSection() {
               />
               <Button onClick={handleSend}>Send</Button>
             </div>
-            <ImageUploadHeader id="image-upload-header">
+            {/* <ImageUploadHeader id="image-upload-header">
               <h1>Facial Recognition</h1>
               <p>
                 Built with the power of OpenCV, this facial recognition system
@@ -396,8 +396,8 @@ export default function InputSection() {
                 <br /> Upload an image of an Africa figure and submit to see the
                 results.
               </p>
-            </ImageUploadHeader>
-            <div
+            </ImageUploadHeader> */}
+            {/* <div
               style={{
                 transform: "translate(0px,440px)",
                 zIndex: 99,
@@ -418,7 +418,7 @@ export default function InputSection() {
               >
                 Submit
               </Button>
-            </div>
+            </div> */}
           </form>
         </div>
         <div id="output-section">
@@ -445,8 +445,9 @@ export default function InputSection() {
       <h1
         style={{
           color: "#1c5f22",
-          transform: "translate(0px, -900px)",
+          transform: "translate(0px, -800px)",
           opacity: "0.7",
+          fontSize: "30px",
         }}
       >
         Data Visualizer
@@ -454,7 +455,7 @@ export default function InputSection() {
       <p
         style={{
           color: "#000",
-          transform: "translate(0px, -900px)",
+          transform: "translate(0px, -800px)",
           opacity: "0.6",
         }}
       >

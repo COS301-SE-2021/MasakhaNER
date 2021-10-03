@@ -35,17 +35,18 @@ export const Chart = css`
 `;
 
 export const Number = styled.span`
-  font-size: 1.0rem;
+  font-size: 1rem;
   text-align: center;
   color: ${(props) => props.color};
 `;
 
 export const MakeBar = styled.div`
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to bottom,
     #69e073, 
     rgb(28, 95, 34)
-  );
+  ); */
+  background-color: rgb(28, 95, 34);
   ${Chart};
 `;
 
