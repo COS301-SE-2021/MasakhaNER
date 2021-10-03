@@ -24,7 +24,7 @@ const FormContainer = styled.div`
 const Input = styled.textarea`
   display: inline-block;
   border-radius: 10px;
-  width: 85vw;
+  width: 60vw;
   height: 4em;
   resize: none;
   text-align: justify;
@@ -352,10 +352,12 @@ export default function InputSection() {
     .then((result: any) => {
       // Get Confidence score
       let confidence = result.confidence
+      console.log("RESULT:", result)
      
-      let text = result.text
+      let text = result.data.text
       setText(text);
       setText(result.text);
+      setInput(result.data.text);
       console.warn("AI TEXT:", text);
       console.warn("AI CON:", confidence);
 
@@ -405,11 +407,6 @@ export default function InputSection() {
   return (
     <>
       <FormContainer>
-      <img 
-           src={imagePath} className="App-image" alt="logo"/>
-          <input type="file" onChange={handleChange} />
-          <p> Text: {text} </p>
-          <button onClick={handleClick} style={{height:50}}> convert to text</button>
         <div style={{ height: "0px" }} id="inputsection">
           <form style={{ height: "0px" }} onSubmit={handleSubmit}>
             <Input
@@ -423,8 +420,16 @@ export default function InputSection() {
                 type="file"
                 placeholder="Upload"
                 onChange={handleFileChange}
+                id="getText"
+                style={{display:"none"}}
               />
+              <Button onClick={() => document.getElementById('getText').click()}>Upload Textfile</Button>
               <Button onClick={handleSend}>Send</Button>
+            </div>
+            <div id="button-container">
+              <input type="file" id="getFile" onChange={handleChange} style={{display:"none"}}/>
+              <Button onClick={() => document.getElementById('getFile').click()}>Upload Image</Button>
+              <Button onClick={handleClick} style={{ width: "105px" }}>Convert</Button>
             </div>
             <ImageUploadHeader id="image-upload-header">
               <h1>Facial Recognition</h1>
@@ -476,7 +481,7 @@ export default function InputSection() {
             id="button-container"
             style={{ transform: "translate(1080px, -400px)" }}
           >
-            <Button onClick={openModal}>Feedback</Button>
+            {/* <Button onClick={openModal}>Feedback</Button> */}
           </div>
         </div>
         <div></div>
