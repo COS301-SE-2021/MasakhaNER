@@ -121,13 +121,6 @@ const Translate = () => {
     speechRecognitionProperties: { interimResults: true }
   });
 
-  if (isRecording){
-    while (isRecording){
-      
-    }
-    setInput(interimResult);
-  }
-
   return (
     <>
       <Nav />
