@@ -1,6 +1,8 @@
 import Nav from "../../components/nav/Nav";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import React from "react";
+import useSpeechToText from "react-hook-speech-to-text";
 
 const InfoBlock = styled.div`
   width: 100%;
@@ -29,7 +31,7 @@ const Containter = styled.div`
   justify-content: center;
 `;
 
-const InputBox = styled.input`
+const InputBox = styled.textarea`
   width: 32vw;
   margin-right: 80px;
   border-radius: 10px;
@@ -103,6 +105,26 @@ const Translate = () => {
       .then((data) => setData(data));
   };
 
+  const {
+    error,
+    isRecording,
+    results,
+    startSpeechToText,
+    stopSpeechToText,
+    interimResult,
+  } = useSpeechToText({
+    continuous: true,
+    timeout: 10000,
+    speechRecognitionProperties: { interimResults: true },
+  });
+
+  useEffect(() => {
+    results.map((result) => {
+      console.log(result);
+      setInput(result as string);
+    });
+  });
+
   return (
     <>
       <Nav />
@@ -129,7 +151,12 @@ const Translate = () => {
         />
         <OutputBox></OutputBox>
       </Containter>
-      <Button>Translate</Button>
+      <div style={{ transform: "translateX(80px)" }}>
+        <Button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
+          {isRecording ? "Stop Recording" : "Start Recording"}
+        </Button>
+        <Button style={{ marginLeft: "10px" }}>Translate</Button>
+      </div>
     </>
   );
 };
