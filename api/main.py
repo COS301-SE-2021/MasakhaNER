@@ -1,5 +1,6 @@
 import base64
 from posixpath import dirname
+#from api.translator import trans2
 from model import runModel
 from flask import Response
 from database.database import User
@@ -7,6 +8,8 @@ from datetime import datetime, timedelta
 from flask import Flask, json, jsonify
 from flask import request
 from functools import wraps
+from translator.TokenizerWrap import TokenizerWrap
+from translator.trans2 import Translate
 import jwt
 import os
 import sys
@@ -25,6 +28,9 @@ app.config.from_object('config_default.Config')
     process and identified as
     entities
 """
+
+tran = Translate()
+
 pretrained_data = [
     ['michael', 'PERSON'],
     ['johnny', 'PERSON'],
@@ -748,6 +754,8 @@ def upload_image():
     print(my_string)
 
     return jsonify({'msg': str(my_string)})
+
+
 """
     transale_model function:
         send data from the user to the model
@@ -756,14 +764,18 @@ def upload_image():
     Returns:
         JSON object with response
 """
+
+
 @app.route('/translate', methods=["POST"])
 @token_required
 def transale_model(user):
     if not user:
         return jsonify({'response': 'log in to use model'}), 401
     text = request.json['input']
-    output = 'This will bw the translated data'
-    return {'response': 'translated', 'input': text,'output': output}, 200
+    output = tran.translate(input_text="The news that will interest you")
+    #output = 'This will bw the translated data'
+    return {'response': 'translated', 'input': text, 'output': output}, 200
+
 
 """
     main function:
