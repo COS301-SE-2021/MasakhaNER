@@ -5,8 +5,9 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
-import Tesseract from 'tesseract.js';
+import Tesseract from "tesseract.js";
 
+import Visualizer from "../visualizer/Visualizer";
 const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
@@ -25,7 +26,7 @@ const Input = styled.textarea`
   display: inline-block;
   border-radius: 10px;
   width: 60vw;
-  height: 4em;
+  height: 12em;
   resize: none;
   text-align: justify;
   padding: 20px;
@@ -118,10 +119,10 @@ const FeedbackInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
-const Visualizer = styled.div`
-  background-color: #d8d8d8;
+const Visualizered = styled.div`
+  /* background-color: #f7f7f7; */
   color: grey;
-  transform: translate(0px, -890px);
+  transform: translate(0px, -590px);
   width: 1000px;
   height: 300px;
 `;
@@ -207,7 +208,7 @@ export default function InputSection() {
 
   const handleChange = (e: any) => {
     setImagePath(URL.createObjectURL(e.target.files[0]));
-  }
+  };
 
   const handleFeedback = async () => {
     const opts: any = {
@@ -339,32 +340,26 @@ export default function InputSection() {
   };
 
   const handleClick = () => {
-  
-    Tesseract.recognize(
-      imagePath,'eng',
-      { 
-        logger: (m: any) => console.log(m) 
-      }
-    )
-    .catch ((err: any) => {
-      console.error(err);
+    Tesseract.recognize(imagePath, "eng", {
+      logger: (m: any) => console.log(m),
     })
-    .then((result: any) => {
-      // Get Confidence score
-      let confidence = result.confidence
-      console.log("RESULT:", result)
-     
-      let text = result.data.text
-      setText(text);
-      setText(result.text);
-      setInput(result.data.text);
-      console.warn("AI TEXT:", text);
-      console.warn("AI CON:", confidence);
+      .catch((err: any) => {
+        console.error(err);
+      })
+      .then((result: any) => {
+        // Get Confidence score
+        let confidence = result.confidence;
+        console.log("RESULT:", result);
 
-  
-    })
-  }
- 
+        let text = result.data.text;
+        setText(text);
+        setText(result.text);
+        setInput(result.data.text);
+        console.warn("AI TEXT:", text);
+        console.warn("AI CON:", confidence);
+      });
+  };
+
   console.warn("AI TEXT 2:", text);
 
   const handleImageUpload = async () => {
@@ -421,17 +416,33 @@ export default function InputSection() {
                 placeholder="Upload"
                 onChange={handleFileChange}
                 id="getText"
-                style={{display:"none"}}
+                style={{ display: "none" }}
               />
-              <Button onClick={() => document.getElementById('getText').click()}>Upload Textfile</Button>
+              <Button
+                onClick={() => document.getElementById("getText").click()}
+              >
+                Upload Textfile
+              </Button>
               <Button onClick={handleSend}>Send</Button>
             </div>
             <div id="button-container">
-              <input type="file" id="getFile" onChange={handleChange} style={{display:"none"}}/>
-              <Button onClick={() => document.getElementById('getFile').click()}>Upload Image</Button>
-              <Button onClick={handleClick} style={{ width: "105px" }}>Convert</Button>
+              <input
+                type="file"
+                id="getFile"
+                onChange={handleChange}
+                style={{ display: "none" }}
+              />
+              <Button
+                onClick={() => document.getElementById("getFile").click()}
+              >
+                Upload Image
+              </Button>
+              <Button onClick={handleClick} style={{ width: "105px" }}>
+                Convert
+              </Button>
             </div>
-            <ImageUploadHeader id="image-upload-header">
+            {/* <ImageUploadHeader id="image-upload-header"> */}
+            {/* <ImageUploadHeader id="image-upload-header">
               <h1>Facial Recognition</h1>
               <p>
                 Built with the power of OpenCV, this facial recognition system
@@ -440,8 +451,8 @@ export default function InputSection() {
                 <br /> Upload an image of an Africa figure and submit to see the
                 results.
               </p>
-            </ImageUploadHeader>
-            <div
+            </ImageUploadHeader> */}
+            {/* <div
               style={{
                 transform: "translate(0px,440px)",
                 zIndex: 99,
@@ -462,7 +473,7 @@ export default function InputSection() {
               >
                 Submit
               </Button>
-            </div>
+            </div> */}
           </form>
         </div>
         <div id="output-section">
@@ -489,8 +500,9 @@ export default function InputSection() {
       <h1
         style={{
           color: "#1c5f22",
-          transform: "translate(0px, -900px)",
+          transform: "translate(0px, -500px)",
           opacity: "0.7",
+          fontSize: "30px",
         }}
       >
         Data Visualizer
@@ -498,15 +510,15 @@ export default function InputSection() {
       <p
         style={{
           color: "#000",
-          transform: "translate(0px, -900px)",
+          transform: "translate(0px, -500px)",
           opacity: "0.6",
         }}
       >
         Displays the most passed in words and their corresponding entities
       </p>
-      <Visualizer>
-        <p>Sean Nkosi</p>
-      </Visualizer>
+      <Visualizered>
+        <Visualizer />
+      </Visualizered>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
