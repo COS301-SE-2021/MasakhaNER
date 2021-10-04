@@ -171,6 +171,22 @@ const Translate = () => {
           Translate
         </Button>
       </div>
+      <div id="button-container">
+              <input
+                type="file"
+                id="getFile"
+                onChange={handleChange}
+                style={{ display: "none" }}
+              />
+              <Button
+                onClick={() => document.getElementById("getFile").click()}
+              >
+                Upload Image
+              </Button>
+              <Button onClick={handleClick} style={{ width: "105px" }}>
+                Convert
+              </Button>
+            </div>
     </>
   );
 };
