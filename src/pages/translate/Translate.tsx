@@ -189,26 +189,24 @@ const Translate = () => {
         </OutputBox>
       </Containter>
       <div style={{ transform: "translateX(80px)" }}>
-        <Button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
+        {/* <Button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
           {isRecording ? "Stop Recording" : "Start Recording"}
-        </Button>
+        </Button> */}
         <Button onClick={handleSend} style={{ marginLeft: "10px" }}>
           Translate
         </Button>
-          <input
-            type="file"
-            id="getFile"
-            onChange={handleChange}
-            style={{ display: "none" }}
-          />
-          <Button
-            onClick={() => document.getElementById("getFile").click()}
-          >
-            Upload Image
-          </Button>
-          <Button onClick={handleClick} style={{ width: "105px" }}>
-            Convert
-          </Button>
+        <input
+          type="file"
+          id="getFile"
+          onChange={handleChange}
+          style={{ display: "none" }}
+        />
+        <Button onClick={() => document.getElementById("getFile").click()}>
+          Upload Image
+        </Button>
+        <Button onClick={handleClick} style={{ width: "105px" }}>
+          Convert
+        </Button>
       </div>
     </>
   );
