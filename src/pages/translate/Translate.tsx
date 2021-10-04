@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import React from "react";
 import useSpeechToText from "react-hook-speech-to-text";
+import Tesseract from "tesseract.js";
 import { createFalse } from "typescript";
 
 const InfoBlock = styled.div`
@@ -93,6 +94,7 @@ const Translate = () => {
   const [input, setInput] = useState("");
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
+  const [imagePath, setImagePath] = useState("");
 
   const options: any = {
     method: "POST",
@@ -139,6 +141,29 @@ const Translate = () => {
     });
   });
 
+  const handleChange = (e: any) => {
+    setImagePath(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const handleClick = () => {
+    Tesseract.recognize(imagePath, "eng", {
+      logger: (m: any) => console.log(m),
+    })
+      .catch((err: any) => {
+        console.error(err);
+      })
+      .then((result: any) => {
+        // Get Confidence score
+        let confidence = result.confidence;
+        console.log("RESULT:", result);
+
+        let text = result.data.text;
+        setInput(result.data.text);
+        console.warn("AI TEXT:", text);
+        console.warn("AI CON:", confidence);
+      });
+  };
+
   return (
     <>
       <Nav />
@@ -164,11 +189,23 @@ const Translate = () => {
         </OutputBox>
       </Containter>
       <div style={{ transform: "translateX(80px)" }}>
-        <Button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
+        {/* <Button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
           {isRecording ? "Stop Recording" : "Start Recording"}
-        </Button>
+        </Button> */}
         <Button onClick={handleSend} style={{ marginLeft: "10px" }}>
           Translate
+        </Button>
+        <input
+          type="file"
+          id="getFile"
+          onChange={handleChange}
+          style={{ display: "none" }}
+        />
+        <Button onClick={() => document.getElementById("getFile").click()}>
+          Upload Image
+        </Button>
+        <Button onClick={handleClick} style={{ width: "105px" }}>
+          Convert
         </Button>
       </div>
     </>
