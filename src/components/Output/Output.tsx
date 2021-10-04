@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Text = styled.div`
   line-height: 33px;
   color: #5f5f5f;
+  transform: translate(0px, -140px);
 
   span {
     border-radius: 8px;
