@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import React from "react";
 import useSpeechToText from "react-hook-speech-to-text";
+import { createFalse } from "typescript";
 
 const InfoBlock = styled.div`
   width: 100%;
@@ -50,6 +51,13 @@ const OutputBox = styled.div`
   border-radius: 10px;
   border: solid 0.1px rgba(153, 153, 153, 0.2);
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  justify-content: flex-start;
+  text-align: left;
+
+  p {
+    justify-self: flex-start;
+  }
 `;
 
 const Button = styled.button`
@@ -83,12 +91,14 @@ const Select = styled.select`
 
 const Translate = () => {
   const [input, setInput] = useState("");
-  const [data, setData] = useState({});
+  const [data, setData] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const options: any = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": localStorage.getItem("token"),
     },
     body: JSON.stringify({
       input: input,
@@ -96,13 +106,17 @@ const Translate = () => {
   };
 
   const handleSend = () => {
+    setLoading(true);
     fetch("/translate", options)
       .then((response) => {
         if (response.ok) {
           return response.json();
         }
       })
-      .then((data) => setData(data));
+      .then((data) => {
+        setLoading(false);
+        setData(data.output);
+      });
   };
 
   const {
@@ -138,24 +152,24 @@ const Translate = () => {
         </p>
       </InfoBlock>
       <Select style={{ transform: "translateX(-430px)" }}>
-        <option value="english">English</option>
+        <option value="english">Yoruba</option>
       </Select>
       <Select style={{ transform: "translateX(70px)" }}>
-        <option value="Igbo">Igbo</option>
+        <option value="Igbo">English</option>
       </Select>
       <Containter>
-        <InputBox
-          onClick={handleSend}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <OutputBox></OutputBox>
+        <InputBox value={input} onChange={(e) => setInput(e.target.value)} />
+        <OutputBox>
+          <p>{loading ? "loading..." : data}</p>
+        </OutputBox>
       </Containter>
       <div style={{ transform: "translateX(80px)" }}>
         <Button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
           {isRecording ? "Stop Recording" : "Start Recording"}
         </Button>
-        <Button style={{ marginLeft: "10px" }}>Translate</Button>
+        <Button onClick={handleSend} style={{ marginLeft: "10px" }}>
+          Translate
+        </Button>
       </div>
     </>
   );

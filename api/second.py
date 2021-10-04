@@ -19,7 +19,7 @@ def translate_text(input):
         generated_tokens, skip_special_tokens=True)
 
     # print(results)
-    return results
+    return results[0]
 
 
 # print(translate_text("Akọni ajìjàgbara obìnrin tó sun àtìmalé torí owó orí"))
