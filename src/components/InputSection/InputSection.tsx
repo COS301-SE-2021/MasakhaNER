@@ -492,7 +492,7 @@ export default function InputSection() {
             id="button-container"
             style={{ transform: "translate(1080px, -400px)" }}
           >
-            {/* <Button onClick={openModal}>Feedback</Button> */}
+            <Button onClick={openModal}>Feedback</Button>
           </div>
         </div>
       </FormContainer>
