@@ -7,6 +7,11 @@ app = Flask(__name__)
 runModel("")
 
 
+@app.route("/", methods=["GET"])
+def hello_world():
+    return "hello world"
+
+
 @app.route("/input", methods=["POST"])
 def model_feedback():
     user_input = str(request.json["input"])
