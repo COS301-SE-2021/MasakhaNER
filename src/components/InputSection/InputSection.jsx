@@ -5,7 +5,9 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
+import Tesseract from "tesseract.js";
 
+import Visualizer from "../visualizer/Visualizer";
 const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
@@ -16,15 +18,15 @@ const FormContainer = styled.div`
     display: flex;
     width: 25em;
     justify-content: space-between;
-    transform: translate(61vw, -65px);
+    transform: translate(61vw, -190px);
   }
 `;
 
 const Input = styled.textarea`
   display: inline-block;
   border-radius: 10px;
-  width: 85vw;
-  height: 4em;
+  width: 60vw;
+  height: 12em;
   resize: none;
   text-align: justify;
   padding: 20px;
@@ -117,10 +119,12 @@ const FeedbackInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
-const VisualizerButton = styled(Button)`
-  background-color: white;
+const Visualizered = styled.div`
+  /* background-color: #f7f7f7; */
   color: grey;
-  transform: translate(0px, -890px);
+  transform: translate(0px, -590px);
+  width: 1000px;
+  height: 300px;
 `;
 
 const ImageUploadHeader = styled.div`
@@ -129,7 +133,7 @@ const ImageUploadHeader = styled.div`
   border-radius: 5px;
   padding: 20px;
   background-color: #1c5f22;
-  transform: translate(-10vw, 300px);
+  transform: translate(-10vw, 600px);
 
   h1 {
     /* color: #7eaf82; */
@@ -180,6 +184,8 @@ export default function InputSection() {
   const [feedback, setFeedback] = useState("");
   const [imageFile, setImageFile] = useState("");
   const [baseFile, setBaseFile] = useState("");
+  const [imagePath, setImagePath] = useState("");
+  const [text, setText] = useState("");
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -200,6 +206,10 @@ export default function InputSection() {
     setIsOpen(false);
   };
 
+  const handleChange = (e) => {
+    setImagePath(URL.createObjectURL(e.target.files[0]));
+  };
+
   const handleFeedback = async () => {
     const opts = {
       method: "POST",
@@ -213,10 +223,7 @@ export default function InputSection() {
     };
 
     try {
-      const resp = await fetch(
-        "https://masakha-api.herokuapp.com/feedback",
-        opts
-      );
+      const resp = await fetch("/feedback", opts);
       console.log(resp);
       if (resp.status === 200) {
       } else {
@@ -260,7 +267,7 @@ export default function InputSection() {
   };
 
   useEffect(() => {
-    fetch("https://masakha-api.herokuapp.com/input", options)
+    fetch("/input", options)
       .then((res) => res.json())
       .then((data) => {
         setOutputData(data.output);
@@ -272,53 +279,6 @@ export default function InputSection() {
     e.preventDefault();
   };
 
-  const Text = styled.div`
-  line-height: 33px;
-  color: #5f5f5f;
-
-  span {
-    border-radius: 8px;
-    padding: 3px;
-  }
-
-  #LOC {
-    background-color: #dd9c22;
-    color: #634000;
-
-    #tag {
-      width: 30px;
-      color: white;
-    }
-  }
-  #DATE {
-    background-color: #2148bd;
-    color: #092781;
-    #tag {
-      width: 30px;
-      color: white;
-    }
-  }
-  #PER {
-    background-color: #79bb14;
-    color: #538606;
-    #tag {
-      width: 30px;
-      color: white;
-    }
-  }
-  #ORG {
-    background-color: #b8216d;
-    color: #8d0649;
-    #tag {
-      width: 30px;
-      color: white;
-    }
-  }
-`;
-
-const createText = (text) => {
-  return <div dangerouslySetInnerHTML={{ __html: text }}></div>;
-};
   const handleSend = async () => {
     addToHistory(input);
     setWait(2);
@@ -332,7 +292,7 @@ const createText = (text) => {
         input: input,
       }),
     };
-    let nogo = true;
+
     try {
       const resp = await fetch("https://masakha-api.herokuapp.com/input", opts);
       console.log(resp);
@@ -340,25 +300,7 @@ const createText = (text) => {
         const data = await resp.json();
         console.log(data);
         setOutputData(data.output);
-        let word=input;
-        let appWord="";
-        for (let i = 0; i < data.output.length; i++) {
-          if(data.output[i].entity=="PERSON"){
-            // if(word.includes(data.output[i].name))
-            word=word.replace(data.output[i].name,`<span id="PER"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `<span id="tag">PER</span></a></span>`)
-          }else if (data.output[i].entity=="LOCATION"){
-            word=word.replace(data.output[i].name,`<span id="LOC"><a href="https://www.google.com/maps/place/${data.output[i].name}" target="_blank">`+ data.output[i].name+`<span id="tag">LOC</span></a></span>`)
-          }else if(data.output[i].entity=="ORGANISATION"){
-            word=word.replace(data.output[i].name,`<span id="ORG"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+data.output[i].name+" "+ `<span id="tag">ORG</span></a></span>`)
-          }else if(data.output[i].entity=="DATE"){
-            word=word.replace(data.output[i].name,`<span id="DATE"><a href="https://en.wikipedia.org/wiki/${data.output[i].name}" target="_blank">`+ data.output[i].name+`<span id="tag">DAT</span></a></span>`)
-          }
-          
-        }
-
-        // let word=data.output[0].name+" "+data.output[0].entity;
-        // <Text className="App">{nogo ? createText(word) : input}</Text>
-        setInput2(word);
+        setInput2(input);
         console.log("data is ", data.output);
         setWait(1);
       } else {
@@ -397,16 +339,37 @@ const createText = (text) => {
     };
   };
 
+  const handleClick = () => {
+    Tesseract.recognize(imagePath, "eng", {
+      logger: (m) => console.log(m),
+    })
+      .catch((err) => {
+        console.error(err);
+      })
+      .then((result) => {
+        // Get Confidence score
+        let confidence = result.confidence;
+        console.log("RESULT:", result);
+
+        let text = result.data.text;
+        setText(text);
+        setText(result.text);
+        setInput(result.data.text);
+        console.warn("AI TEXT:", text);
+        console.warn("AI CON:", confidence);
+      });
+  };
+
+  console.warn("AI TEXT 2:", text);
+
   const handleImageUpload = async () => {
     console.log("THIS IS IT", imageFile);
-    // setWait(2);
+    setWait(2);
     const opts = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-access-token": localStorage.getItem("token"),
-        // "Content-Length": "200000000",
-        // Connection: "keep-alive",
       },
       body: JSON.stringify({
         image: localStorage.getItem("image"),
@@ -414,16 +377,13 @@ const createText = (text) => {
     };
 
     try {
-      const resp = await fetch(
-        "https://masakha-api.herokuapp.com/upload-image",
-        opts
-      );
+      const resp = await fetch("/upload-image", opts);
       console.log(resp);
       if (resp.status === 200) {
-        console.log(resp.status);
+        // alert(resp.status);
         const data = await resp.json();
 
-        console.log(data.msg);
+        // alert(data.msg);
         console.log(data.msg);
         var text = data.msg.substring(2);
         text = text.substring(0, text.length - 1);
@@ -455,21 +415,46 @@ const createText = (text) => {
                 type="file"
                 placeholder="Upload"
                 onChange={handleFileChange}
+                id="getText"
+                style={{ display: "none" }}
               />
+              <Button
+                onClick={() => document.getElementById("getText").click()}
+              >
+                Upload Textfile
+              </Button>
               <Button onClick={handleSend}>Send</Button>
             </div>
-            <ImageUploadHeader id="image-upload-header">
+            <div id="button-container">
+              <input
+                type="file"
+                id="getFile"
+                onChange={handleChange}
+                style={{ display: "none" }}
+              />
+              <Button
+                onClick={() => document.getElementById("getFile").click()}
+              >
+                Upload Image
+              </Button>
+              <Button onClick={handleClick} style={{ width: "105px" }}>
+                Convert
+              </Button>
+            </div>
+            {/* <ImageUploadHeader id="image-upload-header"> */}
+            {/* <ImageUploadHeader id="image-upload-header">
               <h1>Facial Recognition</h1>
               <p>
                 Built with the power of OpenCV, this facial recognition system
                 was built and trained with the faces of popular African figures.{" "}
+                <br />
                 <br /> Upload an image of an Africa figure and submit to see the
                 results.
               </p>
-            </ImageUploadHeader>
-            <div
+            </ImageUploadHeader> */}
+            {/* <div
               style={{
-                transform: "translate(0px,140px)",
+                transform: "translate(0px,440px)",
                 zIndex: 99,
               }}
             >
@@ -488,7 +473,7 @@ const createText = (text) => {
               >
                 Submit
               </Button>
-            </div>
+            </div> */}
           </form>
         </div>
         <div id="output-section">
@@ -510,13 +495,13 @@ const createText = (text) => {
             <Button onClick={openModal}>Feedback</Button>
           </div>
         </div>
-        <div></div>
       </FormContainer>
       <h1
         style={{
           color: "#1c5f22",
-          transform: "translate(0px, -900px)",
+          transform: "translate(0px, -500px)",
           opacity: "0.7",
+          fontSize: "30px",
         }}
       >
         Data Visualizer
@@ -524,15 +509,15 @@ const createText = (text) => {
       <p
         style={{
           color: "#000",
-          transform: "translate(0px, -900px)",
+          transform: "translate(0px, -500px)",
           opacity: "0.6",
         }}
       >
         Displays the most passed in words and their corresponding entities
       </p>
-      <VisualizerButton onClick={visualizer}>
-        <p>3D Visualizer</p>
-      </VisualizerButton>
+      <Visualizered>
+        <Visualizer />
+      </Visualizered>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
