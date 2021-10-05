@@ -17,7 +17,6 @@ const Wrapper = styled.div`
   margin-top: 8vh;
   margin-bottom: 8vh;
   border-radius: 20px;
-  /* box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2); */
   padding: 2rem;
 
   div {
