@@ -14,6 +14,8 @@ import sys
 import predict_ner as ner
 from flask_cors import CORS, cross_origin
 from werkzeug.datastructures import Headers
+from second import translate_text
+
 # from faceAI import faces
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
@@ -937,6 +939,19 @@ def upload_image():
     #     headers={"content-type": "application/json"}
     # )
     return jsonify({'msg': str(my_string)})
+
+
+@app.route('/translate', methods=["POST"])
+@token_required
+def transale_model(user):
+    if not user:
+        return jsonify({'response': 'log in to use model'}), 401
+    text = request.json['input']
+    # output = tran.translate(input_text="The news that will interest you")
+    output = translate_text(str(text))
+
+    #output = 'This will bw the translated data'
+    return {'response': 'translated', 'input': text, 'output': output}, 200
 
 
 """
