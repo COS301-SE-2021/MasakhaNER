@@ -113,12 +113,6 @@ let history;
 function Register() {
   history = useHistory();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [clicked] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-  const [Passworderr, setPasswordErr] = useState(false);
-  const [Passworderr2, setPasswordErr2] = useState(false);
 
   const options = {
     method: "POST",
@@ -127,8 +121,6 @@ function Register() {
     },
     body: JSON.stringify({
       email: email,
-      password: password,
-      confirmPassword: password2,
     }),
   };
 
@@ -137,10 +129,11 @@ function Register() {
       const resp = await fetch("/details/changepassword", options);
       console.log(resp);
       if (resp.status === 200) {
+        localStorage.setItem("newEmail", email);
         alert(resp.status);
         const data = await resp.json();
         console.log(data);
-        history.push("/");
+        window.location.href = "/resetVerify";
       } else {
         alert(resp.status);
         alert("Incorrect email!");
@@ -151,16 +144,16 @@ function Register() {
     }
   };
 
-  useEffect(() => {
-    if (disabled === false) {
-      fetch("/details/changepassword", options)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data.output);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [clicked]);
+  // useEffect(() => {
+  //   if (disabled === false) {
+  //     fetch("/details/changepassword", options)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log(data.output);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [clicked]);
 
   const validEmail = new RegExp(
     "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
@@ -178,13 +171,12 @@ function Register() {
 
   return (
     <>
-    <Nav/>
     <Container>
     <ImageWrapper id="image4"></ImageWrapper>
     <Wrapper>
       <div>
       <h2 style={{ fontSize: "40px", color: "#1c5f22" }} id="login-header">
-        Change Password
+        Reset Password
       </h2>
       <br/>
       </div>
@@ -201,57 +193,13 @@ function Register() {
           required
           placeholder="Email address"
         />
-        <Input
-          type="password"
-          name="oldPassword"
-          id="oldPassword"
-          className="form-control"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          required
-          placeholder="New password"
-        />
-        <div >
-        {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
-        </div>
-        <Input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          className="form-control"
-          value={password2}
-          placeholder="Confirm new password"
-          onChange={(e) => {
-            myFunction();
-            setPassword2(e.target.value);
-            if (password === e.target.value) {
-              setPasswordErr(true);
-              setDisabled(false);
-            } else {
-              setPasswordErr(false);
-              setDisabled(true);
-            }
-          }}
-          required
-        />
-        <div className="errorMSG" id="errorMSG">
-        {!Passworderr && <p color="red">PASSWORDS MUST MATCH</p>}
-        </div>
         <br />
             <SignUpButton
-              disabled={disabled}
               id="mainBtn"
               type="submit"
               className="btn btn-dark"
               onClick={(e) => {
-                e.preventDefault();
-                if (!validPassword.test(password2)) {
-                  setPasswordErr2(true);
-                } else {
-                  handleStatus();
-                }
+                handleStatus();
               }}
             >
               Submit
