@@ -17,10 +17,12 @@
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
     "react-google-recaptcha": "^2.1.0",
+    "react-hook-speech-to-text": "^0.8.0",
     "react-modal": "^3.14.3",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.1",
+    "tesseract.js": "^2.1.5",
     "three": "^0.132.2",
     "web-vitals": "^1.0.1"
   },
