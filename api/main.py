@@ -9,8 +9,6 @@ from datetime import datetime, timedelta
 from flask import Flask, json, jsonify
 from flask import request
 from functools import wraps
-# from translator.TokenizerWrap import TokenizerWrap
-# from translator.trans2 import Translate
 import jwt
 import os
 import sys
