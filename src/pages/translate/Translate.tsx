@@ -170,10 +170,8 @@ const Translate = () => {
       <InfoBlock>
         <h1>Machine Translation</h1>
         <p>
-          Enter text below to send to the MasakhaNER model. The model will
-          decompose the uploaded text and recognise four entities. Organisation,
-          Location, Date and Person. Enter text below or upload a text file
-          containing text you want like to send to the model.
+          Enter text below to send to translate it from Yoruba to English.
+          Alternatively, upload an image of text.{" "}
         </p>
       </InfoBlock>
       <Select style={{ transform: "translateX(-430px)" }}>
