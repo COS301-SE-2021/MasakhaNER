@@ -99,12 +99,21 @@ const Button = styled.button`
   }
 `;
 
-const Bar = styled.div`
-  width: inherit;
-  height: 5px;
-  background-color: #000;
-  margin-top: 5px;
+const SignUpButton = styled(Button)`
+  background-color: #1c5f22;
+  border: solid 1px #1c5f22;
+  color: white;
+  &:hover {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 5px;
+    background-color: #34833b;
+    border: solid 1px #34833b;
+  }
 `;
+
 
 function Register() {
   const [firstName, setfirstName] = useState("");
@@ -161,35 +170,35 @@ function Register() {
   return (
     <div id="detailspage">
       <Nav />
+      <Container>
+      
       <Wrapper>
         <form id="detForm" onSubmit={handleSubmit}>
-          <h2>Edit Details</h2>
-          <Bar />
-          <div className="form-group">
-            <label htmlFor="firstName">First Name:</label>
+        <h2 style={{ fontSize: "30px", color: "#1c5f22" }} id="login-header">
+          Edit details
+        </h2>
             <Input
+              style={{ marginTop: "15px" }}
+              className="form-control"
               type="text"
               name="firstName"
               value={firstName}
               onChange={(e) => setfirstName(e.target.value)}
               required
-              placeholder="Enter your first name"
+              placeholder="First name"
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name:</label>
             <Input
               type="text"
               name="flastName"
               value={lastName}
+              className="form-control"
               onChange={(e) => setlastName(e.target.value)}
               required
-              placeholder="Enter your last name"
+              placeholder="Last name"
             />
-          </div>
           <br />
           <div className="submit-button">
-            <Button
+            <SignUpButton
               id="mainBtn"
               type="submit"
               onClick={(e) => {
@@ -198,15 +207,14 @@ function Register() {
               }}
             >
               Submit
-            </Button>
+            </SignUpButton>
           </div>
           {Passworderr ||
             (Emailerr && <p color="red">INVALID EMAIL OR PASSWORD</p>)}
         </form>
       </Wrapper>
-      <br />
-      <br />
-      <Footer />
+      <ImageWrapper id="image3"></ImageWrapper>
+      </Container>
     </div>
   );
 }

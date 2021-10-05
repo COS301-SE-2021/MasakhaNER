@@ -2,14 +2,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import GoogleLogin from "react-google-login";
 import "./Login.css";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect, Link } from "react-router-dom";
 import styled from "styled-components";
 import { History } from "history";
-import Toast from "../toast/Toast";
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -18,6 +20,11 @@ const ImageWrapper = styled.div`
   background-image: url("../../images/login-image.png");
   background-repeat: no-repeat;
   background-color: #305c16;
+  background-position: top;
+
+  @media only screen and (max-width: 600px) {
+    /* display: none; */
+  }
 `;
 
 const Wrapper = styled.div`
@@ -57,10 +64,14 @@ const Wrapper = styled.div`
           content: "Nnọọ";
         }
         100% {
-          content: "Siyakwamkela emva";
+          content: "Siyakwamukela";
         }
       }
     }
+  }
+
+  @media only screen and (max-width: 600px) {
+    /* widt: 100vw; */
   }
 `;
 
@@ -172,12 +183,16 @@ export default function Login() {
         localStorage.setItem("isAuthenticated", "true");
         if (data.isadmin) {
           if (history.location.pathname == "/login") {
-            history.push("/users");
+            history.push("/");
           } else {
             history.push("/Admin");
           }
         } else {
-          history.push("/Dashboard");
+          if (history.location.pathname == "/login") {
+            window.open("http://localhost:3000/dashboard");
+            window.close();
+          }
+          history.push("/dashboard");
         }
       } else {
         setLoading(false);
@@ -234,7 +249,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <Toast />}
+        {error && <p style={{ color: "#cf6969" }}>Incorrect details</p>}
         <Button onClick={handleLogin}>
           {loading ? <div id="loading"></div> : <p>Login</p>}
         </Button>
