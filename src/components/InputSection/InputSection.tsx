@@ -380,12 +380,12 @@ export default function InputSection() {
     { value: "PER", label: "Person" },
   ];
 
-  // const handleInputChange = (e: any, index: any) => {
-  //   const { name, value } = e.target;
-  //   const list = [...inputList];
-  //   list[index][name] = value;
-  //   setInputList(list);
-  // };
+  const handleInputChange = (e: any, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
 
   // handle click event of the Remove button
   const handleRemoveClick = (index: any) => {
@@ -612,32 +612,34 @@ export default function InputSection() {
         </div>
           <br />
           {inputList.map((x, i) => {
-        return (
-          <form onSubmit={handleSubmit}>
-          <div>
-          <FeedInput
-            placeholder="Type here..."
-            type="text"
-            name="feedback1"
-            id="Feed1"
-          />
-          <FeedSelect name="feedbackEnt1" id="Ent1">
-            <option></option>
-            <option value="<LOC>">LOC</option>
-            <option value="<PER>">PER</option>
-            <option value="<DAT>">DAT</option>
-            <option value="<ORG>">ORG</option>
-          </FeedSelect>
-          <div className="btn-box">
-              {inputList.length !== 1 && <Button
-                className="mr10"
-                onClick={() => handleRemoveClick(i)}>Remove</Button>}
-              {inputList.length - 1 === i && <Button onClick={handleAddClick}>Add</Button>}
-            </div>
-          </div>
-           </form>
-          );
-        })}
+            return (
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <FeedInput
+                    placeholder="Type here..."
+                    type="text"
+                    name="feedbackInput"
+                    value={x.feedbackInput}
+                      onChange={e => handleInputChange(e, i)}
+                  />
+                  <FeedSelect name="feedbackEnt" value={x.feedbackEnt}
+                  onChange={e => handleInputChange(e, i)}>
+                    <option></option>
+                    <option value="<LOC>">LOC</option>
+                    <option value="<PER>">PER</option>
+                    <option value="<DAT>">DAT</option>
+                    <option value="<ORG>">ORG</option>
+                  </FeedSelect>
+                  <div className="btn-box">
+                    {inputList.length !== 1 && <Button
+                      className="mr10"
+                      onClick={() => handleRemoveClick(i)}>Remove</Button>}
+                    {inputList.length - 1 === i && <Button onClick={handleAddClick}>Add</Button>}
+                  </div>
+                </div>
+              </form>
+            );
+          })}
          <Button
             onClick={(e) => {
               e.preventDefault();
@@ -647,6 +649,7 @@ export default function InputSection() {
           >
             Send Feedback
           </Button>
+          <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
       </Modal>
       <Modal
         isOpen={imageIsOpen}
