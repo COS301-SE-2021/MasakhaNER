@@ -27,7 +27,7 @@ export default function Visualizer() {
 
     try {
       const resp = await fetch(
-        "https://masakha-ner-fy8z8.ondigitalocean.app//input",
+        "https://masakha-ner-fy8z8.ondigitalocean.app/input",
         opts
       );
       console.log(resp);
