@@ -592,7 +592,7 @@ def admin_delete_user(user, id):
 
 
 @app.route('/users/<id>', methods=["GET"])
-@cross_origin()
+# @cross_origin() re add
 @token_required
 def admin_get_user(user, id):
     if id is not None:
