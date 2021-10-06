@@ -481,7 +481,10 @@ export default function InputSection() {
             {wait === 3 ? (
               ""
             ) : wait === 2 ? (
-              <div id="loading"></div>
+              <div
+                style={{ transform: "translateY(-100px)" }}
+                id="loading"
+              ></div>
             ) : wait === 1 ? (
               <Output data={outputData} input={input2} />
             ) : (
@@ -528,7 +531,9 @@ export default function InputSection() {
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
         <Button onClick={closeModal}>close</Button>
         <div>
-          <Output data={outputData} input={input2} />
+          <div style={{ transform: "translateY(140px)" }}>
+            <Output data={outputData} input={input2} />
+          </div>
           <p>
             If returned data is incorrect please provide the correct entity by
             placing the entity next to the incorrect output. i.e Name {"<PER>"}
