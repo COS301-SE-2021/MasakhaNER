@@ -37,6 +37,7 @@
     "react-recaptcha": "^2.3.10",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
     "styled-components": "^5.3.0",
     "tesseract.js": "^2.1.5",
     "three": "^0.131.3",

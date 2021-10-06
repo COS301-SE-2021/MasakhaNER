@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import React from "react";
 import useSpeechToText from "react-hook-speech-to-text";
 import Tesseract from "tesseract.js";
-import { createFalse } from "typescript";
 
 const InfoBlock = styled.div`
   width: 100%;

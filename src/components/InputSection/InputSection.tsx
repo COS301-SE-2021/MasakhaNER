@@ -5,9 +5,30 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
+import { isConstructorDeclaration } from "typescript";
 import Tesseract from "tesseract.js";
-
 import Visualizer from "../visualizer/Visualizer";
+// import { CalliFrame } from "../Output/Output";
+
+const FeedInput = styled.input`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  height: 35px;
+  width: 20em;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+`;
+
+const FeedSelect = styled.select`
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  height: 35px;
+  width: 5em;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+`;
+
 const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
@@ -38,6 +59,31 @@ const Input = styled.textarea`
   &:focus {
     outline: none;
   }
+`;
+
+const TextInput = styled.textarea`
+  display: inline-block;
+  border-radius: 10px;
+  width: 60vw;
+  height: 12em;
+  resize: none;
+  text-align: justify;
+  padding: 20px;
+  border-radius: 20px;
+  border: solid 0.1px rgba(153, 153, 153, 0.1);
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
+  position: relative;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const FBInput = styled.textarea`
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
 `;
 
 const OutputSection = styled.div`
@@ -186,6 +232,11 @@ export default function InputSection() {
   const [baseFile, setBaseFile] = useState("");
   const [imagePath, setImagePath] = useState("");
   const [text, setText] = useState("");
+  const [inputList, setInputList] = useState([
+    { feedbackInput: "", feedbackEnt: "" },
+  ]);
+
+  // handle input change
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -325,9 +376,41 @@ export default function InputSection() {
     };
   };
 
+  const FbOpts = [
+    { value: "ORG", label: "Organization" },
+    { value: "LOC", label: "Location" },
+    { value: "PER", label: "Person" },
+  ];
+
+  const handleInputChange = (e: any, index: number) => {
+    const { name, value } = e.target;
+    console.warn("Output: ", e.target.name);
+    const list = [...inputList];
+    if (e.target.name == "feedbackInput") {
+      list[index]["feedbackInput"] = value;
+    } else {
+      list[index]["feedbackEnt"] = value;
+    }
+    setInputList(list);
+  };
+
+  // handle click event of the Remove button
+  const handleRemoveClick = (index: any) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, { feedbackInput: "", feedbackEnt: "" }]);
+  };
+
+  // console.log("THSI IS FILE ANME ",filename)
+  // console.log("THSI IS FILE CONTENT ",filecontent);
   const handleImageFile = (e: any) => {
     const file = e.target.files;
-    console.log(file, "$$$$");
+    // console.log(file, "$$$$");
 
     const reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -399,12 +482,26 @@ export default function InputSection() {
     }
   };
 
+  function concatFeedback() {
+    let inputText = input;
+    console.warn("hello", inputText);
+    for (let index = 0; index < inputList.length; index++) {
+      let feedText = inputList[index]["feedbackInput"];
+      let feedEnt = inputList[index]["feedbackEnt"];
+      let feedBack = feedText + feedEnt;
+      feedText.toUpperCase();
+      inputText.toUpperCase().replace(feedText, feedBack);
+    }
+    setFeedback(inputText);
+    console.warn("Feedback: ", feedback);
+  }
+
   return (
     <>
       <FormContainer>
         <div style={{ height: "0px" }} id="inputsection">
           <form style={{ height: "0px" }} onSubmit={handleSubmit}>
-            <Input
+            <TextInput
               placeholder="Type here..."
               id="testSection"
               value={input}
@@ -482,7 +579,7 @@ export default function InputSection() {
               ""
             ) : wait === 2 ? (
               <div
-                style={{ transform: "translateY(-100px)" }}
+                style={{ transform: "translateY(-100px)", height: "0px" }}
                 id="loading"
               ></div>
             ) : wait === 1 ? (
@@ -530,8 +627,9 @@ export default function InputSection() {
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Feedback</h2>
         <Button onClick={closeModal}>close</Button>
+        <div style={{ height: "40px" }} />
         <div>
-          <div style={{ transform: "translateY(140px)" }}>
+          <div style={{ transform: "translateY(100px)" }}>
             <Output data={outputData} input={input2} />
           </div>
           <p>
@@ -539,25 +637,57 @@ export default function InputSection() {
             placing the entity next to the incorrect output. i.e Name {"<PER>"}
           </p>
         </div>
-        <form onSubmit={handleSubmit}>
-          <FeedbackInput
-            value={feedback}
-            placeholder="Enter feedback"
-            onChange={(e) => {
-              setFeedback(e.target.value);
-            }}
-          />
-          <br />
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              handleFeedback();
-              closeModal();
-            }}
-          >
-            Send Feedback
-          </Button>
-        </form>
+        <br />
+        {inputList.map((x, i) => {
+          return (
+            <form onSubmit={handleSubmit}>
+              <div>
+                <FeedInput
+                  placeholder="Type here..."
+                  type="text"
+                  name="feedbackInput"
+                  value={x.feedbackInput}
+                  onChange={(e) => handleInputChange(e, i)}
+                />
+                <FeedSelect
+                  name="feedbackEnt"
+                  value={x.feedbackEnt}
+                  onChange={(e) => handleInputChange(e, i)}
+                >
+                  <option></option>
+                  <option value="<LOC>">LOC</option>
+                  <option value="<PER>">PER</option>
+                  <option value="<DAT>">DAT</option>
+                  <option value="<ORG>">ORG</option>
+                </FeedSelect>
+                <div className="btn-box">
+                  {inputList.length !== 1 && (
+                    <Button
+                      className="mr10"
+                      onClick={() => handleRemoveClick(i)}
+                    >
+                      Remove
+                    </Button>
+                  )}
+                  {inputList.length - 1 === i && (
+                    <Button onClick={handleAddClick}>Add</Button>
+                  )}
+                </div>
+              </div>
+            </form>
+          );
+        })}
+        <Button
+          onClick={(e) => {
+            e.preventDefault();
+            concatFeedback();
+            handleFeedback();
+            closeModal();
+          }}
+        >
+          Send Feedback
+        </Button>
+        {/* <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div> */}
       </Modal>
       <Modal
         isOpen={imageIsOpen}
