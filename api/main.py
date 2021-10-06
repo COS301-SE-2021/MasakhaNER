@@ -873,6 +873,8 @@ def admin_get_feedack(user, id):
             if(feedback != None):
                 resp = {'id': feedback[0], 'feedback': feedback[1]}
                 res = Response(response=json.dumps(resp))
+                res.headers.add('X-Total-Count', 32)
+                res.headers.add('Access-Control-Expose-Headers', '*')
                 res.headers.add('Content-Range', 'feedback 0-10/100')
                 res.headers.add('Content-Type', 'application/json')
                 return res, 200
