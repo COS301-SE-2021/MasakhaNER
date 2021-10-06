@@ -178,9 +178,8 @@ function Register() {
 
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <Container>
-        <ImageWrapper id="image4"></ImageWrapper>
         <Wrapper>
           <div>
             <h2
@@ -217,7 +216,7 @@ function Register() {
               placeholder="New password"
             />
             <div>
-              {Passworderr2 && <p color="red">PASSWORDS MUST SUE REGEX</p>}
+              {Passworderr2 && <p color="red">Use stronger password</p>}
             </div>
             <Input
               type="password"

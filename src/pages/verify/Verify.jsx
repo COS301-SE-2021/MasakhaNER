@@ -53,8 +53,8 @@ function VerifyAccount() {
       <form onSubmit={handleSubmit}>
         <h3>Enter Confirmation Code</h3>
         <p>
-          Enter the confirmation code we sent to your email.
-          <em>{localStorage.getItem("newEmail")}</em>
+          Enter the confirmation code we sent to your email
+          <em>{" " + localStorage.getItem("newEmail")}</em>
         </p>
         <div className="form-grp">
           <input
