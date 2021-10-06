@@ -380,10 +380,10 @@ export default function InputSection() {
     { value: "PER", label: "Person" },
   ];
 
-  const handleInputChange = (e: any, index) => {
+  const handleInputChange = (e: any, index: number) => {
     const { name, value } = e.target;
     const list = [...inputList];
-    list[index][name] = value;
+    list[index] = value;
     setInputList(list);
   };
 
