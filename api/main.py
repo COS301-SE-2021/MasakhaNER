@@ -913,6 +913,7 @@ def admin_get_all_feedback(user):
 
 
 @app.route('/translate', methods=["POST"])
+@cross_origin()
 @token_required
 def transale_model(user):
     if not user:
