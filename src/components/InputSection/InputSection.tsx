@@ -6,6 +6,8 @@ import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
 import { isConstructorDeclaration } from "typescript";
+import Tesseract from "tesseract.js";
+import Visualizer from "../visualizer/Visualizer";
 // import { CalliFrame } from "../Output/Output";
 
 const FeedInput = styled.input`
@@ -26,9 +28,7 @@ const FeedSelect = styled.select`
   border-radius: 5px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 `;
-import Tesseract from "tesseract.js";
 
-import Visualizer from "../visualizer/Visualizer";
 const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
@@ -232,6 +232,9 @@ export default function InputSection() {
   const [baseFile, setBaseFile] = useState("");
   const [imagePath, setImagePath] = useState("");
   const [text, setText] = useState("");
+  const [inputList, setInputList] = useState([{ feedbackInput: "", feedbackEnt: "" }]);
+
+  // handle input change
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -377,42 +380,23 @@ export default function InputSection() {
     { value: "PER", label: "Person" },
   ];
 
-  const concatFeedback = () => {
-    let finalText = input;
-    let newText = "";
+  // const handleInputChange = (e: any, index: any) => {
+  //   const { name, value } = e.target;
+  //   const list = [...inputList];
+  //   list[index][name] = value;
+  //   setInputList(list);
+  // };
 
-    if ((document.getElementById("Feed1") as HTMLInputElement).value != null){
-      if (finalText.includes((document.getElementById("Feed1") as HTMLInputElement).value)){
-        newText = finalText.replace((document.getElementById("Feed1") as HTMLInputElement).value, (document.getElementById("Feed1") as HTMLInputElement).value+(document.getElementById("Ent1") as HTMLInputElement).value);
-        finalText = newText;
-      }
-    }
-    if ((document.getElementById("Feed2") as HTMLInputElement).value != null){
-      if (finalText.includes((document.getElementById("Feed2") as HTMLInputElement).value)){
-        newText = finalText.replace((document.getElementById("Feed2") as HTMLInputElement).value, (document.getElementById("Feed2") as HTMLInputElement).value+(document.getElementById("Ent2") as HTMLInputElement).value);
-        finalText = newText;
-      }
-    }
-    if ((document.getElementById("Feed3") as HTMLInputElement).value != null){
-      if (finalText.includes((document.getElementById("Feed3") as HTMLInputElement).value)){
-        newText = finalText.replace((document.getElementById("Feed3") as HTMLInputElement).value, (document.getElementById("Feed3") as HTMLInputElement).value+(document.getElementById("Ent3") as HTMLInputElement).value);
-        finalText = newText;
-      }
-    }
-    if ((document.getElementById("Feed4") as HTMLInputElement).value != null){
-      if (finalText.includes((document.getElementById("Feed4") as HTMLInputElement).value)){
-        newText = finalText.replace((document.getElementById("Feed4") as HTMLInputElement).value, (document.getElementById("Feed4") as HTMLInputElement).value+(document.getElementById("Ent4") as HTMLInputElement).value);
-        finalText = newText;
-      }
-    }
-    if ((document.getElementById("Feed5") as HTMLInputElement).value != null){
-      if (finalText.includes((document.getElementById("Feed5") as HTMLInputElement).value)){
-        newText = finalText.replace((document.getElementById("Feed5") as HTMLInputElement).value, (document.getElementById("Feed5") as HTMLInputElement).value+(document.getElementById("Ent5") as HTMLInputElement).value);
-        finalText = newText;
-      }
-    }
-    console.warn(newText);
-    setFeedback(newText);
+  // handle click event of the Remove button
+  const handleRemoveClick = (index: any) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, { feedbackInput: "", feedbackEnt: "" }]);
   };
 
   // console.log("THSI IS FILE ANME ",filename)
@@ -584,7 +568,7 @@ export default function InputSection() {
             id="button-container"
             style={{ transform: "translate(1080px, -400px)" }}
           >
-            {/* <Button onClick={openModal}>Feedback</Button> */}
+            <Button onClick={openModal}>Feedback</Button>
           </div>
         </div>
       </FormContainer>
@@ -626,8 +610,11 @@ export default function InputSection() {
             placing the entity next to the incorrect output. i.e Name {"<PER>"}
           </p>
         </div>
-        <form onSubmit={handleSubmit}>
           <br />
+          {inputList.map((x, i) => {
+        return (
+          <form onSubmit={handleSubmit}>
+          <div>
           <FeedInput
             placeholder="Type here..."
             type="text"
@@ -641,76 +628,25 @@ export default function InputSection() {
             <option value="<DAT>">DAT</option>
             <option value="<ORG>">ORG</option>
           </FeedSelect>
-          <br />
-          <FeedInput
-            placeholder="Type here..."
-            type="text"
-            name="feedback2"
-            id="Feed2"
-          />
-          <FeedSelect name="feedbackEnt2" id="Ent2">
-            <option></option>
-            <option value="<LOC>">LOC</option>
-            <option value="<PER>">PER</option>
-            <option value="<DAT>">DAT</option>
-            <option value="<ORG>">ORG</option>
-          </FeedSelect>
-          <br />
-          <FeedInput
-            placeholder="Type here..."
-            type="text"
-            name="feedback3"
-            id="Feed3"
-          />
-          <FeedSelect name="feedbackEnt3" id="Ent3">
-            <option></option>
-            <option value="<LOC>">LOC</option>
-            <option value="<PER>">PER</option>
-            <option value="<DAT>">DAT</option>
-            <option value="<ORG>">ORG</option>
-          </FeedSelect>
-          <br />
-          <FeedInput
-            placeholder="Type here..."
-            type="text"
-            name="feedback4"
-            id="Feed4"
-          />
-          <FeedSelect name="feedbackEnt4" id="Ent4">
-            <option></option>
-            <option value="<LOC>">LOC</option>
-            <option value="<PER>">PER</option>
-            <option value="<DAT>">DAT</option>
-            <option value="<ORG>">ORG</option>
-          </FeedSelect>
-          <br />
-          <FeedInput
-            placeholder="Type here..."
-            type="text"
-            name="feedback5"
-            id="Feed5"
-          />
-          <FeedSelect name="feedbackEnt5" id="Ent5">
-            <option></option>
-            <option value="<LOC>">LOC</option>
-            <option value="<PER>">PER</option>
-            <option value="<DAT>">DAT</option>
-            <option value="<ORG>">ORG</option>
-          </FeedSelect>
-
-          <br />
-          <br />
-          <Button
+          <div className="btn-box">
+              {inputList.length !== 1 && <Button
+                className="mr10"
+                onClick={() => handleRemoveClick(i)}>Remove</Button>}
+              {inputList.length - 1 === i && <Button onClick={handleAddClick}>Add</Button>}
+            </div>
+          </div>
+           </form>
+          );
+        })}
+         <Button
             onClick={(e) => {
               e.preventDefault();
-              concatFeedback();
               handleFeedback();
               closeModal();
             }}
           >
             Send Feedback
           </Button>
-        </form>
       </Modal>
       <Modal
         isOpen={imageIsOpen}
