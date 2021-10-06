@@ -309,18 +309,17 @@ def model_feedback(user):
         return jsonify({'response': 'log in to use model'}), 401
 
     user_input = str(request.json["input"])
-    #stuff = ner.run()
-    feedback = train_model(user_input.split())
-    # model_feedback = str(runModel(user_input))
-    # model_feedback = eval(model_feedback)
-    db = app.config['DATABASE']
-    if(db != False):
-        # db.input(model_feedback)
-        dude = {'output': feedback}
-        #dude = {'output': "model_feedback"}
-        return dude, 200
-    else:
-        return {'response': 'failed'}, 400
+
+    model_feedback = str(runModel(user_input))
+    model_feedback = eval(model_feedback)
+    print(model_feedback)
+    # db = app.config['DATABASE']
+    # if(db != False):
+    # db.input(model_feedback)
+    dude = {'output': model_feedback}
+    return dude, 200
+    # else:
+    # return {'response': 'failed'}, 400
 
 
 @app.route('/input', methods=["GET"])

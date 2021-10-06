@@ -23,8 +23,6 @@ itsdangerous==2.0.1
 Jinja2==3.0.1
 joblib==1.0.1
 MarkupSafe==2.0.1
-numpy==1.20.3
-opencv_contrib_python_headless==4.5.3.56
 packaging==20.9
 Pillow==8.2.0
 pluggy==0.13.1
@@ -44,18 +42,13 @@ requests==2.25.1
 sacremoses==0.0.45
 scikit-learn==0.24.2
 scipy==1.7.0
-selenium==3.141.0
 sendgrid==6.8.1
 seqeval==1.2.2
 six==1.16.0
 threadpoolctl==2.1.0
 tokenizers==0.10.3
 toml==0.10.2
-torch==1.9.0+cpu
-torchaudio==0.9.0
-torchvision==0.10.0+cpu
 tqdm==4.61.1
-transformers==4.8.1
 typing-extensions==3.10.0.0
 urllib3==1.26.5
 Werkzeug==2.0.1
