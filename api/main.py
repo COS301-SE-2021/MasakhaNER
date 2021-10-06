@@ -1,5 +1,4 @@
 import base64
-from faceAI import faces
 from posixpath import dirname
 from model import runModel
 from flask import Response
@@ -911,33 +910,6 @@ def admin_get_all_feedback(user):
     Returns:
         JSON object with response
 """
-
-
-@app.route('/upload-image', methods=["POST"])
-# @token_required
-@cross_origin()
-def upload_image():
-    string = 'data to be encoded'
-
-    file = request.json["image"]
-    file = file.partition(",")[2]
-
-    #os.path.join(os.path.dirname(__file__), "faceAI/imageToSave.jpg")
-    with open(os.path.join(os.path.dirname(__file__), "faceAI/imageToSave.jpg"), "wb") as fh:
-        fh.write(base64.b64decode(file))
-    #print(os.path.join(os.path.dirname(__file__), "faceAI/a.jpg"))
-    faces.recognize("imageToSave.jpg")
-    with open(os.path.join(os.path.dirname(__file__), "faceAI/a.jpg"), "rb") as img_file:
-        my_string = base64.b64encode(img_file.read())
-    # print(my_string)
-
-    # return jsonify({'msg': str(my_string)}).headers.add("Content-Length", "200000000")
-    # return response.RawResponse(
-    #     ctx, response_data="OK",
-    #     status_code=200,
-    #     headers={"content-type": "application/json"}
-    # )
-    return jsonify({'msg': str(my_string)})
 
 
 @app.route('/translate', methods=["POST"])
