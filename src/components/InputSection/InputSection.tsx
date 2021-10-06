@@ -5,7 +5,6 @@ import Output from "../Output/Output";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useHistory } from "react-router-dom";
-import { isConstructorDeclaration } from "typescript";
 import Tesseract from "tesseract.js";
 import Visualizer from "../visualizer/Visualizer";
 // import { CalliFrame } from "../Output/Output";
@@ -578,10 +577,9 @@ export default function InputSection() {
             {wait === 3 ? (
               ""
             ) : wait === 2 ? (
-              <div
-                style={{ transform: "translateY(-100px)", height: "0px" }}
-                id="loading"
-              ></div>
+              <p style={{ transform: "translateY(-120px)", height: "0px" }}>
+                loading...
+              </p>
             ) : wait === 1 ? (
               <Output data={outputData} input={input2} />
             ) : (
