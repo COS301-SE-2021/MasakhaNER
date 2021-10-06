@@ -9,8 +9,6 @@ from datetime import datetime, timedelta
 from flask import Flask, json, jsonify
 from flask import request
 from functools import wraps
-# from translator.TokenizerWrap import TokenizerWrap
-# from translator.trans2 import Translate
 import jwt
 import os
 import sys
@@ -141,13 +139,14 @@ def model_feedback(user):
 
     model_feedback = str(runModel(user_input))
     model_feedback = eval(model_feedback)
-    db = app.config['DATABASE']
-    if(db != False):
-        db.input(model_feedback)
-        dude = {'output': model_feedback}
-        return dude, 200
-    else:
-        return {'response': 'failed'}, 400
+    print(model_feedback)
+    # db = app.config['DATABASE']
+    # if(db != False):
+    # db.input(model_feedback)
+    dude = {'output': model_feedback}
+    return dude, 200
+    # else:
+    # return {'response': 'failed'}, 400
 
 
 @app.route('/input', methods=["GET"])
