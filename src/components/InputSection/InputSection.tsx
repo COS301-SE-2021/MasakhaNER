@@ -227,7 +227,7 @@ export default function InputSection() {
   const [wait, setWait] = useState(3);
   const [, setFileName] = useState("");
   const [, setFileContent] = useState("");
-  const [feedback, setFeedback] = useState([]);
+  const [feedback, setFeedback] = useState("");
   const [imageFile, setImageFile] = useState("");
   const [baseFile, setBaseFile] = useState("");
   const [imagePath, setImagePath] = useState("");
@@ -260,7 +260,6 @@ export default function InputSection() {
   };
 
   const handleFeedback = async () => {
-    setFeedback(inputList);
     const opts: any = {
       method: "POST",
       headers: {
@@ -481,6 +480,19 @@ export default function InputSection() {
     }
   };
 
+  function concatFeedback(){
+    let inputText = input;
+    console.warn(inputText);
+    for (let index = 0; index < inputList.length; index++) {
+      let feedText = inputList[index]["feedbackInput"];
+      let feedEnt = inputList[index]["feedbackEnt"];   
+      let feedBack = feedText + feedEnt;
+      feedText.toUpperCase();
+      inputText.toUpperCase().replace(feedText, feedBack);  
+    }
+    setFeedback(inputText);
+  }
+
   return (
     <>
       <FormContainer>
@@ -649,7 +661,8 @@ export default function InputSection() {
          <Button
             onClick={(e) => {
               e.preventDefault();
-              handleFeedback();
+              concatFeedback();
+              // handleFeedback();
               closeModal();
             }}
           >
