@@ -118,7 +118,8 @@ const Translate = () => {
       .then((data) => {
         setLoading(false);
         setData(data.output);
-      });
+      })
+      .catch((error) => {});
   };
 
   const {
