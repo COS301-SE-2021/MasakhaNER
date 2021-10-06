@@ -609,6 +609,7 @@ def admin_get_user(user, id):
                     'email': user[4], 'isadmin': user[5], 'activationCode': user[6], 'verified': user[7]}
             res = Response(response=json.dumps(resp))
             res.headers.add('X-Total-Count', 32)
+            res.headers.add('Access-Control-Expose-Headers', '*')
             res.headers.add('Content-Range', 'users 0-10/100')
             res.headers.add('Content-Type', 'application/json')
             return res, 200
@@ -646,6 +647,7 @@ def admin_get_users(user):
                         'email': x[4], 'isadmin': x[5], 'activationCode': x[6], 'verified': x[7]})
         res = Response(response=json.dumps(resp))
         res.headers.add('X-Total-Count', 32)
+        res.headers.add('Access-Control-Expose-Headers', '*')
         res.headers.add('Content-Range', 'users 0-10/100')
         res.headers.add('Content-Type', 'application/json')
         return res, 200
