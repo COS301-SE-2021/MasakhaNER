@@ -612,7 +612,8 @@ def admin_get_user(user, id):
             resp = {'id': user[0], 'firstname': user[1], 'lastname': user[2], 'password': user[3],
                     'email': user[4], 'isadmin': user[5], 'activationCode': user[6], 'verified': user[7]}
             res = Response(response=json.dumps(resp))
-            res.headers['X-Total-Count'] = res.total
+            res.headers.add('X-Total-Count', 32)
+            res.headers.add('Access-Control-Expose-Headers', '*')
             res.headers.add('Content-Range', 'users 0-10/100')
             res.headers.add('Content-Type', 'application/json')
             return res, 200
@@ -649,6 +650,8 @@ def admin_get_users(user):
             resp.append({'id': x[0], 'firstname': x[1], 'lastname': x[2], 'password': x[3],
                         'email': x[4], 'isadmin': x[5], 'activationCode': x[6], 'verified': x[7]})
         res = Response(response=json.dumps(resp))
+        res.headers.add('X-Total-Count', 32)
+        res.headers.add('Access-Control-Expose-Headers', '*')
         res.headers.add('Content-Range', 'users 0-10/100')
         res.headers.add('Content-Type', 'application/json')
         return res, 200
@@ -698,6 +701,8 @@ def admin_get_models(user):
         for x in models:
             resp.append({'id': x[0], 'modelname': x[1], 'model': x[2]})
         res = Response(response=json.dumps(resp))
+        res.headers.add('X-Total-Count', 32)
+        res.headers.add('Access-Control-Expose-Headers', '*')
         res.headers.add('Content-Range', 'models 0-10/100')
         res.headers.add('Content-Type', 'application/json')
         return res, 200
@@ -872,6 +877,8 @@ def admin_get_feedack(user, id):
             if(feedback != None):
                 resp = {'id': feedback[0], 'feedback': feedback[1]}
                 res = Response(response=json.dumps(resp))
+                res.headers.add('X-Total-Count', 32)
+                res.headers.add('Access-Control-Expose-Headers', '*')
                 res.headers.add('Content-Range', 'feedback 0-10/100')
                 res.headers.add('Content-Type', 'application/json')
                 return res, 200
@@ -899,6 +906,8 @@ def admin_get_all_feedback(user):
         for x in feedback:
             resp.append({'id': x[0], 'feedback': x[1]})
         res = Response(response=json.dumps(resp))
+        res.headers.add('X-Total-Count', 32)
+        res.headers.add('Access-Control-Expose-Headers', '*')
         res.headers.add('Content-Range', 'feedback 0-10/100')
         res.headers.add('Content-Type', 'application/json')
         return res, 200
