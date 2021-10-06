@@ -902,6 +902,8 @@ def admin_get_all_feedback(user):
         for x in feedback:
             resp.append({'id': x[0], 'feedback': x[1]})
         res = Response(response=json.dumps(resp))
+        res.headers.add('X-Total-Count', 32)
+        res.headers.add('Access-Control-Expose-Headers', '*')
         res.headers.add('Content-Range', 'feedback 0-10/100')
         res.headers.add('Content-Type', 'application/json')
         return res, 200
