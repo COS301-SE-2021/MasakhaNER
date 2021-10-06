@@ -227,7 +227,7 @@ export default function InputSection() {
   const [wait, setWait] = useState(3);
   const [, setFileName] = useState("");
   const [, setFileContent] = useState("");
-  const [feedback, setFeedback] = useState("");
+  const [feedback, setFeedback] = useState([]);
   const [imageFile, setImageFile] = useState("");
   const [baseFile, setBaseFile] = useState("");
   const [imagePath, setImagePath] = useState("");
@@ -260,6 +260,7 @@ export default function InputSection() {
   };
 
   const handleFeedback = async () => {
+    setFeedback(inputList);
     const opts: any = {
       method: "POST",
       headers: {
@@ -382,8 +383,13 @@ export default function InputSection() {
 
   const handleInputChange = (e: any, index: number) => {
     const { name, value } = e.target;
+    console.warn("Output: ",e.target.name);
     const list = [...inputList];
-    list[index] = value;
+    if(e.target.name == "feedbackInput"){
+      list[index]["feedbackInput"] = value;
+    }else{
+      list[index]["feedbackEnt"] = value;
+    }
     setInputList(list);
   };
 
