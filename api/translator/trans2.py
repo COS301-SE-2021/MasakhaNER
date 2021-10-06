@@ -132,10 +132,10 @@ class Translate:
         return output_text
 
 
-thing = Translate()
+# thing = Translate()
 
 
-# This is a text from a Danish song. It doesn't even make much sense in Danish. However the translation is probably so broken because several of the words are not in the vocabulary.
+# # This is a text from a Danish song. It doesn't even make much sense in Danish. However the translation is probably so broken because several of the words are not in the vocabulary.
 
-print(thing.translate(input_text="The news that will interest you",
-                      true_output_text='how are you'))
+# print(thing.translate(input_text="The news that will interest you",
+#                       true_output_text='how are you'))
