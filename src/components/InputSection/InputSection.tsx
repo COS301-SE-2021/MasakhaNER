@@ -668,7 +668,7 @@ export default function InputSection() {
           >
             Send Feedback
           </Button>
-          <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
+          {/* <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div> */}
       </Modal>
       <Modal
         isOpen={imageIsOpen}
