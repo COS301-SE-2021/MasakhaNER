@@ -487,10 +487,15 @@ export default function InputSection() {
       let feedText = inputList[index]["feedbackInput"];
       let feedEnt = inputList[index]["feedbackEnt"];   
       let feedBack = feedText + feedEnt;
-      feedText.toUpperCase();
-      inputText.toUpperCase().replace(feedText, feedBack);  
+      // console.warn("Feed", feedText.toUpperCase());
+      console.warn("Feed Input: ", feedText);
+      console.warn("Feed: ",feedBack);
+      inputText = inputText.replace(feedText, feedBack);  
+      console.warn("Feed Last: ",inputText);
+      setFeedback(inputText);
     }
     setFeedback(inputText);
+    console.warn("Feedback: ", feedback);
   }
 
   return (
@@ -667,7 +672,7 @@ export default function InputSection() {
             onClick={(e) => {
               e.preventDefault();
               concatFeedback();
-              // handleFeedback();
+              handleFeedback();
               closeModal();
             }}
           >
