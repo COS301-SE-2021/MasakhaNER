@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Text = styled.div`
   line-height: 33px;
   color: #5f5f5f;
+  transform: translate(50px, 120px);
 
   span {
     border-radius: 8px;
@@ -88,11 +89,6 @@ const json = [
   },
 ];
 
-// interface OutputProps {
-//   data: Array<any> | null;
-//   input: string;
-// }
-
 export function CalliFrame() {
   var newEnt = localStorage.getItem("Entity");
   var linklink = "https://en.wikipedia.org/wiki/" + newEnt;
@@ -124,31 +120,19 @@ export default function Output({ data, input }) {
       }
       if (j < data.length) {
         if (data[j].start === i) {
-          console.log("The entity", data[j].entity);
-          if (data[j].entity == "B-LOC" || data[j].entity == "I-LOC") {
+          console.log("The entity", data[j].entity_group);
+          if (data[j].entity_group == "LOC" || data[j].entity_group == "LOC") {
             word +=
-              ` <span id="${data[j].entity.substring(
-                2
-              )}"><a href="https://www.google.com/maps/place/${
-                data[j].word
-              }" target="_blank">` +
+              ` <span id="${data[j].entity_group}"><a href="https://www.google.com/maps/place/${data[j].word}" target="_blank">` +
               data[j].word +
-              `<span id="tag"}>${data[j].entity.substring(
-                2
-              )}</span></a></span>`;
+              `<span id="tag"}>${data[j].entity_group}</span></a></span>`;
             i = data[j].end - 1;
             j += 1;
           } else {
             word +=
-              ` <span id="${data[j].entity.substring(
-                2
-              )}"><a href="https://en.wikipedia.org/wiki/${
-                data[j].word
-              }" target="_blank">` +
+              ` <span id="${data[j].entity_group}"><a href="https://en.wikipedia.org/wiki/${data[j].word}" target="_blank">` +
               data[j].word +
-              `<span id="tag"}>${data[j].entity.substring(
-                2
-              )}</span></a></span>`;
+              `<span id="tag"}>${data[j].entity_group}</span></a></span>`;
             i = data[j].end - 1;
             j += 1;
           }
