@@ -26,10 +26,7 @@ export default function Visualizer() {
     };
 
     try {
-      const resp = await fetch(
-        "https://masakha-ner-fy8z8.ondigitalocean.app/input",
-        opts
-      );
+      const resp = await fetch("https://masakha-api.herokuapp.com/input", opts);
       console.log(resp);
       if (resp.status === 200) {
         data = await resp.json();
