@@ -29,8 +29,7 @@ function VerifyAccount() {
 
       if (resp.status === 200) {
         const data = await resp.json();
-        alert("You have successfully verified your account!");
-        window.location.href = "/Dashboard";
+        window.location.href = "/";
       } else {
         alert("Incorrect verification code!");
         window.location.href = "/verify";
@@ -49,7 +48,10 @@ function VerifyAccount() {
     <div className="verify-form">
       <form onSubmit={handleSubmit}>
         <h3>Enter Confirmation Code</h3>
-        <p>Enter the confirmation code we sent to your email.<em>{localStorage.getItem("newEmail")}</em></p>
+        <p>
+          Enter the confirmation code we sent to your email.
+          <em>{localStorage.getItem("newEmail")}</em>
+        </p>
         <div className="form-grp">
           <input
             type="text"

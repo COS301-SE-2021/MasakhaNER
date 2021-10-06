@@ -26,19 +26,8 @@ const Box: React.FC<Props> = ({
   color,
   name,
 }) => {
-  // const [ref, api] = useBox(() => ({
-  //   mass: 0.1,
-  //   position: [position_x, 1, position_z],
-  // }));
   return (
-    <mesh
-      // onClick={() => {
-      //   api.velocity.set(0, 0, 0);
-      // }}
-      // ref={ref}
-      // position={[0, 0, 0]}
-      position={[position_x, 1, position_z]}
-    >
+    <mesh position={[position_x, 1, position_z]}>
       <Text
         color="white"
         anchorX="center"
@@ -139,7 +128,16 @@ const Visualizer = () => {
     } else {
       color = "#2148bd";
     }
-    displayArray.push([i.count, color, (x_coord += 1), (z_coord += 1), i.name]);
+
+    if (i.count > 20) {
+      displayArray.push([
+        i.count,
+        color,
+        (x_coord += 1),
+        (z_coord += 1),
+        i.name,
+      ]);
+    }
   }
 
   return (
@@ -150,7 +148,6 @@ const Visualizer = () => {
         <Stars />
         <ambientLight intensity={1} />
         <spotLight position={[10, 30, 10]} angle={0.3} castShadow />
-        {/* <Physics> */}
         {displayArray.map((i) => {
           return (
             <Box
@@ -162,8 +159,6 @@ const Visualizer = () => {
             />
           );
         })}
-        {/* <Plane /> */}
-        {/* </Physics> */}
       </Canvas>
     </div>
   );

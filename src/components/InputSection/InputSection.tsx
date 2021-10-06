@@ -26,7 +26,9 @@ const FeedSelect = styled.select`
   border-radius: 5px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 `;
+import Tesseract from "tesseract.js";
 
+import Visualizer from "../visualizer/Visualizer";
 const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
@@ -37,15 +39,15 @@ const FormContainer = styled.div`
     display: flex;
     width: 25em;
     justify-content: space-between;
-    transform: translate(61vw, -65px);
+    transform: translate(61vw, -190px);
   }
 `;
 
 const Input = styled.textarea`
   display: inline-block;
   border-radius: 10px;
-  width: 85vw;
-  height: 4em;
+  width: 60vw;
+  height: 12em;
   resize: none;
   text-align: justify;
   padding: 20px;
@@ -163,10 +165,12 @@ const FeedbackInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
-const VisualizerButton = styled(Button)`
-  background-color: white;
+const Visualizered = styled.div`
+  /* background-color: #f7f7f7; */
   color: grey;
-  transform: translate(0px, -900px);
+  transform: translate(0px, -590px);
+  width: 1000px;
+  height: 300px;
 `;
 
 const ImageUploadHeader = styled.div`
@@ -175,12 +179,26 @@ const ImageUploadHeader = styled.div`
   border-radius: 5px;
   padding: 20px;
   background-color: #1c5f22;
-  transform: translate(-10vw, 300px);
+  transform: translate(-10vw, 600px);
 
   h1 {
     /* color: #7eaf82; */
     color: #fff;
     transform: translate(88px, 20px);
+  }
+
+  p {
+    /* padding: 20px; */
+    color: #fff;
+    opacity: 1;
+    width: 500px;
+    margin-top: 30px;
+    transform: translate(88px, 0px);
+  }
+
+  a {
+    opacity: 1;
+    color: #7eaf82;
   }
 `;
 
@@ -212,6 +230,8 @@ export default function InputSection() {
   const [feedback, setFeedback] = useState("");
   const [imageFile, setImageFile] = useState("");
   const [baseFile, setBaseFile] = useState("");
+  const [imagePath, setImagePath] = useState("");
+  const [text, setText] = useState("");
 
   let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -230,6 +250,10 @@ export default function InputSection() {
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const handleChange = (e: any) => {
+    setImagePath(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleFeedback = async () => {
@@ -407,6 +431,29 @@ export default function InputSection() {
     };
   };
 
+  const handleClick = () => {
+    Tesseract.recognize(imagePath, "eng", {
+      logger: (m: any) => console.log(m),
+    })
+      .catch((err: any) => {
+        console.error(err);
+      })
+      .then((result: any) => {
+        // Get Confidence score
+        let confidence = result.confidence;
+        console.log("RESULT:", result);
+
+        let text = result.data.text;
+        setText(text);
+        setText(result.text);
+        setInput(result.data.text);
+        console.warn("AI TEXT:", text);
+        console.warn("AI CON:", confidence);
+      });
+  };
+
+  console.warn("AI TEXT 2:", text);
+
   const handleImageUpload = async () => {
     console.log("THIS IS IT", imageFile);
     setWait(2);
@@ -460,15 +507,46 @@ export default function InputSection() {
                 type="file"
                 placeholder="Upload"
                 onChange={handleFileChange}
+                id="getText"
+                style={{ display: "none" }}
               />
+              <Button
+                onClick={() => document.getElementById("getText").click()}
+              >
+                Upload Textfile
+              </Button>
               <Button onClick={handleSend}>Send</Button>
             </div>
-            <ImageUploadHeader id="image-upload-header">
+            <div id="button-container">
+              <input
+                type="file"
+                id="getFile"
+                onChange={handleChange}
+                style={{ display: "none" }}
+              />
+              <Button
+                onClick={() => document.getElementById("getFile").click()}
+              >
+                Upload Image
+              </Button>
+              <Button onClick={handleClick} style={{ width: "105px" }}>
+                Convert
+              </Button>
+            </div>
+            {/* <ImageUploadHeader id="image-upload-header"> */}
+            {/* <ImageUploadHeader id="image-upload-header">
               <h1>Facial Recognition</h1>
-            </ImageUploadHeader>
-            <div
+              <p>
+                Built with the power of OpenCV, this facial recognition system
+                was built and trained with the faces of popular African figures.{" "}
+                <br />
+                <br /> Upload an image of an Africa figure and submit to see the
+                results.
+              </p>
+            </ImageUploadHeader> */}
+            {/* <div
               style={{
-                transform: "translate(0px,140px)",
+                transform: "translate(0px,440px)",
                 zIndex: 99,
               }}
             >
@@ -487,7 +565,7 @@ export default function InputSection() {
               >
                 Submit
               </Button>
-            </div>
+            </div> */}
           </form>
         </div>
         <div id="output-section">
@@ -506,12 +584,32 @@ export default function InputSection() {
             id="button-container"
             style={{ transform: "translate(1080px, -400px)" }}
           >
-            <Button onClick={openModal}>Feedback</Button>
+            {/* <Button onClick={openModal}>Feedback</Button> */}
           </div>
         </div>
-        <div></div>
       </FormContainer>
-      <VisualizerButton onClick={visualizer}>3D Visualizer</VisualizerButton>
+      <h1
+        style={{
+          color: "#1c5f22",
+          transform: "translate(0px, -500px)",
+          opacity: "0.7",
+          fontSize: "30px",
+        }}
+      >
+        Data Visualizer
+      </h1>
+      <p
+        style={{
+          color: "#000",
+          transform: "translate(0px, -500px)",
+          opacity: "0.6",
+        }}
+      >
+        Displays the most passed in words and their corresponding entities
+      </p>
+      <Visualizered>
+        <Visualizer />
+      </Visualizered>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}

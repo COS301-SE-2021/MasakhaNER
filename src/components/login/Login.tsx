@@ -5,11 +5,13 @@ import { useState } from "react";
 import { useHistory, Redirect, Link } from "react-router-dom";
 import styled from "styled-components";
 import { History } from "history";
-import Toast from "../toast/Toast";
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -18,6 +20,11 @@ const ImageWrapper = styled.div`
   background-image: url("../../images/login-image.png");
   background-repeat: no-repeat;
   background-color: #305c16;
+  background-position: top;
+
+  @media only screen and (max-width: 600px) {
+    /* display: none; */
+  }
 `;
 
 const Wrapper = styled.div`
@@ -61,6 +68,10 @@ const Wrapper = styled.div`
         }
       }
     }
+  }
+
+  @media only screen and (max-width: 600px) {
+    /* widt: 100vw; */
   }
 `;
 
