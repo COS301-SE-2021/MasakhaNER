@@ -12,11 +12,14 @@ import pickle
 import IPython
 import numpy as np
 import tensorflow as tf
-#from TokenizerWrap import TokenizerWrap
+from .trh import Here
+from .TW import TokenizerWrap
+
 #get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # print(device_lib.list_local_devices())
+dgd = Here()
 
 
 class Translate:
