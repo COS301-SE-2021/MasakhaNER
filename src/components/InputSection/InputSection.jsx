@@ -634,7 +634,7 @@ export default function InputSection() {
         <Button onClick={closeModal}>close</Button>
         <div style={{ height: "40px" }} />
         <div>
-          <div style={{ transform: "translate(-50px, -160px)" }}>
+          <div style={{ transform: "translate(-50px, 70px)" }}>
             <Output data={outputData} input={input2} />
           </div>
           <p>
