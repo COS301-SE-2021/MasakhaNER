@@ -12,8 +12,8 @@ import pickle
 import IPython
 import numpy as np
 import tensorflow as tf
-#from .trh import Here
-#from .TW import TokenizerWrap
+from .trh import Here
+from .TW import TokenizerWrap
 
 #get_ipython().run_line_magic('matplotlib', 'inline')
 
@@ -141,27 +141,27 @@ class Translate:
 
                 return tokens
 
-            print(os.path.join(os.path.dirname(__file__), "token_src.pickle"))
-            with open(os.path.join(os.path.dirname(__file__), "token_src.pickle"), "rb") as f:
-                self.tokenizer_src = pickle.load(f)
+        print(os.path.join(os.path.dirname(__file__), "token_src.pickle"))
+        with open(os.path.join(os.path.dirname(__file__), "token_src.pickle"), "rb") as f:
+            self.tokenizer_src = pickle.load(f)
 
-            os.path.join(os.path.dirname(__file__), "token_dest.pickle")
-            with open(os.path.join(os.path.dirname(__file__), "token_dest.pickle"), "rb") as f:
-                self.tokenizer_dest = pickle.load(f)
+        os.path.join(os.path.dirname(__file__), "token_dest.pickle")
+        with open(os.path.join(os.path.dirname(__file__), "token_dest.pickle"), "rb") as f:
+            self.tokenizer_dest = pickle.load(f)
 
-            mark_start = 'ssss '
-            mark_end = ' eeee'
-            self.token_start = self.tokenizer_dest.word_index[mark_start.strip(
-            )]
-            self.token_end = self.tokenizer_dest.word_index[mark_end.strip(
-            )]
-            print(os.path.join(os.path.dirname(__file__), "model_e2"))
-            self.model_encoder = tf.keras.models.load_model(
-                os.path.join(os.path.dirname(__file__), "model_e2"))
+        mark_start = 'ssss '
+        mark_end = ' eeee'
+        self.token_start = self.tokenizer_dest.word_index[mark_start.strip(
+        )]
+        self.token_end = self.tokenizer_dest.word_index[mark_end.strip(
+        )]
+        print(os.path.join(os.path.dirname(__file__), "model_e2"))
+        self.model_encoder = tf.keras.models.load_model(
+            os.path.join(os.path.dirname(__file__), "model_e2"))
 
-            print(self.model_encoder)
-            self.model_decoder = tf.keras.models.load_model(
-                os.path.join(os.path.dirname(__file__), "model_d2"))
+        print(self.model_encoder)
+        self.model_decoder = tf.keras.models.load_model(
+            os.path.join(os.path.dirname(__file__), "model_d2"))
 
     def translate(self, input_text, true_output_text=None):
         """Translate a single text-string."""
