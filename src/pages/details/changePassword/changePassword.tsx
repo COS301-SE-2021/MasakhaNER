@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Changepass.css";
+// import "./Changepass.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import Nav from "../../../components/nav/Nav";
 import { useHistory } from "react-router-dom";
@@ -110,9 +110,10 @@ const ChangepassButton = styled(Button)`
 
 let history;
 
-function Register() {
+function ChangePassword() {
   history = useHistory();
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setcPassword] = useState("");
 
   const options = {
     method: "POST",
@@ -120,13 +121,13 @@ function Register() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      email: email,
+        password: password,
+        cpassword: cpassword,
     }),
   };
 
   function handleStatus(){
-    window.location.href = "/resetVerify";
-    localStorage.setItem("newEmail", email);
+    window.location.href = "/";
   }
   // const handleStatus = async () => {
   //   try {
@@ -180,22 +181,28 @@ function Register() {
     <Wrapper>
       <div>
       <h2 style={{ fontSize: "40px", color: "#1c5f22" }} id="login-header">
-        Reset Password
+        Create New Password
       </h2>
       <br/>
       </div>
       <form id="detForm" onSubmit={handleSubmit}>
         <Input
-          type="email"
-          name="email"
-          id="email"
+          type="text"
+          name="password"
+          id="password"
           className="form-control"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          value={password}
           required
-          placeholder="Email address"
+          placeholder="New password"
+        />
+        <Input
+          type="text"
+          name="cpassword"
+          id="cpassword"
+          className="form-control"
+          value={cpassword}
+          required
+          placeholder="Confirm new password"
         />
         <br />
             <SignUpButton
@@ -217,4 +224,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default ChangePassword;

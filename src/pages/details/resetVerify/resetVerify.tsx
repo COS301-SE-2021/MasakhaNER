@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./verifyAccount.css";
+import "./resetVerify.css";
 import { Link } from "react-router-dom";
 
-function VerifyAccount() {
+function VerifyReset() {
   const [code, setCode] = useState("");
   //const [clicked, setClicked] = useState(false);
 
@@ -21,24 +21,27 @@ function VerifyAccount() {
   // useEffect(() => {
   //   handleVerify();
   //}, [clicked]);
+  function handleVerify(){
+    window.location.href = "/changePassword";
+  }
 
-  const handleVerify = async () => {
-    try {
-      const resp = await fetch("/resetVerify", options);
-      console.log("This is what came back: ", options);
+  // const handleVerify = async () => {
+  //   try {
+  //     const resp = await fetch("/resetVerify", options);
+  //     console.log("This is what came back: ", options);
 
-      if (resp.status === 200) {
-        const data = await resp.json();
-        window.location.href = "/";
-      } else {
-        alert("Incorrect verification code!");
-        window.location.href = "/resetVerify";
-      }
-    } catch (error) {
-      console.log("there is an error", error);
-      window.location.href = "/resetVerify";
-    }
-  };
+  //     if (resp.status === 200) {
+  //       const data = await resp.json();
+  //       window.location.href = "/";
+  //     } else {
+  //       alert("Incorrect verification code!");
+  //       window.location.href = "/resetVerify";
+  //     }
+  //   } catch (error) {
+  //     console.log("there is an error", error);
+  //     window.location.href = "/resetVerify";
+  //   }
+  // };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -83,4 +86,4 @@ function VerifyAccount() {
   );
 }
 
-export default VerifyAccount;
+export default VerifyReset;
