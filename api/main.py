@@ -16,6 +16,9 @@ from werkzeug.datastructures import Headers
 from second import translate_text
 from translator.TW import TokenizerWrap
 from translator.trans2 import Translate
+import __main__
+
+__main__.TokenizerWrap = TokenizerWrap
 
 # from faceAI import faces
 # sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
