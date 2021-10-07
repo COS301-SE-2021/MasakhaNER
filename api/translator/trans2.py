@@ -33,7 +33,7 @@ class Translate:
 
     def __init__(self):
 
-        os.path.join(os.path.dirname(__file__), "token_src.pickle")
+        print(os.path.join(os.path.dirname(__file__), "token_src.pickle"))
         with open(os.path.join(os.path.dirname(__file__), "token_src.pickle"), "rb") as f:
             self.tokenizer_src = pickle.load(f)
 
