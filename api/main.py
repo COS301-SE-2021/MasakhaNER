@@ -14,8 +14,9 @@ import predict_ner as ner
 from flask_cors import CORS, cross_origin
 from werkzeug.datastructures import Headers
 from second import translate_text
-from translator.TW import TokenizerWrap
-#import translator.trans2 as ts2
+#from translator.TW import TokenizerWrap
+from translator.trans2 import Translate
+from translator.trans2 import TokenizerWrap
 
 # from faceAI import faces
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
@@ -25,7 +26,7 @@ app = Flask(__name__)
 CORS(app)
 app.config.from_object('config_default.Config')
 
-#tran = ts2.Translate()
+tran = Translate()
 
 """
     Serves as mock trained data
@@ -932,8 +933,8 @@ def transale_model(user):
     if not user:
         return jsonify({'response': 'log in to use model'}), 401
     text = request.json['input']
-    #output = tran.translate(input_text="The news that will interest you")
-    output = translate_text(str(text))
+    output = tran.translate(input_text="The news that will interest you")
+    #output = translate_text(str(text))
 
     #output = 'This will bw the translated data'
     return {'response': 'translated', 'input': text, 'output': output}, 200
