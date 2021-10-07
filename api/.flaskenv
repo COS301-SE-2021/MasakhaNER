@@ -1,2 +1,2 @@
-FLASK_APP=main.py
+FLASK_APP=flask_start flask run
 FLASK_ENV=development

@@ -18,7 +18,7 @@ from translator.TW import TokenizerWrap
 from translator.trans2 import Translate
 
 # from faceAI import faces
-sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
 app = Flask(__name__)
