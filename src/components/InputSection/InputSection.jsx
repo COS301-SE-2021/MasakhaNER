@@ -582,7 +582,9 @@ export default function InputSection() {
             {wait === 3 ? (
               ""
             ) : wait === 2 ? (
-              <p style={{ transform: "translate(50px, 100px)", height: "0px" }}>
+              <p
+                style={{ transform: "translate(50px, -120px)", height: "0px" }}
+              >
                 loading...
               </p>
             ) : wait === 1 ? (
