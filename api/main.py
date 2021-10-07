@@ -28,7 +28,7 @@ app = Flask(__name__)
 CORS(app)
 app.config.from_object('config_default.Config')
 
-tran = Translate()
+#tran = Translate()
 
 """
     Serves as mock trained data
@@ -935,8 +935,8 @@ def transale_model(user):
     if not user:
         return jsonify({'response': 'log in to use model'}), 401
     text = request.json['input']
-    output = tran.translate(input_text="The news that will interest you")
-    #output = translate_text(str(text))
+    #output = tran.translate(input_text="The news that will interest you")
+    output = translate_text(str(text))
 
     #output = 'This will bw the translated data'
     return {'response': 'translated', 'input': text, 'output': output}, 200
