@@ -595,7 +595,7 @@ export default function InputSection() {
           </OutputSection>
           <div
             id="button-container"
-            style={{ transform: "translate(1080px, -100px)" }}
+            style={{ transform: "translate(1080px, -500px)" }}
           >
             <Button onClick={openModal}>Feedback</Button>
           </div>
