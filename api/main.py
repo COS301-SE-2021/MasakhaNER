@@ -14,9 +14,8 @@ import predict_ner as ner
 from flask_cors import CORS, cross_origin
 from werkzeug.datastructures import Headers
 from second import translate_text
-#from translator.TW import TokenizerWrap
+from translator.TW import TokenizerWrap
 from translator.trans2 import Translate
-from translator.trans2 import TokenizerWrap
 
 # from faceAI import faces
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
