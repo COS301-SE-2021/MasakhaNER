@@ -1,5 +1,8 @@
-
 from transformers import MT5ForConditionalGeneration, T5Tokenizer
+
+"""
+https://huggingface.co/Davlan/mt5_base_yor_eng_mt
+"""
 
 
 def translate_text(input):
