@@ -4,6 +4,15 @@ import numpy as np
 import cv2
 import pickle
 
+
+"""
+code referenced from:
+
+https://github.com/codingforentrepreneurs/OpenCV-Python-Series
+
+https://www.youtube.com/watch?v=PmZ29Vta7Vc&t=3219s&ab_channel=CodingEntrepreneurs
+"""
+
 dirname = os.path.dirname(__file__)
 filename = os.path.join(
     dirname, "cascades/data/haarcascade_frontalface_default.xml")

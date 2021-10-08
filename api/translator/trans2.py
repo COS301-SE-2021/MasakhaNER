@@ -19,6 +19,20 @@ import matplotlib.pyplot as plt
 
 
 # print(device_lib.list_local_devices())
+"""""
+Original author is Magnus Erik Hvass Pedersen
+
+https://github.com/Hvass-Labs/TensorFlow-Tutorials
+
+https://www.youtube.com/watch?v=vI2Y3I-JI2Q&t=1824s&ab_channel=HvassLaboratories
+
+License(MIT)
+These tutorials and source-code are published under the MIT License which allows very broad use for both academic and commercial purposes.
+
+A few of the images used for demonstration purposes may be under copyright. These images are included under the "fair usage" laws.
+
+You are very welcome to modify these tutorials and use them in your own projects. Please keep a link to the original repository.
+"""
 
 
 class Translate:

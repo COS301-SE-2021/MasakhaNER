@@ -3,6 +3,14 @@ import numpy as np
 import cv2
 import pickle
 
+"""
+code referenced from:
+
+https://github.com/codingforentrepreneurs/OpenCV-Python-Series
+
+https://www.youtube.com/watch?v=PmZ29Vta7Vc&t=3219s&ab_channel=CodingEntrepreneurs
+"""
+
 
 def recognize(img):
     dirname = os.path.dirname(__file__)
