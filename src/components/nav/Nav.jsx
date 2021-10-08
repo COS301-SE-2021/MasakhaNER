@@ -43,7 +43,7 @@ function Nav() {
       <ButtonContainer>
         <a onClick={dash}>Entity Recognition</a>
         <a onClick={translate}>Translate</a>
-        <a onClick={edit}>Edit Details</a>
+        {/* <a onClick={edit}>Edit Details</a> */}
         <a onClick={about}>About</a>
         <a onClick={handleLogout}>Log out</a>
       </ButtonContainer>

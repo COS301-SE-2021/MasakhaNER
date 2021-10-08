@@ -257,10 +257,10 @@ export default function Login() {
         <Button onClick={handleLogin}>
           {loading ? <div id="loading"></div> : <p>Login</p>}
         </Button>
-        <p onClick={changePassword} style={{ fontSize: "14px" }}>
+        {/* <p onClick={changePassword} style={{ fontSize: "14px" }}>
           forgot password?
           <a style={{ color: "#1c5f22", fontSize: "14px" }}> click here</a>
-        </p>
+        </p> */}
         <SignUpButton onClick={register}>Sign up</SignUpButton>
         <p>or log in using</p>
         <div id="google-button">
